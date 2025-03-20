@@ -1,93 +1,34 @@
-# From Code to Robot
-
-
-
-## Getting started
-
-To make it easy for you to get started with GitLab, here's a list of recommended next steps.
-
-Already a pro? Just edit this README.md and make it your own. Want to make it easy? [Use the template at the bottom](#editing-this-readme)!
-
-## Add your files
-
-- [ ] [Create](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#create-a-file) or [upload](https://docs.gitlab.com/ee/user/project/repository/web_editor.html#upload-a-file) files
-- [ ] [Add files using the command line](https://docs.gitlab.com/ee/gitlab-basics/add-file.html#add-a-file-using-the-command-line) or push an existing Git repository with the following command:
-
-```
-cd existing_repo
-git remote add origin https://gitioc.upc.edu/teaching/from-code-to-robot.git
-git branch -M main
-git push -uf origin main
-```
-
-## Integrate with your tools
-
-- [ ] [Set up project integrations](https://gitioc.upc.edu/teaching/from-code-to-robot/-/settings/integrations)
-
-## Collaborate with your team
-
-- [ ] [Invite team members and collaborators](https://docs.gitlab.com/ee/user/project/members/)
-- [ ] [Create a new merge request](https://docs.gitlab.com/ee/user/project/merge_requests/creating_merge_requests.html)
-- [ ] [Automatically close issues from merge requests](https://docs.gitlab.com/ee/user/project/issues/managing_issues.html#closing-issues-automatically)
-- [ ] [Enable merge request approvals](https://docs.gitlab.com/ee/user/project/merge_requests/approvals/)
-- [ ] [Set auto-merge](https://docs.gitlab.com/ee/user/project/merge_requests/merge_when_pipeline_succeeds.html)
-
-## Test and Deploy
-
-Use the built-in continuous integration in GitLab.
-
-- [ ] [Get started with GitLab CI/CD](https://docs.gitlab.com/ee/ci/quick_start/)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing (SAST)](https://docs.gitlab.com/ee/user/application_security/sast/)
-- [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
-- [ ] [Use pull-based deployments for improved Kubernetes management](https://docs.gitlab.com/ee/user/clusters/agent/)
-- [ ] [Set up protected environments](https://docs.gitlab.com/ee/ci/environments/protected_environments.html)
-
-***
-
-# Editing this README
-
-When you're ready to make this README your own, just edit this file and use the handy template below (or feel free to structure it however you want - this is just a starting point!). Thanks to [makeareadme.com](https://www.makeareadme.com/) for this template.
-
-## Suggestions for a good README
-
-Every project is different, so consider which of these sections apply to yours. The sections used in the template are suggestions for most open source projects. Also keep in mind that while a README can be too long and detailed, too long is better than too short. If you think your README is too long, consider utilizing another form of documentation rather than cutting out information.
-
-## Name
-Choose a self-explaining name for your project.
+# From Code to Robot: A hands-on curriculum for robotics, computer vision, and AI using MATLAB and Company robots
 
 ## Description
-Let people know what your project can do specifically. Provide context and add a link to any reference visitors might be unfamiliar with. A list of Features or a Background subsection can also be added here. If there are alternatives to your project, this is a good place to list differentiating factors.
+“From Code to Robot” is a hands-on curriculum that equips students with practical skills in robotics, computer vision, and artificial intelligence (AI) using MATLAB and Universal Robots (UR) robotic arms. Targeted at students in industrial engineering, computer science, and technology, this curriculum provides a software and hardware framework together with teaching material to supplement theoretical concepts with practical applications, preparing learners for careers in automation, robotics, and intelligent systems. The curriculum is built around three core pillars – Robotics, Computer Vision, and AI – each offering focused, hands-on teaching materials and exercises that deepen students' technical skills. Separating the curriculum into these three pillars adds flexibility for both instructors and students. In many bachelor’s and master’s programs, courses focus exclusively on one domain – robotics, vision, or AI – and only recently are programs beginning to integrate topics across two or even all three fields. By maintaining a modular design, the curriculum supports two main objectives: (1) encouraging faculty to design elective courses that integrate multiple pillars for a more interdisciplinary, project-based learning experience, and (2) allowing individual modules to be used in courses that concentrate on one or two pillars, where the remaining content can be “fixed” or “preset” for instructors looking to focus primarily on robotics, vision, or AI. In particular, the objectives regarding each one of the three pillars are:
 
-## Badges
-On some READMEs, you may see small images that convey metadata, such as whether or not all the tests are passing for the project. You can use Shields to add some to your README. Many services also have instructions for adding a badge.
+- Robotics: This module covers essential robotic concepts related to modeling, kinematics, differential kinematics, dynamics, and control for serial manipulators. It will include topics such as DH
+parameter computation, forward and inverse kinematics (both closed-form and iterative), trajectory planning, geometric and analytic Jacobians, singularities, redundancy, and dynamic modeling using
+Lagrange and Newton-Euler methods, as well as decentralized motion control. All concepts will be illustrated in simulation on a UR3 robotic arm using MATLAB, utilizing the Symbolic Math Toolbox
+and Simulink, and some exercises will be prepared to run on physical UR3 robots, utilizing the Universal Robots UR Series Manipulators Support from the Robotics System Toolbox.
 
-## Visuals
-Depending on what you are making, it can be a good idea to include screenshots or even a video (you'll frequently see GIFs rather than actual videos). Tools like ttygif can help, but check out Asciinema for a more sophisticated method.
+- Computer Vision: This module focuses on object detection and recognition using pretrained models, specifically YOLOv8. Key concepts include creating datasets for training, applying data
+augmentation, transfer learning, and the training and validation of deep learning models. The goal is to use MATLAB's current transfer learning framework within the Deep Learning Toolbox,
+integrating it with the YOLOv8 architecture (already implemented in MATLAB; refer to this git repository). Students will work with the developed teaching materials, mainly MATLAB live or .m
+scripts, to annotate objects in images by defining bounding boxes, apply data augmentation techniques, such as geometric transformations (rotations, translations, and dilations), and train and
+validate new objects via transfer learning (YOLOv8 is already pretrained on the COCO dataset). These curriculum materials enable students to train YOLO on new objects and obtain their bounding
+boxes, facilitating object manipulation by the Universal Robots robots. In addition, a calibration script will be developed to convert detected object positions in images into spatial coordinates based on the lab’s existing cameras, ensuring smooth communication between the computer vision and robotics modules within MATLAB. 
 
-## Installation
-Within a particular ecosystem, there may be a common way of installing things, such as using Yarn, NuGet, or Homebrew. However, consider the possibility that whoever is reading your README is a novice and would like more guidance. Listing specific steps helps remove ambiguity and gets people to using your project as quickly as possible. If it only runs in a specific context like a particular programming language version or operating system or has dependencies that have to be installed manually, also add a Requirements subsection.
+- Artificial Intelligence: This module focuses on robotic task planning using Q-learning and Deep Q-learning, two UPC - BarcelonaTech model-free algorithms in Reinforcement Learning (RL). Key
+concepts covered include the STRIPS language (modeling pre- and post-conditions of robotic actions), task planning, and Q-learning algorithms. The goal is to create curricular materials in the
+form of MATLAB live or .m scripts, utilizing the existing implementation of these reinforcement learning algorithms in MATLAB’s Reinforcement Learning Toolbox. The current implementation of
+these algorithms is expected to support robotic task planning directly. However, if the algorithms do not account for action preconditions to reduce the number of possible actions in a given state,
+modifications may be necessary. In such a case, a customized version of the algorithm will be developed with minor adjustments to enable action pruning for each state. The developed materials
+will take as input a primary robotic task, defined by the user and based on objects detected by the computer vision module, and output a sequence of ordered primitive tasks. When executed by the
+robot, these tasks achieve the main objective. The sequence is then sent to the robotics module, which designs and executes the required trajectories to complete each task. This enables students
+to apply advanced techniques to optimize task sequencing and decision-making in robotics.
 
-## Usage
-Use examples liberally, and show the expected output if you can. It's helpful to have inline the smallest example of usage that you can demonstrate, while providing links to more sophisticated examples if they are too long to reasonably include in the README.
 
-## Support
-Tell people where they can go to for help. It can be any combination of an issue tracker, a chat room, an email address, etc.
-
-## Roadmap
-If you have ideas for releases in the future, it is a good idea to list them in the README.
-
-## Contributing
-State if you are open to contributions and what your requirements are for accepting them.
-
-For people who want to make changes to your project, it's helpful to have some documentation on how to get started. Perhaps there is a script that they should run or some environment variables that they need to set. Make these steps explicit. These instructions could also be useful to your future self.
-
-You can also document commands to lint the code or run tests. These steps help to ensure high code quality and reduce the likelihood that the changes inadvertently break something. Having instructions for running tests is especially helpful if it requires external setup, such as starting a Selenium server for testing in a browser.
-
-## Authors and acknowledgment
-Show your appreciation to those who have contributed to the project.
-
-## License
-For open source projects, say how it is licensed.
-
-## Project status
-If you have run out of energy or time for your project, put a note at the top of the README saying that development has slowed down or stopped completely. Someone may choose to fork your project or volunteer to step in as a maintainer or owner, allowing your project to keep going. You can also make an explicit request for maintainers.
+## Goals
+- Develop curriculum materials in the form of MATLAB live scripts or .m scripts (the latest version of .m scripts includes new features that make them more similar to live scripts), and Simulink models for programming, simulating and controlling UR3 robotic arms, covering kinematics, dynamics, and motion control using the Symbolic Math Toolbox, Simulink, the Universal Robots UR Series
+Manipulators Support from the Robotics System Toolbox. These curriculum materials will be developed in English, Spanish, and Catalan to accommodate the different course languages.
+- Integrate YOLOv8 into the MATLAB’s transfer learning framework of the Deep Learning Toolbox for customizable object detection, enabling a smooth communication with the robotics module.
+- Implement Q-learning and Deep Q-learning for task planning using the Reinforcement Learning Toolbox, generating optimized task sequences for robotic execution. 
+- Develop a modular set of demos and tutorials to equip students with skills in robotics, computer vision, and/or AI. 5. Publish a teaching innovation journal or conference paper, create repository
+documentation, and develop supporting materials for course adoption, as well as other promotional material such as YouTube videos.
