@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<profiles>
+    <participant profile_name="participant_win" is_default_profile="true">
+        <rtps>
+            <builtin>
+                <metatrafficUnicastLocatorList>
+                     <locator/>
+                </metatrafficUnicastLocatorList>
+                 <initialPeersList>
+                     <locator>
+                         <udpv4>
+                         <address>172.21.168.123</address>
+                         </udpv4>
+                     </locator>
+                     <locator>
+                         <udpv4>
+                         <address>172.21.160.1</address>
+                         </udpv4>
+                     </locator>
+                     <locator>
+                         <udpv4>
+                         <address>182.30.45.12</address>
+                         </udpv4>
+                     </locator>
+                     <locator>
+                         <udpv4>
+                         <address>194.158.78.29</address>
+                         </udpv4>
+                     </locator>
+                 </initialPeersList>
+             </builtin>
+         </rtps>
+     </participant>
+</profiles> 
