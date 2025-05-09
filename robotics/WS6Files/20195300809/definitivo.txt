@@ -1,0 +1,90 @@
+ Program
+   Variables Setup
+   BeforeStart
+     MoveJ
+       inicio
+     Gripper Activate
+     Gripper Open (3)
+     abrir≔socket_open("10.5.20.90",30003)
+     Loop abrir≟False
+       abrir≔socket_open("10.5.20.90",30003)
+       Wait: 0.01
+     vf≔0
+   Robot Program
+     socket_send_int(1)
+     Wait sensor≠1
+     MoveJ
+       Punto_recogida
+     Gripper Close (3)
+     vf≔1
+     MoveJ
+       punto_medio
+       var_1≔0
+     df≔socket_read_ascii_float(1)
+     Loop df[1]≟0
+       Wait: 0.01
+       df≔socket_read_ascii_float(1)
+     If df[1]≟1
+       Call Rechazar
+     ElseIf df[1]≟2
+       MoveJ
+         Posicion_foto
+       socket_send_int(1)
+       vt≔socket_read_ascii_float(1)
+       Loop vt[1]≟0
+         Wait: 0.01
+         vt≔socket_read_ascii_float(1)
+       If vt≟3
+         Call Tipo_1
+       ElseIf vt≟4
+         Call Tipo_1
+       ElseIf vt≟5
+         Call Tipo_1
+       ElseIf vt≟6
+         Call Tipo_1
+       ElseIf vt≟7
+         Call Rechazar
+   Thread_1
+     Loop vf≟1
+       f≔force()
+       ff≔to_str(f)
+       socket_send_line(ff)
+       Wait: 0.01
+   Rechazar
+     Rechazo
+       Patterns
+         Line_Pattern_1
+           StartItem_1
+           EndItem_1
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Approach
+           MoveL
+             ToolActionPoint
+           Tool action
+             Gripper Open (3)
+           MoveL
+             Exit_1
+     MoveJ
+       inicio
+   Tipo_1
+     Rechazo_1
+       Patterns
+         Line_Pattern_2
+           StartItem_2
+           EndItem_2
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Approach
+           MoveL
+             ToolActionPoint
+           Tool action
+             Gripper Open (3)
+           MoveL
+             Exit_1
+     MoveJ
+       inicio

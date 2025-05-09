@@ -1,0 +1,29 @@
+ Program
+   Variables Setup
+   Robot Program
+     MoveJ
+       Waypoint_1
+       Gripper Open (1)
+       Popup: give me the patch please 
+       Gripper Close (1)
+       MoveJ
+         Waypoint_2
+       MoveL
+         Waypoint_3
+       MoveJ
+         Waypoint_5
+       MoveJ
+         Waypoint_6
+       MoveL
+         Waypoint_2
+       MoveJ
+         Waypoint_4
+       Force
+         Popup: position patch
+       Force
+         Wait: 5.0
+         Gripper Open (1)
+       MoveL
+         Direction: Plane_1 Z+
+           Until (distance)
+       Popup: patch stuck!

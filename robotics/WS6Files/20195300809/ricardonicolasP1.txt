@@ -1,0 +1,30 @@
+ Program
+   Init Variables
+   Robot Program
+     Wait Entrada_0=HI
+     Gripper Open (1)
+     MoveJ
+       Waypoint_1
+       Waypoint_2
+     MoveL
+       Waypoint_31
+     Gripper Close (1)
+     MoveL
+       Waypoint_4
+     MoveJ
+       Waypoint_3
+       Waypoint_5
+     MoveL
+       Waypoint_6
+     Gripper Open (1)
+     MoveJ
+       Waypoint_7
+     Wait: 1.0
+     PiezaHome≔ True 
+   Thread_1
+     Set AO[1]=4.0
+     Set AO[0]=3.0
+     Wait Entrada_0=HI
+     Set AO[1]=0.0
+     Wait PiezaHome≟ True 
+     sync()

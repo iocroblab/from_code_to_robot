@@ -1,0 +1,44 @@
+ Program
+   Variables Setup
+   BeforeStart
+     Set DO[0]=On
+     Gripper Activate
+     Gripper Move40% (1)
+     MoveJ
+       inicio
+   Robot Program
+     If sensor==0
+       Wait: 1.5
+       Set DO[0]=Off
+       MoveJ
+         Waypoint_4
+         pick
+         Gripper Close (1)
+         Waypoint_3
+         Waypoint_1
+         Waypoint_5
+         Gripper Move40% (1)
+         Waypoint_2
+         Wait: 2.0
+         Waypoint_5
+         Gripper Close (1)
+         Waypoint_6
+         Pallet_1
+           Patterns
+             Grid_Pattern_1
+               CornerItem_1
+               CornerItem_2
+               CornerItem_3
+               CornerItem_4
+           Layers
+           At Each Item
+             Generated Movements
+               MoveJ
+                 Approach
+               MoveL
+                 ToolActionPoint
+               Tool action
+                 Gripper Move40% (1)
+               MoveL
+                 Exit_1
+         Set DO[0]=On

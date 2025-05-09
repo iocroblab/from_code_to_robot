@@ -1,0 +1,40 @@
+ Program
+   Variables Setup
+   BeforeStart
+     finished≔ True 
+     Home
+     Set DO[0]=Off
+     Gripper Activate
+     Gripper Open (1)
+   Robot Program
+     Set DO[0]=On
+     If sensor≟0
+       Set DO[0]=Off
+       If finished≟ True 
+         finished≔ False 
+         MoveJ
+           Waypoint_seg1
+           Wait: 1.0
+           MoveJ
+             Waypoint_cinta
+             Gripper Close (1)
+             Wait: 1.0
+             Waypoint_seg1
+             Set DO[0]=On
+             MoveJ
+               Waypoint_seg2
+             MoveJ
+               Waypoint_pintar
+             Gripper Open (1)
+             MoveJ
+               Waypoint_seg2
+             MoveJ
+               Waypoint_pintar
+             Gripper Close (1)
+             MoveJ
+               Waypoint_seg3
+             MoveJ
+               Waypoint_seg4
+             MoveJ
+               Waypoint_inici
+             finished≔ True 

@@ -1,0 +1,29 @@
+ Program
+   Variables Setup
+   Robot Program
+     MoveJ
+       initial
+       Gripper Open (1)
+       over_piece
+       MoveL
+         pick_start
+       Gripper Close (1)
+       over_piece
+       over_conv_start
+       on_conv_start
+       Gripper Open (1)
+       MoveJ
+         over_conv_start
+       Set DO[0]=On
+       Wait sensor=LO
+       Set DO[0]=Off
+       over_conv_end
+       MoveJ
+         on_conv_end
+       Gripper Close (1)
+       over_conv_end
+       over_place
+       place_end
+       Gripper Open (1)
+       MoveL
+         over_place

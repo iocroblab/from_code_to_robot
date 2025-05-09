@@ -1,0 +1,43 @@
+ Program
+   Variables Setup
+   Robot Program
+     If var_1<6
+       MoveJ
+         Ini
+         Wait DI[0]=LO
+       MoveJ
+         Pre_pick
+       MoveL
+         Pick
+         Gripper Close (1)
+         Wait: 0.5
+       MoveL
+         Pre_pick
+       Pallet_1
+         Patterns
+           Grid_Pattern_1
+             CornerItem_1
+             CornerItem_2
+             CornerItem_3
+             CornerItem_4
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach
+             MoveL
+               ToolActionPoint
+             Tool action
+               Gripper Open (1)
+               Wait: 0.5
+             MoveL
+               Exit_1
+               var_1≔var_1+1
+               If var_1≟6
+                 Popup: Replace pallet!
+                 var_1≔0
+   Thread_1
+     If digital_in[0]≟ False  or var_1≟6
+       Set DO[0]=Off
+     Else
+       Set DO[0]=On

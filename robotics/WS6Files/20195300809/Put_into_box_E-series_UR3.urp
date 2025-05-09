@@ -1,0 +1,44 @@
+<URProgram createdIn="3.0.0.0" lastSavedIn="5.0.3.30563">
+  <children>
+    <MainProgram runOnlyOnce="true" speed="0.0" acceleration="0.0" useActiveTCP="false" positionType="CartesianPose">
+      <feature class="GeomFeatureReference" referencedName="Joint_0_name"/>
+      <children>
+        <Set type="NoAction" payload="0.0" tcpAsCog="true"/>
+        <Move motionType="MoveJ" speed="0.8726646259971648" acceleration="1.7453292519943295" useActiveTCP="false" positionType="JointAngles">
+          <children>
+            <Waypoint type="Fixed" name="Home" kinematicsFlags="0">
+              <motionParameters/>
+              <position>
+                <JointAngles angles="0.0, -1.570865293543747, 0.0, -1.570881982825231, 0.0, 0.0"/>
+                <TCPOffset pose="0.0, 0.0, 0.0, 0.0, 0.0, 0.0"/>
+                <Kinematics status="NOT_INITIALIZED" validChecksum="true">
+                  <deltaTheta value="4.995389450306556E-4, 0.03488526200861463, 0.18772855853099063, -0.22315547003586866, 4.6571450798798706E-5, -0.003900716970902096"/>
+                  <a value="-1.3100926675211307E-4, -0.24338724726067523, -0.2080759854459816, 7.815347033407088E-5, -1.2181447280305475E-4, 0.0"/>
+                  <d value="0.15182904148837323, 1.3832333525830083, -17.8907736047909, 16.63840947279705, 0.08523390679547979, 0.09220672833692495"/>
+                  <alpha value="1.5705013065489488, 0.006135360933887174, -0.0028581754864452813, 1.5704547445108392, -1.5715787292438577, 0.0"/>
+                  <jointChecksum value="-1374833414, -1374161928, 770608848, -1381721196, -1381821196, -1381617411"/>
+                </Kinematics>
+              </position>
+              <BaseToFeature pose="0.0, 0.0, 0.0, 0.0, 0.0, 0.0"/>
+            </Waypoint>
+            <Waypoint type="Fixed" name="End" kinematicsFlags="4">
+              <motionParameters/>
+              <position>
+                <JointAngles angles="-1.5707963267948966, -3.141592653589793, 2.652900463031381, -4.223696789826278, 0.0, 4.71238898038469"/>
+                <TCPOffset pose="0.0, 0.0, 0.0, 0.0, 0.0, 0.0"/>
+                <Kinematics status="NOT_INITIALIZED" validChecksum="true">
+                  <deltaTheta value="4.995389450306556E-4, 0.03488526200861463, 0.18772855853099063, -0.22315547003586866, 4.6571450798798706E-5, -0.003900716970902096"/>
+                  <a value="-1.3100926675211307E-4, -0.24338724726067523, -0.2080759854459816, 7.815347033407088E-5, -1.2181447280305475E-4, 0.0"/>
+                  <d value="0.15182904148837323, 1.3832333525830083, -17.8907736047909, 16.63840947279705, 0.08523390679547979, 0.09220672833692495"/>
+                  <alpha value="1.5705013065489488, 0.006135360933887174, -0.0028581754864452813, 1.5704547445108392, -1.5715787292438577, 0.0"/>
+                  <jointChecksum value="-1374833414, -1374161928, 770608848, -1381721196, -1381821196, -1381617411"/>
+                </Kinematics>
+              </position>
+              <BaseToFeature pose="0.0, 0.0, 0.0, 0.0, 0.0, 0.0"/>
+            </Waypoint>
+          </children>
+        </Move>
+      </children>
+    </MainProgram>
+  </children>
+</URProgram>

@@ -1,0 +1,12 @@
+ Program
+   BeforeStart
+     con≔socket_open("10.5.20.90",30002)
+   Robot Program
+     Loop con≟ True 
+       con≔socket_open("10.5.20.90",30002)
+       Popup: hola
+       Wait: 0.01
+       str≔"Passa tronco"
+       socket_send_string(str)
+       socket_send_byte(10)
+       socket_close()

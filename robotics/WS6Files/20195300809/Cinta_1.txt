@@ -1,0 +1,82 @@
+ Program
+   Variables Setup
+   Robot Program
+     If timer_1≟5  and inici≟get_actual_tcp_pose()
+       Pallet_3
+         Patterns
+           Irreg_Pattern_3
+             Item_3
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach_3
+             MoveL
+               ToolActionPoi_2
+             Tool action
+               Gripper Activate
+               Gripper Close (3)
+             MoveL
+               Approach_3
+       timer_1: Reset
+       MoveJ
+         Cami_magatz
+       Pallet_4
+         Patterns
+           Grid_Pattern_1
+             CornerItem_1
+             CornerItem_2
+             CornerItem_3
+             CornerItem_4
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach_4
+             MoveL
+               ToolActionPoi_3
+             Tool action
+               Gripper Open (3)
+             MoveL
+               Approach_4
+       Popup: Peca al magatzem
+       MoveJ
+         inici
+   Thread_1
+     If sensor≠0  and timer_1≟0  and inici≟get_actual_tcp_pose()
+       Pallet_1
+         Patterns
+           Irreg_Pattern_1
+             Item_1
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach
+             MoveL
+               ToolActionPoint
+             Tool action
+               Gripper Activate
+             MoveL
+               Approach
+       Popup: Object agafat
+       MoveJ
+         Cami_pintat
+       Pallet_2
+         Patterns
+           Irreg_Pattern_2
+             Item_2
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach_2
+             MoveL
+               ToolActionPoi_1
+             Tool action
+               Gripper Open (3)
+             MoveL
+               Approach_2
+       Popup: pieza pintando
+       MoveJ
+         inici

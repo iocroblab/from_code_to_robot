@@ -1,0 +1,53 @@
+ Program
+   BeforeStart
+     MoveJ
+       home
+     Gripper Activate
+     Gripper Open (1)
+     cont≔1
+   Robot Program
+     recollida
+       MoveJ
+         SegPick
+       MoveL
+         Pick
+         Gripper Close (1)
+         SegPick
+       If cont≟9
+         cont≔1
+         Call despaletizar
+       Pallet_1
+         Patterns
+           Grid_Pattern_1
+             CornerItem_1
+             CornerItem_2
+             CornerItem_3
+             CornerItem_4
+         Layers
+         At Each Item
+           MoveJ
+             SegP1
+             P1
+             Gripper Open (1)
+             SegP1
+   despaletizar
+     Pallet_2
+       Patterns
+         Grid_Pattern_2
+           CornerItem_5
+           CornerItem_6
+           CornerItem_7
+           CornerItem_8
+       Layers
+       At Each Item
+         MoveJ
+           SegP2
+           P2
+           Gripper Open (1)
+           Gripper Close (1)
+           SegP2
+           SegPdeixada
+           Pdeixada
+           Gripper Open (1)
+           SegPdeixada
+           SegP2

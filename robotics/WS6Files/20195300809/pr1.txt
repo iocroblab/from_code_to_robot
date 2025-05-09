@@ -1,0 +1,12 @@
+ Program
+   BeforeStart
+     Gripper Open (1)
+     MoveJ
+       punt1
+   Robot Program
+     MoveJ
+       Agafar
+       Gripper Close (1)
+     If digital_out[0]≟ True 
+       MoveJ
+         punt1

@@ -1,0 +1,28 @@
+ Program
+   Variables Setup
+   Robot Program
+     MoveJ
+       Waypoint_1
+     Pallet_1
+       Patterns
+         Irreg_Pattern_1
+           Item_1
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Approach
+           MoveL
+             ToolActionPoint
+           Tool action
+             Gripper Activate
+             Gripper Close (3)
+           MoveL
+             Approach
+     MoveJ
+       Waypoint_2
+     MoveJ
+       Waypoint_3
+     MoveL
+       Waypoint_4
+     Gripper Open (3)

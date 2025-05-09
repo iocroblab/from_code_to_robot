@@ -1,0 +1,43 @@
+ Program
+   Variables Setup
+   BeforeStart
+     Gripper Activate
+     plane_current≔Plane_hor
+     count≔0
+     MoveJ
+       Waypoint_1
+     MoveJ
+       Home_point
+     Gripper Move21% (1)
+   Robot Program
+     Popup: Place patch in feeding station
+     pick patch
+       MoveJ
+         paprox_pick
+       MoveL
+         pick_point
+         Gripper Move89% (1)
+         paprox_pick
+     MoveJ
+       Home_point
+     apply patch
+       change plane
+         If count≟1
+           plane_current≔Plane_vert
+       move to damage
+         MoveJ
+           Part_plane
+         Force
+           Popup: Move the patch above the damage
+       apply patch
+         Force
+           Wait: 5.0
+         MoveL
+           back_up
+           Gripper Move21% (1)
+       count≔count+1
+     MoveJ
+       Home_point
+     If count≟2
+       Popup: Job is done!
+       Halt

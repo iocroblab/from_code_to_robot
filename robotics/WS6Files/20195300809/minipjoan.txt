@@ -1,0 +1,53 @@
+ Program
+   Variables Setup
+   Robot Program
+     Gripper Activate
+     MoveJ
+       Waypoint_1
+     Gripper Close (1)
+     MoveL
+       Direction: Base Z-
+         Until (tool_contact_detection)
+           Gripper Open (1)
+           MoveL
+             Waypoint_2
+             Gripper Move58% (1)
+             Waypoint_3
+     MoveJ
+       Waypoint_4
+       MoveJ
+         Waypoint_5
+         Gripper Open (1)
+         MoveJ
+           Waypoint_6
+           Wait: 8.0
+       MoveJ
+         Waypoint_7
+         MoveJ
+           Waypoint_8
+           Gripper Move58% (1)
+         MoveJ
+           Waypoint_9
+           Pallet_1
+             Patterns
+               Grid_Pattern_1
+                 CornerItem_1
+                 CornerItem_2
+                 CornerItem_3
+                 CornerItem_4
+             Layers
+             At Each Item
+               Generated Movements
+                 MoveJ
+                   Approach
+                 MoveL
+                   ToolActionPoint
+                 Tool action
+                   Gripper Open (1)
+                 MoveL
+                   Exit_1
+   Thread_1
+     If sensor≟ True 
+       Set DO[0]=On
+     Else
+       Set DO[0]=Off

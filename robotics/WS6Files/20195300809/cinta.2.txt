@@ -1,0 +1,81 @@
+ Program
+   Variables Setup
+   Robot Program
+     Gripper Activate
+     MoveJ
+       Waypoint_2
+     Wait sensor=LO
+     Pallet_1
+       Patterns
+         Irreg_Pattern_1
+           Item_1
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Waypoint_6
+           MoveL
+             Waypoint_7
+             Set Payload: Payload
+           Tool action
+             Gripper Close (3)
+           MoveL
+             Waypoint_6
+     Pallet_2
+       Patterns
+         Irreg_Pattern_2
+           Item_2
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Waypoint_5
+           MoveL
+             ToolActionPoi_1
+           Tool action
+             Gripper Open (3)
+           MoveL
+             Waypoint_5
+     MoveL
+       Waypoint_1
+     Wait: 3.0
+     Pallet_3
+       Patterns
+         Irreg_Pattern_3
+           Item_3
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Waypoint_5
+           MoveL
+             ToolActionPoi_1
+           Tool action
+             Gripper Close (3)
+           MoveL
+             Waypoint_5
+     MoveL
+       Waypoint_3
+     Pallet_4
+       Patterns
+         Grid_Pattern_1
+           CornerItem_1
+           CornerItem_2
+           CornerItem_3
+           CornerItem_4
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Approach
+           MoveL
+             Waypoint_4
+           Tool action
+             Gripper Open (3)
+           MoveL
+             Approach
+   Thread_1
+     If sensor≠0
+       Set DO[0]=On
+     Else
+       Set DO[0]=Off

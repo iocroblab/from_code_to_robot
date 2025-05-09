@@ -1,0 +1,27 @@
+ Program
+   Variables Setup
+   BeforeStart
+     Gripper Activate
+     socket_open("10.5.20.90",29999)
+     socket_send_string("hello pc")
+   Robot Program
+     MoveJ
+       Waypoint_7
+     MoveJ
+       Waypoint_1
+       Gripper Move59% (1)
+       MoveL
+         Waypoint_3
+       MoveJ
+         Waypoint_2
+         Gripper Move11% (1)
+         Gripper Move56% (1)
+       Set DO[0]=On
+       MoveJ
+         Waypoint_6
+       MoveJ
+         Waypoint_4
+         Gripper Move19% (1)
+       MoveJ
+         Waypoint_5
+         Gripper Move11% (1)

@@ -1,0 +1,28 @@
+ Program
+   Variables Setup
+   BeforeStart
+     Gripper Activate
+     Gripper Open (3)
+     var_1≔0
+   Robot Program
+     MoveJ
+       Waypoint_1
+     MoveJ
+       Waypoint_2
+     Gripper Close (3)
+     socket_open("10.5.20.90",30003)
+     var_1≔1
+     MoveJ
+       Waypoint_3
+       var_1≔0
+     MoveJ
+       Waypoint_2
+       Gripper Open (3)
+     MoveJ
+       Waypoint_1
+   Thread_1
+     Loop var_1≟1
+       f≔force()
+       ff≔to_str(f)
+       socket_send_line(ff)
+       Wait: 0.01

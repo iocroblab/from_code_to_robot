@@ -1,0 +1,24 @@
+ Program
+   Variables Setup
+   Robot Program
+     Gripper Open (1)
+     MoveJ
+       homee
+       Waypoint_1
+       Gripper Close (1)
+       Waypoint_6
+       MoveL
+         Waypoint_7
+         Waypoint_8
+       Waypoint_2
+       Force
+         Waypoint_3
+         var_1≔get boolean
+       Force
+         Wait: 5.0
+       Gripper Open (1)
+       Force
+         Wait: 3.0
+       MoveJ
+         Waypoint_5
+       Popup: Se acabo

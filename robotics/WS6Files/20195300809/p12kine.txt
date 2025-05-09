@@ -1,0 +1,39 @@
+ Program
+   Variables Setup
+   Robot Program
+     Gripper Open (1)
+     Wait: 1.0
+     MoveJ
+       Waypoint_1
+     MoveL
+       Waypoint_2
+       Gripper Close (1)
+       Wait: 1.0
+       Waypoint_1
+     MoveJ
+       Waypoint_3
+     MoveL
+       Waypoint_4
+       Gripper Open (1)
+       Wait: 1.0
+       Waypoint_3
+       Set DO[0]=On
+     Wait sensor=LO
+     Set cont=cont+1
+     MoveJ
+       Waypoint_5
+     MoveL
+       Waypoint_6
+       Gripper Close (1)
+       Waypoint_5
+     If cont≤2
+       MoveJ
+         Waypoint_1
+       MoveL
+         Waypoint_2
+         Gripper Open (1)
+         Wait: 1.0
+         Waypoint_1
+     Else
+       Script
+       Set

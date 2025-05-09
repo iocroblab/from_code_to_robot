@@ -1,0 +1,89 @@
+ Program
+   Variables Setup
+   BeforeStart
+     pregunta≔ True 
+     Gripper Open (1)
+     cont≔0
+   Robot Program
+     MoveJ
+       Waypoint_1
+     MoveJ
+       Waypoint_7
+     Pallet_2
+       Patterns
+         Grid_Pattern_2
+           CornerItem_5
+           CornerItem_6
+           CornerItem_7
+           CornerItem_8
+       Layers
+       At Each Item
+         Generated Movements
+           MoveJ
+             Approach_1
+           MoveL
+             ToolActionPoi_1
+           Tool action
+             Gripper Move89% (1)
+           MoveL
+             Exit_2
+     cont≔cont+1
+     If cont≟2
+       MoveJ
+         Waypoint_8
+       MoveJ
+         Waypoint_9
+       Gripper Open (1)
+       MoveJ
+         Waypoint_10
+       pregunta≔'buena?'
+       cont≔0
+       If pregunta≟ False 
+         Wait: 1.0
+       Else
+         MoveJ
+           Waypoint_11
+         Gripper Close (1)
+         MoveJ
+           Waypoint_12
+     Else
+       Wait: 1.0
+     If pregunta≟ True 
+       MoveJ
+         Waypoint_5
+       MoveJ
+         Waypoint_6
+         Gripper Open (1)
+     Else
+       pregunta≔ True 
+     If sensor≟ False 
+       MoveJ
+         Waypoint_2
+       MoveJ
+         Waypoint_3
+       Gripper Close (1)
+       MoveJ
+         Waypoint_4
+       Pallet_3
+         Patterns
+           Grid_Pattern_3
+             CornerItem_9
+             CornerItem_10
+             CornerItem_11
+             CornerItem_12
+         Layers
+         At Each Item
+           Generated Movements
+             MoveJ
+               Approach
+             MoveL
+               ToolActionPoint
+             Tool action
+               Gripper Open (1)
+             MoveL
+               Exit_1
+   Thread_1
+     If sensor≟ False 
+       Set DO[0]=Off
+     Else
+       Set DO[0]=On

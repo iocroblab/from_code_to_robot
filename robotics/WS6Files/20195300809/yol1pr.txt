@@ -1,0 +1,8 @@
+ Program
+   Variables Setup
+   BeforeStart
+     var_1≔socket_open("10.5.20.90",29999)
+     Loop var_1≟ False 
+       var_1≔socket_open("10.5.20.90",29999)
+   Robot Program
+     Popup: hola matlab
