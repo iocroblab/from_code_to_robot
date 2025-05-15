@@ -1,6 +1,0 @@
- Program
-   Variables Setup
-   Robot Program
-     MoveJ
-       Posicion_foto
-       Gripper Activate

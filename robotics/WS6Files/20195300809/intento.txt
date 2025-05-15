@@ -1,6 +1,0 @@
- Program
-   Variables Setup
-   Robot Program
-     si≔socket_open("10.5.20.90",30003)
-     If si≟ True 
-       Popup: yuhu

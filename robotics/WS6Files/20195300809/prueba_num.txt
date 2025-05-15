@@ -1,5 +1,0 @@
- Program
-   Variables Setup
-   Robot Program
-     o≔socket_open("10.5.20.90",30003)
-     socket_send_int(7)

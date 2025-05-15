@@ -1,7 +1,0 @@
- Program
-   Variables Setup
-   Robot Program
-     Force
-       MoveJ
-         Waypoint_1
-         Waypoint_2
