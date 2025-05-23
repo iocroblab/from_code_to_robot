@@ -1,0 +1,225 @@
+[0.009s] Invoking command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/src/Universal_Robots_ROS2_Description -DCMAKE_INSTALL_PREFIX=/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description
+[0.094s] -- The C compiler identification is GNU 13.3.0
+[0.289s] -- The CXX compiler identification is GNU 13.3.0
+[0.342s] -- Detecting C compiler ABI info
+[0.644s] -- Detecting C compiler ABI info - done
+[0.680s] -- Check for working C compiler: /usr/bin/cc - skipped
+[0.681s] -- Detecting C compile features
+[0.682s] -- Detecting C compile features - done
+[0.714s] -- Detecting CXX compiler ABI info
+[1.061s] -- Detecting CXX compiler ABI info - done
+[1.094s] -- Check for working CXX compiler: /usr/bin/c++ - skipped
+[1.095s] -- Detecting CXX compile features
+[1.097s] -- Detecting CXX compile features - done
+[1.114s] -- Found ament_cmake: 2.5.3 (/opt/ros/jazzy/share/ament_cmake/cmake)
+[1.617s] -- Found Python3: /usr/bin/python3 (found version "3.12.3") found components: Interpreter 
+[2.022s] -- Found ament_cmake_pytest: 2.5.3 (/opt/ros/jazzy/share/ament_cmake_pytest/cmake)
+[3.331s] -- Configuring done (3.3s)
+[3.334s] -- Generating done (0.0s)
+[3.335s] -- Build files have been written to: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description
+[3.340s] Invoked command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/src/Universal_Robots_ROS2_Description -DCMAKE_INSTALL_PREFIX=/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description
+[3.341s] Invoking command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description -- -j12 -l12
+[3.380s] Invoked command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --build /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description -- -j12 -l12
+[3.392s] Invoking command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description
+[3.402s] -- Install configuration: ""
+[3.403s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config
+[3.403s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10e
+[3.403s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10e/default_kinematics.yaml
+[3.403s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10e/physical_parameters.yaml
+[3.403s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10e/visual_parameters.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10e/joint_limits.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5e
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5e/default_kinematics.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5e/physical_parameters.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5e/visual_parameters.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5e/joint_limits.yaml
+[3.404s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5/default_kinematics.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5/physical_parameters.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5/visual_parameters.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur5/joint_limits.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur16e
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur16e/default_kinematics.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur16e/physical_parameters.yaml
+[3.405s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur16e/visual_parameters.yaml
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur16e/joint_limits.yaml
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/initial_positions.yaml
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3/default_kinematics.yaml
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3/physical_parameters.yaml
+[3.406s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3/visual_parameters.yaml
+[3.407s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3/joint_limits.yaml
+[3.407s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10
+[3.407s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10/default_kinematics.yaml
+[3.407s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10/physical_parameters.yaml
+[3.407s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10/visual_parameters.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur10/joint_limits.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3e
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3e/default_kinematics.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3e/physical_parameters.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3e/visual_parameters.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur3e/joint_limits.yaml
+[3.408s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur20
+[3.409s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur20/default_kinematics.yaml
+[3.409s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur20/physical_parameters.yaml
+[3.409s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur20/visual_parameters.yaml
+[3.409s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/config/ur20/joint_limits.yaml
+[3.409s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/launch
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/launch/view_ur.launch.py
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/wrist2.stl
+[3.410s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/shoulder.stl
+[3.411s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/base.stl
+[3.411s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/wrist3.stl
+[3.411s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/upperarm.stl
+[3.411s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/forearm.stl
+[3.412s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/collision/wrist1.stl
+[3.412s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual
+[3.412s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/wrist3.dae
+[3.412s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/upperarm.dae
+[3.416s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/wrist2.dae
+[3.418s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/forearm.dae
+[3.420s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/shoulder.dae
+[3.424s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/wrist1.dae
+[3.426s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10e/visual/base.dae
+[3.426s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e
+[3.427s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision
+[3.427s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist2.stl
+[3.427s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/shoulder.stl
+[3.428s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/base.stl
+[3.428s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist3.stl
+[3.428s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/upperarm.stl
+[3.428s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/forearm.stl
+[3.429s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/collision/wrist1.stl
+[3.429s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual
+[3.429s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist3.dae
+[3.429s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/upperarm.dae
+[3.435s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist2.dae
+[3.438s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/forearm.dae
+[3.440s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/shoulder.dae
+[3.444s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/wrist1.dae
+[3.447s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5e/visual/base.dae
+[3.448s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5
+[3.449s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision
+[3.449s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/wrist2.stl
+[3.450s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/shoulder.stl
+[3.450s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/base.stl
+[3.450s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/wrist3.stl
+[3.451s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/upperarm.stl
+[3.451s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/forearm.stl
+[3.452s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/collision/wrist1.stl
+[3.452s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual
+[3.452s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/wrist3.dae
+[3.453s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/upperarm.dae
+[3.457s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/wrist2.dae
+[3.460s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/forearm.dae
+[3.463s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/shoulder.dae
+[3.465s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/wrist1.dae
+[3.468s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur5/visual/base.dae
+[3.469s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e
+[3.469s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/collision
+[3.470s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/collision/upperarm.stl
+[3.470s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/collision/forearm.stl
+[3.470s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/visual
+[3.471s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/visual/upperarm.dae
+[3.477s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur16e/visual/forearm.dae
+[3.481s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3
+[3.481s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision
+[3.482s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/wrist2.stl
+[3.482s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/shoulder.stl
+[3.483s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/base.stl
+[3.484s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/wrist3.stl
+[3.485s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/upperarm.stl
+[3.486s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/forearm.stl
+[3.487s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/collision/wrist1.stl
+[3.488s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual
+[3.488s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/wrist3.dae
+[3.489s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/upperarm.dae
+[3.493s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/wrist2.dae
+[3.495s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/forearm.dae
+[3.498s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/shoulder.dae
+[3.501s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/wrist1.dae
+[3.503s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3/visual/base.dae
+[3.505s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10
+[3.506s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision
+[3.506s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/wrist2.stl
+[3.506s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/shoulder.stl
+[3.507s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/base.stl
+[3.507s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/wrist3.stl
+[3.508s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/upperarm.stl
+[3.508s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/forearm.stl
+[3.508s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/collision/wrist1.stl
+[3.509s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual
+[3.509s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/wrist3.dae
+[3.510s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/upperarm.dae
+[3.514s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/wrist2.dae
+[3.520s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/forearm.dae
+[3.524s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/shoulder.dae
+[3.527s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/wrist1.dae
+[3.531s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur10/visual/base.dae
+[3.531s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e
+[3.532s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision
+[3.532s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/wrist2.stl
+[3.533s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/shoulder.stl
+[3.533s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/base.stl
+[3.534s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/wrist3.stl
+[3.534s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/upperarm.stl
+[3.534s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/forearm.stl
+[3.535s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/collision/wrist1.stl
+[3.535s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual
+[3.536s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/wrist3.dae
+[3.536s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/upperarm.dae
+[3.544s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/wrist2.dae
+[3.548s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/forearm.dae
+[3.551s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/shoulder.dae
+[3.556s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/wrist1.dae
+[3.559s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur3e/visual/base.dae
+[3.560s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20
+[3.561s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision
+[3.561s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/wrist2.stl
+[3.561s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/shoulder.stl
+[3.562s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/base.stl
+[3.562s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/wrist3.stl
+[3.563s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/upperarm.stl
+[3.563s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/forearm.stl
+[3.563s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/collision/wrist1.stl
+[3.564s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/LICENSE.txt
+[3.564s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual
+[3.565s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/wrist3.dae
+[3.566s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/upperarm.dae
+[3.568s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/wrist2.dae
+[3.569s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/forearm.dae
+[3.571s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/UR20_DIFF_8bit_2K.png
+[3.574s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/shoulder.dae
+[3.575s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/wrist1.dae
+[3.576s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/meshes/ur20/visual/base.dae
+[3.578s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/rviz
+[3.578s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/rviz/view_robot.rviz
+[3.579s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf
+[3.579s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/ur.ros2_control.xacro
+[3.580s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/inc
+[3.580s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/inc/ur_transmissions.xacro
+[3.580s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/inc/ur_common.xacro
+[3.580s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/ur.urdf.xacro
+[3.581s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/urdf/ur_macro.xacro
+[3.581s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/test
+[3.581s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/test/test_view_ur_launch.py
+[3.582s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/test/test_ur_urdf_xacro.py
+[3.582s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ament_index/resource_index/package_run_dependencies/ur_description
+[3.583s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ament_index/resource_index/parent_prefix_path/ur_description
+[3.584s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/environment/ament_prefix_path.sh
+[3.584s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/environment/ament_prefix_path.dsv
+[3.585s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/environment/path.sh
+[3.585s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/environment/path.dsv
+[3.586s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/local_setup.bash
+[3.586s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/local_setup.sh
+[3.587s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/local_setup.zsh
+[3.587s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/local_setup.dsv
+[3.588s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/package.dsv
+[3.588s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ament_index/resource_index/packages/ur_description
+[3.589s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/cmake/ur_descriptionConfig.cmake
+[3.589s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/cmake/ur_descriptionConfig-version.cmake
+[3.590s] -- Installing: /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/install/ur_description/share/ur_description/package.xml
+[3.595s] Invoked command in '/home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description' returned '0': CMAKE_PREFIX_PATH=${CMAKE_PREFIX_PATH}:/opt/ros/jazzy DEBUGINFOD_URLS=https://debuginfod.ubuntu.com /usr/bin/cmake --install /home/constantin-sul/Desktop/Work/from-code-to-robot/robotics/Ros/Visualization/build/ur_description
