@@ -1,19 +1,28 @@
 function run_tests(tests)
+    % If we got a cell array of structs, convert it to a struct array
+    if iscell(tests)
+        tests = vertcat(tests{:});
+    end
+
+    if ~isstruct(tests)
+        error('run_tests: expected a struct array or cell array of structs.');
+    end
+
     fprintf('\n Running %d functional test(s):\n', numel(tests));
     for i = 1:numel(tests)
         t = tests(i);
         fprintf('\nTest %d: %s\n', i, t.description);
         try
-            % per-test setup (e.g. compute config)
-            if isfield(t, 'setup')
+            % per-test setup
+            if isfield(t, 'setup') && ~isempty(t.setup)
                 evalin('base', t.setup);
             end
 
             % run the code under test
             evalin('base', t.code);
 
-            % extract result variable name
-            tokens = regexp(t.code, '(\w+)\s*=', 'tokens', 'once');
+            % extract the result variable
+            tokens  = regexp(t.code, '(\w+)\s*=', 'tokens', 'once');
             varName = strtrim(tokens{1});
             result  = evalin('base', varName);
 
