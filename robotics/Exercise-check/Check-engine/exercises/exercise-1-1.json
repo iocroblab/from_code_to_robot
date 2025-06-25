@@ -1,0 +1,25 @@
+{
+  "exercise": {
+    "id": "1-1",
+    "description": "Check a robot model",
+    "setup": "robot = loadrobot('puma560','DataFormat','column');",
+    "variables": [
+      {
+        "name": "robot",
+        "type": "rigidBodyTree",
+        "properties": {
+          "DataFormat": "column"
+        }
+      }
+    ],
+    "tests": [
+      {
+        "description": "Check end-effector at home config",
+        "setup": "config = homeConfiguration(robot);",
+        "code": "pos = tform2trvec(getTransform(robot, config, robot.BodyNames{end}));",
+        "expected": [0.5, 0, 0.2],
+        "tolerance": 1e-3
+      }
+    ]
+  }
+}
