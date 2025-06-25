@@ -1,9 +1,9 @@
 function check_exercise(exercise_id)
     % Main checking function (JSON-based)
     json_file = fullfile('exercises', sprintf('exercise-%s.json', exercise_id));
-    if ~isfile(json_file)
-        error('JSON file %s not found.', json_file);
-    end
+    % if ~isfile(json_file)
+    %     error('JSON file %s not found.', json_file);
+    % end
 
     data = jsondecode( fileread(json_file) );
     ex = data.exercise;

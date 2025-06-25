@@ -1,17 +1,16 @@
 function check_variables(vars)
     fprintf('\nChecking variable structure:\n');
     for i = 1:numel(vars)
-        var = vars(i);
+        var  = vars(i);
         name = var.name;
 
-        % first, does it exist?
-        exists = evalin('base', sprintf('exist(''%s'',''var'')', name));
-        if exists ~= 1
+        %–– does it exist?
+        if evalin('base', sprintf('exist(''%s'',''var'')', name)) ~= 1
             fprintf('[FAIL] %s not found in workspace\n', name);
             continue;
         end
 
-        % now grab it
+        %–– grab it
         try
             val = evalin('base', name);
         catch e
@@ -19,19 +18,27 @@ function check_variables(vars)
             continue;
         end
 
-        % type check
-        if isfield(var, 'type')
-            if ~isa(val, var.type)
-                fprintf('[FAIL] %s should be of type "%s", but is "%s"\n', ...
-                        name, var.type, class(val));
+        %–– type check
+        if isfield(var,'type')
+            if ~isa(val,var.type)
+                fprintf('[FAIL] %s should be %s, but is %s\n', name,var.type,class(val));
                 continue;
             else
-                fprintf('[OK]   %s is of type %s\n', name, var.type);
+                fprintf('[OK]   %s is of type %s\n', name,var.type);
             end
         end
 
-        % property checks
-        if isfield(var, 'properties')
+        %–– full‐value check
+        if isfield(var,'expected')
+            if isequal(val, var.expected)
+                fprintf('[OK]   %s matches expected value\n', name);
+            else
+                fprintf('[FAIL] %s does not match expected value\n', name);
+            end
+        end
+
+        %–– property checks (optional extra)
+        if isfield(var,'properties')
             props = fieldnames(var.properties);
             for p = 1:numel(props)
                 prop     = props{p};

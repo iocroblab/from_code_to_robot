@@ -2,7 +2,7 @@
   "exercise": {
     "id": "1-1",
     "description": "Check a robot model",
-    "setup": "robot = loadrobot('puma560','DataFormat','column');",
+    "setup": "robot = loadrobot('ur3','DataFormat','column');",
     "variables": [
       {
         "name": "robot",

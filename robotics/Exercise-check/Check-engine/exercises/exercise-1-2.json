@@ -1,0 +1,18 @@
+{
+  "exercise": {
+    "id": "1-2",
+    "description": "Check a homogeneous transformation matrix",
+    "variables": [
+      {
+        "name": "TB0",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      }
+    ]
+  }
+}
