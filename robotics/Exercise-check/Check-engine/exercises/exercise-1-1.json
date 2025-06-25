@@ -11,13 +11,21 @@
     ],
     "tests": [
       {
-        "description": "Robot is in home configuration [0,0]",
-        "code": "q = [homeConfiguration(robot).JointPosition];",
-        "expected": [0, 0]
+        "description": "Joint 1 is in home configuration [0]",
+        "code": "q1 = homeConfiguration(robot); joint1 = q1(1).JointPosition;",
+        "resultVar": "joint1",
+        "expected": [0]
       },
       {
+        "description": "Joint 2 is in home configuration [0]",
+        "code": "q2 = homeConfiguration(robot); joint2 = q2(2).JointPosition;",
+        "resultVar": "joint2",
+        "expected": [0]
+      },
+
+      { 
         "description": "End-effector pose at home configuration",
-        "code": "T = getTransform(robot, homeConfiguration(robot), robot.BodyNames{end});",
+        "code": "T = round(getTransform(robot, homeConfiguration(robot), 'base', robot.BodyNames{end}),6);",
         "expected": [
           [0.0000, -1.0000, 0.0000, -0.6500],
           [0.0000,  0.0000, 1.0000,  0.0000],
