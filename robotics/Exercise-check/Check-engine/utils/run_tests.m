@@ -19,7 +19,7 @@ function run_tests(tests, globalSetup)
         end
     end
 
-    fprintf('\n Running %d functional test(s):\n', numel(tests));
+    fprintf('Checking Solutions: \n');
     for i = 1:numel(tests)
         t = tests(i);
         fprintf('\nTest %d: %s\n', i, t.description);

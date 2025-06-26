@@ -45,7 +45,7 @@ function check_variables(vars)
                     err = val(:) - expected(:);
                     errorcheck = (all(err <= tol) || all(abs(err) < 1e-12));
                     if errorcheck
-                        fprintf('[OK]   %s within tolerance %.2g\n', name, tol);
+                        fprintf('[OK]   %s correct \n', name);
                     else
                         fprintf('[FAIL] %s mismatch\nExpected: %s\nGot: %s\n', ...
                                 name, mat2str(expected, 4), mat2str(val, 4));
