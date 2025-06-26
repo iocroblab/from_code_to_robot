@@ -1,0 +1,49 @@
+{
+  "exercise": {
+    "id": "1-1",
+    "description": "Check Robot home configuration and end-effector pose",
+    "setup": "robot = evalin('base','robot');",
+    "variables": [
+      {
+        "name": "robot",
+        "type": "rigidBodyTree"
+      }
+    ],
+    "tests": [
+      {
+        "description": "Joint 1 home configuration",
+        "code": "q1 = homeConfiguration(robot); joint1 = q1(1).JointPosition;",
+        "resultVar": "joint1",
+        "expected": 0
+      },
+      {
+        "description": "Joint 2 home configuration",
+        "code": "q2 = homeConfiguration(robot); joint2 = q2(2).JointPosition;",
+        "resultVar": "joint2",
+        "expected": 0
+      },
+
+      { 
+        "description": "End-effector pose at home configuration",
+        "code": "T = round(getTransform(robot, homeConfiguration(robot), 'base', robot.BodyNames{end}),6);",
+        "tolerance": 1e-6,
+        "expected": [
+          [0.0000, -1.0000, 0.0000, -0.6500],
+          [0.0000,  0.0000, 1.0000,  0.0000],
+          [-1.0000, 0.0000, 0.0000,  0.0000],
+          [0.0000,  0.0000, 0.0000,  1.0000]
+        ]
+      },
+      
+      {
+        "description": "checking gravity direction",
+        "code": "gravity = robot.Gravity;",
+        "type": "double",
+        "expected": [
+          [0, 1, 0]
+        ]
+      }
+      
+    ]
+  }
+}
