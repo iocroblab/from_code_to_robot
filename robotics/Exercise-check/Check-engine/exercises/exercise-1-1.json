@@ -1,39 +1,70 @@
 {
   "exercise": {
-    "id": "1-1",
-    "description": "Check myRobot home configuration and end-effector pose",
-    "setup": "robot = evalin('base','myRobot');",
+    "id": "1-2",
+    "description": "Check a homogeneous transformation matrix",
     "variables": [
       {
-        "name": "robot",
-        "type": "rigidBodyTree"
+        "name": "T12",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T23",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T34",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T14",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T41",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
       }
     ],
-    "tests": [
+    "tests" : [
       {
-        "description": "Joint 1 is in home configuration [0]",
-        "code": "q1 = homeConfiguration(robot); joint1 = q1(1).JointPosition;",
-        "resultVar": "joint1",
-        "expected": [0]
-      },
-      {
-        "description": "Joint 2 is in home configuration [0]",
-        "code": "q2 = homeConfiguration(robot); joint2 = q2(2).JointPosition;",
-        "resultVar": "joint2",
-        "expected": [0]
-      },
-
-      { 
-        "description": "End-effector pose at home configuration",
-        "code": "T = round(getTransform(robot, homeConfiguration(robot), 'base', robot.BodyNames{end}),6);",
+        "description": "Checking Transform TB0",
+        "code": "TB0;",
+        "resultVar": "TB0",
         "expected": [
-          [0.0000, -1.0000, 0.0000, -0.6500],
-          [0.0000,  0.0000, 1.0000,  0.0000],
-          [-1.0000, 0.0000, 0.0000,  0.0000],
-          [0.0000,  0.0000, 0.0000,  1.0000]
-        ],
-        "tolerance": 1e-6
-      }
-    ]
+          [1, 0, 0, 1],
+          [0, 1, 0, 0],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      }]
   }
 }

@@ -1,0 +1,25 @@
+{
+  "exercise": {
+    "id": "1-1-2",
+    "description": "Check transform and position of origin",
+    "variables": [
+      {
+        "name": "T14",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 0],
+          [0, 1, 0, 0.2],
+          [0, 0, 1, -0.35],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "origin14",
+        "type": "double",
+        "expected": [
+          [0, 0.2, -0.35]
+        ]
+      }
+    ]
+  }
+}

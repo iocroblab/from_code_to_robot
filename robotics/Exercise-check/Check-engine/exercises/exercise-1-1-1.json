@@ -1,0 +1,38 @@
+{
+  "exercise": {
+    "id": "1-1-1",
+    "description": "Check a homogeneous transformation matrix",
+    "variables": [
+      {
+        "name": "T12",
+        "type": "double",
+        "expected": [
+          [0, -1, 0, 0],
+          [1, 0, 0, 0],
+          [0, 0, 1, -0.2],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T23",
+        "type": "double",
+        "expected": [
+          [0, 1, 0, 0],
+          [-1, 0, 0, 0],
+          [0, 0, 1, -0.15],
+          [0, 0, 0, 1]
+        ]
+      },
+      {
+        "name": "T34",
+        "type": "double",
+        "expected": [
+          [1, 0, 0, 0],
+          [0, 1, 0, 0.2],
+          [0, 0, 1, 0],
+          [0, 0, 0, 1]
+        ]
+      }
+    ]
+  }
+}

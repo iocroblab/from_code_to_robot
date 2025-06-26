@@ -9,11 +9,11 @@ function check_exercise(exercise_id)
     ex = data.exercise;
     fprintf('Checking exercise %s: %s\n', ex.id, ex.description);
 
-    %--- run exercise-level setup if provided (e.g. define robot) ---
-    if isfield(ex, 'setup')
-        fprintf(' Running exercise setup...\n');
-        evalin('base', ex.setup);
-    end
+    % %--- run exercise-level setup if provided (e.g. define robot) ---
+    % if isfield(ex, 'setup')
+    %     fprintf(' Running exercise setup...\n');
+    %     eval(ex.setup);
+    % end
 
     %--- static variable checks ---
     if isfield(ex, 'variables')
@@ -21,7 +21,11 @@ function check_exercise(exercise_id)
     end
 
     %--- functional tests ---
-    if isfield(ex, 'tests')
-        run_tests(ex.tests);
+    if isfield(ex, 'tests')&&~isempty(ex.tests)
+        if isfield(ex, 'setup')&&~isempty(ex.setup)
+            run_tests(ex.tests, ex.setup);
+        else
+            run_tests(ex.tests);
+        end
     end
 end

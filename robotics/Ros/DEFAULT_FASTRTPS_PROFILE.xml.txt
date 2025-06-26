@@ -1,34 +1,35 @@
-<?xml version="1.0" encoding="UTF-8" ?>
+<?xml version="1.0" encoding="UTF-8"?>
 <profiles>
-    <participant profile_name="participant_win" is_default_profile="true">
-        <rtps>
-            <builtin>
-                <metatrafficUnicastLocatorList>
-                     <locator/>
-                </metatrafficUnicastLocatorList>
-                 <initialPeersList>
-                     <locator>
-                         <udpv4>
-                         <address>172.21.168.123</address>
-                         </udpv4>
-                     </locator>
-                     <locator>
-                         <udpv4>
-                         <address>172.21.160.1</address>
-                         </udpv4>
-                     </locator>
-                     <locator>
-                         <udpv4>
-                         <address>182.30.45.12</address>
-                         </udpv4>
-                     </locator>
-                     <locator>
-                         <udpv4>
-                         <address>194.158.78.29</address>
-                         </udpv4>
-                     </locator>
-                 </initialPeersList>
-             </builtin>
-         </rtps>
-     </participant>
-</profiles> 
+  <participant profile_name="participant_win" is_default_profile="true">
+    <rtps>
+      <builtin>
+        <metatrafficUnicastLocatorList>
+          <locator/>
+        </metatrafficUnicastLocatorList>
+
+        <initialPeersList>
+          <!-- 1. Your Docker container -->
+          <locator>
+            <udpv4>
+              <address>172.17.0.2</address>
+            </udpv4>
+          </locator>
+
+          <!-- 2. Bridge gateway (host side) -->
+          <locator>
+            <udpv4>
+              <address>172.17.0.1</address>
+            </udpv4>
+          </locator>
+
+          <!-- 3. Windows/MATLAB host (on WLAN) -->
+          <locator>
+            <udpv4>
+              <address>192.168.178.199</address>
+            </udpv4>
+          </locator>
+        </initialPeersList>
+      </builtin>
+    </rtps>
+  </participant>
+</profiles>
