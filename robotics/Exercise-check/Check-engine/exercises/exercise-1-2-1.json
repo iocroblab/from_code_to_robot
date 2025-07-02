@@ -1,0 +1,83 @@
+{
+  "exercise": {
+    "id": "1-1-2",
+    "setup": "bodies = evalin('base', 'bodies'); joints=evalin('base','joints');",
+    "description": "Variable Structure",
+    "variables": [
+        {
+        "name": "robot",
+        "type": "rigidBodyTree"
+      },
+       {
+        "name": "bodies",
+        "type": "cell" 
+      },
+       {
+        "name": "joints",
+        "type": "cell"
+      }
+    ],
+      "tests": [
+      {
+        "description": "checking body elements",
+        "code": "correctNames = true;
+bodyNames=[];
+soln=[];
+
+if ~size(bodies,1)==6
+    correctNames = false;
+    disp('wrong number of bodies, expected 6');
+else
+
+    for i=1:size(bodies,1)
+        bodyNames=[bodyNames; bodies{i}.Name];
+        soln=[soln;['body_', num2str(i)]];
+    end
+    if ~strcmp(bodyNames, soln)
+        correctNames = false
+        disp('wrong body names, expected names: ')
+        disp(soln)
+    end
+end",
+        "resultVar": "correctNames",
+        "expected": true
+      },
+
+
+
+
+{
+        "description": "checking joint elements",
+        "code": "correctNames = true;
+jointNames=[];
+solj=[];
+solt=strings(6,1);
+solt(:)='revolute'; 
+jointTypes=[];
+if ~size(joints,1)==6
+    correctNames = false;
+    disp('wrong number of joints, expected 6');
+else
+
+    for i=1:size(joints,1)
+        jointTypes=[jointTypes; joints{i}.Type];
+        jointNames=[jointNames; joints{i}.Name];
+        solj=[solj;['joint_',num2str(i)]];
+    end
+    if ~strcmp(jointNames, solj)
+        correctNames = false;
+        disp('wrong joint names, expected names: ')
+        disp(solj)
+    end
+    if ~strcmp(jointTypes, solt)
+        correctNames = false;
+        disp('wrong joint types, expected types: ')
+        disp(solt)
+    end
+end",
+        "resultVar": "correctNames",
+        "expected": true
+      }
+          ]
+  }
+}

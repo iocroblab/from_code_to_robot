@@ -1,0 +1,17 @@
+{
+    "exercise": {
+        "id": "1-2-2",
+        "description": "Checking Robot Setup",
+        "variables": [
+            {
+                "name": "robot.Gravity",
+                "expected": [0,0,-1]
+            },
+            {
+                "name": "[homeConfiguration(robot).JointPosition]",
+                "expected": [1.5707,	0,	1.5707,	0,	1.5707,	0],
+                "tolerance": 1e-4
+            }
+        ]
+    }
+}

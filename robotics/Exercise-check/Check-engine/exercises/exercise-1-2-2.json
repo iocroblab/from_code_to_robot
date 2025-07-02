@@ -1,0 +1,113 @@
+{
+    "exercise": {
+        "id": "1-2-2",
+        "description": "Checking Robot Setup",
+        "variables": [
+            {
+                "name": "joints{1}.ChildToJointTransform",
+
+                "tolerance": 1e-4,
+                "expected": [
+                    [1.0000 ,0      ,0,     0],
+                    [0,0.0000,-1.0000,0],
+                    [0,1.0000,0.0000,0.1519],
+                    [0,0 ,0,1.0000]
+                ]
+            },
+            {
+                "name": "joints{2}.ChildToJointTransform",
+
+                "tolerance": 1e-4,
+                "expected": [
+                    [1.0000, 0,      0,      -0.2437],
+                    [0,      1.0000, 0,       0     ],
+                    [0,      0,      1.0000,  0     ],
+                    [0,      0,      0,      1.0000]
+                ]
+                
+            },
+            {
+                "name": "joints{3}.ChildToJointTransform",
+
+                "tolerance": 1e-4,
+                "expected": [
+                    [1.0000, 0,      0,      -0.2132],
+                    [0,      1.0000, 0,       0     ],
+                    [0,      0,      1.0000,  0     ],
+                    [0,      0,      0,      1.0000]
+                ]
+            },
+            {
+                "name": "joints{4}.ChildToJointTransform",
+
+                "tolerance": 1e-4,
+                "expected": [
+                    [1.0000, 0,      0,      0     ],
+                    [0,      0.0000, -1.0000, 0     ],
+                    [0,      1.0000,  0.0000, 0.1124],
+                    [0,      0,      0,      1.0000]
+                ]
+            },
+            {
+                "name": "joints{5}.ChildToJointTransform",
+
+                "tolerance": 1e-4,
+                "expected": [
+                    [1.0000, 0,      0,      0     ],
+                    [0,      0.0000,  1.0000, 0     ],
+                    [0,     -1.0000,  0.0000, 0.0853],
+                    [0,      0,      0,      1.0000]
+                ]
+            },
+            {
+                "name": "joints{6}.ChildToJointTransform",
+
+                "expected": [
+                    [1.0000, 0,      0,      0     ],
+                    [0,      1.0000,  0,      0     ],
+                    [0,      0,      1.0000, 0.0819],
+                    [0,      0,      0,      1.0000]
+                ],
+
+                "tolerance": 1e-5
+            },
+            {
+                "name": "bodies{1}.Joint.Name",
+
+                "expected": "joint_1"
+            },
+            {
+                "name": "bodies{2}.Joint.Name",
+
+                "expected": "joint_2"
+            },
+            {
+                "name": "bodies{3}.Joint.Name",
+
+                "expected": "joint_3"
+            },
+            {
+                "name": "bodies{4}.Joint.Name",
+
+                "expected": "joint_4"
+            },
+            {
+                "name": "bodies{5}.Joint.Name",
+
+                "expected": "joint_5"
+            },
+            {
+                "name": "bodies{6}.Joint.Name",
+                "expected": "joint_6"
+            },
+            {
+                "name": "robot.NumBodies",
+                "expected": 6
+            },
+            {
+                "name": "cell2mat(robot.FrameNames)",
+                "expected": "basebody_1body_2body_3body_4body_5body_6"
+            }
+        ]
+    }
+}
