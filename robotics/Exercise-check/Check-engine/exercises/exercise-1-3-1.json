@@ -8,32 +8,31 @@
                 "type": "sym"
             },
             {
-                "name": "isreal(q1)",
-                "expected": true
-            },
-            {
                 "name": "q2",
                 "type": "sym"
-            },
-            {
-                "name": "isreal(q2)",
-                "expected": true
             },
             {
                 "name": "q3",
                 "type": "sym"
             },
             {
-                "name": "isreal(q3)",
-                "expected": true
+                "description": "Checking if variables are real",
+                "name": "isreal(q1)&&isreal(q2)&&isreal(q3)",
+                "expected": true, 
+                "output_ok": "variables are setup correctly", 
+                "output_fail": "one or more variables are not assumed as real"
+
             },
             {
                 "name": "q",
                 "type": "sym"
             },
             {
+                "description": "Checking dimension of q",
                 "name": "size(q,2)",
-                "expected": 3
+                "expected": 3,
+                "output_ok": "correct dimensions of q", 
+                "output_fail": "incorrect dimension of q"
             },
             {
                 "name": "limit_1",
