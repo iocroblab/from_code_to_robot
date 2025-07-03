@@ -8,6 +8,27 @@
                 "expected": [3, 4]
             },
             {
+                "description": "checking q1 position in DH Parameter",
+                "name": "any(symvar(DH(1,3)) == q1)",
+                "expected": true,
+                "output_ok": "q1 is controlling the correct parameter",
+                "output_fail": "q1 is not in the right position"
+            },
+            {
+                "description": "checking q2 position in DH Parameter",
+                "name": "any(symvar(DH(2,4)) == q2)",
+                "expected": true,
+                "output_ok": "q2 is controlling the correct parameter",
+                "output_fail": "q2 is not in the right position"
+            },
+            {
+                "description": "checking q3 position in DH Parameter",
+                "name": "any(symvar(DH(3,4)) == q3)",
+                "expected": true,
+                "output_ok": "q3 is controlling the correct parameter",
+                "output_fail": "q3 is not in the right position"
+            },
+            {
                 "name": "TB0",
                 "type": "double",
                 "expected": [
@@ -27,15 +48,28 @@
                     [0,0,0,1]],
                 "hidden": true
 
-            }
-        ],
-        "tests":[
+            },
             {
-            "description": "Checking if joint variables qi are in their correct poosition",
-            "code": "
-            
+                "description": "Checking DH parameters from frame 0 to frame 1",
+                "name": "subs(dh2tf(DH(1,:)),q1,pi/3)",
+                "expected": [[1,0,0,0.3],[0,0,1,0],[0,-1,0,1.0472],[0,0,0,1]],
+                "output_ok": "DH parameters are correct",
+                "output_fail": "DH parameters are wrong"
+            },
+            {
+                "description": "Checking DH parameters from frame 1 to frame 2",
+                "name": "subs(dh2tf(DH(2,:)),q2,pi/4)",
+                "expected": [[0.7071,-0.7071,0.0000,0.4243],[0.7071,0.7071,0.0000,0.4243],[0.0000,0.0000,1.0000,0.0000],[0.0000,0.0000,0.0000,1.0000]],
+                "output_ok": "DH parameters are correct",
+                "output_fail": "DH parameters are wrong"
+            },
+            {
+                "description": "Checking DH parameters from frame 2 to frame 3",
+                "name": "subs(dh2tf(DH(3,:)),q3,pi/4)",
+                "expected": [[0.7071,0.0000,0.7071,0.2828],[0.7071,0.0000,-0.7071,0.2828],[0.0000,1.0000,0.0000,0.0000],[0.0000,0.0000,0.0000,1.0000]],
+                "output_ok": "DH parameters are correct",
+                "output_fail": "DH parameters are wrong"
             }
-
-            ]
+        ]
 }
 }

@@ -1,0 +1,108 @@
+{
+    "exercise": {
+        "id": "1-3-3",
+        "description": "Robot Structure",
+        "variables": [
+            {
+                "name": "robot",
+                "type": "rigidBodyTree"
+            },
+            {
+                "name": "bodies",
+                "type": "cell"
+            },
+            {
+                "description": "Number of bodies",
+                "name": "size(bodies)",
+                "expected": [5,1],
+                "output_ok": "correct number of bodies",
+                "output_fail": "incorrect number of bodies"
+            },
+            {
+                "name": "joints",
+                "type": "cell"
+            },
+            {
+                "description": "Number of joints",
+                "name": "size(joints)",
+                "expected": [5,1],
+                "output_ok": "correct number of joints",
+                "output_fail": "incorrect number of joints"
+            },
+            {
+                "description": "Checking joint type",
+                "name": "robot.Bodies{1}.Joint.Type",
+                "expected": "fixed",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "robot.Bodies{2}.Joint.Type",
+                "expected": "prismatic",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "robot.Bodies{3}.Joint.Type",
+                "expected": "revolute",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "robot.Bodies{4}.Joint.Type",
+                "expected": "revolute",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "robot.Bodies{5}.Joint.Type",
+                "expected": "fixed",
+                "hidden": true
+            },
+            {
+                "description": "Checking if DH parameters are correct",
+                "name": "getTransform(robot, homeConfiguration(robot), 'tool', 'base')",
+                "expected": [[0.0000,0.0000,-1.0000,-1.5500],[0.0000,-1.0000,0.0000,0.0000],[-1.0000,0.0000,0.0000,0.3000],[0.0000,0.0000,0.0000,1.0000]],
+                "output_ok": "DH parameters correctly linked to joints",
+                "output_fail": "DH parameters not correctly linked"
+
+            }
+        ],
+        "tests": [
+            {
+                "description": "checking body and joint  names",
+                "code": "
+                bodynames={};
+            jointnames={};
+    for i=1:5
+    bodynames{i}=robot.Bodies{i}.Name;
+jointnames{i}=robot.Bodies{i}.Joint.Name;
+end
+okjointnames={'base_link',    'joint_2',    'joint_3',   'joint_4', 'tool_link'};
+okbodynames={ 'body_base',    'body_2',    'body_3',    'body_4'    ,'tool'};
+
+if strcmp(bodynames,okbodynames)
+disp('Bodies named correctly');
+else
+disp('Bodies named incorrectly');
+disp('expected:')
+disp(okbodynames)
+disp('got:')
+disp(bodynames)
+end
+if strcmp(jointnames, okjointnames)
+disp('Joints named correctly');
+else
+disp('Joints named incorrectly');
+disp('expected:' );
+disp(okjointnames);
+disp('got: ')
+disp(jointnames);
+end
+"
+
+}
+
+]
+}
+}
