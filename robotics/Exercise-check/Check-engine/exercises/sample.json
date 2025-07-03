@@ -7,6 +7,18 @@
       {
         "name": "robot",
         "type": "rigidBodyTree"
+      },
+        {
+        "name": "robot.Gravity",
+        "type": "double",
+        "expected": [0,0,-1]
+      },
+        {
+        "name": "T01(1:3,4)'",
+        "type": "double",
+        "expected": [0,0,5],
+        "hidden": true
+
       }
     ],
     "tests": [

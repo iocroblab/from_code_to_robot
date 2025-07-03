@@ -1,6 +1,6 @@
 {
   "exercise": {
-    "id": "1-1-2",
+    "id": "1-2-1",
     "setup": "bodies = evalin('base', 'bodies'); joints=evalin('base','joints');",
     "description": "Variable Structure",
     "variables": [

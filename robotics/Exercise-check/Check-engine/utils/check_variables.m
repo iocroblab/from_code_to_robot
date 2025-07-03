@@ -2,14 +2,14 @@ function check_variables(vars)
     fprintf('\nChecking variables:\n \n');
     for i = 1:numel(vars)
         var  = vars(i);
-        if isa(var,"cell")
+        if isa(var, "cell")
             var = var{1};
         end
         name = var.name;
         fprintf('Checking Variable %s \n', name);
 
         % detect whether it's a simple var-name or a more complex expression
-        if isempty(regexp(name, '[\.\{\}]', 'once'))
+        if isempty(regexp(name, '[\.\{\}\(\)]', 'once'))
             % no dots or braces → a simple variable
             if evalin('base', sprintf('exist(''%s'', ''var'')', name)) ~= 1
                 fprintf('[FAIL] %s not found in workspace\n\n', name);
@@ -43,36 +43,48 @@ function check_variables(vars)
             end
         end
 
+        % Determine if this variable is marked hidden
+        hidden = isfield(var, 'hidden') && var.hidden;
+
         %–– value or tolerance check
         if isfield(var, 'expected')
             expected = var.expected;
 
             if isnumeric(val) || isa(val, 'sym')
                 % Use tolerance (from JSON or default)
-                tol = 1e-12;
+                tol = 1e-4;
                 if isfield(var, 'tolerance') && ~isempty(var.tolerance)
                     tol = var.tolerance;
                 end
 
                 try
                     err = val(:) - expected(:);
-                    errorcheck = (all(err <= tol) || all(abs(err) < 1e-12));
+                    errorcheck = (all(abs(err) <= tol) || all(abs(err) < 1e-12));
                     if errorcheck
                         fprintf('[OK]   %s correct \n', name);
                     else
-                        fprintf('[FAIL] %s mismatch\nExpected: %s\nGot: %s\n', ...
-                                name, mat2str(expected, 4), mat2str(val, 4));
+                        if hidden
+                            fprintf('[FAIL] %s mismatch\n', name);
+                        else
+                            fprintf('[FAIL] %s mismatch\nExpected: %s\nGot: %s\n', ...
+                                    name, mat2str(expected, 4), mat2str(val, 4));
+                        end
                     end
                 catch e
-                    fprintf('[ERROR] Tolerance comparison failed for %s: %s\n', name, e.message);
+                    fprintf('[ERROR] Comparison failed for %s: %s\n', name, e.message);
                 end
+
             else
                 % Not numeric/symbolic → isequal
                 if isequal(val, expected)
                     fprintf('[OK]   %s matches expected value\n', name);
                 else
-                    fprintf('[FAIL] %s mismatch\nExpected: %s\nGot: %s\n', ...
-                            name, mat2str(expected, 4), mat2str(val, 4));
+                    if hidden
+                        fprintf('[FAIL] %s mismatch\n', name);
+                    else
+                        fprintf('[FAIL] %s mismatch\nExpected: %s\nGot: %s\n', ...
+                                name, mat2str(expected, 4), mat2str(val, 4));
+                    end
                 end
             end
         end

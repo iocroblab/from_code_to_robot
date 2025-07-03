@@ -1,0 +1,57 @@
+{
+    "exercise": {
+        "id": "1-3-1",
+        "description": "Checking Symbolic Variable Setup and Joint Limits",
+        "variables": [
+            {
+                "name": "q1",
+                "type": "sym"
+            },
+            {
+                "name": "isreal(q1)",
+                "expected": true
+            },
+            {
+                "name": "q2",
+                "type": "sym"
+            },
+            {
+                "name": "isreal(q2)",
+                "expected": true
+            },
+            {
+                "name": "q3",
+                "type": "sym"
+            },
+            {
+                "name": "isreal(q3)",
+                "expected": true
+            },
+            {
+                "name": "q",
+                "type": "sym"
+            },
+            {
+                "name": "size(q,2)",
+                "expected": 3
+            },
+            {
+                "name": "limit_1",
+                "type": "double",
+                "expected": [0.1, 0.4]
+            },
+            {
+                "name": "limit_2",
+                "type": "double",
+                "expected": [-6.2832, 6.2832],
+                "hidden": true
+            },
+            {
+                "name": "limit_3",
+                "type": "double",
+                "expected": [-6.2832, 6.2832],
+                "hidden": true
+            }
+        ]
+    }
+}
