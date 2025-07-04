@@ -10,6 +10,13 @@ arguments (Input)
     replacements {mustBeNumericOrLogical} = [] % Optional input for replacements
 end
 
+% Attempt to convert the matrix to double
+try
+    matrix = double(matrix); % Convert symbolic matrix to double if possible
+catch exception
+    % If conversion fails, the exception is caught but not handled
+    % This allows the function to continue without interruption
+end
 % Check if the matrix is symbolic
 if ~isempty(symbolicvar) && ~isempty(replacements)
     matrix = double(round(subs(matrix, symbolicvar, replacements), 4));

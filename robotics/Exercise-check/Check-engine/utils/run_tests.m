@@ -19,10 +19,10 @@ function run_tests(tests, globalSetup)
         end
     end
 
-    fprintf('Checking Solutions: \n');
+    %fprintf('Looking at other Solutions: \n');
     for i = 1:numel(tests)
         t = tests(i);
-        fprintf('\nTest %d: %s\n', i, t.description);
+        fprintf('%s\n', t.description);
         try
             % Per-test setup (optional)
             if  isfield(t, 'setup') 

@@ -70,36 +70,37 @@
         ],
         "tests": [
             {
-                "description": "checking body and joint  names",
+                "setup": "robot = evalin('base','robot');",
+                "description": "Checking body and joint names",
                 "code": "
-                bodynames={};
-            jointnames={};
-    for i=1:5
-    bodynames{i}=robot.Bodies{i}.Name;
-jointnames{i}=robot.Bodies{i}.Joint.Name;
-end
-okjointnames={'base_link',    'joint_2',    'joint_3',   'joint_4', 'tool_link'};
-okbodynames={ 'body_base',    'body_2',    'body_3',    'body_4'    ,'tool'};
-
-if strcmp(bodynames,okbodynames)
-disp('Bodies named correctly');
-else
-disp('Bodies named incorrectly');
-disp('expected:')
-disp(okbodynames)
-disp('got:')
-disp(bodynames)
-end
-if strcmp(jointnames, okjointnames)
-disp('Joints named correctly');
-else
-disp('Joints named incorrectly');
-disp('expected:' );
-disp(okjointnames);
-disp('got: ')
-disp(jointnames);
-end
-"
+                            bodynames={};
+                            jointnames={};
+                                for i=1:5
+                                bodynames{i}=robot.Bodies{i}.Name;
+                            jointnames{i}=robot.Bodies{i}.Joint.Name;
+                            end
+                            okjointnames={'base_link',    'joint_2',    'joint_3',   'joint_4', 'tool_link'};
+                            okbodynames={ 'body_base',    'body_2',    'body_3',    'body_4'    ,'tool'};
+                            
+                            if strcmp(bodynames,okbodynames)
+                            disp('[OK] Bodies named correctly');
+                            else
+                            disp('[FAIL] Bodies named incorrectly');
+                            disp('expected:')
+                            disp(okbodynames)
+                            disp('got:')
+                            disp(bodynames)
+                            end
+                            if strcmp(jointnames, okjointnames)
+                            disp('[OK] Joints named correctly');
+                            else
+                            disp('[FAIL] Joints named incorrectly');
+                            disp('expected:' );
+                            disp(okjointnames);
+                            disp('got: ')
+                            disp(jointnames);
+                            end
+                            "
 
 }
 

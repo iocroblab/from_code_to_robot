@@ -15,29 +15,44 @@ function check_variables(vars)
         end
         fprintf('%s\n', header);
 
-        % detect whether it's a simple var-name or a more complex expression
+        %–– detect hidden flag
+        hidden = isfield(var, 'hidden') && var.hidden;
+
+        %–– detect whether simple var-name
         if isempty(regexp(name, '[\.\{\}\(\)]', 'once'))
-            % no dots or braces → a simple variable
             if evalin('base', sprintf('exist(''%s'', ''var'')', name)) ~= 1
-                output = get_output(var, 'fail', sprintf('%s not found in workspace', name));
-                fprintf('[FAIL] %s\n\n', output);
+                if hidden || (isfield(var, 'output_fail') && ~isempty(var.output_fail))
+                    output = get_output(var, 'fail', sprintf('%s not found in workspace', name));
+                    fprintf('[FAIL] %s\n\n', output);
+                else
+                    fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected: <undefined>\nGot: <undefined>\n\n', name);
+                end
                 continue;
             end
         end
-        % try to retrieve the value
+
+        %–– try to retrieve the value
         try
             val = evalin('base', name);
         catch
-            output = get_output(var, 'fail', sprintf('%s not found in workspace', name));
-            fprintf('[FAIL] %s\n\n', output);
+            if hidden || (isfield(var, 'output_fail') && ~isempty(var.output_fail))
+                output = get_output(var, 'fail', sprintf('%s not found in workspace', name));
+                fprintf('[FAIL] %s\n\n', output);
+            else
+                fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected: <undefined>\nGot: <undefined>\n\n', name);
+            end
             continue;
         end
 
         %–– type check
         if isfield(var, 'type')
             if ~isa(val, var.type)
-                output = get_output(var, 'fail', sprintf('%s should be %s, but is %s', name, var.type, class(val)));
-                fprintf('[FAIL] %s\n\n', output);
+                if hidden || (isfield(var, 'output_fail') && ~isempty(var.output_fail))
+                    output = get_output(var, 'fail', sprintf('%s should be %s, but is %s', name, var.type, class(val)));
+                    fprintf('[FAIL] %s\n\n', output);
+                else
+                    fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected type: %s\nGot type: %s\n\n', name, var.type, class(val));
+                end
                 continue;
             else
                 output = get_output(var, 'ok', sprintf('%s is of type %s', name, var.type));
@@ -61,8 +76,14 @@ function check_variables(vars)
                         output = get_output(var, 'ok', sprintf('%s correct', name));
                         fprintf('[OK] %s\n', output);
                     else
-                        output = get_output(var, 'fail', sprintf('%s mismatch', name));
-                        fprintf('[FAIL] %s\n', output);
+                        % mismatch case
+                        if hidden || (isfield(var, 'output_fail') && ~isempty(var.output_fail))
+                            output = get_output(var, 'fail', sprintf('%s mismatch', name));
+                            fprintf('[FAIL] %s\n', output);
+                        else
+                            fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected: %s\nGot: %s\n', ...
+                                    name, mat2str(expected, 4), mat2str(val, 4));
+                        end
                     end
                 catch e
                     fprintf('[ERROR] Comparison failed for %s: %s\n', name, e.message);
@@ -73,27 +94,14 @@ function check_variables(vars)
                     output = get_output(var, 'ok', sprintf('%s matches expected value', name));
                     fprintf('[OK] %s\n', output);
                 else
-                    output = get_output(var, 'fail', sprintf('%s mismatch', name));
-                    fprintf('[FAIL] %s\n', output);
-                end
-            end
-        end
-
-        %–– property checks (optional extra)
-        if isfield(var, 'properties')
-            props = fieldnames(var.properties);
-            for p = 1:numel(props)
-                prop     = props{p};
-                expected = var.properties.(prop);
-                try
-                    actual = val.(prop);
-                    if isequal(actual, expected)
-                        fprintf('[OK]   %s.%s = %s\n', name, prop, mat2str(actual));
+                    % mismatch case
+                    if hidden || (isfield(var, 'output_fail') && ~isempty(var.output_fail))
+                        output = get_output(var, 'fail', sprintf('%s mismatch', name));
+                        fprintf('[FAIL] %s\n', output);
                     else
-                        fprintf('[FAIL] %s.%s: expected %s, got %s\n', name, prop, mat2str(expected), mat2str(actual));
+                        fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected: %s\nGot: %s\n', ...
+                                name, mat2str(expected, 4), mat2str(val, 4));
                     end
-                catch e
-                    fprintf('[ERROR] %s.%s inaccessible: %s\n', name, prop, e.message);
                 end
             end
         end

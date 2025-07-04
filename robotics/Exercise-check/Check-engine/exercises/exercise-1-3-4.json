@@ -1,0 +1,36 @@
+{
+    "exercise": {
+        "id": "1-3-4",
+        "description": "Robot Joint Setup",
+        "variables": [
+            {
+                "description": "Checking joint limits for first controllable joint",
+                "name": "robot.Bodies{2}.Joint.PositionLimits",
+                "expected": [0.1 , 0.4]
+                },
+            {
+                "description": "Checking joint limits for second controllable joint",
+                "name": "robot.Bodies{3}.Joint.PositionLimits",
+                "expected": [-6.2832,6.2832]
+                
+                },
+            {
+                "description": "Checking joint limits for third controllable joint",
+                "name": "robot.Bodies{4}.Joint.PositionLimits",
+                "expected": [-6.2832,6.2832]
+                },
+            {
+                "description": "Checking home configuration",
+                "name": "getTransform(robot,homeConfiguration(robot), 'tool', 'base')",
+                "expected": [[0.0000,0.0000,-1.0000,-0.9500],[0.0000,-1.0000,0.0000,0.0000],[-1.0000,0.0000,0.0000,1.0000],[0.0000,0.0000,0.0000,1.0000]],
+                "output_ok": "robot reached desired position in home configuration", 
+                "output_fail": "robot failed to reach desired position in home configuration" 
+                }
+
+           
+        ],
+        "tests": [
+            
+]
+}
+}
