@@ -5,10 +5,10 @@
         "variables": [
             {
                 "name": "robot.Gravity",
-                "expected": [0,0,-1]
+                "expected": [0,0,-9.81]
             },
             {
-                "name": "[homeConfiguration(robot).JointPosition]",
+                "name": "homeConfiguration(robot)",
                 "expected": [1.5707,	0,	1.5707,	0,	1.5707,	0],
                 "tolerance": 1e-4
             }
