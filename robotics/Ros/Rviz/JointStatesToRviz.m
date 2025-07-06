@@ -1,4 +1,4 @@
-function success = JointStatesToRviz(JointConfiguration)
+function success = JointStatesToRviz(ur_model, JointConfiguration)
 %JOINTCONFIGURATIONTORVIZ Initialize and publish a 6-DOF joint configuration to RViz via ROS2.
 %   On first call, this function sets up the ROS2 node, publisher, and message. 
 %   Subsequent calls will reuse the same resources for efficiency.
@@ -8,6 +8,7 @@ function success = JointStatesToRviz(JointConfiguration)
 %   - success: logical true if message was published without error, false otherwise
 
 arguments
+    ur_model
     JointConfiguration 
 end
 arguments (Output)
@@ -16,10 +17,10 @@ end
 
 persistent node jsPub jsMsg
 
-StartIfNotRunning('view_ur\.launch\.py', ...
-    ['cd Ros/Repo/; ' ...
+promt = strcat(['cd Ros/Repo/; ' ...
     'source install/setup.bash; ' ...
-    'ros2 launch ur_description view_ur.launch.py ur_type:=ur3e']);
+    'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model]); 
+StartIfNotRunning('view_ur\.launch\.py', promt);
 
 % --- Initialization on first call ---
 if isempty(node) || ~isvalid(node)
