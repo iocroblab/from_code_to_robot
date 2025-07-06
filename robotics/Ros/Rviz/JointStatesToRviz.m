@@ -16,6 +16,11 @@ end
 
 persistent node jsPub jsMsg
 
+StartIfNotRunning('view_ur\.launch\.py', ...
+    ['cd Ros/Repo/; ' ...
+    'source install/setup.bash; ' ...
+    'ros2 launch ur_description view_ur.launch.py ur_type:=ur3e']);
+
 % --- Initialization on first call ---
 if isempty(node) || ~isvalid(node)
     % Create a ROS2 node
