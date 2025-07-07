@@ -86,7 +86,7 @@
                             jointnames{i}=robot.Bodies{i}.Joint.Name;
                             end
                             okjointnames={'base_link',    'joint_2',    'joint_3',   'joint_4', 'tool_link'};
-                            okbodynames={ 'body_base',    'body_2',    'body_3',    'body_4'    ,'tool'};
+                            okbodynames={'body_base',    'body_2',    'body_3',    'body_4'    ,'tool'};
                             
                             if strcmp(bodynames,okbodynames)
                             disp('[OK] Bodies named correctly');
