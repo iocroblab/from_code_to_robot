@@ -17,10 +17,12 @@ end
 
 persistent node jsPub jsMsg
 
-promt = strcat(['cd Ros/Repo/; ' ...
-    'source install/setup.bash; ' ...
-    'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model]); 
-StartIfNotRunning('view_ur\.launch\.py', promt);
+if isunix %only start up Rviz automatically if run on Ubuntu
+    promt = strcat(['cd Ros/Repo/; ' ...
+        'source install/setup.bash; ' ...
+        'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model]); 
+    StartIfNotRunning('view_ur\.launch\.py', promt);
+end
 
 % --- Initialization on first call ---
 if isempty(node) || ~isvalid(node)
