@@ -1,4 +1,4 @@
-function success = JointStatesToRviz(ur_model, JointConfiguration)
+function success = JointStatesToRviz(JointConfiguration,ur_model)
 %JOINTCONFIGURATIONTORVIZ Initialize and publish a 6-DOF joint configuration to RViz via ROS2.
 %   On first call, this function sets up the ROS2 node, publisher, and message. 
 %   Subsequent calls will reuse the same resources for efficiency.
@@ -8,8 +8,8 @@ function success = JointStatesToRviz(ur_model, JointConfiguration)
 %   - success: logical true if message was published without error, false otherwise
 
 arguments
-    ur_model
     JointConfiguration 
+    ur_model char= 'ur3'
 end
 arguments (Output)
     success (1,1) logical
