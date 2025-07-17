@@ -1,0 +1,14 @@
+{
+  "exercise": {
+    "id": "2-1-4",
+    "description": "Checking Tranform matrices",
+    "variables": [
+        {
+            "name": "T_config", 
+            "type": "double", 
+            "expected": [[0.0000,-1.0000,0.0000,0.0000],[0.0000,0.0000,1.0000,0.0000],[-1.0000,0.0000,0.0000,-0.2000],[0.0000,0.0000,0.0000,1.0000]],
+            "hidden" : false
+        }
+        ]
+  }
+}

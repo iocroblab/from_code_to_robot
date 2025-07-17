@@ -1,4 +1,4 @@
-function TargetFrameBroadcaster(homogeneousTransform)    
+function TargetFrameBroadcaster(homogeneousTransform, childFrame, parentFrame)    
 
     % TARGETFRAMEBROADCASTER Function to publish a static transform between frames
     %

@@ -33,7 +33,8 @@ function status = StartScript(cmd, emulator)
             launcher = sprintf(...
               'env -u LD_LIBRARY_PATH xterm -hold -e "bash -lc ''%s''" &', ...
               wrapped);
-
+        case 'windows'
+            launcher = cmd; 
         otherwise
             error('Unsupported emulator "%s".', emulator);
     end

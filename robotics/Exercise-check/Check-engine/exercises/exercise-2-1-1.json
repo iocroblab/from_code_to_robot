@@ -1,0 +1,69 @@
+{
+  "exercise": {
+    "id": "2-1-1",
+    "description": "Checking forward kinematic",
+    "variables": [
+        {       "name": "A36", 
+                "type": "sym"
+        },
+      {
+                "name": "q4",
+                "type": "sym"
+            },
+            {
+                "name": "q5",
+                "type": "sym"
+            },
+            {
+                "name": "q6",
+                "type": "sym"
+            },
+            {
+                "description": "Checking if variables are real",
+                "name": "isreal(q4)&&isreal(q5)&&isreal(q6)",
+                "expected": true, 
+                "output_ok": "variables are setup correctly", 
+                "output_fail": "one or more variables are not assumed as real"
+
+            },
+            {
+                "name": "q",
+                "type": "sym"
+            },
+            {
+                "description": "Checking dimension of q",
+                "name": "size(q,2)",
+                "expected": 3,
+                "output_ok": "correct dimensions of q", 
+                "output_fail": "incorrect dimension of q"
+            }
+    ],
+     "tests":[
+            
+         {
+                "setup": "A36 = evalin('base','A36');",
+                "description": "Checking A36 matrix",
+                
+                "expected": true, 
+                "code": "
+             syms q4 q5 q6 real;
+             DH = [
+             0  -pi/2    0   q4;
+             0  pi/2     0   q5;
+             0  0        0.2  q6
+             ];
+
+A36_check = dh2tf(DH(1,:)) * dh2tf(DH(2,:)) * dh2tf(DH(3,:));
+
+isA36Correct = isequal(A36_check, A36);
+if isA36Correct
+disp('[OK] Forward Kinematics matches solution')
+else
+disp('[FAIL] Forward Kinematics does not matches solution')
+end
+"
+}
+]
+
+  }
+}

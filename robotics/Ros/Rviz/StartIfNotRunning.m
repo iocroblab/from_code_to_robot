@@ -12,25 +12,43 @@ function status = StartIfNotRunning(procPattern, launchCmd, emulator)
 %   Returns the exit status of either the check (if already running, returns 0)
 %   or of the launcher (0 on success).
 
-    arguments
-        procPattern  (1,:) char
-        launchCmd    (1,:) char
-        emulator     (1,:) char = "gnome-terminal"
-    end
-
+arguments
+    procPattern  (1,:) char
+    launchCmd    (1,:) char
+    emulator     (1,:) char = "gnome-terminal"
+end
+if isunix
     % 1) Check for an existing process
     checkCmd = sprintf('pgrep -f "%s"', procPattern);
     [checkStatus, ~] = system(checkCmd);
+    
+elseif ispc
+    %start a wsl shell if not running
+    [wslstatus, wslrunning]= system('tasklist /FI "IMAGENAME eq wsl.exe"'); 
+    if wslstatus==0 && strcmp(wslrunning(1:11), 'INFORMATION')
+        system('start cmd /k wsl');
+    end
+    
+    %start the docker if not running
+    [status, result] = system('wsl docker ps -a --filter name=gz-modified --filter status=running');
+    if ~(status == 0 && ~isempty(result(103:end)))
+        
+        system('wsl docker start gz-modified');
+    end
 
-    if checkStatus == 0
-        %fprintf('Process matching "%s" is already running – nothing to do.\n', procPattern);
-        status = 0;
-        return
-    else
+    checkCmd = sprintf('wsl pgrep -f "%s"', procPattern);
+    [checkStatus, ~] = system(checkCmd);
+end
+
+if checkStatus == 0
+    %fprintf('Process matching "%s" is already running – nothing to do.\n', procPattern);
+    status = 0;
+    return
+else
 
 
     % 2) Not running yet → spawn it
     status = StartScript(launchCmd, emulator);
     pause(4)
-    end
+end
 end

@@ -1,4 +1,4 @@
-function TargetFrameBroadcaster(homogeneousTransform, childFrame, parentFrame)    
+function TargetFrameBroadcaster(homogeneousTransform)    
 
     % FRAMEBROADCASTER Function to publish a static transform using ROS 2
     %
