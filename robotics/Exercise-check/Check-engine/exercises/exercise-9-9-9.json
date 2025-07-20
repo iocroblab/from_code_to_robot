@@ -1,0 +1,32 @@
+{
+  "exercise": {
+    "id": "9-9-9",
+    "description": "Checking Functions",
+    
+      "contents":
+      [
+       
+          {
+          "name":"myfunction",
+          "inputs":[[9,1],[5,5],[7,3]], 
+          "outputs": [[9],[10],[10]],
+          "hidden":false,
+          "tolerance":2,
+          "forbidden": ["sum"]
+      },
+          {
+          "name":"myfunction",
+          "forbidden": ["sum"]
+      },
+          {
+          "name":"myfunctiones",
+          "inputs":[[1,2,3]],
+          "outputs": ["yes"]
+      },
+          {
+              "name":"main",
+              "forbidden": ["sum"]
+          }
+          ]
+  }
+}
