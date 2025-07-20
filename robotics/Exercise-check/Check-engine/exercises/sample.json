@@ -64,6 +64,26 @@
                 ]
             }
 
-        ]
+        ],
+
+      "contents":
+      [
+       
+          {
+          "name":"myfunction",
+          "inputs":[[9,1],[5,5],[7,3]], 
+          "outputs": [[9],[10],[10]],
+          "hidden":false,
+          "tolerance":2
+      },
+          {
+          "name":"myfunctiones",
+          "forbidden":["sum","while"] 
+      },
+          {
+              "name":"main",
+              "forbidden": ["sum"]
+          }
+          ]
     }
 }

@@ -28,4 +28,9 @@ function check_exercise(exercise_id)
             run_tests(ex.tests);
         end
     end
+    
+    %--- content check
+    if isfield(ex, 'contents')
+        check_contents(ex.contents);
+    end
 end
