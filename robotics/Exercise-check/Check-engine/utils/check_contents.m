@@ -96,6 +96,8 @@ for i=1:numel(contentcheck) % Loop through each content check criteria
                 delete(tempfilename); % Delete the temporary file
             end
         end
+
+        
     end
 end
 end

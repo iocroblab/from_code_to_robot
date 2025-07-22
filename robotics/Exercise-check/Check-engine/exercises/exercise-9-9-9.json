@@ -24,6 +24,10 @@
           "outputs": ["yes"]
       },
           {
+          "name":"myfunctiones",
+          "forbidden":["try"]
+      },
+          {
               "name":"main",
               "forbidden": ["sum"]
           }

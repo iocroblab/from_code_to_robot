@@ -13,7 +13,8 @@ function TargetFrameBroadcaster(homogeneousTransform)
     % Create a ROS 2 node for broadcasting transforms
     tf2broadcaster_node = ros2node("tf2broadcaster_node", 0);
     % Create a transform tree with specified Quality of Service settings
-    tftree = ros2tf(tf2broadcaster_node,'StaticBroadcasterQoS',struct('Depth',50));
+       qos = struct('History', 'keeplast', 'Depth', 10, 'Reliability', 'reliable', 'Durability', 'volatile');
+    tftree = ros2tf(tf2broadcaster_node,'StaticBroadcasterQoS',qos);
 
     
     % Create a TransformStamped message
