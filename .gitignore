@@ -1,2 +1,10 @@
-
 *.asv
+
+# computer vision
+__pycache__/
+datasets/
+
+win64/
++best/
+matlab.mat
+*.mat
