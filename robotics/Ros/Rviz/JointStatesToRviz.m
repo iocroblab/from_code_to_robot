@@ -1,4 +1,4 @@
-function success = JointStatesToRviz(JointConfiguration,ur_model)
+function success = JointStatesToRviz(JointConfiguration,ur_model, time)
 %JOINTCONFIGURATIONTORVIZ Initialize and publish a 6-DOF joint configuration to RViz via ROS2.
 %   On first call, this function sets up the ROS2 node, publisher, and message. 
 %   Subsequent calls will reuse the same resources for efficiency.
@@ -9,7 +9,8 @@ function success = JointStatesToRviz(JointConfiguration,ur_model)
 
 arguments
     JointConfiguration 
-    ur_model char= 'ur3'
+    ur_model char= 'ur3e'
+    time = 2
 end
 arguments (Output)
     success (1,1) logical
@@ -45,17 +46,34 @@ if isempty(node) || ~isvalid(node)
         'wrist_3_joint'};
 end
 
-% --- Publish the joint configuration ---
-try
-    % Assign positions
-    jsMsg.position = JointConfiguration;
-    % Timestamp the message
-    jsMsg.header.stamp = ros2time(node, 'now');
-    % Send to RViz
-    send(jsPub, jsMsg);
-    success = true;
-catch ME
-    warning('JointConfigurationToRviz:PublishFailed', '%s', ME.message);
-    success = false;
+%format input joint states
+if size(JointConfiguration,1)==6 && size(JointConfiguration,2)~=6
+    JointConfiguration = JointConfiguration'; 
+end
+
+% --- Publish the joint configurations ---
+NumJointStates = size(JointConfiguration,1);
+desiredRate = NumJointStates/time; 
+r = ros2rate(node, desiredRate);
+
+reset(r);
+for i=1:NumJointStates
+    try
+        % Assign positions
+        jsMsg.position = JointConfiguration(i,:);
+        % Timestamp the message
+        jsMsg.header.stamp = ros2time(node, 'now');
+        % Send to RViz
+        send(jsPub, jsMsg);
+        success = true;
+        % Pause to maintain the desired publishing rate
+        if NumJointStates~=1
+        waitfor(r);
+        end
+
+    catch ME
+        warning('JointConfigurationToRviz:PublishFailed', '%s', ME.message);
+        success = false;
+    end
 end
 end

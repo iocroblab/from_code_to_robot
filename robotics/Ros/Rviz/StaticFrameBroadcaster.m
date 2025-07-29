@@ -1,4 +1,4 @@
-function TargetFrameBroadcaster(homogeneousTransform)    
+function StaticFrameBroadcaster(homogeneousTransform)    
 
     % FRAMEBROADCASTER Function to publish a static transform using ROS 2
     %
@@ -13,7 +13,7 @@ function TargetFrameBroadcaster(homogeneousTransform)
     % Create a ROS 2 node for broadcasting transforms
     tf2broadcaster_node = ros2node("tf2broadcaster_node", 0);
     % Create a transform tree with specified Quality of Service settings
-       qos = struct('History', 'keeplast', 'Depth', 10, 'Reliability', 'reliable', 'Durability', 'volatile');
+    qos = struct('History', 'keeplast', 'Depth', 10, 'Reliability', 'reliable', 'Durability', 'volatile');
     tftree = ros2tf(tf2broadcaster_node,'StaticBroadcasterQoS',qos);
 
     
@@ -36,7 +36,7 @@ function TargetFrameBroadcaster(homogeneousTransform)
     tfStampedMsg.transform.rotation.z = Tquat(4);
     
     % Send the transform message
-    sendTransform(tftree,tfStampedMsg)
+    sendTransform(tftree,tfStampedMsg, "UseStatic",true)
     % Print confirmation of the published transform
     fprintf("Published static transform: %s → %s\n", ...
             tfStampedMsg.header.frame_id, tfStampedMsg.child_frame_id);
