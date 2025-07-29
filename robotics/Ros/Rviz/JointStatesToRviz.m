@@ -10,7 +10,7 @@ function success = JointStatesToRviz(JointConfiguration,ur_model, time)
 arguments
     JointConfiguration 
     ur_model char= 'ur3e'
-    time = 2
+    time = 5
 end
 arguments (Output)
     success (1,1) logical
