@@ -1,0 +1,109 @@
+function yolov8Det = trainYOLOv8ObjectDetector(configFile, baseModel, varargin)
+% trainYOLOv8ObjectDetector Train a YOLO v8 deep learning object detector.
+%
+% yolov8Det = trainYOLOv8ObjectDetector(configFile, baseModel, ...)
+% trains a YOLOv8 object detector using the specified configuration file and
+% base model. Additional training parameters can be passed as name-value pairs,
+% which are forwarded directly to the YOLOv8 Python trainer.
+%
+% Inputs
+% ------
+%   configFile      Path to the YAML configuration file specifying dataset
+%                   locations and class names.
+%   baseModel       Path to the base YOLOv8 model (.pt file).
+%
+% Name-Value Pair Arguments
+% -------------------------
+%   'MaxEpochs'         Maximum number of training epochs. (Default: 10)
+%   'MiniBatchSize'     Mini-batch size for training. (Default: 16)
+%   'ImageSize'         Image size used for training, specified as [H W C].
+%                       (Default: [640 640 3])
+%   ...                 Any additional YOLOv8 training parameters supported
+%                       by the Python API can be specified as name-value pairs.
+%
+% Example
+% -------
+% yolov8Det = trainYOLOv8ObjectDetector('data.yaml', 'yolov8n.pt', ...
+%     'MaxEpochs', 50, 'MiniBatchSize', 32, 'batch', 32, 'lr0', 0.01);
+%
+% See also trainYOLOv4ObjectDetector, trainYOLOv3ObjectDetector
+%
+% Copyright 2024 The MathWorks, Inc.
+
+% Default values
+defaultMaxEpochs = 10;
+defaultMiniBatchSize = 16;
+defaultImageSize = [640 640 3];
+
+% Parse standard arguments and collect the rest
+p = inputParser;
+addRequired(p, 'configFile');
+addRequired(p, 'baseModel', @mustBeValidBaseModel);
+addParameter(p, 'MaxEpochs', defaultMaxEpochs);
+addParameter(p, 'MiniBatchSize', defaultMiniBatchSize);
+addParameter(p, 'ImageSize', defaultImageSize);
+parse(p, configFile, baseModel, varargin{:});
+opts = p.Results;
+
+% Extract  arguments
+stdNames = ["MaxEpochs", "MiniBatchSize", "ImageSize"];
+extraArgs = {};
+for i = 1:2:length(varargin)
+    if ~any(strcmpi(varargin{i}, stdNames))
+        extraArgs = [extraArgs, varargin(i:i+1)];
+    end
+end
+
+if ~canUseGPU()
+    error("Training of YOLO v8 object detector requires GPU.")
+end
+
+terminate(pyenv)
+
+if (ispc)
+     pyenv(Version="win64/python/python", ExecutionMode = "OutOfProcess")
+ else
+     pyenv(Version="glnxa64/python/bin/python3", ExecutionMode = "OutOfProcess")
+ end
+
+if isunix
+    py.sys.setdlopenflags(int32(bitor(int64(py.os.RTLD_LAZY),int64(py.os.RTLD_DEEPBIND))));
+end
+
+pythonObject = py.trainYOLOv8Wrapper.yolov8TrainerClass(py.str(baseModel), py.int(opts.ImageSize(1,1)));
+
+if ~isempty(extraArgs)
+    pyExtraArgs = pyargs(extraArgs{:});
+    results = pythonObject.trainYOLOv8(configFile, py.int(opts.MaxEpochs), pyExtraArgs);
+else
+    results = pythonObject.trainYOLOv8(configFile, py.int(opts.MaxEpochs));
+end
+
+% Obtain path to results dir that has .pt file
+getSaveDir = string(results.save_dir.parts);
+
+% Extract location of export directory
+onnxExportDir = [getSaveDir,'weights','best.pt'];
+onnxExportPath = fullfile(onnxExportDir{:});
+
+% Export best trained model to onnx format
+pythonObject.exportModel(onnxExportPath);
+
+% Import the exported model in MATLAB
+modelPath = fullfile(onnxExportDir{1:end-1});
+net = importYOLOv8Model(fullfile(modelPath,"best.onnx"));
+
+dictValues = pythonObject.getClassNames(configFile);
+classDict = dictValues{"names"};
+matlabDict = dictionary(classDict);
+classNames = values(matlabDict);
+
+yolov8Det = yolov8ObjectDetector(net, classNames);
+
+end
+
+function mustBeValidBaseModel(baseModel)
+    if ~endsWith(baseModel, '.pt')
+        error("baseModel must end with '.pt'.");
+    end
+end

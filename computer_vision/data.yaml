@@ -1,0 +1,9 @@
+path: ''
+train: fruits_3_4998/train/images/
+val: fruits_3_4998/val/images/
+test: null
+names:
+  0: apple
+  1: orange
+  2: pear
+  

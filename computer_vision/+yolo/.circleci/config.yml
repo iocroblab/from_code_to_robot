@@ -1,0 +1,21 @@
+version: 2.1
+orbs:
+  matlab: mathworks/matlab@1.1.1
+
+jobs:
+  build:
+    machine:
+      image: ubuntu-2204:2024.01.1
+    steps:
+      - checkout
+      - matlab/install:
+          release: R2024a
+          products: Computer_Vision_Toolbox Image_Processing_Toolbox Deep_Learning_Toolbox Deep_Learning_Toolbox_Converter_for_ONNX_Model_Format
+      - matlab/run-tests:
+          test-results-junit: artifacts/test_results/matlab/results.xml
+          # Have to add test/tools to the path for certain tests.
+          source-folder: .;test/tools
+      - store_test_results:
+          path: artifacts/test_results
+      - store_artifacts:
+          path: artifacts/
