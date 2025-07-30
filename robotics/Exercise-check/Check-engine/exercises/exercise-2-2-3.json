@@ -1,0 +1,65 @@
+{
+    "exercise": {
+        "id": "2-2-3",
+        "description": "Checking IK solutions for third manipulator",
+        "variables": [
+            {
+                "description": "checking solution type",
+                "name": "sol_3",
+                "type": "double"
+            },{
+                "description": "checking solution size",
+                "name": "size(sol_3,1)",
+                "expected": 2
+            },
+            {
+                "description": "checking first solution for q1",
+                "name": "getIndex('sortrows(sol_3)',1,1)",
+                "expected": 0.0144 ,
+                "output_ok": "first solution for q1 is correct",
+                "output_fail": "first solution for q1 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking first solution for q2",
+                "name": "getIndex('sortrows(sol_3)',1,2)",
+                "expected": 1.7576,
+                "output_ok": "first solution for q2 is correct",
+                "output_fail": "first solution for q2 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking first solution for q3",
+                "name": "getIndex('sortrows(sol_3)',1,3)",
+                "expected": -0.5378,
+                "output_ok": "first solution for q3 is correct",
+                "output_fail": "first solution for q3 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking second solution for q1",
+                "name": "getIndex('sortrows(sol_3)',2,1)",
+                "expected": 1.3751,
+                "output_ok": "second solution for q1 is correct",
+                "output_fail": " second solution for q1 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking second solution for q2",
+                "name": "getIndex('sortrows(sol_3)',2,2)",
+                "output_ok": "second solution for q2 is correct",
+                "output_fail": "second solution for q2 is not correct",
+                "expected": -1.7576,
+                "hidden":true
+            },
+            {
+                "description": "checking second solution for q3",
+                "name": "getIndex('sortrows(sol_3)',2,3)",
+                "output_ok": "second solution for q3 is correct",
+                "output_fail": "second solution for q3 is not correct",
+                "expected": 1.6167,
+                "hidden":true
+            }
+        ]
+    }
+}

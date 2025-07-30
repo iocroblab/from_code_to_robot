@@ -1,0 +1,50 @@
+{
+    "exercise": {
+        "id": "2-2-2",
+        "description": "Checking IK solutions for second manipulator",
+        "variables": [
+            {
+                "description": "checking solution type",
+                "name": "sol_2",
+                "type": "double"
+            },
+            {
+                "description": "checking solution size",
+                "name": "size(sol_2,1)",
+                "expected": 2
+            },
+            {
+                "description": "checking first solution for q1",
+                "name": "getIndex('sortrows(sol_2)',1,1)",
+                "expected": 1.0476,
+                "output_ok": "first solution for q1 is correct",
+                "output_fail": "first solution for q1 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking first solution for q2",
+                "name": "getIndex('sortrows(sol_2)',1,2)",
+                "expected": 0.3134,
+                "output_ok": "first solution for q2 is correct",
+                "output_fail": "first solution for q2 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking second solution for q1",
+                "name": "getIndex('sortrows(sol_2)',2,1)",
+                "expected": 1.3821,
+                "output_ok": "second solution for q1 is correct",
+                "output_fail": " second solution for q1 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "checking second solution for q2",
+                "name": "getIndex('sortrows(sol_2)',2,2)",
+                "output_ok": "second solution for q2 is correct",
+                "output_fail": "second solution for q2 is not correct",
+                "expected": -0.3134,
+                "hidden":true
+            }
+        ]
+    }
+}

@@ -1,0 +1,34 @@
+{
+    "exercise": {
+        "id": "2-2-1",
+        "description": "Checking IK solutions for first manipulator",
+        "variables": [
+            {
+                "description": "Checking Type of solution",
+                "name": "sol_1", 
+                "type": "double"
+            },{
+                "description": "checking solution size",
+                "name": "size(sol_1,1)",
+                "expected": 1
+            },
+            {
+                "description": "Checking q1",
+                "name": "sol_1(1)",
+                "expected": 0.9818,
+                "output_ok": "solution for q1 is correct",
+                "output_fail": "solution for q1 is not correct",
+                "hidden":true
+            },
+            {
+                "description": "Checking q2",
+                "name": "sol_1(2)",
+                "expected": 0.1498,
+                "output_ok": "solution for q2 is correct",
+                "output_fail": "solution for q2 is not correct",
+                "hidden":true
+            }
+        ]
+
+    }
+}
