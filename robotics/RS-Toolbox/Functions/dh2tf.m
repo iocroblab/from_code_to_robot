@@ -24,4 +24,5 @@ for i=1:size(dh,1)
         T = T * subs(Tsym, {a, alpha_, d, theta}, dh(i,:));
     end
 end
+T=simplify(T); 
 end
