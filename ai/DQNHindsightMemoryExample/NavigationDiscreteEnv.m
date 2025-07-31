@@ -7,9 +7,11 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
     properties
         Map = zeros([1, 5]);
         Robot
-        Obj
-        Goal
-        State = zeros(4,1)
+        Obj1
+        Obj2
+        Goal1
+        Goal2
+        State = zeros(5,1)
         Obstacles
         % Add property to enable automatic visualization during simulation
         EnableVisualization = false
@@ -28,9 +30,9 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
     methods
         function this = NavigationDiscreteEnv()
             % Initialize Observation settings
-            observationInfo = rlNumericSpec([3 1]);
+            observationInfo = rlNumericSpec([5 1]);
             observationInfo.Name = 'Observation';
-            observationInfo.Description = 'Robot x, Object x, Goal x';
+            observationInfo.Description = 'Robot x, Object1 x, Object2 x, Goal1 x, Goal2 x';
 
             % Initialize Action settings
             % 1 = pick
@@ -56,16 +58,29 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
 
             this.Robot.handle = 0;
 
-            this.Obj.x = randi(5) - 1;
-            this.Obj.y = 1;
+            this.Obj1.x = randi(5) - 1;
+            this.Obj1.y = 1;
+
+            this.Obj2.x = randi(5) - 1;
+            this.Obj2.y = 1;
+            while this.Obj1.x == this.Obj2.x
+                this.Obj2.x = randi(5) - 1;
+            end
+
 
             % Ensure goal x position is different from robot x position
-            this.Goal.x = randi(5) - 1;
-            while this.Goal.x == this.Obj.x
-                this.Goal.x = randi(5) - 1;
+            this.Goal1.x = randi(5) - 1;
+            while this.Goal1.x == this.Obj1.x
+                this.Goal1.x = randi(5) - 1;
             end
-            this.Goal.y  = 1;
-            state = [this.Robot.x, this.Obj.x, this.Goal.x]';
+            this.Goal1.y  = 1;
+
+            this.Goal2.x = randi(5) - 1;
+            while this.Goal2.x == this.Obj2.x || this.Goal2.x == this.Goal1.x
+                this.Goal2.x = randi(5) - 1;
+            end
+            this.Goal2.y  = 1;
+            state = [this.Robot.x, this.Obj1.x, this.Obj2.x, this.Goal1.x, this.Goal2.x]';
             this.State = state;
         end
 
@@ -80,7 +95,7 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
         function [nextobs,reward,isdone,loggedSignals] = step(this,action)
             arguments
                 this
-                action {mustBeMember(action,[1,2, 3, 4])}
+                action {mustBeMember(action,[1,2,3,4])}
             end
             % Step the environment to the next state, given the action
             %
@@ -95,16 +110,24 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
 
             switch action
                 case 1 % pick up
-                    if this.Robot.x == this.Obj.x && this.Robot.handle == 0
+                    obj_in_robot_pos = this.Robot.x == this.Obj1.x || this.Robot.x == this.Obj2.x;
+                    if obj_in_robot_pos && this.Robot.handle == 0
                         this.Robot.handle = 1;
-                        this.Obj.x = -1; % Move object off the map when picked
-                        this.Obj.y = -1;
+                        if this.Robot.x == this.Obj1.x
+                            this.Robot.handle = 1;
+                            this.Obj1.x = -1; % Move object off the map when picked
+                        else
+                            this.Robot.handle = 2;
+                            this.Obj2.x = -1; % Move object off the map when picked
+                        end
                     end
                 case 2 % drop
                     if this.Robot.handle == 1 % Only drop if carrying something
                         this.Robot.handle = 0;
-                        this.Obj.x = this.Robot.x;
-                        this.Obj.y = this.Robot.y;
+                        this.Obj1.x = this.Robot.x;
+                    elseif this.Robot.handle == 2
+                        this.Robot.handle = 0;
+                        this.Obj2.x = this.Robot.x;
                     end
                 case 3 % move left
                     xnew = x - 1;
@@ -119,7 +142,7 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
             % Assign new position
             this.Robot.x = xnew;
 
-            nextobs = [this.Robot.x this.Obj.x this.Goal.x]';
+            nextobs = [this.Robot.x this.Obj1.x this.Obj2.x this.Goal1.x this.Goal2.x]';
             reward = myNavigationGoalRewardFcn({this.State}, {action}, {nextobs});
             isdone = myNavigationGoalIsDoneFcn({this.State}, {action}, {nextobs});
             this.State = nextobs;
@@ -128,7 +151,7 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
 
             % Automatically show visualization if enabled
             if this.EnableVisualization
-                this.plot();
+                % this.plot();
                 pause(0.5); % Small pause to see the animation
             end
         end
@@ -136,7 +159,7 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
         function enableVisualization(this)
             % Enable automatic visualization during simulation
             this.EnableVisualization = true;
-            this.plot(); % Show initial state
+            % this.plot(); % Show initial state
         end
 
         function disableVisualization(this)
@@ -148,8 +171,8 @@ classdef NavigationDiscreteEnv < rl.env.MATLABEnvironment
             % Visualizes the environment
             if isempty(this.Visualizer) || ~isvalid(this.Visualizer)
                 this.Visualizer = NavigationDiscreteEnvVisualizer(this);
-            % else
-            %     bringToFront(this.Visualizer);
+                % else
+                %     bringToFront(this.Visualizer);
             end
             if nargout
                 varargout{1} = this.Visualizer;

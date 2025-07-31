@@ -63,7 +63,7 @@ classdef NavigationDiscreteEnvVisualizer < rl.env.viz.AbstractFigureVisualizer
             f = figure(...
                 'Toolbar','none',...
                 'Visible','on',...
-                'HandleVisibility','on', ...
+                'HandleVisibility','off', ...
                 'NumberTitle','off',...
                 'Name','Pick and Place 1D Environment',...
                 'MenuBar','none',...
@@ -100,10 +100,12 @@ classdef NavigationDiscreteEnvVisualizer < rl.env.viz.AbstractFigureVisualizer
             % Create invisible plots for legend
             plot(ha, NaN, NaN, 'bs', 'MarkerSize', 10, 'MarkerFaceColor', 'blue');
             plot(ha, NaN, NaN, 'ms', 'MarkerSize', 10, 'MarkerFaceColor', 'magenta');
-            plot(ha, NaN, NaN, 'gs', 'MarkerSize', 10, 'MarkerFaceColor', 'green');
-            plot(ha, NaN, NaN, 'rs', 'MarkerSize', 10, 'MarkerFaceColor', 'red');
             plot(ha, NaN, NaN, 'cs', 'MarkerSize', 10, 'MarkerFaceColor', 'cyan');
-            legend(ha, {'Robot (empty)', 'Robot (carrying)', 'Object', 'Goal', 'Success'}, ...
+            plot(ha, NaN, NaN, 'gs', 'MarkerSize', 10, 'MarkerFaceColor', 'green');
+            plot(ha, NaN, NaN, 'ys', 'MarkerSize', 10, 'MarkerFaceColor', 'yellow');
+            plot(ha, NaN, NaN, 'rs', 'MarkerSize', 10, 'MarkerFaceColor', 'red');
+            plot(ha, NaN, NaN, 'ko', 'MarkerSize', 10, 'MarkerFaceColor', 'black');
+            legend(ha, {'Robot (empty)', 'Robot (carrying Obj1)', 'Robot (carrying Obj2)', 'Object1', 'Object2', 'Goal1', 'Goal2'}, ...
                 'Location', 'eastoutside');
             hold(ha, 'off');
 
@@ -137,31 +139,53 @@ classdef NavigationDiscreteEnvVisualizer < rl.env.viz.AbstractFigureVisualizer
 
             robotXIndex = this.Environment.Robot.x + 1;
             robotYIndex = this.Environment.Robot.y + 1;
-            goalXIndex = this.Environment.Goal.x + 1;
-            goalYIndex = this.Environment.Goal.y + 1;
-            objXIndex = this.Environment.Obj.x + 1;
-            objYIndex = this.Environment.Obj.y + 1;
+            goal1XIndex = this.Environment.Goal1.x + 1;
+            goal1YIndex = this.Environment.Goal1.y + 1;
+            goal2XIndex = this.Environment.Goal2.x + 1;
+            goal2YIndex = this.Environment.Goal2.y + 1;
+            obj1XIndex = this.Environment.Obj1.x + 1;
+            obj1YIndex = this.Environment.Obj1.y + 1;
+            obj2XIndex = this.Environment.Obj2.x + 1;
+            obj2YIndex = this.Environment.Obj2.y + 1;
 
-            % Goal is red.
-            mapWithRobotandGoal(goalYIndex, goalXIndex, 1) = 255;
-            mapWithRobotandGoal(goalYIndex, goalXIndex, 2) = 0;
-            mapWithRobotandGoal(goalYIndex, goalXIndex, 3) = 0;
+            % Goal1 is red.
+            mapWithRobotandGoal(goal1YIndex, goal1XIndex, 1) = 255;
+            mapWithRobotandGoal(goal1YIndex, goal1XIndex, 2) = 0;
+            mapWithRobotandGoal(goal1YIndex, goal1XIndex, 3) = 0;
 
-            % Object visualization (only if not being carried by robot)
-            if this.Environment.Robot.handle == 0 && ...
-                    this.Environment.Obj.x >= 0 && this.Environment.Obj.x <= 9 && ...
-                    this.Environment.Obj.y >= 0 && this.Environment.Obj.y <= 9
-                % Object is green when in the world
-                mapWithRobotandGoal(objYIndex, objXIndex, 1) = 0;
-                mapWithRobotandGoal(objYIndex, objXIndex, 2) = 255;
-                mapWithRobotandGoal(objYIndex, objXIndex, 3) = 0;
+            % Goal2 is black.
+            mapWithRobotandGoal(goal2YIndex, goal2XIndex, 1) = 0;
+            mapWithRobotandGoal(goal2YIndex, goal2XIndex, 2) = 0;
+            mapWithRobotandGoal(goal2YIndex, goal2XIndex, 3) = 0;
+
+            % Object1 visualization (only if not being carried by robot and in valid position)
+            if this.Environment.Robot.handle ~= 1 && ...
+                    this.Environment.Obj1.x >= 0 && this.Environment.Obj1.x <= 4
+                % Object1 is green when in the world
+                mapWithRobotandGoal(obj1YIndex, obj1XIndex, 1) = 0;
+                mapWithRobotandGoal(obj1YIndex, obj1XIndex, 2) = 255;
+                mapWithRobotandGoal(obj1YIndex, obj1XIndex, 3) = 0;
             end
 
-            % Robot visualization depends on whether it's carrying the object
+            % Object2 visualization (only if not being carried by robot and in valid position)
+            if this.Environment.Robot.handle ~= 2 && ...
+                    this.Environment.Obj2.x >= 0 && this.Environment.Obj2.x <= 4
+                % Object2 is yellow when in the world
+                mapWithRobotandGoal(obj2YIndex, obj2XIndex, 1) = 255;
+                mapWithRobotandGoal(obj2YIndex, obj2XIndex, 2) = 255;
+                mapWithRobotandGoal(obj2YIndex, obj2XIndex, 3) = 0;
+            end
+
+            % Robot visualization depends on whether it's carrying an object
             if this.Environment.Robot.handle == 1
-                % Robot carrying object is magenta (mix of red and blue)
+                % Robot carrying object1 is magenta (mix of red and blue)
                 mapWithRobotandGoal(robotYIndex, robotXIndex, 1) = 255;
                 mapWithRobotandGoal(robotYIndex, robotXIndex, 2) = 0;
+                mapWithRobotandGoal(robotYIndex, robotXIndex, 3) = 255;
+            elseif this.Environment.Robot.handle == 2
+                % Robot carrying object2 is cyan (mix of green and blue)
+                mapWithRobotandGoal(robotYIndex, robotXIndex, 1) = 0;
+                mapWithRobotandGoal(robotYIndex, robotXIndex, 2) = 255;
                 mapWithRobotandGoal(robotYIndex, robotXIndex, 3) = 255;
             else
                 % Robot without object is blue
@@ -170,14 +194,25 @@ classdef NavigationDiscreteEnvVisualizer < rl.env.viz.AbstractFigureVisualizer
                 mapWithRobotandGoal(robotYIndex, robotXIndex, 3) = 255;
             end
 
-            % Check if task is completed (object at goal position)
-            if this.Environment.Obj.x == this.Environment.Goal.x && ...
-                    this.Environment.Obj.y == this.Environment.Goal.y && ...
-                    this.Environment.Robot.handle == 0
-                % Success state: object at goal is cyan
-                mapWithRobotandGoal(goalYIndex, goalXIndex, 1) = 0;
-                mapWithRobotandGoal(goalYIndex, goalXIndex, 2) = 255;
-                mapWithRobotandGoal(goalYIndex, goalXIndex, 3) = 255;
+            % Check if tasks are completed (objects at goal positions)
+            % Object1 at Goal1
+            if this.Environment.Obj1.x == this.Environment.Goal1.x && ...
+                    this.Environment.Obj1.y == this.Environment.Goal1.y && ...
+                    this.Environment.Robot.handle ~= 1
+                % Success state: object1 at goal1 - keep red but add green component
+                mapWithRobotandGoal(goal1YIndex, goal1XIndex, 1) = 255;
+                mapWithRobotandGoal(goal1YIndex, goal1XIndex, 2) = 128;
+                mapWithRobotandGoal(goal1YIndex, goal1XIndex, 3) = 0;
+            end
+
+            % Object2 at Goal2
+            if this.Environment.Obj2.x == this.Environment.Goal2.x && ...
+                    this.Environment.Obj2.y == this.Environment.Goal2.y && ...
+                    this.Environment.Robot.handle ~= 2
+                % Success state: object2 at goal2 - keep black but add green component
+                mapWithRobotandGoal(goal2YIndex, goal2XIndex, 1) = 0;
+                mapWithRobotandGoal(goal2YIndex, goal2XIndex, 2) = 128;
+                mapWithRobotandGoal(goal2YIndex, goal2XIndex, 3) = 0;
             end
 
             f = this.Figure;
@@ -194,23 +229,31 @@ classdef NavigationDiscreteEnvVisualizer < rl.env.viz.AbstractFigureVisualizer
 
             % Update title with current state information
             if this.Environment.Robot.handle == 1
-                robotStatus = 'carrying object';
+                robotStatus = 'carrying object1';
+            elseif this.Environment.Robot.handle == 2
+                robotStatus = 'carrying object2';
             else
                 robotStatus = 'empty hands';
             end
 
-            if this.Environment.Obj.x == this.Environment.Goal.x && ...
-                    this.Environment.Obj.y == this.Environment.Goal.y && ...
-                    this.Environment.Robot.handle == 0
+            if this.Environment.Obj1.x == this.Environment.Goal1.x && ...
+                    this.Environment.Obj1.y == this.Environment.Goal1.y && ...
+                    this.Environment.Robot.handle ~= 1
+                taskStatus = ' - TASK COMPLETED!';
+            elseif this.Environment.Obj2.x == this.Environment.Goal2.x && ...
+                    this.Environment.Obj2.y == this.Environment.Goal2.y && ...
+                    this.Environment.Robot.handle ~= 2
                 taskStatus = ' - TASK COMPLETED!';
             else
                 taskStatus = '';
             end
 
-            title(ha, sprintf('Pick & Place - Robot: (%d,%s), Object: (%d,%d), Goal: (%d,%d)%s', ...
+            title(ha, sprintf('Pick & Place - Robot: (%d,%s), Object1: (%d,%d), Object2: (%d,%d), Goal1: (%d,%d), Goal2: (%d,%d)%s', ...
                 this.Environment.Robot.x, robotStatus, ...
-                this.Environment.Obj.x, this.Environment.Obj.y, ...
-                this.Environment.Goal.x, this.Environment.Goal.y, taskStatus));
+                this.Environment.Obj1.x, this.Environment.Obj1.y, ...
+                this.Environment.Obj2.x, this.Environment.Obj2.y, ...
+                this.Environment.Goal1.x, this.Environment.Goal1.y, ...
+                this.Environment.Goal2.x, this.Environment.Goal2.y, taskStatus));
 
             % Force figure to front and refresh
             figure(f);
