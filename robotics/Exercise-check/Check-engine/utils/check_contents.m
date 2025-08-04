@@ -76,7 +76,7 @@ for i=1:numel(contentcheck) % Loop through each content check criteria
                     functionoutput = feval(name, args{:}); % Call the function with the current inputs
 
                     if isnumeric(functionoutput)
-                        if abs(functionoutput-outputs(j))<=tol % Check if output is within tolerance
+                        if abs(functionoutput-outputs(j,:))<=tol % Check if output is within tolerance
                             disp(['[OK] Output for: ',functioncall,' matched expectation within tolerance']) % Display success message
                         elseif isfield(content,'hidden')&&content.hidden % Check if the content is hidden
                             disp(['[FAIL] Output for: ',functioncall,'does not match expected output']); % Display failure message for hidden content
