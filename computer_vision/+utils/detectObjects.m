@@ -7,7 +7,7 @@ function detection = detectObjects(detector, imageName, filter)
     %   filter: (opcional) objeto Filter para postprocesar las detecciones
 
     % Path to the image folder
-    imagePath = fullfile('data/fruits-test/train/images/', imageName);
+    imagePath = fullfile('datasets/fruits_3_4998/example/', imageName);
 
     % Read the image
     I = imread(imagePath);
