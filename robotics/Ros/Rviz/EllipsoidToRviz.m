@@ -49,12 +49,6 @@ function success = EllipsoidToRviz(U, S, p_ee, res)
     rgb_u32 = uint32(R)*2^16 + uint32(G)*2^8 + uint32(B);
     rgb_f32 = typecast(rgb_u32,'single');     % 1xN float32
 
-    % ---- Optional sanity check: estimated center ≈ p_ee
-    center_est = mean(xyz,1);
-    center_err = norm(center_est - p_ee);
-    if center_err > 1e-6
-        warning('Ellipsoid center check: |mean - p_ee| = %.3g (frames correct?)', center_err);
-    end
 
     % ---- ROS 2 node & publisher
     persistent node pub
