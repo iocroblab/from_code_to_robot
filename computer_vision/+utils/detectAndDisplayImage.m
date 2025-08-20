@@ -6,7 +6,9 @@ function detection = detectAndDisplayImage(detector, imageName, filter)
     else
         detection = utils.detectObjects(detector, imageName, filter);
     end
-    figure;
-    imshow(detection);
+    f = figure('Name', ['Detections in: ', imageName], ...
+               'NumberTitle', 'off', ...
+               'Color', 'white');
+    imshow(detection, 'Parent', axes(f)); % Show in figure's axes
     title(['Detections in: ', imageName], 'Interpreter', 'none');
 end

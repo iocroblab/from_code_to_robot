@@ -7,4 +7,4 @@ datasets/
 win64/
 +best/
 matlab.mat
-*.mat
+yolov8n.mat

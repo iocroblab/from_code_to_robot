@@ -1,4 +1,4 @@
-function yolov8Det = trainYOLOv8ObjectDetector(configFile, baseModel, varargin)
+function [yolov8Det, results] = trainYOLOv8ObjectDetector(configFile, baseModel, varargin)
 %trainYOLOv8ObjectDetector Train a YOLO v8 deep learning object detector.
 %
 % trainedDetector = trainYOLOv8ObjectDetector(configFile, baseModel) trains a
@@ -85,40 +85,9 @@ end
 
 pythonObject = py.trainYOLOv8Wrapper.yolov8TrainerClass(py.str(baseModel), py.int(options.ImageSize(1,1)));
 
-% Extract extra YOLO arguments (not handled by MATLAB)
-knownFields = {'configFile','baseModel','MaxEpochs','ImageSize','resume'};
-extraArgs = struct();
-for i = 1:2:length(varargin)
-    argName = varargin{i};
-    if ischar(argName) || isstring(argName)
-        % Chequeo case-insensitive
-        if ~any(strcmpi(argName, knownFields))
-            argValue = varargin{i+1};
-            % Convierte booleanos MATLAB a booleanos Python
-            if islogical(argValue)
-                if argValue
-                    argValue = py.True;
-                else
-                    argValue = py.False;
-                end
-            end
-            extraArgs.(char(argName)) = argValue;
-        end
-    end
-end
-pyExtraArgs = {};
-fields = fieldnames(extraArgs);
-for i = 1:numel(fields)
-    pyExtraArgs{end+1} = fields{i};
-    pyExtraArgs{end+1} = extraArgs.(fields{i});
-end
-
 if options.resume
     results = pythonObject.resumeYOLOv8();
 else
-    disp("extra:")
-    disp(pyExtraArgs)
-    disp(".........")
     results = pythonObject.trainYOLOv8(configFile, py.int(options.MaxEpochs), varargin);
 end
 
