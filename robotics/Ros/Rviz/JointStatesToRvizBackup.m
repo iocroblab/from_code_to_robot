@@ -18,17 +18,17 @@ end
 
 persistent node jsPub jsMsg
 
-if isunix %only start up Rviz automatically if run on Ubuntu
-    promt = strcat(['cd Ros/Repo/; ' ...
-        'source install/setup.bash; ' ...
-        'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model]); 
-    StartIfNotRunning('view_ur\.launch\.py', promt);
-
-
-elseif ispc
-    promt=strcat('wsl docker exec -dit gz-modified bash -c "cd Ros/Repo && source install/setup.bash && ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model, '"');
-    StartIfNotRunning('view_ur\.launch\.py', promt, "windows");    
-end
+% if isunix %only start up Rviz automatically if run on Ubuntu
+%     promt = strcat(['cd Ros/Repo/; ' ...
+%         'source install/setup.bash; ' ...
+%         'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model]); 
+%     StartIfNotRunning('view_ur\.launch\.py', promt);
+% 
+% 
+% elseif ispc
+%     promt=strcat('wsl docker exec -dit gz-modified bash -c "cd Ros/Repo && source install/setup.bash && ros2 launch ur_description view_ur.launch.py ur_type:=', ur_model, '"');
+%     StartIfNotRunning('view_ur\.launch\.py', promt, "windows");    
+% end
 % --- Initialization on first call ---
 if isempty(node) || ~isvalid(node)
     % Create a ROS2 node

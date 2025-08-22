@@ -64,16 +64,16 @@ opt = p.Results;
 
 success = false;
 
-% ---------- Launch RViz/UR description if needed ----------
-if isunix % only auto-start on Ubuntu
-    promt = strcat(['cd Ros/Repo/; ' ...
-        'source install/setup.bash; ' ...
-        'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type]);
-    StartIfNotRunning('view_ur\.launch\.py', promt);
-elseif ispc
-    promt = strcat('wsl docker exec -dit gz-modified bash -c "cd Ros/Repo && source install/setup.bash && ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type, '"');
-    StartIfNotRunning('view_ur\.launch\.py', promt, "windows");
-end
+% % ---------- Launch RViz/UR description if needed ----------
+% if isunix % only auto-start on Ubuntu
+%     promt = strcat(['cd Ros/Repo/; ' ...
+%         'source install/setup.bash; ' ...
+%         'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type]);
+%     StartIfNotRunning('view_ur\.launch\.py', promt);
+% elseif ispc
+%     promt = strcat('wsl docker exec -dit gz-modified bash -c "cd Ros/Repo && source install/setup.bash && ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type, '"');
+%     StartIfNotRunning('view_ur\.launch\.py', promt, "windows");
+% end
 
 % ---------- Persistent ROS2 node & publishers ----------
 persistent node jsPub pclPub jsMsg
