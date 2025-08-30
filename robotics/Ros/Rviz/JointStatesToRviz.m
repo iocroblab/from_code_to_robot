@@ -1,32 +1,35 @@
 function success = JointStatesToRviz(JointConfiguration, ur_type, time, varargin)
-%JOINTSTATESTORVIZ Publish joint states (ROS 2) and, optionally, manipulability ellipsoid to RViz.
+%JOINTSTATESTORVIZ Publish joint states (ROS 2) and, optionally, manipulability
+% ellipsoid to RViz. If a trajectory is given, optionally publish a yellow
+% PointCloud2 of the end-effector path.
+%
 %   success = JointStatesToRviz(JointConfiguration, ur_type, time, Name,Value)
 %
 %   Inputs
 %     JointConfiguration : [N x 6] or [1 x 6] joint angles (rad).
-%     ur_type            : char, e.g. 'ur3e', 'ur5e', ... (ROS 2 naming).
-%     time               : total duration [s] to play the N states.
+%     ur_type            : char, e.g. 'ur3e', 'ur5e', ...
+%     time               : total duration [s] to play the N states. ([] okay)
 %
 %   Name-Value options (all optional):
-%     'PlotManipulabilityEllipsoid' : true|false   (default: true)
-%     'EllipsoidKind'               : 'trans'|'rot' (default: 'trans')
-%     'EllipsoidResolution'         : positive int (default: 25)
-%     'BaseFrame'                   : char (default: 'base_link')
-%     'ToolFrame'                   : char (default: 'tool0')
-%     'JointStateTopic'             : char (default: '/joint_states')
-%     'EllipsoidTopic'              : char (default: '/manip_ellipsoid')
+%     'Ellipsoid'         : true|false            (default: false)
+%     'EllipsoidKind'     : 'trans'|'rot'         (default: 'trans')
+%     'EllipsoidResolution': positive int         (default: 35)
+%     'BaseFrame'         : char                  (default: 'base_link')
+%     'ToolFrame'         : char                  (default: 'tool0')
+%     'JointStateTopic'   : char                  (default: '/joint_states')
+%     'EllipsoidTopic'    : char                  (default: '/manip_ellipsoid')
+%     'Trajectory'        : true|false            (default: depends on N; see notes)
+%     'TrajectoryTopic'   : char                  (default: '/trajectory_path')
 %
 %   Output
 %     success : logical true if all publishes succeeded.
 %
-%   Notes
-%     - Uses a single ROS 2 node (persistent) for both publishers.
-%     - Automatically launches RViz/UR description as in your original code.
-%     - Ellipsoid colors encode local radius (low=red → high=green).
+%   Default for 'Trajectory':
+%     - Single pose (N==1): false
+%     - Trajectory (N>1):   true (unless explicitly passed as false)
 %
 %   Requires:
-%     - Robotics System Toolbox (for loadrobot, geometricJacobian, getTransform)
-%     - Your helper StartIfNotRunning(...)
+%     - Robotics System Toolbox
 %
 %   (C) 2025
 
@@ -35,8 +38,6 @@ arguments
     ur_type char = 'ur3e'
     time double = []          % allow []
 end
-
-% ---- This makes the function line and arguments block consistent ----
 arguments (Repeating)
     varargin
 end
@@ -44,39 +45,47 @@ end
 % ---- Handle default time depending on trajectory length ----
 if isempty(time)
     if size(JointConfiguration,1) <= 1
-        time = 1;   % single pose → arbitrary (rate loop won't wait)
+        time = 1;
     else
-        time = 5;   % default total time for a trajectory
+        time = 5;
     end
 end
 
-% ---- Parse Name-Value pairs (example set; keep your existing parser) ----
+% ---- Normalize JointConfiguration to [N x 6] early (needed for defaults) ----
+if size(JointConfiguration,2) ~= 6 && size(JointConfiguration,1) == 6
+    JointConfiguration = JointConfiguration.'; % make row
+end
+if size(JointConfiguration,2) ~= 6
+    error('JointConfiguration must have 6 columns.');
+end
+N = size(JointConfiguration,1);
+
+% ---- Parse Name-Value pairs ----
 p = inputParser;
 addParameter(p,'Ellipsoid',false,@(x)islogical(x)&&isscalar(x));
 addParameter(p,'EllipsoidKind','trans',@(s)ischar(s)||isstring(s));
-addParameter(p,'EllipsoidResolution',35,@(n)isnumeric(n)&&isscalar(n)&&n>2);
+addParameter(p,'EllipsoidResolution',20,@(n)isnumeric(n)&&isscalar(n)&&n>2);
 addParameter(p,'BaseFrame','base_link',@(s)ischar(s)||isstring(s));
 addParameter(p,'ToolFrame','tool0',@(s)ischar(s)||isstring(s));
 addParameter(p,'JointStateTopic','/joint_states',@(s)ischar(s)||isstring(s));
 addParameter(p,'EllipsoidTopic','/manip_ellipsoid',@(s)ischar(s)||isstring(s));
+addParameter(p,'Trajectory',false,@(x)islogical(x)&&isscalar(x));           % default filled, may override below
+addParameter(p,'TrajectoryTopic','/trajectory_path',@(s)ischar(s)||isstring(s));
 parse(p, varargin{:});
 opt = p.Results;
 
+% Apply default logic for 'Trajectory' only if user didn't pass it
+useDefaultTraj = any(strcmp(p.UsingDefaults,'Trajectory'));
+if useDefaultTraj
+    doTrajectory = (N > 1);
+else
+    doTrajectory = logical(opt.Trajectory);
+end
+
 success = false;
 
-% % ---------- Launch RViz/UR description if needed ----------
-% if isunix % only auto-start on Ubuntu
-%     promt = strcat(['cd Ros/Repo/; ' ...
-%         'source install/setup.bash; ' ...
-%         'ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type]);
-%     StartIfNotRunning('view_ur\.launch\.py', promt);
-% elseif ispc
-%     promt = strcat('wsl docker exec -dit gz-modified bash -c "cd Ros/Repo && source install/setup.bash && ros2 launch ur_description view_ur.launch.py ur_type:=', ur_type, '"');
-%     StartIfNotRunning('view_ur\.launch\.py', promt, "windows");
-% end
-
 % ---------- Persistent ROS2 node & publishers ----------
-persistent node jsPub pclPub jsMsg
+persistent node jsPub ellPub trajPub jsMsg
 try
     if isempty(node) || ~isvalid(node)
         node = ros2node("MatlabToRvizNode");
@@ -84,8 +93,11 @@ try
     if isempty(jsPub) || ~isvalid(jsPub)
         jsPub = ros2publisher(node, char(opt.JointStateTopic), "sensor_msgs/JointState");
     end
-    if isempty(pclPub) || ~isvalid(pclPub)
-        pclPub = ros2publisher(node, char(opt.EllipsoidTopic), "sensor_msgs/PointCloud2");
+    if isempty(ellPub) || ~isvalid(ellPub)
+        ellPub = ros2publisher(node, char(opt.EllipsoidTopic), "sensor_msgs/PointCloud2");
+    end
+    if isempty(trajPub) || ~isvalid(trajPub)
+        trajPub = ros2publisher(node, char(opt.TrajectoryTopic), "sensor_msgs/PointCloud2");
     end
     if isempty(jsMsg)
         jsMsg = ros2message(jsPub);
@@ -104,27 +116,30 @@ end
 
 % ---------- Load / cache UR model ----------
 try
-        mdlName = mapURTypeToRobotName(ur_type);                 % 'universalUR3e', etc.
-        model = loadrobot(mdlName, "DataFormat", "row", "Gravity", [0 0 -9.81]); %#ok<NASGU>
-        % setappdata(model,'__ur_type__',ur_type);                 % tag cache with current ur_type
-    
+    mdlName = mapURTypeToRobotName(ur_type);
+    model = loadrobot(mdlName, "DataFormat", "row", "Gravity", [0 0 -9.81]); %#ok<NASGU>
 catch ME
     warning('Failed to load robot model for "%s": %s', ur_type, ME.message);
     return
 end
 
-% ---------- Normalize JointConfiguration to [N x 6] ----------
-if size(JointConfiguration,2) ~= 6 && size(JointConfiguration,1) == 6
-    JointConfiguration = JointConfiguration.'; % make row
+% ---------- If requested, precompute & publish EE trajectory as yellow PointCloud2 ----------
+if doTrajectory
+    try
+        pathXYZ = zeros(N,3,'single');
+        for i = 1:N
+            T_ee = getTransform(model, JointConfiguration(i,:), char(opt.ToolFrame), model.BaseName);
+            pathXYZ(i,:) = single(T_ee(1:3,4)).';
+        end
+        publishPathPointCloud(trajPub, node, pathXYZ, char(opt.BaseFrame));  % yellow
+    catch ME
+        warning('Trajectory path publish failed: %s', ME.message);
+    end
 end
-if size(JointConfiguration,2) ~= 6
-    error('JointConfiguration must have 6 columns.');
-end
-N = size(JointConfiguration,1);
 
 % ---------- Playback rate ----------
 desiredRate = max(1e-3, N / time);
-r = ros2rate(node, desiredRate);
+r = ros2rate(node, desiredRate);   % using node as time source
 reset(r);
 
 % ---------- Main loop ----------
@@ -145,41 +160,25 @@ for i = 1:N
     % Manipulability ellipsoid (optional)
     if opt.Ellipsoid
         try
-            % Jacobian in BASE frame (6x6)
-            J = geometricJacobian(model, q, char(opt.ToolFrame));  % w.r.t. model.BaseName
-            % MATLAB order is [angular; linear] or [linear; angular]?
-            % For RBT: geometricJacobian returns [angular; linear] -> check and adapt
-            % We need translational J_t as rows 4:6 if using [linear; angular] format.
-            % To be robust, infer by norm heuristic:
-            if size(J,1) == 6
-                % Heuristic: columns magnitudes of top vs bottom blocks near rotational vs translational
-                if mean(vecnorm(J(1:3,:),2,2)) > mean(vecnorm(J(4:6,:),2,2))
-                    Jr = J(1:3,:); Jt = J(4:6,:);
-                else
-                    % swap if toolbox returns [linear; angular]
-                    Jt = J(1:3,:); Jr = J(4:6,:);
-                end
+            J = geometricJacobian(model, q, char(opt.ToolFrame));  % 6x6
+            % Heuristic split into rotational vs translational:
+            if mean(vecnorm(J(1:3,:),2,2)) > mean(vecnorm(J(4:6,:),2,2))
+                Jr = J(1:3,:); Jt = J(4:6,:);
             else
-                error('Unexpected Jacobian size.');
+                Jt = J(1:3,:); Jr = J(4:6,:);
             end
 
             switch lower(opt.EllipsoidKind)
-                case {'trans','t','translation','translational'}
-                    Jx = Jt;
-                case {'rot','r','rotation','rotational'}
-                    Jx = Jr;
-                otherwise
-                    Jx = Jt; % default
+                case {'trans','t','translation','translational'}, Jx = Jt;
+                case {'rot','r','rotation','rotational'},         Jx = Jr;
+                otherwise,                                        Jx = Jt;
             end
 
-            % SVD of selected block
             [U,S,~] = svd(Jx,'econ');   % 3x3
-            % EE pose (base -> tool)
             T_ee = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
             p_ee = T_ee(1:3,4).';        % 1x3
 
-            % Publish PointCloud2
-            publishEllipsoidPointCloud(pclPub, node, U, S, p_ee, opt.EllipsoidResolution, char(opt.BaseFrame));
+            publishEllipsoidPointCloud(ellPub, node, U, S, p_ee, opt.EllipsoidResolution, char(opt.BaseFrame));
         catch ME
             warning('Ellipsoid publish failed: %s', ME.message);
             allOK = false;
@@ -198,22 +197,69 @@ end % function
 % ===================== Helpers =====================
 
 function name = mapURTypeToRobotName(ur_type)
-% Map ROS 2 'ur_type' (e.g., 'ur3e') to Robotics System Toolbox model name.
 switch lower(string(ur_type))
     case "ur3e",  name = 'universalUR3e';
     case "ur5e",  name = 'universalUR5e';
     case "ur10e", name = 'universalUR10e';
-    case "ur3",  name = 'universalUR3';
-    case "ur5",  name = 'universalUR5';
-    case "ur10", name = 'universalUR10';
+    case "ur3",   name = 'universalUR3';
+    case "ur5",   name = 'universalUR5';
+    case "ur10",  name = 'universalUR10';
     case "ur16e", name = 'universalUR16e';
     otherwise
         error('Unsupported ur_type "%s". Add mapping in mapURTypeToRobotName.', ur_type);
 end
 end
 
-function tf = isvalidRigidBodyTree(rbt)
-tf = isa(rbt,'rigidBodyTree') && ~isempty(rbt.BodyNames) && isprop(rbt,'DataFormat');
+function publishPathPointCloud(pub, node, xyz, frame_id)
+% Publish Nx3 EE path as yellow sensor_msgs/PointCloud2
+if isempty(xyz)
+    warning('Empty path; not sending.');
+    return
+end
+if size(xyz,2) ~= 3
+    error('xyz must be Nx3.');
+end
+xyz = single(xyz);
+good = all(isfinite(xyz),2);
+xyz  = xyz(good,:);
+N    = size(xyz,1);
+
+% Yellow RGB (255,255,0) for all points -> pack to float32 'rgb' field
+R = uint8(255*ones(1,N));
+G = uint8(255*ones(1,N));
+B = uint8(zeros(1,N));
+rgb_u32 = uint32(R)*2^16 + uint32(G)*2^8 + uint32(B);
+rgb_f32 = typecast(rgb_u32,'single');   % 1xN row
+
+msg = ros2message(pub);
+msg.header.frame_id = frame_id;
+
+% Define fields x,y,z,rgb (FLOAT32)
+f = repmat(ros2message("sensor_msgs/PointField"),4,1);
+names = {'x','y','z','rgb'}; offs = [0 4 8 12]; dtype = uint8(7); % FLOAT32
+for i=1:4
+    f(i).name = names{i};
+    f(i).offset = uint32(offs(i));
+    f(i).datatype = dtype;
+    f(i).count = uint32(1);
+end
+msg.fields = f;
+msg.is_bigendian = false;
+msg.height = uint32(1);
+msg.width  = uint32(N);
+msg.point_step = uint32(16);
+msg.row_step   = uint32(16 * N);
+msg.is_dense   = true;
+
+A = [xyz.'; rgb_f32];      % 4xN
+msg.data = typecast(A(:),'uint8');
+msg.header.stamp = ros2time(node,"now");
+
+if msg.width == 0 || isempty(msg.data)
+    warning('Path PointCloud2 is empty; not sending.');
+    return
+end
+send(pub, msg);
 end
 
 function publishEllipsoidPointCloud(pub, node, U, S, p_ee, res, frame_id)
@@ -226,10 +272,9 @@ if numel(p_ee) ~= 3
 end
 p_ee = reshape(p_ee,1,3);
 
-% Unit sphere (columns are unit directions)
+% Unit sphere -> ellipsoid
 [xs,ys,zs] = sphere(res);          % (res+1)x(res+1)
-P  = [xs(:)'; ys(:)'; zs(:)']./2;  % 3xN (radius=0.5 for density)
-
+P  = [xs(:)'; ys(:)'; zs(:)']./2;  % 3xN (radius=0.5)
 SP = S * P;         % 3xN
 E0 = U * SP;        % 3xN
 E  = E0 + p_ee.';   % 3xN
@@ -253,7 +298,7 @@ R = uint8(255*(1 - g));
 G = uint8(255*g);
 B = uint8(0*g);
 rgb_u32 = uint32(R)*2^16 + uint32(G)*2^8 + uint32(B);
-rgb_f32 = typecast(rgb_u32,'single');
+rgb_f32 = typecast(rgb_u32,'single');   % 1xN row
 
 msg = ros2message(pub);
 msg.header.frame_id = frame_id;
@@ -271,7 +316,7 @@ msg.fields = f;
 msg.is_bigendian = false;
 msg.height = uint32(1);
 msg.width  = uint32(N);
-msg.point_step = uint32(16);          % 4 fields * 4 bytes
+msg.point_step = uint32(16);
 msg.row_step   = uint32(16 * N);
 msg.is_dense   = true;
 
@@ -280,7 +325,7 @@ msg.data = typecast(A(:),'uint8');
 msg.header.stamp = ros2time(node,"now");
 
 if msg.width == 0 || isempty(msg.data)
-    warning('PointCloud2 is empty; not sending.');
+    warning('Ellipsoid PointCloud2 is empty; not sending.');
     return
 end
 send(pub, msg);
