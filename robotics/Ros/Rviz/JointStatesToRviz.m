@@ -384,7 +384,7 @@ function success = JointStatesToRviz(JointConfiguration, ur_type, time, varargin
 
 arguments
     JointConfiguration
-    ur_type char = 'ur3e'
+    ur_type = []
     time double = []
 end
 arguments (Repeating)
@@ -395,7 +395,9 @@ end
 if isempty(time)
     time = (size(JointConfiguration,1) <= 1) * 1 + (size(JointConfiguration,1) > 1) * 5;
 end
-
+    if isempty(ur_type)
+        ur_type = 'ur3e';
+    end
 % ---- Normalize JointConfiguration to [N x 6] ----
 if size(JointConfiguration,2) ~= 6 && size(JointConfiguration,1) == 6
     JointConfiguration = JointConfiguration.'; % make row
