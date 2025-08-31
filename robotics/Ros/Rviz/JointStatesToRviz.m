@@ -366,7 +366,7 @@ function success = JointStatesToRviz(JointConfiguration, ur_type, time, varargin
 %   Name-Value options (all optional):
 %     'Ellipsoid'           : true|false            (default: false)
 %     'EllipsoidKind'       : 'trans'|'rot'         (default: 'trans')
-%     'EllipsoidResolution' : positive int          (default: 25)
+%     'EllipsoidResolution' : positive int          (default: 35)
 %     'EllipsoidEvery'      : positive int          (default: 1 → send all)
 %     'BaseFrame'           : char                  (default: 'base_link')
 %     'ToolFrame'           : char                  (default: 'tool0')
