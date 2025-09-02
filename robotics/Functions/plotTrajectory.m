@@ -105,7 +105,7 @@ for i = 1:nPlots
     if i == nPlots
         xlabel('Time');
     end
-    legend(arrayfun(@(j) sprintf('Joint %d', j), 1:nJ, 'UniformOutput', false), 'Location', 'best');
+    legend(arrayfun(@(j) sprintf('Joint %d', j), 1:nJ, 'UniformOutput', false), 'Location', 'northeast');
     grid on;
 end
 end
