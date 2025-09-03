@@ -443,6 +443,7 @@ success = false;
 
 % ---------- Persistent ROS2 node & publishers ----------
 persistent node jsPub ellPub trajPub jsMsg
+
 try
     if isempty(node) || ~isvalid(node)
         node = ros2node("MatlabToRvizNode");
