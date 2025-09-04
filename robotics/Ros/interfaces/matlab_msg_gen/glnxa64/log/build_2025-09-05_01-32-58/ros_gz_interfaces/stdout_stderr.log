@@ -1,0 +1,280 @@
+-- The C compiler identification is GNU 12.4.0
+-- The CXX compiler identification is GNU 12.4.0
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/gcc-12 - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/g++-12 - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Building for ROS 2 Jazzy
+-- Found ament_cmake: 2.5.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/ament_cmake/cmake)
+-- Found Python3: /home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin/python3 (found version "3.10.18") found components: Interpreter 
+-- Found ament_cmake_ros: 0.12.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/ament_cmake_ros/cmake)
+-- Found rosidl_typesupport_c: 3.2.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_typesupport_c/cmake)
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Found rosidl_typesupport_cpp: 3.2.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_typesupport_cpp/cmake)
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Found rosidl_default_generators: 1.6.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_default_generators/cmake)
+-- Found rosidl_adapter: 4.8.1 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_adapter/cmake)
+-- Found builtin_interfaces: 2.0.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/builtin_interfaces/cmake)
+-- Found class_loader: 2.7.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/class_loader/cmake)
+-- Found geometry_msgs: 5.3.5 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/geometry_msgs/cmake)
+-- Found rcl_interfaces: 2.0.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rcl_interfaces/cmake)
+-- Found rclcpp: 28.1.3 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rclcpp/cmake)
+-- Found rmw_implementation_cmake: 7.3.1 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rmw_implementation_cmake/cmake)
+-- Found rmw_fastrtps_cpp: 9.0.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rmw_fastrtps_cpp/cmake)
+-- Found FastRTPS: /usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/include (Required is at least version "2.13") 
+-- Using RMW implementation 'rmw_fastrtps_cpp' as default
+-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c
+-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces
+[1/267] Generating type hashes for ROS interfaces
+[2/267] Generating C++ code for ROS interfaces
+[3/267] Generating C code for ROS interfaces
+[4/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__type_support.c.o
+[5/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__type_support.c.o
+[6/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__type_support.c.o
+[7/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__type_support.c.o
+[8/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__description.c.o
+[9/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__description.c.o
+[10/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__description.c.o
+[11/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__description.c.o
+[12/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__type_support.c.o
+[13/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__description.c.o
+[14/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__type_support.c.o
+[15/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__functions.c.o
+[16/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__functions.c.o
+[17/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__functions.c.o
+[18/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__description.c.o
+[19/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__functions.c.o
+[20/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support.c.o
+[21/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__description.c.o
+[22/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__description.c.o
+[23/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__functions.c.o
+[24/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__type_support.c.o
+[25/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__type_support.c.o
+[26/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__description.c.o
+[27/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support.c.o
+[28/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__functions.c.o
+[29/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__description.c.o
+[30/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__functions.c.o
+[31/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__functions.c.o
+[32/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__type_support.c.o
+[33/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.c.o
+[34/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__description.c.o
+[35/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__description.c.o
+[36/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__functions.c.o
+[37/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__description.c.o
+[38/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.c.o
+[39/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__functions.c.o
+[40/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__type_support.c.o
+[41/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__description.c.o
+[42/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__type_support.c.o
+[43/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__functions.c.o
+[44/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__functions.c.o
+[45/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__description.c.o
+[46/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support.c.o
+[47/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__functions.c.o
+[48/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__description.c.o
+[49/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__description.c.o
+[50/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__type_support.c.o
+[51/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__type_support.c.o
+[52/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__functions.c.o
+[53/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__functions.c.o
+[54/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__description.c.o
+[55/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__type_support.c.o
+[56/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__description.c.o
+[57/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__functions.c.o
+[58/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__type_support.c.o
+[59/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__functions.c.o
+[60/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__description.c.o
+[61/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__type_support.c.o
+[62/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__description.c.o
+[63/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__functions.c.o
+[64/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__functions.c.o
+[65/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__type_support.c.o
+[66/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__type_support.c.o
+[67/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__functions.c.o
+[68/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__functions.c.o
+[69/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__description.c.o
+[70/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__description.c.o
+[71/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__description.c.o
+[72/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support.c.o
+[73/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.c.o
+[74/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__description.c.o
+[75/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__functions.c.o
+[76/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__functions.c.o
+[77/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__functions.c.o
+[78/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__functions.c.o
+[79/267] Linking C shared library libros_gz_interfaces__rosidl_generator_c.so
+[80/267] Generating C type support dispatch for ROS interfaces
+[81/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/contact__type_support.cpp.o
+[82/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/altimeter__type_support.cpp.o
+[83/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity__type_support.cpp.o
+[84/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/contacts__type_support.cpp.o
+[85/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity_factory__type_support.cpp.o
+[86/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/dataframe__type_support.cpp.o
+[87/267] Generating C++ type support dispatch for ROS interfaces
+[88/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity_wrench__type_support.cpp.o
+[89/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/float32_array__type_support.cpp.o
+[90/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/gui_camera__type_support.cpp.o
+[91/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/joint_wrench__type_support.cpp.o
+[92/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/light__type_support.cpp.o
+[93/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/logical_camera_image__type_support.cpp.o
+[94/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/logical_camera_image_model__type_support.cpp.o
+[95/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/material_color__type_support.cpp.o
+[96/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/sensor_noise__type_support.cpp.o
+[97/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/param_vec__type_support.cpp.o
+[98/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/track_visual__type_support.cpp.o
+[99/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/video_record__type_support.cpp.o
+[100/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/string_vec__type_support.cpp.o
+[101/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/world_control__type_support.cpp.o
+[102/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/world_reset__type_support.cpp.o
+[103/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/delete_entity__type_support.cpp.o
+[104/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/set_entity_pose__type_support.cpp.o
+[105/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/control_world__type_support.cpp.o
+[106/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/spawn_entity__type_support.cpp.o
+[107/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_c.so
+[108/267] Generating C++ introspection for ROS interfaces
+[109/267] Generating C introspection for ROS interfaces
+[110/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/altimeter__type_support.cpp.o
+[111/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/contact__type_support.cpp.o
+[112/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/dataframe__type_support.cpp.o
+[113/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/contact__type_support.c.o
+[114/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/contacts__type_support.cpp.o
+[115/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity__type_support.cpp.o
+[116/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/altimeter__type_support.c.o
+[117/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity__type_support.c.o
+[118/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/dataframe__type_support.c.o
+[119/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/contacts__type_support.c.o
+[120/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity_factory__type_support.c.o
+[121/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support.c.o
+[122/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/float32_array__type_support.c.o
+[123/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity_factory__type_support.cpp.o
+[124/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/gui_camera__type_support.c.o
+[125/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/light__type_support.c.o
+[126/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support.c.o
+[127/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.c.o
+[128/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.c.o
+[129/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support.c.o
+[130/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/material_color__type_support.c.o
+[131/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/param_vec__type_support.c.o
+[132/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/track_visual__type_support.c.o
+[133/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/string_vec__type_support.c.o
+[134/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/video_record__type_support.c.o
+[135/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/world_control__type_support.c.o
+[136/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/world_reset__type_support.c.o
+[137/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/control_world__type_support.c.o
+[138/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/dataframe__type_support.cpp.o
+[139/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/delete_entity__type_support.c.o
+[140/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.c.o
+[141/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support.c.o
+[142/267] Linking C shared library libros_gz_interfaces__rosidl_typesupport_introspection_c.so
+[143/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/altimeter__type_support.cpp.o
+[144/267] Generating C++ type support for eProsima Fast-RTPS
+[145/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity__type_support.cpp.o
+[146/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity_factory__type_support.cpp.o
+[147/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity_wrench__type_support.cpp.o
+[148/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/gui_camera__type_support.cpp.o
+[149/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/contact__type_support.cpp.o
+[150/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/float32_array__type_support.cpp.o
+[151/267] Generating C type support for eProsima Fast-RTPS
+[152/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/contacts__type_support.cpp.o
+[153/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/joint_wrench__type_support.cpp.o
+[154/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/altimeter__type_support.cpp.o
+[155/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/dataframe__type_support.cpp.o
+[156/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity__type_support.cpp.o
+[157/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/contacts__type_support.cpp.o
+[158/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity_factory__type_support.cpp.o
+[159/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity_wrench__type_support.cpp.o
+[160/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/contact__type_support.cpp.o
+[161/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/altimeter__type_support_c.cpp.o
+[162/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/contacts__type_support_c.cpp.o
+[163/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/contact__type_support_c.cpp.o
+[164/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/dataframe__type_support_c.cpp.o
+[165/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/float32_array__type_support_c.cpp.o
+[166/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity_factory__type_support_c.cpp.o
+[167/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity__type_support_c.cpp.o
+[168/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support_c.cpp.o
+[169/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/gui_camera__type_support_c.cpp.o
+[170/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support_c.cpp.o
+[171/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/light__type_support_c.cpp.o
+[172/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support_c.cpp.o
+[173/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support_c.cpp.o
+[174/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/material_color__type_support_c.cpp.o
+[175/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/param_vec__type_support_c.cpp.o
+[176/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/string_vec__type_support_c.cpp.o
+[177/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support_c.cpp.o
+[178/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/video_record__type_support_c.cpp.o
+[179/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/track_visual__type_support_c.cpp.o
+[180/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/world_control__type_support_c.cpp.o
+[181/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/control_world__type_support_c.cpp.o
+[182/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/delete_entity__type_support_c.cpp.o
+[183/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/world_reset__type_support_c.cpp.o
+[184/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support_c.cpp.o
+[185/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support_c.cpp.o
+[186/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/joint_wrench__type_support.cpp.o
+[187/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/float32_array__type_support.cpp.o
+[188/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_fastrtps_c.so
+[189/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/gui_camera__type_support.cpp.o
+[190/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/logical_camera_image_model__type_support.cpp.o
+[191/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/light__type_support.cpp.o
+[192/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/logical_camera_image__type_support.cpp.o
+[193/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/param_vec__type_support.cpp.o
+[194/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/material_color__type_support.cpp.o
+[195/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/sensor_noise__type_support.cpp.o
+[196/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/video_record__type_support.cpp.o
+[197/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/track_visual__type_support.cpp.o
+[198/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/string_vec__type_support.cpp.o
+[199/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/world_control__type_support.cpp.o
+[200/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/world_reset__type_support.cpp.o
+[201/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/light__type_support.cpp.o
+[202/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/control_world__type_support.cpp.o
+[203/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.cpp.o
+[204/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.cpp.o
+[205/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/set_entity_pose__type_support.cpp.o
+[206/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/material_color__type_support.cpp.o
+[207/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/delete_entity__type_support.cpp.o
+[208/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/sensor_noise__type_support.cpp.o
+[209/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/spawn_entity__type_support.cpp.o
+[210/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/track_visual__type_support.cpp.o
+[211/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/string_vec__type_support.cpp.o
+[212/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.so
+[213/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/world_reset__type_support.cpp.o
+[214/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/video_record__type_support.cpp.o
+[215/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/world_control__type_support.cpp.o
+[216/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/param_vec__type_support.cpp.o
+[217/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/control_world__type_support.cpp.o
+[218/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/delete_entity__type_support.cpp.o
+[219/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity_wrench__type_support.cpp.o
+[220/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/joint_wrench__type_support.cpp.o
+[221/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/float32_array__type_support.cpp.o
+[222/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/light__type_support.cpp.o
+[223/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.cpp.o
+[224/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/spawn_entity__type_support.cpp.o
+[225/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/gui_camera__type_support.cpp.o
+[226/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/logical_camera_image__type_support.cpp.o
+[227/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_introspection_cpp.so
+[228/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/logical_camera_image_model__type_support.cpp.o
+[229/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/material_color__type_support.cpp.o
+[230/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/param_vec__type_support.cpp.o
+[231/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/string_vec__type_support.cpp.o
+[232/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/track_visual__type_support.cpp.o
+[233/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/sensor_noise__type_support.cpp.o
+[234/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/video_record__type_support.cpp.o
+[235/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/world_control__type_support.cpp.o
+[236/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/world_reset__type_support.cpp.o
+[237/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/control_world__type_support.cpp.o
+[238/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/set_entity_pose__type_support.cpp.o
+[239/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/delete_entity__type_support.cpp.o
+[240/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/spawn_entity__type_support.cpp.o
+[241/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_cpp.so
+[242/267] Building CXX object CMakeFiles/ros_gz_interfaces_matlab.dir/src/ros_gz_interfaces_GuiCamera_message.cpp.o
+[243/267] Building CXX object CMakeFiles/ros_gz_interfaces_matlab.dir/src/ros_gz_interfaces_JointWrench_message.cpp.o
+ninja: build stopped: interrupted by user.

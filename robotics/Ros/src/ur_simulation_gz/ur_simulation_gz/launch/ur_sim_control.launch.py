@@ -174,7 +174,14 @@ def launch_setup(context, *args, **kwargs):
         package="ros_gz_bridge",
         executable="parameter_bridge",
         arguments=[
+            # Clock bridge (Gz → ROS)
             "/clock@rosgraph_msgs/msg/Clock[gz.msgs.Clock",
+
+            # Simulation control service (ROS → Gz)
+            "/world/empty/control@ros_gz_interfaces/srv/ControlWorld@gz.msgs.WorldControl@gz.msgs.Boolean",
+
+            # Simulation pause topic (ROS → Gz)
+            "/world/empty/physics/paused@std_msgs/msg/Bool]gz.msgs.Boolean"
         ],
         output="screen",
     )
@@ -214,7 +221,7 @@ def generate_launch_description():
                 "ur20",
                 "ur30",
             ],
-            default_value="ur5e",
+            default_value="ur3e",
         )
     )
     declared_arguments.append(
@@ -267,7 +274,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="scaled_joint_trajectory_controller",
+            default_value="forward_effort_controller",
             description="Robot controller to start.",
         )
     )
@@ -294,7 +301,7 @@ def generate_launch_description():
     )
     declared_arguments.append(
         DeclareLaunchArgument(
-            "gazebo_gui", default_value="true", description="Start gazebo with GUI?"
+            "gazebo_gui", default_value="false", description="Start gazebo with GUI?"
         )
     )
     declared_arguments.append(

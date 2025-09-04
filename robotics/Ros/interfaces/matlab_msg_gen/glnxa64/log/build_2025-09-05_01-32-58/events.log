@@ -1,0 +1,752 @@
+[0.000000] (-) TimerEvent: {}
+[0.000118] (ros_gz_interfaces) JobQueued: {'identifier': 'ros_gz_interfaces', 'dependencies': OrderedDict()}
+[0.000769] (ros_gz_interfaces) JobStarted: {'identifier': 'ros_gz_interfaces'}
+[0.044816] (ros_gz_interfaces) JobProgress: {'identifier': 'ros_gz_interfaces', 'progress': 'cmake'}
+[0.045149] (ros_gz_interfaces) Command: {'cmd': ['/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin/cmake', '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces', '-DCMAKE_BUILD_TYPE=Release', '-DCMAKE_SHARED_LINKER_FLAGS=-Wl,-no-as-needed', '-DBUILD_TESTING=OFF', '-DALIAS_ROS2_TF2=1', '-DCMAKE_CXX_FLAGS_RELEASE=-O0', '-G', 'Ninja', '-DCMAKE_C_COMPILER=/usr/bin/gcc-12', '-DCMAKE_CXX_COMPILER=/usr/bin/g++-12', '-DCMAKE_INSTALL_PREFIX=/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/install'], 'cwd': '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('ARCH', 'glnxa64'), ('CUSTOM_LD_LIBRARY_PATH', ''), ('USER', 'constanin'), ('LOCAL_PYTHON_VENV_PATH', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv'), ('MEMKIND_HEAP_MANAGER', 'TBB'), ('CUSTOM_AMENT_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('XDG_SESSION_TYPE', 'x11'), ('CLUTTER_DISABLE_MIPMAPPED_TEXT', '1'), ('KMP_HANDLE_SIGNALS', '0'), ('SHLVL', '1'), ('ICU_TIMEZONE_FILES_DIR', '/usr/local/MATLAB/R2025a/bin/icutzdata'), ('LD_LIBRARY_PATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib:/usr/local/MATLAB/R2025a/sys/os/glnxa64:/usr/local/MATLAB/R2025a/bin/glnxa64:/home/constanin/.MathWorks/D7P8bRQE8tJROWzD72O_ERheIYsh3N7Z2Yo12zD0lxI/bin/glnxa64:/usr/local/MATLAB/R2025a/extern/lib/glnxa64:/usr/local/MATLAB/R2025a/cefclient/sys/os/glnxa64:/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/amd64/server'), ('BASEMATLABPATH', ''), ('HOME', '/home/constanin'), ('AUTOMOUNT_MAP', ''), ('OLDPWD', '/usr/local/MATLAB/R2025a'), ('DESKTOP_SESSION', 'ubuntu'), ('MW_LD_SHIM', '/usr/local/MATLAB/R2025a/bin/glnxa64/ld_shim.so.2.39.ubuntu_24_04'), ('GIO_LAUNCHED_DESKTOP_FILE', '/home/constanin/Desktop/matlab.desktop'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('KMP_BLOCKTIME', '1'), ('PS1', '(venv)'), ('MANAGERPID', '2269'), ('SYSTEMD_EXEC_PID', '2743'), ('GSM_SKIP_SSH_AGENT_WORKAROUND', 'true'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '12090'), ('DEBUGINFOD_URLS', 'https://debuginfod.ubuntu.com'), ('CUSTOM_SITE_PACKAGES_PATH', ''), ('COLCON_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('MWAPIKEY', 'zTASjVeOcwkhQm5s'), ('ROS_DISTRO', 'jazzy'), ('LOGNAME', 'constanin'), ('MATLAB_MEM_MGR_VALUE', ''), ('JOURNAL_STREAM', '9:25993'), ('_', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin/colcon'), ('PKG_CONFIG_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib/pkgconfig'), ('MEMORY_PRESSURE_WATCH', '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'constanin'), ('TERM', 'dumb'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('WINDOWPATH', '2'), ('PATH', '/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin::/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/bin:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin:/usr/local/MATLAB/R2025a/toolbox/shared/coder/ninja/glnxa64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/AERO-Ubuntu-24:@/tmp/.ICE-unix/2710,unix/AERO-Ubuntu-24:/tmp/.ICE-unix/2710'), ('INVOCATION_ID', '9f068d1acebc467e86f260671c3060bf'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('TOOLBOX', '/usr/local/MATLAB/R2025a/toolbox'), ('MKL_DOMAIN_NUM_THREADS', ''), ('KMP_INIT_AT_FORK', 'false'), ('DISPLAY', ':1'), ('LD_PRELOAD', ''), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('PRE_LD_PRELOAD', ''), ('VIRTUAL_ENV_PROMPT', '(venv)'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('SHELL', '/bin/bash'), ('CMAKE_PATH', '/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin'), ('XFILESEARCHPATH', '/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/locale/%L/%T/%N%S:'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('OSG_LD_LIBRARY_PATH', '/usr/local/MATLAB/R2025a/sys/openscenegraph/lib/glnxa64'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VIRTUAL_ENV', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv'), ('CUSTOM_PATH', ''), ('KMP_STACKSIZE', '512k'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DYLD_LIBRARY_PATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib:'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('MKL_NUM_THREADS', ''), ('MW_PATCH_OFFSETS', '0000100000002A80'), ('PYTHONPATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib/python3.9/site-packages:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/lib/python3.10/site-packages:'), ('LC_NUMERIC', 'C'), ('COLCON', '1'), ('MEMORY_PRESSURE_WRITE', 'c29tZSAyMDAwMDAgMjAwMDAwMAA='), ('MW_CONNECTOR_COOKIE_SETTINGS', '[{"prefix":"ch_","suffix":"_12092"}]'), ('CMAKE_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2')]), 'shell': False}
+[0.099751] (-) TimerEvent: {}
+[0.110279] (ros_gz_interfaces) StdoutLine: {'line': b'-- The C compiler identification is GNU 12.4.0\n'}
+[0.169470] (ros_gz_interfaces) StdoutLine: {'line': b'-- The CXX compiler identification is GNU 12.4.0\n'}
+[0.183792] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info\n'}
+[0.199842] (-) TimerEvent: {}
+[0.234314] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting C compiler ABI info - done\n'}
+[0.244193] (ros_gz_interfaces) StdoutLine: {'line': b'-- Check for working C compiler: /usr/bin/gcc-12 - skipped\n'}
+[0.244641] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting C compile features\n'}
+[0.245189] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting C compile features - done\n'}
+[0.250393] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info\n'}
+[0.299941] (-) TimerEvent: {}
+[0.309714] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting CXX compiler ABI info - done\n'}
+[0.319105] (ros_gz_interfaces) StdoutLine: {'line': b'-- Check for working CXX compiler: /usr/bin/g++-12 - skipped\n'}
+[0.319375] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features\n'}
+[0.319905] (ros_gz_interfaces) StdoutLine: {'line': b'-- Detecting CXX compile features - done\n'}
+[0.320526] (ros_gz_interfaces) StdoutLine: {'line': b'-- Building for ROS 2 Jazzy\n'}
+[0.329984] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found ament_cmake: 2.5.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/ament_cmake/cmake)\n'}
+[0.400020] (-) TimerEvent: {}
+[0.500240] (-) TimerEvent: {}
+[0.600472] (-) TimerEvent: {}
+[0.624715] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found Python3: /home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin/python3 (found version "3.10.18") found components: Interpreter \n'}
+[0.700594] (-) TimerEvent: {}
+[0.723925] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found ament_cmake_ros: 0.12.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/ament_cmake_ros/cmake)\n'}
+[0.736838] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rosidl_typesupport_c: 3.2.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_typesupport_c/cmake)\n'}
+[0.738304] (ros_gz_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[0.800713] (-) TimerEvent: {}
+[0.806011] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rosidl_typesupport_cpp: 3.2.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_typesupport_cpp/cmake)\n'}
+[0.807096] (ros_gz_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[0.857700] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rosidl_default_generators: 1.6.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_default_generators/cmake)\n'}
+[0.868112] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rosidl_adapter: 4.8.1 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rosidl_adapter/cmake)\n'}
+[0.872802] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found builtin_interfaces: 2.0.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/builtin_interfaces/cmake)\n'}
+[0.892869] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found class_loader: 2.7.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/class_loader/cmake)\n'}
+[0.899860] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found geometry_msgs: 5.3.5 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/geometry_msgs/cmake)\n'}
+[0.900810] (-) TimerEvent: {}
+[0.941228] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rcl_interfaces: 2.0.2 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rcl_interfaces/cmake)\n'}
+[0.990087] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rclcpp: 28.1.3 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rclcpp/cmake)\n'}
+[1.000905] (-) TimerEvent: {}
+[1.022420] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rmw_implementation_cmake: 7.3.1 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rmw_implementation_cmake/cmake)\n'}
+[1.025765] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found rmw_fastrtps_cpp: 9.0.0 (/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/share/rmw_fastrtps_cpp/cmake)\n'}
+[1.076375] (ros_gz_interfaces) StdoutLine: {'line': b'-- Found FastRTPS: /usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/include (Required is at least version "2.13") \n'}
+[1.087242] (ros_gz_interfaces) StdoutLine: {'line': b"-- Using RMW implementation 'rmw_fastrtps_cpp' as default\n"}
+[1.100981] (-) TimerEvent: {}
+[1.201187] (-) TimerEvent: {}
+[1.301403] (-) TimerEvent: {}
+[1.401599] (-) TimerEvent: {}
+[1.501899] (-) TimerEvent: {}
+[1.602088] (-) TimerEvent: {}
+[1.702349] (-) TimerEvent: {}
+[1.802660] (-) TimerEvent: {}
+[1.902933] (-) TimerEvent: {}
+[1.923249] (ros_gz_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_c: rosidl_typesupport_fastrtps_c;rosidl_typesupport_introspection_c\n'}
+[2.003031] (-) TimerEvent: {}
+[2.103249] (-) TimerEvent: {}
+[2.203513] (-) TimerEvent: {}
+[2.301653] (ros_gz_interfaces) StdoutLine: {'line': b'-- Using all available rosidl_typesupport_cpp: rosidl_typesupport_fastrtps_cpp;rosidl_typesupport_introspection_cpp\n'}
+[2.303597] (-) TimerEvent: {}
+[2.318143] (ros_gz_interfaces) StdoutLine: {'line': b'-- Configuring done\n'}
+[2.388157] (ros_gz_interfaces) StdoutLine: {'line': b'-- Generating done\n'}
+[2.402003] (ros_gz_interfaces) StdoutLine: {'line': b'-- Build files have been written to: /home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces\n'}
+[2.403700] (-) TimerEvent: {}
+[2.417769] (ros_gz_interfaces) CommandEnded: {'returncode': 0}
+[2.419557] (ros_gz_interfaces) JobProgress: {'identifier': 'ros_gz_interfaces', 'progress': 'build'}
+[2.419594] (ros_gz_interfaces) Command: {'cmd': ['/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin/cmake', '--build', '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces', '--', '-j12', '-l12'], 'cwd': '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces', 'env': OrderedDict([('GJS_DEBUG_TOPICS', 'JS ERROR;JS LOG'), ('ARCH', 'glnxa64'), ('CUSTOM_LD_LIBRARY_PATH', ''), ('USER', 'constanin'), ('LOCAL_PYTHON_VENV_PATH', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv'), ('MEMKIND_HEAP_MANAGER', 'TBB'), ('CUSTOM_AMENT_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('XDG_SESSION_TYPE', 'x11'), ('CLUTTER_DISABLE_MIPMAPPED_TEXT', '1'), ('KMP_HANDLE_SIGNALS', '0'), ('SHLVL', '1'), ('ICU_TIMEZONE_FILES_DIR', '/usr/local/MATLAB/R2025a/bin/icutzdata'), ('LD_LIBRARY_PATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib:/usr/local/MATLAB/R2025a/sys/os/glnxa64:/usr/local/MATLAB/R2025a/bin/glnxa64:/home/constanin/.MathWorks/D7P8bRQE8tJROWzD72O_ERheIYsh3N7Z2Yo12zD0lxI/bin/glnxa64:/usr/local/MATLAB/R2025a/extern/lib/glnxa64:/usr/local/MATLAB/R2025a/cefclient/sys/os/glnxa64:/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/amd64/native_threads:/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/amd64/server'), ('BASEMATLABPATH', ''), ('HOME', '/home/constanin'), ('AUTOMOUNT_MAP', ''), ('OLDPWD', '/usr/local/MATLAB/R2025a'), ('DESKTOP_SESSION', 'ubuntu'), ('MW_LD_SHIM', '/usr/local/MATLAB/R2025a/bin/glnxa64/ld_shim.so.2.39.ubuntu_24_04'), ('GIO_LAUNCHED_DESKTOP_FILE', '/home/constanin/Desktop/matlab.desktop'), ('GNOME_SHELL_SESSION_MODE', 'ubuntu'), ('GTK_MODULES', 'gail:atk-bridge'), ('KMP_BLOCKTIME', '1'), ('PS1', '(venv)'), ('MANAGERPID', '2269'), ('SYSTEMD_EXEC_PID', '2743'), ('GSM_SKIP_SSH_AGENT_WORKAROUND', 'true'), ('DBUS_SESSION_BUS_ADDRESS', 'unix:path=/run/user/1000/bus'), ('GIO_LAUNCHED_DESKTOP_FILE_PID', '12090'), ('DEBUGINFOD_URLS', 'https://debuginfod.ubuntu.com'), ('CUSTOM_SITE_PACKAGES_PATH', ''), ('COLCON_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('MWAPIKEY', 'zTASjVeOcwkhQm5s'), ('ROS_DISTRO', 'jazzy'), ('LOGNAME', 'constanin'), ('MATLAB_MEM_MGR_VALUE', ''), ('JOURNAL_STREAM', '9:25993'), ('_', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin/colcon'), ('PKG_CONFIG_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib/pkgconfig'), ('MEMORY_PRESSURE_WATCH', '/sys/fs/cgroup/user.slice/user-1000.slice/user@1000.service/session.slice/org.gnome.Shell@x11.service/memory.pressure'), ('XDG_SESSION_CLASS', 'user'), ('USERNAME', 'constanin'), ('TERM', 'dumb'), ('GNOME_DESKTOP_SESSION_ID', 'this-is-deprecated'), ('WINDOWPATH', '2'), ('PATH', '/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin::/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/bin:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/bin:/usr/local/MATLAB/R2025a/toolbox/shared/coder/ninja/glnxa64:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/snap/bin'), ('SESSION_MANAGER', 'local/AERO-Ubuntu-24:@/tmp/.ICE-unix/2710,unix/AERO-Ubuntu-24:/tmp/.ICE-unix/2710'), ('INVOCATION_ID', '9f068d1acebc467e86f260671c3060bf'), ('XDG_MENU_PREFIX', 'gnome-'), ('XDG_RUNTIME_DIR', '/run/user/1000'), ('TOOLBOX', '/usr/local/MATLAB/R2025a/toolbox'), ('MKL_DOMAIN_NUM_THREADS', ''), ('KMP_INIT_AT_FORK', 'false'), ('DISPLAY', ':1'), ('LD_PRELOAD', ''), ('LANG', 'en_US.UTF-8'), ('XDG_CURRENT_DESKTOP', 'ubuntu:GNOME'), ('PRE_LD_PRELOAD', ''), ('VIRTUAL_ENV_PROMPT', '(venv)'), ('XMODIFIERS', '@im=ibus'), ('XDG_SESSION_DESKTOP', 'ubuntu'), ('XAUTHORITY', '/run/user/1000/gdm/Xauthority'), ('SSH_AUTH_SOCK', '/run/user/1000/keyring/ssh'), ('AMENT_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2'), ('SHELL', '/bin/bash'), ('CMAKE_PATH', '/usr/local/MATLAB/R2025a/bin/glnxa64/cmake/bin'), ('XFILESEARCHPATH', '/usr/local/MATLAB/R2025a/sys/java/jre/glnxa64/jre/lib/locale/%L/%T/%N%S:'), ('QT_ACCESSIBILITY', '1'), ('GDMSESSION', 'ubuntu'), ('OSG_LD_LIBRARY_PATH', '/usr/local/MATLAB/R2025a/sys/openscenegraph/lib/glnxa64'), ('GPG_AGENT_INFO', '/run/user/1000/gnupg/S.gpg-agent:0:1'), ('GJS_DEBUG_OUTPUT', 'stderr'), ('VIRTUAL_ENV', '/home/constanin/.matlab/R2025a/ros2/glnxa64/venv'), ('CUSTOM_PATH', ''), ('KMP_STACKSIZE', '512k'), ('QT_IM_MODULE', 'ibus'), ('PWD', '/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/build/ros_gz_interfaces'), ('XDG_CONFIG_DIRS', '/etc/xdg/xdg-ubuntu:/etc/xdg'), ('DYLD_LIBRARY_PATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib:'), ('XDG_DATA_DIRS', '/usr/share/ubuntu:/usr/share/gnome:/usr/local/share/:/usr/share/:/var/lib/snapd/desktop'), ('MKL_NUM_THREADS', ''), ('MW_PATCH_OFFSETS', '0000100000002A80'), ('PYTHONPATH', ':/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2/lib/python3.9/site-packages:/home/constanin/.matlab/R2025a/ros2/glnxa64/venv/lib/python3.10/site-packages:'), ('LC_NUMERIC', 'C'), ('COLCON', '1'), ('MEMORY_PRESSURE_WRITE', 'c29tZSAyMDAwMDAgMjAwMDAwMAA='), ('MW_CONNECTOR_COOKIE_SETTINGS', '[{"prefix":"ch_","suffix":"_12092"}]'), ('CMAKE_PREFIX_PATH', '/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2:/usr/local/MATLAB/R2025a/sys/ros2/glnxa64/ros2')]), 'shell': False}
+[2.503821] (-) TimerEvent: {}
+[2.604032] (-) TimerEvent: {}
+[2.704274] (-) TimerEvent: {}
+[2.804524] (-) TimerEvent: {}
+[2.904737] (-) TimerEvent: {}
+[3.004953] (-) TimerEvent: {}
+[3.105221] (-) TimerEvent: {}
+[3.205552] (-) TimerEvent: {}
+[3.305818] (-) TimerEvent: {}
+[3.406054] (-) TimerEvent: {}
+[3.506311] (-) TimerEvent: {}
+[3.606559] (-) TimerEvent: {}
+[3.706818] (-) TimerEvent: {}
+[3.807038] (-) TimerEvent: {}
+[3.907289] (-) TimerEvent: {}
+[4.007572] (-) TimerEvent: {}
+[4.107784] (-) TimerEvent: {}
+[4.208018] (-) TimerEvent: {}
+[4.281439] (ros_gz_interfaces) StdoutLine: {'line': b'[1/267] Generating type hashes for ROS interfaces\n'}
+[4.308112] (-) TimerEvent: {}
+[4.408424] (-) TimerEvent: {}
+[4.508737] (-) TimerEvent: {}
+[4.608985] (-) TimerEvent: {}
+[4.709247] (-) TimerEvent: {}
+[4.809524] (-) TimerEvent: {}
+[4.909778] (-) TimerEvent: {}
+[5.010028] (-) TimerEvent: {}
+[5.110237] (-) TimerEvent: {}
+[5.210468] (-) TimerEvent: {}
+[5.310677] (-) TimerEvent: {}
+[5.410918] (-) TimerEvent: {}
+[5.511206] (-) TimerEvent: {}
+[5.611449] (-) TimerEvent: {}
+[5.711647] (-) TimerEvent: {}
+[5.811859] (-) TimerEvent: {}
+[5.912069] (-) TimerEvent: {}
+[6.012317] (-) TimerEvent: {}
+[6.112568] (-) TimerEvent: {}
+[6.212812] (-) TimerEvent: {}
+[6.313029] (-) TimerEvent: {}
+[6.413261] (-) TimerEvent: {}
+[6.513518] (-) TimerEvent: {}
+[6.613771] (-) TimerEvent: {}
+[6.713992] (-) TimerEvent: {}
+[6.814233] (-) TimerEvent: {}
+[6.914492] (-) TimerEvent: {}
+[7.014729] (-) TimerEvent: {}
+[7.114939] (-) TimerEvent: {}
+[7.212438] (ros_gz_interfaces) StdoutLine: {'line': b'[2/267] Generating C++ code for ROS interfaces\n'}
+[7.215010] (-) TimerEvent: {}
+[7.315228] (-) TimerEvent: {}
+[7.415467] (-) TimerEvent: {}
+[7.515709] (-) TimerEvent: {}
+[7.616011] (-) TimerEvent: {}
+[7.716339] (-) TimerEvent: {}
+[7.816605] (-) TimerEvent: {}
+[7.916858] (-) TimerEvent: {}
+[7.961011] (ros_gz_interfaces) StdoutLine: {'line': b'[3/267] Generating C code for ROS interfaces\n'}
+[8.016911] (-) TimerEvent: {}
+[8.038980] (ros_gz_interfaces) StdoutLine: {'line': b'[4/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__type_support.c.o\n'}
+[8.040712] (ros_gz_interfaces) StdoutLine: {'line': b'[5/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__type_support.c.o\n'}
+[8.044865] (ros_gz_interfaces) StdoutLine: {'line': b'[6/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__type_support.c.o\n'}
+[8.046509] (ros_gz_interfaces) StdoutLine: {'line': b'[7/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__type_support.c.o\n'}
+[8.065237] (ros_gz_interfaces) StdoutLine: {'line': b'[8/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__description.c.o\n'}
+[8.070022] (ros_gz_interfaces) StdoutLine: {'line': b'[9/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__description.c.o\n'}
+[8.087411] (ros_gz_interfaces) StdoutLine: {'line': b'[10/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__description.c.o\n'}
+[8.107393] (ros_gz_interfaces) StdoutLine: {'line': b'[11/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__description.c.o\n'}
+[8.115188] (ros_gz_interfaces) StdoutLine: {'line': b'[12/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__type_support.c.o\n'}
+[8.117010] (-) TimerEvent: {}
+[8.119761] (ros_gz_interfaces) StdoutLine: {'line': b'[13/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__description.c.o\n'}
+[8.138455] (ros_gz_interfaces) StdoutLine: {'line': b'[14/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__type_support.c.o\n'}
+[8.153094] (ros_gz_interfaces) StdoutLine: {'line': b'[15/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contacts__functions.c.o\n'}
+[8.159800] (ros_gz_interfaces) StdoutLine: {'line': b'[16/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/altimeter__functions.c.o\n'}
+[8.170108] (ros_gz_interfaces) StdoutLine: {'line': b'[17/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/dataframe__functions.c.o\n'}
+[8.182868] (ros_gz_interfaces) StdoutLine: {'line': b'[18/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__description.c.o\n'}
+[8.186371] (ros_gz_interfaces) StdoutLine: {'line': b'[19/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/contact__functions.c.o\n'}
+[8.192212] (ros_gz_interfaces) StdoutLine: {'line': b'[20/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support.c.o\n'}
+[8.210623] (ros_gz_interfaces) StdoutLine: {'line': b'[21/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__description.c.o\n'}
+[8.217122] (-) TimerEvent: {}
+[8.223358] (ros_gz_interfaces) StdoutLine: {'line': b'[22/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__description.c.o\n'}
+[8.233631] (ros_gz_interfaces) StdoutLine: {'line': b'[23/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity__functions.c.o\n'}
+[8.244922] (ros_gz_interfaces) StdoutLine: {'line': b'[24/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__type_support.c.o\n'}
+[8.251573] (ros_gz_interfaces) StdoutLine: {'line': b'[25/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__type_support.c.o\n'}
+[8.277556] (ros_gz_interfaces) StdoutLine: {'line': b'[26/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__description.c.o\n'}
+[8.292190] (ros_gz_interfaces) StdoutLine: {'line': b'[27/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support.c.o\n'}
+[8.296527] (ros_gz_interfaces) StdoutLine: {'line': b'[28/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_factory__functions.c.o\n'}
+[8.309467] (ros_gz_interfaces) StdoutLine: {'line': b'[29/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__description.c.o\n'}
+[8.317915] (-) TimerEvent: {}
+[8.329383] (ros_gz_interfaces) StdoutLine: {'line': b'[30/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/float32_array__functions.c.o\n'}
+[8.333144] (ros_gz_interfaces) StdoutLine: {'line': b'[31/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/entity_wrench__functions.c.o\n'}
+[8.336964] (ros_gz_interfaces) StdoutLine: {'line': b'[32/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__type_support.c.o\n'}
+[8.361639] (ros_gz_interfaces) StdoutLine: {'line': b'[33/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.c.o\n'}
+[8.366996] (ros_gz_interfaces) StdoutLine: {'line': b'[34/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__description.c.o\n'}
+[8.371719] (ros_gz_interfaces) StdoutLine: {'line': b'[35/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__description.c.o\n'}
+[8.394112] (ros_gz_interfaces) StdoutLine: {'line': b'[36/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/gui_camera__functions.c.o\n'}
+[8.395156] (ros_gz_interfaces) StdoutLine: {'line': b'[37/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__description.c.o\n'}
+[8.406664] (ros_gz_interfaces) StdoutLine: {'line': b'[38/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.c.o\n'}
+[8.407099] (ros_gz_interfaces) StdoutLine: {'line': b'[39/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/joint_wrench__functions.c.o\n'}
+[8.418030] (-) TimerEvent: {}
+[8.433576] (ros_gz_interfaces) StdoutLine: {'line': b'[40/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__type_support.c.o\n'}
+[8.439392] (ros_gz_interfaces) StdoutLine: {'line': b'[41/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__description.c.o\n'}
+[8.461181] (ros_gz_interfaces) StdoutLine: {'line': b'[42/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__type_support.c.o\n'}
+[8.464383] (ros_gz_interfaces) StdoutLine: {'line': b'[43/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/light__functions.c.o\n'}
+[8.469092] (ros_gz_interfaces) StdoutLine: {'line': b'[44/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image__functions.c.o\n'}
+[8.479402] (ros_gz_interfaces) StdoutLine: {'line': b'[45/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__description.c.o\n'}
+[8.483610] (ros_gz_interfaces) StdoutLine: {'line': b'[46/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support.c.o\n'}
+[8.515620] (ros_gz_interfaces) StdoutLine: {'line': b'[47/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__functions.c.o\n'}
+[8.518129] (-) TimerEvent: {}
+[8.526765] (ros_gz_interfaces) StdoutLine: {'line': b'[48/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__description.c.o\n'}
+[8.529189] (ros_gz_interfaces) StdoutLine: {'line': b'[49/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__description.c.o\n'}
+[8.532129] (ros_gz_interfaces) StdoutLine: {'line': b'[50/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__type_support.c.o\n'}
+[8.550943] (ros_gz_interfaces) StdoutLine: {'line': b'[51/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__type_support.c.o\n'}
+[8.566973] (ros_gz_interfaces) StdoutLine: {'line': b'[52/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/material_color__functions.c.o\n'}
+[8.567998] (ros_gz_interfaces) StdoutLine: {'line': b'[53/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/param_vec__functions.c.o\n'}
+[8.578646] (ros_gz_interfaces) StdoutLine: {'line': b'[54/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__description.c.o\n'}
+[8.590361] (ros_gz_interfaces) StdoutLine: {'line': b'[55/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__type_support.c.o\n'}
+[8.595577] (ros_gz_interfaces) StdoutLine: {'line': b'[56/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__description.c.o\n'}
+[8.596497] (ros_gz_interfaces) StdoutLine: {'line': b'[57/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/sensor_noise__functions.c.o\n'}
+[8.618250] (-) TimerEvent: {}
+[8.623450] (ros_gz_interfaces) StdoutLine: {'line': b'[58/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__type_support.c.o\n'}
+[8.625541] (ros_gz_interfaces) StdoutLine: {'line': b'[59/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/string_vec__functions.c.o\n'}
+[8.626791] (ros_gz_interfaces) StdoutLine: {'line': b'[60/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__description.c.o\n'}
+[8.641233] (ros_gz_interfaces) StdoutLine: {'line': b'[61/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__type_support.c.o\n'}
+[8.656265] (ros_gz_interfaces) StdoutLine: {'line': b'[62/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__description.c.o\n'}
+[8.689746] (ros_gz_interfaces) StdoutLine: {'line': b'[63/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/track_visual__functions.c.o\n'}
+[8.720071] (ros_gz_interfaces) StdoutLine: {'line': b'[64/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_control__functions.c.o\n'}
+[8.720310] (-) TimerEvent: {}
+[8.723878] (ros_gz_interfaces) StdoutLine: {'line': b'[65/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__type_support.c.o\n'}
+[8.733910] (ros_gz_interfaces) StdoutLine: {'line': b'[66/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__type_support.c.o\n'}
+[8.741840] (ros_gz_interfaces) StdoutLine: {'line': b'[67/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/video_record__functions.c.o\n'}
+[8.742178] (ros_gz_interfaces) StdoutLine: {'line': b'[68/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/msg/detail/world_reset__functions.c.o\n'}
+[8.756810] (ros_gz_interfaces) StdoutLine: {'line': b'[69/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__description.c.o\n'}
+[8.771149] (ros_gz_interfaces) StdoutLine: {'line': b'[70/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__description.c.o\n'}
+[8.790518] (ros_gz_interfaces) StdoutLine: {'line': b'[71/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__description.c.o\n'}
+[8.808885] (ros_gz_interfaces) StdoutLine: {'line': b'[72/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support.c.o\n'}
+[8.812803] (ros_gz_interfaces) StdoutLine: {'line': b'[73/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.c.o\n'}
+[8.820477] (-) TimerEvent: {}
+[8.864649] (ros_gz_interfaces) StdoutLine: {'line': b'[74/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__description.c.o\n'}
+[8.896147] (ros_gz_interfaces) StdoutLine: {'line': b'[75/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/control_world__functions.c.o\n'}
+[8.920598] (-) TimerEvent: {}
+[8.933354] (ros_gz_interfaces) StdoutLine: {'line': b'[76/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/set_entity_pose__functions.c.o\n'}
+[8.936785] (ros_gz_interfaces) StdoutLine: {'line': b'[77/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/delete_entity__functions.c.o\n'}
+[8.987318] (ros_gz_interfaces) StdoutLine: {'line': b'[78/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_generator_c.dir/rosidl_generator_c/ros_gz_interfaces/srv/detail/spawn_entity__functions.c.o\n'}
+[9.020707] (-) TimerEvent: {}
+[9.032080] (ros_gz_interfaces) StdoutLine: {'line': b'[79/267] Linking C shared library libros_gz_interfaces__rosidl_generator_c.so\n'}
+[9.120870] (-) TimerEvent: {}
+[9.221122] (-) TimerEvent: {}
+[9.321425] (-) TimerEvent: {}
+[9.421695] (-) TimerEvent: {}
+[9.521983] (-) TimerEvent: {}
+[9.622302] (-) TimerEvent: {}
+[9.722587] (-) TimerEvent: {}
+[9.822925] (-) TimerEvent: {}
+[9.923234] (-) TimerEvent: {}
+[10.023488] (-) TimerEvent: {}
+[10.123728] (-) TimerEvent: {}
+[10.223980] (-) TimerEvent: {}
+[10.324232] (-) TimerEvent: {}
+[10.424481] (-) TimerEvent: {}
+[10.524734] (-) TimerEvent: {}
+[10.625001] (-) TimerEvent: {}
+[10.725257] (-) TimerEvent: {}
+[10.825513] (-) TimerEvent: {}
+[10.925761] (-) TimerEvent: {}
+[11.026028] (-) TimerEvent: {}
+[11.126283] (-) TimerEvent: {}
+[11.226542] (-) TimerEvent: {}
+[11.326794] (-) TimerEvent: {}
+[11.427059] (-) TimerEvent: {}
+[11.490061] (ros_gz_interfaces) StdoutLine: {'line': b'[80/267] Generating C type support dispatch for ROS interfaces\n'}
+[11.529911] (-) TimerEvent: {}
+[11.611452] (ros_gz_interfaces) StdoutLine: {'line': b'[81/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/contact__type_support.cpp.o\n'}
+[11.622040] (ros_gz_interfaces) StdoutLine: {'line': b'[82/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/altimeter__type_support.cpp.o\n'}
+[11.622547] (ros_gz_interfaces) StdoutLine: {'line': b'[83/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity__type_support.cpp.o\n'}
+[11.627446] (ros_gz_interfaces) StdoutLine: {'line': b'[84/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/contacts__type_support.cpp.o\n'}
+[11.627705] (ros_gz_interfaces) StdoutLine: {'line': b'[85/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity_factory__type_support.cpp.o\n'}
+[11.630043] (-) TimerEvent: {}
+[11.641431] (ros_gz_interfaces) StdoutLine: {'line': b'[86/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/dataframe__type_support.cpp.o\n'}
+[11.645561] (ros_gz_interfaces) StdoutLine: {'line': b'[87/267] Generating C++ type support dispatch for ROS interfaces\n'}
+[11.666329] (ros_gz_interfaces) StdoutLine: {'line': b'[88/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/entity_wrench__type_support.cpp.o\n'}
+[11.718056] (ros_gz_interfaces) StdoutLine: {'line': b'[89/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/float32_array__type_support.cpp.o\n'}
+[11.721643] (ros_gz_interfaces) StdoutLine: {'line': b'[90/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/gui_camera__type_support.cpp.o\n'}
+[11.723644] (ros_gz_interfaces) StdoutLine: {'line': b'[91/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/joint_wrench__type_support.cpp.o\n'}
+[11.727964] (ros_gz_interfaces) StdoutLine: {'line': b'[92/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/light__type_support.cpp.o\n'}
+[11.730981] (-) TimerEvent: {}
+[11.733551] (ros_gz_interfaces) StdoutLine: {'line': b'[93/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/logical_camera_image__type_support.cpp.o\n'}
+[11.746793] (ros_gz_interfaces) StdoutLine: {'line': b'[94/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/logical_camera_image_model__type_support.cpp.o\n'}
+[11.823571] (ros_gz_interfaces) StdoutLine: {'line': b'[95/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/material_color__type_support.cpp.o\n'}
+[11.824605] (ros_gz_interfaces) StdoutLine: {'line': b'[96/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/sensor_noise__type_support.cpp.o\n'}
+[11.831082] (-) TimerEvent: {}
+[11.832435] (ros_gz_interfaces) StdoutLine: {'line': b'[97/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/param_vec__type_support.cpp.o\n'}
+[11.836199] (ros_gz_interfaces) StdoutLine: {'line': b'[98/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/track_visual__type_support.cpp.o\n'}
+[11.845290] (ros_gz_interfaces) StdoutLine: {'line': b'[99/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/video_record__type_support.cpp.o\n'}
+[11.881518] (ros_gz_interfaces) StdoutLine: {'line': b'[100/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/string_vec__type_support.cpp.o\n'}
+[11.920624] (ros_gz_interfaces) StdoutLine: {'line': b'[101/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/world_control__type_support.cpp.o\n'}
+[11.931185] (-) TimerEvent: {}
+[11.947721] (ros_gz_interfaces) StdoutLine: {'line': b'[102/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/msg/world_reset__type_support.cpp.o\n'}
+[11.950742] (ros_gz_interfaces) StdoutLine: {'line': b'[103/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/delete_entity__type_support.cpp.o\n'}
+[11.951711] (ros_gz_interfaces) StdoutLine: {'line': b'[104/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/set_entity_pose__type_support.cpp.o\n'}
+[11.982993] (ros_gz_interfaces) StdoutLine: {'line': b'[105/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/control_world__type_support.cpp.o\n'}
+[11.994394] (ros_gz_interfaces) StdoutLine: {'line': b'[106/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_c.dir/rosidl_typesupport_c/ros_gz_interfaces/srv/spawn_entity__type_support.cpp.o\n'}
+[12.031307] (-) TimerEvent: {}
+[12.131634] (-) TimerEvent: {}
+[12.157105] (ros_gz_interfaces) StdoutLine: {'line': b'[107/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_c.so\n'}
+[12.231731] (-) TimerEvent: {}
+[12.332282] (-) TimerEvent: {}
+[12.337362] (ros_gz_interfaces) StdoutLine: {'line': b'[108/267] Generating C++ introspection for ROS interfaces\n'}
+[12.432598] (-) TimerEvent: {}
+[12.532895] (-) TimerEvent: {}
+[12.565221] (ros_gz_interfaces) StdoutLine: {'line': b'[109/267] Generating C introspection for ROS interfaces\n'}
+[12.634953] (-) TimerEvent: {}
+[12.698765] (ros_gz_interfaces) StdoutLine: {'line': b'[110/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/altimeter__type_support.cpp.o\n'}
+[12.720454] (ros_gz_interfaces) StdoutLine: {'line': b'[111/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/contact__type_support.cpp.o\n'}
+[12.729157] (ros_gz_interfaces) StdoutLine: {'line': b'[112/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/dataframe__type_support.cpp.o\n'}
+[12.732219] (ros_gz_interfaces) StdoutLine: {'line': b'[113/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/contact__type_support.c.o\n'}
+[12.735329] (-) TimerEvent: {}
+[12.771474] (ros_gz_interfaces) StdoutLine: {'line': b'[114/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/contacts__type_support.cpp.o\n'}
+[12.781338] (ros_gz_interfaces) StdoutLine: {'line': b'[115/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity__type_support.cpp.o\n'}
+[12.796147] (ros_gz_interfaces) StdoutLine: {'line': b'[116/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/altimeter__type_support.c.o\n'}
+[12.816731] (ros_gz_interfaces) StdoutLine: {'line': b'[117/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity__type_support.c.o\n'}
+[12.825233] (ros_gz_interfaces) StdoutLine: {'line': b'[118/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/dataframe__type_support.c.o\n'}
+[12.835427] (-) TimerEvent: {}
+[12.842720] (ros_gz_interfaces) StdoutLine: {'line': b'[119/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/contacts__type_support.c.o\n'}
+[12.882932] (ros_gz_interfaces) StdoutLine: {'line': b'[120/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity_factory__type_support.c.o\n'}
+[12.896646] (ros_gz_interfaces) StdoutLine: {'line': b'[121/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support.c.o\n'}
+[12.901936] (ros_gz_interfaces) StdoutLine: {'line': b'[122/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/float32_array__type_support.c.o\n'}
+[12.919119] (ros_gz_interfaces) StdoutLine: {'line': b'[123/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity_factory__type_support.cpp.o\n'}
+[12.928816] (ros_gz_interfaces) StdoutLine: {'line': b'[124/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/gui_camera__type_support.c.o\n'}
+[12.935902] (-) TimerEvent: {}
+[12.948035] (ros_gz_interfaces) StdoutLine: {'line': b'[125/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/light__type_support.c.o\n'}
+[12.959912] (ros_gz_interfaces) StdoutLine: {'line': b'[126/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support.c.o\n'}
+[12.984632] (ros_gz_interfaces) StdoutLine: {'line': b'[127/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.c.o\n'}
+[13.000342] (ros_gz_interfaces) StdoutLine: {'line': b'[128/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.c.o\n'}
+[13.024935] (ros_gz_interfaces) StdoutLine: {'line': b'[129/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support.c.o\n'}
+[13.028748] (ros_gz_interfaces) StdoutLine: {'line': b'[130/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/material_color__type_support.c.o\n'}
+[13.035967] (-) TimerEvent: {}
+[13.044525] (ros_gz_interfaces) StdoutLine: {'line': b'[131/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/param_vec__type_support.c.o\n'}
+[13.066371] (ros_gz_interfaces) StdoutLine: {'line': b'[132/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/track_visual__type_support.c.o\n'}
+[13.089692] (ros_gz_interfaces) StdoutLine: {'line': b'[133/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/string_vec__type_support.c.o\n'}
+[13.096177] (ros_gz_interfaces) StdoutLine: {'line': b'[134/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/video_record__type_support.c.o\n'}
+[13.098656] (ros_gz_interfaces) StdoutLine: {'line': b'[135/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/world_control__type_support.c.o\n'}
+[13.112140] (ros_gz_interfaces) StdoutLine: {'line': b'[136/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/msg/detail/world_reset__type_support.c.o\n'}
+[13.136070] (-) TimerEvent: {}
+[13.194341] (ros_gz_interfaces) StdoutLine: {'line': b'[137/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/control_world__type_support.c.o\n'}
+[13.199903] (ros_gz_interfaces) StdoutLine: {'line': b'[138/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/dataframe__type_support.cpp.o\n'}
+[13.236953] (-) TimerEvent: {}
+[13.240842] (ros_gz_interfaces) StdoutLine: {'line': b'[139/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/delete_entity__type_support.c.o\n'}
+[13.245636] (ros_gz_interfaces) StdoutLine: {'line': b'[140/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.c.o\n'}
+[13.246075] (ros_gz_interfaces) StdoutLine: {'line': b'[141/267] Building C object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_c.dir/rosidl_typesupport_introspection_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support.c.o\n'}
+[13.335071] (ros_gz_interfaces) StdoutLine: {'line': b'[142/267] Linking C shared library libros_gz_interfaces__rosidl_typesupport_introspection_c.so\n'}
+[13.337025] (-) TimerEvent: {}
+[13.437292] (-) TimerEvent: {}
+[13.537937] (-) TimerEvent: {}
+[13.638287] (-) TimerEvent: {}
+[13.738954] (-) TimerEvent: {}
+[13.839908] (-) TimerEvent: {}
+[13.881373] (ros_gz_interfaces) StdoutLine: {'line': b'[143/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/altimeter__type_support.cpp.o\n'}
+[13.937767] (ros_gz_interfaces) StdoutLine: {'line': b'[144/267] Generating C++ type support for eProsima Fast-RTPS\n'}
+[13.940007] (-) TimerEvent: {}
+[13.970601] (ros_gz_interfaces) StdoutLine: {'line': b'[145/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity__type_support.cpp.o\n'}
+[14.039170] (ros_gz_interfaces) StdoutLine: {'line': b'[146/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity_factory__type_support.cpp.o\n'}
+[14.040091] (-) TimerEvent: {}
+[14.045925] (ros_gz_interfaces) StdoutLine: {'line': b'[147/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/entity_wrench__type_support.cpp.o\n'}
+[14.140202] (-) TimerEvent: {}
+[14.174456] (ros_gz_interfaces) StdoutLine: {'line': b'[148/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/gui_camera__type_support.cpp.o\n'}
+[14.197146] (ros_gz_interfaces) StdoutLine: {'line': b'[149/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/contact__type_support.cpp.o\n'}
+[14.240946] (-) TimerEvent: {}
+[14.339889] (ros_gz_interfaces) StdoutLine: {'line': b'[150/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/float32_array__type_support.cpp.o\n'}
+[14.341026] (-) TimerEvent: {}
+[14.441318] (-) TimerEvent: {}
+[14.510599] (ros_gz_interfaces) StdoutLine: {'line': b'[151/267] Generating C type support for eProsima Fast-RTPS\n'}
+[14.515830] (ros_gz_interfaces) StdoutLine: {'line': b'[152/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/contacts__type_support.cpp.o\n'}
+[14.541439] (-) TimerEvent: {}
+[14.641788] (-) TimerEvent: {}
+[14.729893] (ros_gz_interfaces) StdoutLine: {'line': b'[153/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/joint_wrench__type_support.cpp.o\n'}
+[14.741914] (-) TimerEvent: {}
+[14.842920] (-) TimerEvent: {}
+[14.943263] (-) TimerEvent: {}
+[15.043611] (-) TimerEvent: {}
+[15.129877] (ros_gz_interfaces) StdoutLine: {'line': b'[154/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/altimeter__type_support.cpp.o\n'}
+[15.143949] (-) TimerEvent: {}
+[15.244919] (-) TimerEvent: {}
+[15.288698] (ros_gz_interfaces) StdoutLine: {'line': b'[155/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/dataframe__type_support.cpp.o\n'}
+[15.345053] (-) TimerEvent: {}
+[15.375420] (ros_gz_interfaces) StdoutLine: {'line': b'[156/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity__type_support.cpp.o\n'}
+[15.433142] (ros_gz_interfaces) StdoutLine: {'line': b'[157/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/contacts__type_support.cpp.o\n'}
+[15.445182] (-) TimerEvent: {}
+[15.480818] (ros_gz_interfaces) StdoutLine: {'line': b'[158/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity_factory__type_support.cpp.o\n'}
+[15.545286] (-) TimerEvent: {}
+[15.558904] (ros_gz_interfaces) StdoutLine: {'line': b'[159/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/entity_wrench__type_support.cpp.o\n'}
+[15.645417] (-) TimerEvent: {}
+[15.658910] (ros_gz_interfaces) StdoutLine: {'line': b'[160/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/contact__type_support.cpp.o\n'}
+[15.745530] (-) TimerEvent: {}
+[15.816445] (ros_gz_interfaces) StdoutLine: {'line': b'[161/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/altimeter__type_support_c.cpp.o\n'}
+[15.845700] (-) TimerEvent: {}
+[15.946159] (-) TimerEvent: {}
+[15.980825] (ros_gz_interfaces) StdoutLine: {'line': b'[162/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/contacts__type_support_c.cpp.o\n'}
+[15.987955] (ros_gz_interfaces) StdoutLine: {'line': b'[163/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/contact__type_support_c.cpp.o\n'}
+[16.046285] (-) TimerEvent: {}
+[16.146649] (-) TimerEvent: {}
+[16.247006] (-) TimerEvent: {}
+[16.347351] (-) TimerEvent: {}
+[16.386141] (ros_gz_interfaces) StdoutLine: {'line': b'[164/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/dataframe__type_support_c.cpp.o\n'}
+[16.447491] (-) TimerEvent: {}
+[16.547835] (-) TimerEvent: {}
+[16.586359] (ros_gz_interfaces) StdoutLine: {'line': b'[165/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/float32_array__type_support_c.cpp.o\n'}
+[16.608410] (ros_gz_interfaces) StdoutLine: {'line': b'[166/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity_factory__type_support_c.cpp.o\n'}
+[16.649017] (-) TimerEvent: {}
+[16.712642] (ros_gz_interfaces) StdoutLine: {'line': b'[167/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity__type_support_c.cpp.o\n'}
+[16.714569] (ros_gz_interfaces) StdoutLine: {'line': b'[168/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/entity_wrench__type_support_c.cpp.o\n'}
+[16.749998] (-) TimerEvent: {}
+[16.774959] (ros_gz_interfaces) StdoutLine: {'line': b'[169/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/gui_camera__type_support_c.cpp.o\n'}
+[16.850141] (-) TimerEvent: {}
+[16.950511] (-) TimerEvent: {}
+[17.050841] (-) TimerEvent: {}
+[17.116014] (ros_gz_interfaces) StdoutLine: {'line': b'[170/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/joint_wrench__type_support_c.cpp.o\n'}
+[17.150923] (-) TimerEvent: {}
+[17.172825] (ros_gz_interfaces) StdoutLine: {'line': b'[171/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/light__type_support_c.cpp.o\n'}
+[17.179323] (ros_gz_interfaces) StdoutLine: {'line': b'[172/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/logical_camera_image__type_support_c.cpp.o\n'}
+[17.251043] (-) TimerEvent: {}
+[17.265946] (ros_gz_interfaces) StdoutLine: {'line': b'[173/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support_c.cpp.o\n'}
+[17.351155] (-) TimerEvent: {}
+[17.455678] (-) TimerEvent: {}
+[17.556072] (-) TimerEvent: {}
+[17.656391] (-) TimerEvent: {}
+[17.733463] (ros_gz_interfaces) StdoutLine: {'line': b'[174/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/material_color__type_support_c.cpp.o\n'}
+[17.755146] (ros_gz_interfaces) StdoutLine: {'line': b'[175/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/param_vec__type_support_c.cpp.o\n'}
+[17.756480] (-) TimerEvent: {}
+[17.856786] (-) TimerEvent: {}
+[17.957152] (-) TimerEvent: {}
+[17.971957] (ros_gz_interfaces) StdoutLine: {'line': b'[176/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/string_vec__type_support_c.cpp.o\n'}
+[18.037536] (ros_gz_interfaces) StdoutLine: {'line': b'[177/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/sensor_noise__type_support_c.cpp.o\n'}
+[18.057920] (-) TimerEvent: {}
+[18.059895] (ros_gz_interfaces) StdoutLine: {'line': b'[178/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/video_record__type_support_c.cpp.o\n'}
+[18.158035] (-) TimerEvent: {}
+[18.258341] (-) TimerEvent: {}
+[18.282809] (ros_gz_interfaces) StdoutLine: {'line': b'[179/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/track_visual__type_support_c.cpp.o\n'}
+[18.358450] (-) TimerEvent: {}
+[18.458770] (-) TimerEvent: {}
+[18.481546] (ros_gz_interfaces) StdoutLine: {'line': b'[180/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/world_control__type_support_c.cpp.o\n'}
+[18.487394] (ros_gz_interfaces) StdoutLine: {'line': b'[181/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/control_world__type_support_c.cpp.o\n'}
+[18.521251] (ros_gz_interfaces) StdoutLine: {'line': b'[182/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/delete_entity__type_support_c.cpp.o\n'}
+[18.540246] (ros_gz_interfaces) StdoutLine: {'line': b'[183/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/msg/detail/world_reset__type_support_c.cpp.o\n'}
+[18.558883] (-) TimerEvent: {}
+[18.659316] (-) TimerEvent: {}
+[18.759638] (-) TimerEvent: {}
+[18.859917] (-) TimerEvent: {}
+[18.960221] (-) TimerEvent: {}
+[19.054080] (ros_gz_interfaces) StdoutLine: {'line': b'[184/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/spawn_entity__type_support_c.cpp.o\n'}
+[19.060347] (-) TimerEvent: {}
+[19.160663] (-) TimerEvent: {}
+[19.174604] (ros_gz_interfaces) StdoutLine: {'line': b'[185/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_c.dir/rosidl_typesupport_fastrtps_c/ros_gz_interfaces/srv/detail/set_entity_pose__type_support_c.cpp.o\n'}
+[19.260773] (-) TimerEvent: {}
+[19.301712] (ros_gz_interfaces) StdoutLine: {'line': b'[186/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/joint_wrench__type_support.cpp.o\n'}
+[19.323458] (ros_gz_interfaces) StdoutLine: {'line': b'[187/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/float32_array__type_support.cpp.o\n'}
+[19.360902] (-) TimerEvent: {}
+[19.367657] (ros_gz_interfaces) StdoutLine: {'line': b'[188/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_fastrtps_c.so\n'}
+[19.461017] (-) TimerEvent: {}
+[19.508031] (ros_gz_interfaces) StdoutLine: {'line': b'[189/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/gui_camera__type_support.cpp.o\n'}
+[19.561127] (-) TimerEvent: {}
+[19.661436] (-) TimerEvent: {}
+[19.727238] (ros_gz_interfaces) StdoutLine: {'line': b'[190/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/logical_camera_image_model__type_support.cpp.o\n'}
+[19.738036] (ros_gz_interfaces) StdoutLine: {'line': b'[191/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/light__type_support.cpp.o\n'}
+[19.761921] (-) TimerEvent: {}
+[19.862261] (-) TimerEvent: {}
+[19.962925] (-) TimerEvent: {}
+[19.964735] (ros_gz_interfaces) StdoutLine: {'line': b'[192/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/logical_camera_image__type_support.cpp.o\n'}
+[20.063948] (-) TimerEvent: {}
+[20.097645] (ros_gz_interfaces) StdoutLine: {'line': b'[193/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/param_vec__type_support.cpp.o\n'}
+[20.120638] (ros_gz_interfaces) StdoutLine: {'line': b'[194/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/material_color__type_support.cpp.o\n'}
+[20.164070] (-) TimerEvent: {}
+[20.264387] (-) TimerEvent: {}
+[20.317859] (ros_gz_interfaces) StdoutLine: {'line': b'[195/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/sensor_noise__type_support.cpp.o\n'}
+[20.364498] (-) TimerEvent: {}
+[20.464871] (-) TimerEvent: {}
+[20.565280] (-) TimerEvent: {}
+[20.625037] (ros_gz_interfaces) StdoutLine: {'line': b'[196/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/video_record__type_support.cpp.o\n'}
+[20.665395] (-) TimerEvent: {}
+[20.724908] (ros_gz_interfaces) StdoutLine: {'line': b'[197/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/track_visual__type_support.cpp.o\n'}
+[20.738476] (ros_gz_interfaces) StdoutLine: {'line': b'[198/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/string_vec__type_support.cpp.o\n'}
+[20.768764] (-) TimerEvent: {}
+[20.869103] (-) TimerEvent: {}
+[20.964130] (ros_gz_interfaces) StdoutLine: {'line': b'[199/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/world_control__type_support.cpp.o\n'}
+[20.969287] (-) TimerEvent: {}
+[21.069739] (-) TimerEvent: {}
+[21.170149] (-) TimerEvent: {}
+[21.197038] (ros_gz_interfaces) StdoutLine: {'line': b'[200/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/msg/detail/dds_fastrtps/world_reset__type_support.cpp.o\n'}
+[21.271347] (-) TimerEvent: {}
+[21.285363] (ros_gz_interfaces) StdoutLine: {'line': b'[201/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/light__type_support.cpp.o\n'}
+[21.371494] (-) TimerEvent: {}
+[21.389100] (ros_gz_interfaces) StdoutLine: {'line': b'[202/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/control_world__type_support.cpp.o\n'}
+[21.473918] (-) TimerEvent: {}
+[21.573794] (ros_gz_interfaces) StdoutLine: {'line': b'[203/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/logical_camera_image_model__type_support.cpp.o\n'}
+[21.574091] (-) TimerEvent: {}
+[21.584591] (ros_gz_interfaces) StdoutLine: {'line': b'[204/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/logical_camera_image__type_support.cpp.o\n'}
+[21.642081] (ros_gz_interfaces) StdoutLine: {'line': b'[205/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/set_entity_pose__type_support.cpp.o\n'}
+[21.674214] (-) TimerEvent: {}
+[21.728254] (ros_gz_interfaces) StdoutLine: {'line': b'[206/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/material_color__type_support.cpp.o\n'}
+[21.774357] (-) TimerEvent: {}
+[21.877040] (-) TimerEvent: {}
+[21.890639] (ros_gz_interfaces) StdoutLine: {'line': b'[207/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/delete_entity__type_support.cpp.o\n'}
+[21.977174] (-) TimerEvent: {}
+[22.038988] (ros_gz_interfaces) StdoutLine: {'line': b'[208/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/sensor_noise__type_support.cpp.o\n'}
+[22.041278] (ros_gz_interfaces) StdoutLine: {'line': b'[209/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.dir/rosidl_typesupport_fastrtps_cpp/ros_gz_interfaces/srv/detail/dds_fastrtps/spawn_entity__type_support.cpp.o\n'}
+[22.077279] (-) TimerEvent: {}
+[22.138002] (ros_gz_interfaces) StdoutLine: {'line': b'[210/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/track_visual__type_support.cpp.o\n'}
+[22.177392] (-) TimerEvent: {}
+[22.253794] (ros_gz_interfaces) StdoutLine: {'line': b'[211/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/string_vec__type_support.cpp.o\n'}
+[22.277524] (-) TimerEvent: {}
+[22.336616] (ros_gz_interfaces) StdoutLine: {'line': b'[212/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_fastrtps_cpp.so\n'}
+[22.377648] (-) TimerEvent: {}
+[22.381725] (ros_gz_interfaces) StdoutLine: {'line': b'[213/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/world_reset__type_support.cpp.o\n'}
+[22.398720] (ros_gz_interfaces) StdoutLine: {'line': b'[214/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/video_record__type_support.cpp.o\n'}
+[22.472142] (ros_gz_interfaces) StdoutLine: {'line': b'[215/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/world_control__type_support.cpp.o\n'}
+[22.477767] (-) TimerEvent: {}
+[22.578937] (-) TimerEvent: {}
+[22.662345] (ros_gz_interfaces) StdoutLine: {'line': b'[216/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/msg/detail/param_vec__type_support.cpp.o\n'}
+[22.679052] (-) TimerEvent: {}
+[22.782939] (-) TimerEvent: {}
+[22.833673] (ros_gz_interfaces) StdoutLine: {'line': b'[217/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/control_world__type_support.cpp.o\n'}
+[22.883057] (-) TimerEvent: {}
+[22.983389] (-) TimerEvent: {}
+[23.019139] (ros_gz_interfaces) StdoutLine: {'line': b'[218/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/delete_entity__type_support.cpp.o\n'}
+[23.083573] (-) TimerEvent: {}
+[23.125920] (ros_gz_interfaces) StdoutLine: {'line': b'[219/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/entity_wrench__type_support.cpp.o\n'}
+[23.183682] (-) TimerEvent: {}
+[23.214775] (ros_gz_interfaces) StdoutLine: {'line': b'[220/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/joint_wrench__type_support.cpp.o\n'}
+[23.219133] (ros_gz_interfaces) StdoutLine: {'line': b'[221/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/float32_array__type_support.cpp.o\n'}
+[23.286995] (ros_gz_interfaces) StdoutLine: {'line': b'[222/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/light__type_support.cpp.o\n'}
+[23.287289] (-) TimerEvent: {}
+[23.306020] (ros_gz_interfaces) StdoutLine: {'line': b'[223/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/set_entity_pose__type_support.cpp.o\n'}
+[23.387420] (-) TimerEvent: {}
+[23.405301] (ros_gz_interfaces) StdoutLine: {'line': b'[224/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_introspection_cpp.dir/rosidl_typesupport_introspection_cpp/ros_gz_interfaces/srv/detail/spawn_entity__type_support.cpp.o\n'}
+[23.483328] (ros_gz_interfaces) StdoutLine: {'line': b'[225/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/gui_camera__type_support.cpp.o\n'}
+[23.486019] (ros_gz_interfaces) StdoutLine: {'line': b'[226/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/logical_camera_image__type_support.cpp.o\n'}
+[23.490926] (-) TimerEvent: {}
+[23.591368] (-) TimerEvent: {}
+[23.683631] (ros_gz_interfaces) StdoutLine: {'line': b'[227/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_introspection_cpp.so\n'}
+[23.691525] (-) TimerEvent: {}
+[23.791876] (-) TimerEvent: {}
+[23.842964] (ros_gz_interfaces) StdoutLine: {'line': b'[228/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/logical_camera_image_model__type_support.cpp.o\n'}
+[23.894995] (ros_gz_interfaces) StdoutLine: {'line': b'[229/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/material_color__type_support.cpp.o\n'}
+[23.895251] (-) TimerEvent: {}
+[23.922727] (ros_gz_interfaces) StdoutLine: {'line': b'[230/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/param_vec__type_support.cpp.o\n'}
+[23.995375] (-) TimerEvent: {}
+[24.094558] (ros_gz_interfaces) StdoutLine: {'line': b'[231/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/string_vec__type_support.cpp.o\n'}
+[24.095459] (-) TimerEvent: {}
+[24.111104] (ros_gz_interfaces) StdoutLine: {'line': b'[232/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/track_visual__type_support.cpp.o\n'}
+[24.117973] (ros_gz_interfaces) StdoutLine: {'line': b'[233/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/sensor_noise__type_support.cpp.o\n'}
+[24.195920] (-) TimerEvent: {}
+[24.265344] (ros_gz_interfaces) StdoutLine: {'line': b'[234/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/video_record__type_support.cpp.o\n'}
+[24.272434] (ros_gz_interfaces) StdoutLine: {'line': b'[235/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/world_control__type_support.cpp.o\n'}
+[24.296035] (-) TimerEvent: {}
+[24.396351] (-) TimerEvent: {}
+[24.496697] (-) TimerEvent: {}
+[24.505778] (ros_gz_interfaces) StdoutLine: {'line': b'[236/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/msg/world_reset__type_support.cpp.o\n'}
+[24.596796] (-) TimerEvent: {}
+[24.697111] (-) TimerEvent: {}
+[24.797416] (-) TimerEvent: {}
+[24.886176] (ros_gz_interfaces) StdoutLine: {'line': b'[237/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/control_world__type_support.cpp.o\n'}
+[24.897539] (-) TimerEvent: {}
+[24.904689] (ros_gz_interfaces) StdoutLine: {'line': b'[238/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/set_entity_pose__type_support.cpp.o\n'}
+[24.997721] (-) TimerEvent: {}
+[25.098125] (-) TimerEvent: {}
+[25.106156] (ros_gz_interfaces) StdoutLine: {'line': b'[239/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/delete_entity__type_support.cpp.o\n'}
+[25.198234] (-) TimerEvent: {}
+[25.298549] (-) TimerEvent: {}
+[25.376561] (ros_gz_interfaces) StdoutLine: {'line': b'[240/267] Building CXX object CMakeFiles/ros_gz_interfaces__rosidl_typesupport_cpp.dir/rosidl_typesupport_cpp/ros_gz_interfaces/srv/spawn_entity__type_support.cpp.o\n'}
+[25.398722] (-) TimerEvent: {}
+[25.500876] (-) TimerEvent: {}
+[25.597508] (ros_gz_interfaces) StdoutLine: {'line': b'[241/267] Linking CXX shared library libros_gz_interfaces__rosidl_typesupport_cpp.so\n'}
+[25.600333] (-) TimerEvent: {}
+[25.700634] (-) TimerEvent: {}
+[25.803446] (-) TimerEvent: {}
+[25.907968] (-) TimerEvent: {}
+[26.008362] (-) TimerEvent: {}
+[26.108706] (-) TimerEvent: {}
+[26.210145] (-) TimerEvent: {}
+[26.310614] (-) TimerEvent: {}
+[26.412434] (-) TimerEvent: {}
+[26.515916] (-) TimerEvent: {}
+[26.616248] (-) TimerEvent: {}
+[26.716570] (-) TimerEvent: {}
+[26.817131] (-) TimerEvent: {}
+[26.917589] (-) TimerEvent: {}
+[27.018117] (-) TimerEvent: {}
+[27.118472] (-) TimerEvent: {}
+[27.218780] (-) TimerEvent: {}
+[27.319289] (-) TimerEvent: {}
+[27.419666] (-) TimerEvent: {}
+[27.521167] (-) TimerEvent: {}
+[27.621534] (-) TimerEvent: {}
+[27.721938] (-) TimerEvent: {}
+[27.823271] (-) TimerEvent: {}
+[27.923704] (-) TimerEvent: {}
+[28.028035] (-) TimerEvent: {}
+[28.128368] (-) TimerEvent: {}
+[28.228755] (-) TimerEvent: {}
+[28.329991] (-) TimerEvent: {}
+[28.430298] (-) TimerEvent: {}
+[28.530602] (-) TimerEvent: {}
+[28.630908] (-) TimerEvent: {}
+[28.732452] (-) TimerEvent: {}
+[28.832744] (-) TimerEvent: {}
+[28.933147] (-) TimerEvent: {}
+[29.034219] (-) TimerEvent: {}
+[29.134619] (-) TimerEvent: {}
+[29.235958] (-) TimerEvent: {}
+[29.336342] (-) TimerEvent: {}
+[29.436684] (-) TimerEvent: {}
+[29.540021] (-) TimerEvent: {}
+[29.640584] (-) TimerEvent: {}
+[29.740929] (-) TimerEvent: {}
+[29.841282] (-) TimerEvent: {}
+[29.941690] (-) TimerEvent: {}
+[30.042028] (-) TimerEvent: {}
+[30.142346] (-) TimerEvent: {}
+[30.242738] (-) TimerEvent: {}
+[30.343140] (-) TimerEvent: {}
+[30.443539] (-) TimerEvent: {}
+[30.543960] (-) TimerEvent: {}
+[30.644917] (-) TimerEvent: {}
+[30.745255] (-) TimerEvent: {}
+[30.848015] (-) TimerEvent: {}
+[30.948450] (-) TimerEvent: {}
+[31.048832] (-) TimerEvent: {}
+[31.149177] (-) TimerEvent: {}
+[31.249506] (-) TimerEvent: {}
+[31.349974] (-) TimerEvent: {}
+[31.450309] (-) TimerEvent: {}
+[31.550625] (-) TimerEvent: {}
+[31.652676] (-) TimerEvent: {}
+[31.752996] (-) TimerEvent: {}
+[31.853293] (-) TimerEvent: {}
+[31.953668] (-) TimerEvent: {}
+[32.054179] (-) TimerEvent: {}
+[32.154925] (-) TimerEvent: {}
+[32.255410] (-) TimerEvent: {}
+[32.358951] (-) TimerEvent: {}
+[32.459315] (-) TimerEvent: {}
+[32.559628] (-) TimerEvent: {}
+[32.659957] (-) TimerEvent: {}
+[32.760317] (-) TimerEvent: {}
+[32.860623] (-) TimerEvent: {}
+[32.960937] (-) TimerEvent: {}
+[33.061264] (-) TimerEvent: {}
+[33.161608] (-) TimerEvent: {}
+[33.262000] (-) TimerEvent: {}
+[33.362329] (-) TimerEvent: {}
+[33.462921] (-) TimerEvent: {}
+[33.565925] (-) TimerEvent: {}
+[33.666251] (-) TimerEvent: {}
+[33.766570] (-) TimerEvent: {}
+[33.866907] (-) TimerEvent: {}
+[33.967239] (-) TimerEvent: {}
+[34.067738] (-) TimerEvent: {}
+[34.168119] (-) TimerEvent: {}
+[34.269921] (-) TimerEvent: {}
+[34.370214] (-) TimerEvent: {}
+[34.476023] (-) TimerEvent: {}
+[34.576930] (-) TimerEvent: {}
+[34.677231] (-) TimerEvent: {}
+[34.779006] (-) TimerEvent: {}
+[34.879356] (-) TimerEvent: {}
+[34.979751] (-) TimerEvent: {}
+[35.080946] (-) TimerEvent: {}
+[35.181279] (-) TimerEvent: {}
+[35.281814] (-) TimerEvent: {}
+[35.385995] (-) TimerEvent: {}
+[35.486317] (-) TimerEvent: {}
+[35.588933] (-) TimerEvent: {}
+[35.690034] (-) TimerEvent: {}
+[35.790366] (-) TimerEvent: {}
+[35.890721] (-) TimerEvent: {}
+[35.991918] (-) TimerEvent: {}
+[36.092224] (-) TimerEvent: {}
+[36.192603] (-) TimerEvent: {}
+[36.293932] (-) TimerEvent: {}
+[36.394256] (-) TimerEvent: {}
+[36.494598] (-) TimerEvent: {}
+[36.595157] (-) TimerEvent: {}
+[36.695935] (-) TimerEvent: {}
+[36.796253] (-) TimerEvent: {}
+[36.896591] (-) TimerEvent: {}
+[36.997923] (-) TimerEvent: {}
+[37.098241] (-) TimerEvent: {}
+[37.198613] (-) TimerEvent: {}
+[37.248540] (ros_gz_interfaces) StdoutLine: {'line': b'[242/267] Building CXX object CMakeFiles/ros_gz_interfaces_matlab.dir/src/ros_gz_interfaces_GuiCamera_message.cpp.o\n'}
+[37.298730] (-) TimerEvent: {}
+[37.334728] (ros_gz_interfaces) StdoutLine: {'line': b'[243/267] Building CXX object CMakeFiles/ros_gz_interfaces_matlab.dir/src/ros_gz_interfaces_JointWrench_message.cpp.o\n'}
+[37.400973] (-) TimerEvent: {}
+[37.501381] (-) TimerEvent: {}
+[37.601690] (-) TimerEvent: {}
+[37.702017] (-) TimerEvent: {}
+[37.802373] (-) TimerEvent: {}
+[37.902708] (-) TimerEvent: {}
+[38.003023] (-) TimerEvent: {}
+[38.103354] (-) TimerEvent: {}
+[38.203734] (-) TimerEvent: {}
+[38.304141] (-) TimerEvent: {}
+[38.404930] (-) TimerEvent: {}
+[38.505307] (-) TimerEvent: {}
+[38.605974] (-) TimerEvent: {}
+[38.706918] (-) TimerEvent: {}
+[38.807226] (-) TimerEvent: {}
+[38.907520] (-) TimerEvent: {}
+[39.007919] (-) TimerEvent: {}
+[39.109018] (-) TimerEvent: {}
+[39.209616] (-) TimerEvent: {}
+[39.310937] (-) TimerEvent: {}
+[39.411291] (-) TimerEvent: {}
+[39.511625] (-) TimerEvent: {}
+[39.611941] (-) TimerEvent: {}
+[39.712958] (-) TimerEvent: {}
+[39.813352] (-) TimerEvent: {}
+[39.913912] (-) TimerEvent: {}
+[40.014271] (-) TimerEvent: {}
+[40.115007] (-) TimerEvent: {}
+[40.215942] (-) TimerEvent: {}
+[40.316340] (-) TimerEvent: {}
+[40.416934] (-) TimerEvent: {}
+[40.517954] (-) TimerEvent: {}
+[40.618330] (-) TimerEvent: {}
+[40.718651] (-) TimerEvent: {}
+[40.820928] (-) TimerEvent: {}
+[40.921248] (-) TimerEvent: {}
+[41.021608] (-) TimerEvent: {}
+[41.122023] (-) TimerEvent: {}
+[41.222409] (-) TimerEvent: {}
+[41.322780] (-) TimerEvent: {}
+[41.423124] (-) TimerEvent: {}
+[41.523930] (-) TimerEvent: {}
+[41.624264] (-) TimerEvent: {}
+[41.726942] (-) TimerEvent: {}
+[41.827271] (-) TimerEvent: {}
+[41.927601] (-) TimerEvent: {}
+[42.027930] (-) TimerEvent: {}
+[42.128249] (-) TimerEvent: {}
+[42.228922] (-) TimerEvent: {}
+[42.329230] (-) TimerEvent: {}
+[42.434357] (-) TimerEvent: {}
+[42.534680] (-) TimerEvent: {}
+[42.635020] (-) TimerEvent: {}
+[42.735349] (-) TimerEvent: {}
+[42.835801] (-) TimerEvent: {}
+[42.940480] (-) TimerEvent: {}
+[43.040801] (-) TimerEvent: {}
+[43.146930] (-) TimerEvent: {}
+[43.247258] (-) TimerEvent: {}
+[43.347587] (-) TimerEvent: {}
+[43.447928] (-) TimerEvent: {}
+[43.548245] (-) TimerEvent: {}
+[43.648550] (-) TimerEvent: {}
+[43.750502] (-) TimerEvent: {}
+[43.850815] (-) TimerEvent: {}
+[43.951157] (-) TimerEvent: {}
+[44.051480] (-) TimerEvent: {}
+[44.151810] (-) TimerEvent: {}
+[44.252200] (-) TimerEvent: {}
+[44.352568] (-) TimerEvent: {}
+[44.452893] (-) TimerEvent: {}
+[44.553203] (-) TimerEvent: {}
+[44.653928] (-) TimerEvent: {}
+[44.754248] (-) TimerEvent: {}
+[44.855929] (-) TimerEvent: {}
+[44.956262] (-) TimerEvent: {}
+[45.056585] (-) TimerEvent: {}
+[45.156919] (-) TimerEvent: {}
+[45.257946] (-) TimerEvent: {}
+[45.358450] (-) TimerEvent: {}
+[45.459949] (-) TimerEvent: {}
+[45.561039] (-) TimerEvent: {}
+[45.661381] (-) TimerEvent: {}
+[45.761699] (-) TimerEvent: {}
+[45.862023] (-) TimerEvent: {}
+[45.962925] (-) TimerEvent: {}
+[46.067924] (-) TimerEvent: {}
+[46.168970] (-) TimerEvent: {}
+[46.179031] (ros_gz_interfaces) StdoutLine: {'line': b'ninja: build stopped: interrupted by user.\n'}
+[46.192830] (ros_gz_interfaces) CommandEnded: {'returncode': -2}
+[46.269356] (-) TimerEvent: {}
+[46.381023] (-) TimerEvent: {}
+[46.425362] (ros_gz_interfaces) JobEnded: {'identifier': 'ros_gz_interfaces', 'rc': 'SIGINT'}
+[46.436514] (-) EventReactorShutdown: {}

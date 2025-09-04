@@ -1,0 +1,30 @@
+{
+  "package_name": "ros_gz_interfaces",
+  "non_idl_tuples": [
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Altimeter.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Contact.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Contacts.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Dataframe.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Entity.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/EntityFactory.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/EntityWrench.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Float32Array.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/GuiCamera.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/JointWrench.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/Light.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/LogicalCameraImage.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/LogicalCameraImageModel.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/MaterialColor.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/ParamVec.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/SensorNoise.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/StringVec.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/TrackVisual.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/VideoRecord.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/WorldControl.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:msg/WorldReset.msg",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:srv/ControlWorld.srv",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:srv/DeleteEntity.srv",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:srv/SetEntityPose.srv",
+    "/home/constanin/ros2_ifaces/matlab_msg_gen/glnxa64/src/ros_gz_interfaces:srv/SpawnEntity.srv"
+  ]
+}

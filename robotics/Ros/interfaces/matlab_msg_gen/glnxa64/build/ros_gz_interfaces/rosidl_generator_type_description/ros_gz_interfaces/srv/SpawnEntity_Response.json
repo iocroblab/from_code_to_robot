@@ -1,0 +1,26 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "ros_gz_interfaces/srv/SpawnEntity_Response",
+      "fields": [
+        {
+          "name": "success",
+          "type": {
+            "type_id": 15,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": ""
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": []
+  },
+  "type_hashes": [
+    {
+      "type_name": "ros_gz_interfaces/srv/SpawnEntity_Response",
+      "hash_string": "RIHS01_1240305e6f4a99678706284e1d569bf60f0f8b3beac180fda8c1af5df4f50d0f"
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "type_description_msg": {
+    "type_description": {
+      "type_name": "ros_gz_interfaces/srv/DeleteEntity_Request",
+      "fields": [
+        {
+          "name": "entity",
+          "type": {
+            "type_id": 1,
+            "capacity": 0,
+            "string_capacity": 0,
+            "nested_type_name": "ros_gz_interfaces/msg/Entity"
+          },
+          "default_value": ""
+        }
+      ]
+    },
+    "referenced_type_descriptions": [
+      {
+        "type_name": "ros_gz_interfaces/msg/Entity",
+        "fields": [
+          {
+            "name": "id",
+            "type": {
+              "type_id": 9,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "name",
+            "type": {
+              "type_id": 17,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          },
+          {
+            "name": "type",
+            "type": {
+              "type_id": 3,
+              "capacity": 0,
+              "string_capacity": 0,
+              "nested_type_name": ""
+            },
+            "default_value": ""
+          }
+        ]
+      }
+    ]
+  },
+  "type_hashes": [
+    {
+      "type_name": "ros_gz_interfaces/srv/DeleteEntity_Request",
+      "hash_string": "RIHS01_ea205b62f7792b2b51b1430035ee0d744226a8c684cdc72e49a6346735c35cc3"
+    },
+    {
+      "type_name": "ros_gz_interfaces/msg/Entity",
+      "hash_string": "RIHS01_266a26f377057ebb0a1f08f7fb9dc435a841d9ec4fa3ab8fa0085e66e653504e"
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+function [data, info] = paramVec
+%ParamVec gives an empty data for ros_gz_interfaces/ParamVec
+% Copyright 2019-2021 The MathWorks, Inc.
+data = struct();
+data.MessageType = 'ros_gz_interfaces/ParamVec';
+[data.header, info.header] = ros.internal.ros2.messages.std_msgs.header;
+info.header.MLdataType = 'struct';
+[data.params, info.params] = ros.internal.ros2.messages.rcl_interfaces.parameter;
+info.params.MLdataType = 'struct';
+info.params.MaxLen = NaN;
+info.params.MinLen = 0;
+info.MessageType = 'ros_gz_interfaces/ParamVec';
+info.constant = 0;
+info.default = 0;
+info.maxstrlen = NaN;
+info.MaxLen = 1;
+info.MinLen = 1;
+info.MatPath = cell(1,18);
+info.MatPath{1} = 'header';
+info.MatPath{2} = 'header.stamp';
+info.MatPath{3} = 'header.stamp.sec';
+info.MatPath{4} = 'header.stamp.nanosec';
+info.MatPath{5} = 'header.frame_id';
+info.MatPath{6} = 'params';
+info.MatPath{7} = 'params.name';
+info.MatPath{8} = 'params.value';
+info.MatPath{9} = 'params.value.type';
+info.MatPath{10} = 'params.value.bool_value';
+info.MatPath{11} = 'params.value.integer_value';
+info.MatPath{12} = 'params.value.double_value';
+info.MatPath{13} = 'params.value.string_value';
+info.MatPath{14} = 'params.value.byte_array_value';
+info.MatPath{15} = 'params.value.bool_array_value';
+info.MatPath{16} = 'params.value.integer_array_value';
+info.MatPath{17} = 'params.value.double_array_value';
+info.MatPath{18} = 'params.value.string_array_value';
