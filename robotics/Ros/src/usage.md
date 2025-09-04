@@ -12,7 +12,7 @@ cd ..
 colcon build --symlink-install 
 
 start gazebo: 
-ros2 launch ur_simulation_gz ur_sim_control.launch.py   initial_joint_controller:=forward_effort_controller   activate_joint_controller:=true
+ros2 launch ur_simulation_gz ur_sim_control.launch.py   initial_joint_controller:=forward_effort_controller   activate_joint_controller:=true gazebo_gui:=false ur_type:=ur3e
 
 send effort to effort controller: 
 ros2 topic pub -r 25 /forward_effort_controller/commands std_msgs/msg/Float64MultiArray -- "{data: [-20,0,0,0,0,0]}"
