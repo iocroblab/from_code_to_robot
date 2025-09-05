@@ -18,6 +18,10 @@ function success = PauseGazebo(pauseFlag, worldName)
 
     srvType = "ros_gz_interfaces/ControlWorld";
     srvName = "/world/" + worldName + "/control";
+    
+    % if isempty(which("ros_gz_interfaces_msg_WorldControl"))
+    %     ros2RegisterMessages("/home/constanin/Desktop/Work/GitIOC/robotics/Ros/interfaces/");
+    % end
 
     % Detect whether MATLAB has ros_gz_interfaces generated
     hasGzIfaces = ~isempty(which("ros_gz_interfaces_msg_WorldControl")) || ...
@@ -28,16 +32,13 @@ function success = PauseGazebo(pauseFlag, worldName)
         if success, return; end
         % If native failed (e.g., no service present), fall through to CLI
     end
-
-    % CLI fallback (works as long as your shell is ROS-sourced)
-    success = i_callCLI(pauseFlag, worldName);
 end
 
 function success = i_callNative(pauseFlag, srvName, srvType)
     persistent pNode pClient pSrv
     try
         if isempty(pNode) || ~isvalid(pNode)
-            pNode = ros2node(sprintf("matlab_pausegazebo_%d", randi(1e9)));
+            pNode = ros2node('matlab_pausegazebo');
             pClient = []; pSrv = "";
         end
         if isempty(pClient) || ~isvalid(pClient) || pSrv ~= srvName

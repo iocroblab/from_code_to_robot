@@ -1,0 +1,31 @@
+function [data, info] = worldControl
+%WorldControl gives an empty data for ros_gz_interfaces/WorldControl
+% Copyright 2019-2021 The MathWorks, Inc.
+data = struct();
+data.MessageType = 'ros_gz_interfaces/WorldControl';
+[data.pause, info.pause] = ros.internal.ros2.messages.ros2.default_type('logical',1,0);
+[data.step, info.step] = ros.internal.ros2.messages.ros2.default_type('logical',1,0);
+[data.multi_step, info.multi_step] = ros.internal.ros2.messages.ros2.default_type('uint32',1,0, NaN, [0]);
+[data.reset, info.reset] = ros.internal.ros2.custommessages.ros_gz_interfaces.worldReset;
+info.reset.MLdataType = 'struct';
+[data.seed, info.seed] = ros.internal.ros2.messages.ros2.default_type('uint32',1,0);
+[data.run_to_sim_time, info.run_to_sim_time] = ros.internal.ros2.messages.builtin_interfaces.time;
+info.run_to_sim_time.MLdataType = 'struct';
+info.MessageType = 'ros_gz_interfaces/WorldControl';
+info.constant = 0;
+info.default = 0;
+info.maxstrlen = NaN;
+info.MaxLen = 1;
+info.MinLen = 1;
+info.MatPath = cell(1,11);
+info.MatPath{1} = 'pause';
+info.MatPath{2} = 'step';
+info.MatPath{3} = 'multi_step';
+info.MatPath{4} = 'reset';
+info.MatPath{5} = 'reset.all';
+info.MatPath{6} = 'reset.time_only';
+info.MatPath{7} = 'reset.model_only';
+info.MatPath{8} = 'seed';
+info.MatPath{9} = 'run_to_sim_time';
+info.MatPath{10} = 'run_to_sim_time.sec';
+info.MatPath{11} = 'run_to_sim_time.nanosec';
