@@ -22,6 +22,12 @@ function success = PauseGazebo(pauseFlag, worldName)
     % if isempty(which("ros_gz_interfaces_msg_WorldControl"))
     %     ros2RegisterMessages("/home/constanin/Desktop/Work/GitIOC/robotics/Ros/interfaces/");
     % end
+    msgList = ros2("msg", "list");
+    if ~any(strcmp(msgList, 'ros_gz_interfaces/WorldControl'))
+        filepath = which('matlab_msg_gen.zip');
+        ros2RegisterMessages(filepath); 
+    end
+    
 
     % Detect whether MATLAB has ros_gz_interfaces generated
     hasGzIfaces = ~isempty(which("ros_gz_interfaces_msg_WorldControl")) || ...

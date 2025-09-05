@@ -87,6 +87,11 @@ Visualization Manager:
           Alpha: 1
           Show Axes: false
           Show Trail: false
+        ground_plane:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
+          Value: true
         shoulder_link:
           Alpha: 1
           Show Axes: false
@@ -202,7 +207,7 @@ Visualization Manager:
       Frames:
         All Enabled: false
         base:
-          Value: false
+          Value: true
         base_link:
           Value: false
         base_link_inertia:
@@ -213,6 +218,8 @@ Visualization Manager:
           Value: false
         ft_frame:
           Value: false
+        ground_plane:
+          Value: false
         shoulder_link:
           Value: false
         tool0:
@@ -220,7 +227,7 @@ Visualization Manager:
         upper_arm_link:
           Value: false
         world:
-          Value: true
+          Value: false
         wrist_1_link:
           Value: false
         wrist_2_link:
@@ -249,6 +256,8 @@ Visualization Manager:
                               {}
                           ft_frame:
                             {}
+          ground_plane:
+            {}
       Update Interval: 0
       Value: true
   Enabled: true
@@ -304,18 +313,18 @@ Visualization Manager:
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.005745016969740391
-        Y: -0.05516111105680466
-        Z: 0.4886980950832367
+        X: -0.18135330080986023
+        Y: 0.25697964429855347
+        Z: -0.025081437081098557
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.46539807319641113
+      Pitch: 0.5553979873657227
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 2.1585187911987305
+      Yaw: 1.973525047302246
     Saved: ~
 Window Geometry:
   Displays:

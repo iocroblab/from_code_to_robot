@@ -178,9 +178,6 @@ def launch_setup(context, *args, **kwargs):
 
             # Simulation control service (ROS → Gz)
             "/world/empty/control@ros_gz_interfaces/srv/ControlWorld@gz.msgs.WorldControl@gz.msgs.Boolean",
-
-            # Simulation pause topic (ROS → Gz)
-            "/world/empty/physics/paused@std_msgs/msg/Bool]gz.msgs.Boolean"
         ],
         output="screen",
     )
@@ -194,7 +191,7 @@ def launch_setup(context, *args, **kwargs):
         forward_position_controller_spawner_stopped,
         forward_velocity_controller_spawner_stopped,
         forward_effort_controller_spawner_stopped,
-        
+
         # initial controller (active by default = forward_effort_controller)
         initial_joint_controller_spawner_stopped,
         initial_joint_controller_spawner_started,
