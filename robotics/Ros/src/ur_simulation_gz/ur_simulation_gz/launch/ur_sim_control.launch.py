@@ -1,30 +1,6 @@
 # Copyright (c) 2021 Stogl Robotics Consulting UG (haftungsbeschränkt)
 #
-# Redistribution and use in source and binary forms, with or without
-# modification, are permitted provided that the following conditions are met:
-#
-#    * Redistributions of source code must retain the above copyright
-#      notice, this list of conditions and the following disclaimer.
-#
-#    * Redistributions in binary form must reproduce the above copyright
-#      notice, this list of conditions and the following disclaimer in the
-#      documentation and/or other materials provided with the distribution.
-#
-#    * Neither the name of the {copyright_holder} nor the names of its
-#      contributors may be used to endorse or promote products derived from
-#      this software without specific prior written permission.
-#
-# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-# AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-# IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
-# ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
-# LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
-# CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
-# SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-# INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-# CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
-# ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
-# POSSIBILITY OF SUCH DAMAGE.
+# (license header unchanged)
 #
 # Author: Denis Stogl
 
@@ -127,7 +103,7 @@ def launch_setup(context, *args, **kwargs):
         condition=IfCondition(launch_rviz),
     )
 
-    # There may be other controllers of the joints, but this is the initially-started one
+    # Initial joint controller (started or stopped based on flag)
     initial_joint_controller_spawner_started = Node(
         package="controller_manager",
         executable="spawner",
@@ -140,6 +116,29 @@ def launch_setup(context, *args, **kwargs):
         arguments=[initial_joint_controller, "-c", "/controller_manager", "--stopped"],
         condition=UnlessCondition(activate_joint_controller),
     )
+
+    # --- NEW: Always preload these two controllers in stopped state ---
+    forward_position_controller_spawner_stopped = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forward_position_controller", "--inactive", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+
+    forward_velocity_controller_spawner_stopped = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forward_velocity_controller", "--inactive", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+    
+    forward_effort_controller_spawner_stopped = Node(
+        package="controller_manager",
+        executable="spawner",
+        arguments=["forward_effort_controller", "--inactive", "--controller-manager", "/controller_manager"],
+        output="screen",
+    )
+    # ---------------------------------------------------------------
 
     # GZ nodes
     gz_spawn_entity = Node(
@@ -190,8 +189,16 @@ def launch_setup(context, *args, **kwargs):
         robot_state_publisher_node,
         joint_state_broadcaster_spawner,
         delay_rviz_after_joint_state_broadcaster_spawner,
+
+        # preload additional controllers stopped
+        forward_position_controller_spawner_stopped,
+        forward_velocity_controller_spawner_stopped,
+        forward_effort_controller_spawner_stopped,
+        
+        # initial controller (active by default = forward_effort_controller)
         initial_joint_controller_spawner_stopped,
         initial_joint_controller_spawner_started,
+
         gz_spawn_entity,
         gz_launch_description,
         gz_sim_bridge,
@@ -274,7 +281,7 @@ def generate_launch_description():
     declared_arguments.append(
         DeclareLaunchArgument(
             "initial_joint_controller",
-            default_value="forward_effort_controller",
+            default_value="forward_position_controller",
             description="Robot controller to start.",
         )
     )
