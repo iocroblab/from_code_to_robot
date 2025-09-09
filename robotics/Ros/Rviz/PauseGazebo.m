@@ -24,7 +24,7 @@ function success = PauseGazebo(pauseFlag, worldName)
     % end
     msgList = ros2("msg", "list");
     if ~any(strcmp(msgList, 'ros_gz_interfaces/WorldControl'))
-        filepath = which('matlab_msg_gen.zip');
+        filepath = fileparts(which('matlab_msg_gen.zip'));
         ros2RegisterMessages(filepath); 
     end
     
