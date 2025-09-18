@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="3">
-  <name>TutorialTeleop</name>
+  <name>tutorialteleop</name>
   <version>0.1.0</version>
   <description>Keyboard teleop for publishing geometry_msgs/Twist with linear/rotation toggle (TAB).</description>
 
@@ -11,6 +11,9 @@
 
   <exec_depend>rclpy</exec_depend>
   <exec_depend>geometry_msgs</exec_depend>
+  <exec_depend>std_msgs</exec_depend>
+  <exec_depend>python3-pynput</exec_depend>
+
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
