@@ -11,7 +11,7 @@ setup(
         ('share/ament_index/resource_index/packages', ['resource/' + package_name]),
         ('share/' + package_name, ['package.xml']),
     ],
-    install_requires=['setuptools', 'pynput>=1.7'],
+    install_requires=['setuptools'],
     zip_safe=True,
     author='Your Name',
     author_email='you@example.com',
@@ -23,6 +23,7 @@ setup(
     entry_points={
         'console_scripts': [
             'tutorial_teleop = tutorialteleop.teleop:main',
+            'tutorial_teleop_global = tutorialteleop.teleop_global:main',
         ],
     },
 )
