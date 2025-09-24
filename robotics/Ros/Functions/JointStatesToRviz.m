@@ -420,6 +420,8 @@ addParameter(p,'EllipsoidTopic','/manip_ellipsoid',@(s)ischar(s)||isstring(s));
 addParameter(p,'Trajectory',false,@(x)islogical(x)&&isscalar(x));           % may be overridden by default rule
 addParameter(p,'TrajectoryTopic','/trajectory_path',@(s)ischar(s)||isstring(s));
 addParameter(p,'PrecomputeEllipsoids',[],@(x)(islogical(x)&&isscalar(x))||isempty(x));
+addParameter(p,'SendJointStates',true,@(x)islogical(x)&&isscalar(x));
+
 parse(p, varargin{:});
 opt = p.Results;
 opt.EllipsoidEvery = max(1, floor(opt.EllipsoidEvery)); % sanitize
@@ -562,7 +564,8 @@ allOK = true;
 for i = 1:N
     q = JointConfiguration(i,:);
 
-    % Publish joint state
+% Publish joint state (unless SendJointStates is false)
+if opt.SendJointStates
     try
         jsMsg.position = q;
         jsMsg.header.stamp = ros2time(node, 'now');
@@ -571,6 +574,8 @@ for i = 1:N
         warning('JointStatesToRviz:PublishFailed', '%s', ME.message);
         allOK = false;
     end
+end
+
 
     % Manipulability ellipsoid (optional, with decimation; prefers precomputed)
     if opt.Ellipsoid
@@ -615,7 +620,9 @@ end
 
 success = allOK;
 
-end % function
+end 
+
+% function
 
 % ===================== Helpers =====================
 
