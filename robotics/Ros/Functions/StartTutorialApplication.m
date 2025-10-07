@@ -47,6 +47,14 @@ end
 % ---- Workspace settings (adjust if needed) ----
 wsPath    = 'git_ws';
 setupBash = 'install/setup.bash';
+
+% Make workspace absolute for terminal working dir
+if startsWith(wsPath, filesep)      % already absolute like '/git_ws'
+    wsAbs = wsPath;
+else
+    home  = getenv('HOME'); if isempty(home), home = '~'; end
+    wsAbs = fullfile(home, wsPath); % e.g. '/home/user/git_ws'
+end
 % -----------------------------------------------
 
 % Platform prefix: Windows→'wsl ', Ubuntu→''
@@ -103,7 +111,9 @@ else
     if ispc
         error('Windows without Docker is not supported. Use ''Docker'', true.');
     end
-    launcher = sprintf('env -u LD_LIBRARY_PATH gnome-terminal -- %s &', innerQuoted);
+  
+    launcher = sprintf('env -u LD_LIBRARY_PATH gnome-terminal --working-directory="%s" -- %s &', wsAbs, innerQuoted);
+
 end
 
 
