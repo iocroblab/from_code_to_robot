@@ -32,7 +32,7 @@ function q = GetJointSpeeds(order, timeout)
     end
 
     % Receive one message (blocking up to timeout)
-    msg = receive(sub, timeout);
+    msg = sub.LatestMessage;
     if isempty(msg)
         error("GetJointStates:Timeout", "No /joint_states message received within %.1f s.", timeout);
     end
