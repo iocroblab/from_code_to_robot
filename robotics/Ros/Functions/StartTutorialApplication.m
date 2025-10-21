@@ -6,25 +6,38 @@ function StartTutorialApplication(Application, varargin)
 %   • Ubuntu native           → opens gnome-terminal (Docker=false)
 %
 % REQUIRED
-%   Application  : 'Rviz' | 'Simulation' | 'Teleoperation' | <custom>
+%   Application  : 'Rviz' | 'Simulation' | 'Teleoperation' | 'Trajectory' | <custom>
 %
 % OPTIONAL (Name–Value)
-%   'Model'      : default 'ur3e' (accepts 'ur3e' or 'universalUR3e')
+%   % Robot selection (any of these keys; last one wins)
+%   'Model'|'model'|'ur_type' : default 'ur3e'
+%       Accepts friendly names ('universalUR3e', 'UR5e', etc.) or direct ur_type
+%       ('ur3e','ur5e','ur10e','ur16e','ur3','ur5','ur10').
+%
+%   % Workspace directory (any of these keys; last one wins)
+%   'workspace'|'Workspace'|'ws'|'WS' : default 'git_ws'
+%       Path can be absolute or relative to HOME. Used as terminal CWD.
+%
 %   'Controller' : '' | 'Speed' | 'Torque' | 'Position'
 %                  'Position' → adds initial_joint_controller:=forward_position_controller
 %   'Docker'     : logical, default true
-%   'DockerName' : char, default 'MatlabTutorialDocker'
-%   'Detach" : logical, default true
+%   'DockerName' : char, default 'gz-modified'
+%   'Detach'     : logical, default true if Application=='Rviz', else false
+%
+% Notes:
+%   • If both 'Model' and 'ur_type' are provided, the last specified wins.
+%   • Workspace synonyms are case-insensitive.
 
 % ---------- Defaults ----------
-opts.Model      = 'ur3e';
+opts.Model      = 'ur3e';          % can also be set via 'ur_type'
 opts.Controller = '';
 opts.Docker     = true;
 opts.DockerName = 'gz-modified';
-if strcmp(Application, 'Rviz')
-    opts.Detach = true; 
+opts.Workspace  = 'git_ws';        % NEW: user-configurable via workspace/ws/WS/Workspace
+if strcmpi(Application, 'Rviz')
+    opts.Detach = true;
 else
-    opts.Detach = false; 
+    opts.Detach = false;
 end
 
 % ---------- Parse Name–Value ----------
@@ -35,17 +48,28 @@ for k=1:2:numel(varargin)
     name = lower(string(varargin{k}));
     val  = varargin{k+1};
     switch name
-        case "model",       opts.Model      = char(val);
-        case "controller",  opts.Controller = char(val);
-        case "docker",      opts.Docker     = logical(val);
-        case "dockername",  opts.DockerName = char(val);
-        case "detach",      opts.Detach    = logical(val);
-        otherwise, error('Unknown option "%s".', name);
+        % --- robot selection (synonyms) ---
+        case {"model","ur_type"}
+            opts.Model = char(val);  % accept either friendly model or direct ur_type
+        % --- workspace selection (synonyms) ---
+        case {"workspace","ws"}
+            opts.Workspace = char(val);
+        % --- existing options ---
+        case "controller"
+            opts.Controller = char(val);
+        case "docker"
+            opts.Docker = logical(val);
+        case "dockername"
+            opts.DockerName = char(val);
+        case "detach"
+            opts.Detach = logical(val);
+        otherwise
+            error('Unknown option "%s".', name);
     end
 end
 
 % ---- Workspace settings (adjust if needed) ----
-wsPath    = 'git_ws';
+wsPath    = opts.Workspace;        % <— use user-provided path (NEW)
 setupBash = 'install/setup.bash';
 
 % Make workspace absolute for terminal working dir
@@ -59,9 +83,10 @@ end
 
 % Platform prefix: Windows→'wsl ', Ubuntu→''
 prefix = '';
-if ispc, prefix = 'wsl '; end
+if ispc, prefix = 'wsl '; %#ok<NASGU>  % kept for clarity if reused later
+end
 
-% Normalize model to ROS ur_type
+% Normalize model (friendly or direct) to ROS ur_type
 ur_type = toURType(opts.Model);
 
 % Build controller arg
@@ -81,7 +106,7 @@ innerQuoted = sprintf('bash -lc "%s; exec bash"', escapeForBashLC(inner));
 
 % If Docker=true → try to start docker & container unconditionally (idempotent)
 if opts.Docker
-    ensureDockerRunning(opts.DockerName); 
+    ensureDockerRunning(opts.DockerName);
 end
 
 % Build the final launcher
@@ -111,11 +136,8 @@ else
     if ispc
         error('Windows without Docker is not supported. Use ''Docker'', true.');
     end
-  
     launcher = sprintf('env -u LD_LIBRARY_PATH gnome-terminal --working-directory="%s" -- %s &', wsAbs, innerQuoted);
-
 end
-
 
 status = system(launcher);
 if status~=0
@@ -124,6 +146,7 @@ end
 
 % ====================== NESTED HELPERS ======================
     function ur = toURType(modelOrName)
+        % Accepts either friendly names or already-correct ur_type
         m = lower(strrep(modelOrName,' ',''));
         switch m
             case {'ur3e','universalur3e'},    ur='ur3e';
@@ -133,7 +156,14 @@ end
             case {'ur3','universalur3'},      ur='ur3';
             case {'ur5','universalur5'},      ur='ur5';
             case {'ur10','universalur10'},    ur='ur10';
-            otherwise, error('Unsupported model "%s".', modelOrName);
+            otherwise
+                % If user already provided a valid ur_type string not listed above,
+                % accept it as-is; otherwise, error.
+                if startsWith(m, "ur")
+                    ur = m;  % pass through (e.g., future models)
+                else
+                    error('Unsupported model or ur_type "%s".', modelOrName);
+                end
         end
     end
 
@@ -167,7 +197,9 @@ end
                 % TODO: adjust to your package
                 base = sprintf('ros2 run tutorialteleop tutorial_teleop');
                 if ~isempty(carg), cmd = sprintf('%s %s', base, carg); else, cmd = base; end
-
+            case 'trajectory'
+                base = sprintf('ros2 run trajectory_tracker track_trajectory');
+                if ~isempty(carg), cmd = sprintf('%s %s', base, carg); else, cmd = base; end
             otherwise
                 cmd = ''; % unknown → let caller error
         end
@@ -179,8 +211,6 @@ end
         end
         system(cmd); pause(0.3);
     end
-
-
 
     function s = escapeForBashLC(s)
         s = strrep(s, '"','\"');

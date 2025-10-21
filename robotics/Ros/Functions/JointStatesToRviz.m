@@ -280,18 +280,31 @@ end
 % ===================== Helpers =====================
 
 function name = mapURTypeToRobotName(ur_type)
-switch lower(string(ur_type))
-    case "ur3e",  name = 'universalUR3e';
-    case "ur5e",  name = 'universalUR5e';
-    case "ur10e", name = 'universalUR10e';
-    case "ur3",   name = 'universalUR3';
-    case "ur5",   name = 'universalUR5';
-    case "ur10",  name = 'universalUR10';
-    case "ur16e", name = 'universalUR16e';
-    otherwise
-        error('Unsupported ur_type "%s". Add mapping in mapURTypeToRobotName.', ur_type);
+% mapURTypeToRobotName  Maps UR type strings (e.g. 'ur5e') to full robot names
+%                       (e.g. 'universalUR5e'). If the input is already a
+%                       valid 'universalUR...' name, it is returned unchanged.
+
+    ur_type = string(lower(ur_type));
+
+    % If it's already a full model name, just return it
+    if startsWith(ur_type, "universalur")
+        name = char(ur_type);
+        return;
+    end
+
+    switch ur_type
+        case "ur3e",  name = 'universalUR3e';
+        case "ur5e",  name = 'universalUR5e';
+        case "ur10e", name = 'universalUR10e';
+        case "ur3",   name = 'universalUR3';
+        case "ur5",   name = 'universalUR5';
+        case "ur10",  name = 'universalUR10';
+        case "ur16e", name = 'universalUR16e';
+        otherwise
+            error('Unsupported ur_type "%s". Add mapping in mapURTypeToRobotName.', ur_type);
+    end
 end
-end
+
 
 function mode = parseDualityMode(s)
 % Map user strings to 'velocity' or 'effort'
