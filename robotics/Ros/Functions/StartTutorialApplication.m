@@ -13,7 +13,7 @@ function StartTutorialApplication(Application, varargin)
 %   'Controller' : '' | 'Speed' | 'Torque' | 'Position'
 %                  'Position' → adds initial_joint_controller:=forward_position_controller
 %   'Docker'     : logical, default true
-%   'DockerName' : char, default 'MatlabTutorialDocker'
+%   'DockerName' : char, default 'gz-modified'
 %   'Detach" : logical, default true
 
 % ---------- Defaults ----------
