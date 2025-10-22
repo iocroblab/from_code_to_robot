@@ -11,17 +11,20 @@ function success = JointStatesToRviz(JointConfiguration, ur_type, time, varargin
 %     time               : total duration [s] to play the N states. ([] okay)
 %
 %   Name-Value options (all optional):
-%     'Ellipsoid'           : true|false            (default: false)
-%     'EllipsoidKind'       : 'trans'|'rot'         (default: 'trans')
-%     'EllipsoidResolution' : positive int          (default: 35)
-%     'EllipsoidEvery'      : positive int          (default: 1 → send all)
-%     'BaseFrame'           : char                  (default: 'base_link')
-%     'ToolFrame'           : char                  (default: 'tool0')
-%     'JointStateTopic'     : char                  (default: '/joint_states')
-%     'EllipsoidTopic'      : char                  (default: '/manip_ellipsoid')
-%     'Trajectory'          : true|false            (default: N>1)
-%     'TrajectoryTopic'     : char                  (default: '/trajectory_path')
-%     'PrecomputeEllipsoids': true|false|[]         (default: [] → auto true if Ellipsoid&&N>1)
+%     'Ellipsoid'            : true|false            (default: false)
+%     'EllipsoidKind'        : 'trans'|'rot'         (default: 'trans')
+%     'EllipsoidDuality'     : 'velocity'|'speed' or 'effort'|'force'|'torque'
+%                              (default: 'velocity')
+%     'EllipsoidResolution'  : positive int          (default: 35)
+%     'EllipsoidEvery'       : positive int          (default: 1 → send all)
+%     'BaseFrame'            : char                  (default: 'base_link')
+%     'ToolFrame'            : char                  (default: 'tool0')
+%     'JointStateTopic'      : char                  (default: '/joint_states')
+%     'EllipsoidTopic'       : char                  (default: '/manip_ellipsoid')
+%     'Trajectory'           : true|false            (default: N>1)
+%     'TrajectoryTopic'      : char                  (default: '/trajectory_path')
+%     'PrecomputeEllipsoids' : true|false|[]         (default: [] → auto true if Ellipsoid&&N>1)
+%     'SendJointStates'      : true|false            (default: true)
 %
 %   Default for 'Trajectory':
 %     - Single pose (N==1): false
@@ -42,9 +45,10 @@ end
 if isempty(time)
     time = (size(JointConfiguration,1) <= 1) * 1 + (size(JointConfiguration,1) > 1) * 5;
 end
-    if isempty(ur_type)
-        ur_type = 'ur3e';
-    end
+if isempty(ur_type)
+    ur_type = 'ur3e';
+end
+
 % ---- Normalize JointConfiguration to [N x 6] ----
 if size(JointConfiguration,2) ~= 6 && size(JointConfiguration,1) == 6
     JointConfiguration = JointConfiguration.'; % make row
@@ -58,6 +62,7 @@ N = size(JointConfiguration,1);
 p = inputParser;
 addParameter(p,'Ellipsoid',false,@(x)islogical(x)&&isscalar(x));
 addParameter(p,'EllipsoidKind','trans',@(s)ischar(s)||isstring(s));
+addParameter(p,'EllipsoidDuality','Velocity',@(s)ischar(s)||isstring(s));    % NEW
 addParameter(p,'EllipsoidResolution',35,@(n)isnumeric(n)&&isscalar(n)&&n>2);
 addParameter(p,'EllipsoidEvery',1,@(n)isnumeric(n)&&isscalar(n)&&n>=1);
 addParameter(p,'BaseFrame','base_link',@(s)ischar(s)||isstring(s));
@@ -72,6 +77,9 @@ addParameter(p,'SendJointStates',true,@(x)islogical(x)&&isscalar(x));
 parse(p, varargin{:});
 opt = p.Results;
 opt.EllipsoidEvery = max(1, floor(opt.EllipsoidEvery)); % sanitize
+
+% ---- Parse duality mode (velocity vs effort/force/torque) ----
+dualMode = parseDualityMode(opt.EllipsoidDuality);   % 'velocity' or 'effort'
 
 % Apply default logic for 'Trajectory' only if user didn't pass it
 useDefaultTraj = any(strcmp(p.UsingDefaults,'Trajectory'));
@@ -132,11 +140,9 @@ end
 
 % ---------- Clear topics if disabled ----------
 if ~doTrajectory
-    % Clear any previously displayed trajectory in RViz
     try, publishEmptyPointCloud(trajPub, node, char(opt.BaseFrame)); catch, end
 end
 if ~opt.Ellipsoid
-    % Clear any previously displayed ellipsoid in RViz
     try, publishEmptyPointCloud(ellPub, node, char(opt.BaseFrame)); catch, end
 end
 
@@ -180,9 +186,11 @@ if precompEll
             end
 
             [U,S,~] = svd(Jx,'econ');   % 3x3
+            S_eff = selectScaling(S, dualMode);  % NEW: velocity -> S; effort -> inv(S)
+
             T  = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
             p  = single(T(1:3,4));
-            SP = S * P;                  % 3xM
+            SP = S_eff * P;              % 3xM
             E  = U * SP + p;             % 3xM
 
             % Color by local radius (red→green)
@@ -211,24 +219,22 @@ allOK = true;
 for i = 1:N
     q = JointConfiguration(i,:);
 
-% Publish joint state (unless SendJointStates is false)
-if opt.SendJointStates
-    try
-        jsMsg.position = q;
-        jsMsg.header.stamp = ros2time(node, 'now');
-        send(jsPub, jsMsg);
-    catch ME
-        warning('JointStatesToRviz:PublishFailed', '%s', ME.message);
-        allOK = false;
+    % Publish joint state (unless SendJointStates is false)
+    if opt.SendJointStates
+        try
+            jsMsg.position = q;
+            jsMsg.header.stamp = ros2time(node, 'now');
+            send(jsPub, jsMsg);
+        catch ME
+            warning('JointStatesToRviz:PublishFailed', '%s', ME.message);
+            allOK = false;
+        end
     end
-end
-
 
     % Manipulability ellipsoid (optional, with decimation; prefers precomputed)
     if opt.Ellipsoid
         try
             sendThis = (mod(i-1, opt.EllipsoidEvery) == 0);
-            % Also ensure the very last state is sent at least once
             if (i == N) && ~sendThis
                 sendThis = true;
             end
@@ -236,7 +242,7 @@ end
                 if ~isempty(ellPayload) && ~isempty(sendMask) && sendMask(i) && ~isempty(ellPayload{i})
                     publishPrebuiltCloud(ellPub, node, ellPayload{i}.xyz, ellPayload{i}.rgb_f32, char(opt.BaseFrame));
                 else
-                    % Fallback: compute & publish on-the-fly (your known-good sender)
+                    % Fallback: compute & publish on-the-fly
                     J = geometricJacobian(model, q, char(opt.ToolFrame));  % 6x6
                     if mean(vecnorm(J(1:3,:),2,2)) > mean(vecnorm(J(4:6,:),2,2))
                         Jr = J(1:3,:); Jt = J(4:6,:);
@@ -251,7 +257,9 @@ end
                     [U,S,~] = svd(Jx,'econ');   % 3x3
                     T_ee = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
                     p_ee = T_ee(1:3,4).';        % 1x3
-                    publishEllipsoidPointCloud(ellPub, node, U, S, p_ee, opt.EllipsoidResolution, char(opt.BaseFrame));
+
+                    % NEW: pass duality mode to use S or inv(S)
+                    publishEllipsoidPointCloud(ellPub, node, U, S, p_ee, opt.EllipsoidResolution, char(opt.BaseFrame), dualMode);
                 end
             end
         catch ME
@@ -267,23 +275,59 @@ end
 
 success = allOK;
 
-end 
-
-% function
+end
 
 % ===================== Helpers =====================
 
 function name = mapURTypeToRobotName(ur_type)
-switch lower(string(ur_type))
-    case "ur3e",  name = 'universalUR3e';
-    case "ur5e",  name = 'universalUR5e';
-    case "ur10e", name = 'universalUR10e';
-    case "ur3",   name = 'universalUR3';
-    case "ur5",   name = 'universalUR5';
-    case "ur10",  name = 'universalUR10';
-    case "ur16e", name = 'universalUR16e';
+% mapURTypeToRobotName  Maps UR type strings (e.g. 'ur5e') to full robot names
+%                       (e.g. 'universalUR5e'). If the input is already a
+%                       valid 'universalUR...' name, it is returned unchanged.
+
+    ur_type = string(lower(ur_type));
+
+    % If it's already a full model name, just return it
+    if startsWith(ur_type, "universalur")
+        name = char(ur_type);
+        return;
+    end
+
+    switch ur_type
+        case "ur3e",  name = 'universalUR3e';
+        case "ur5e",  name = 'universalUR5e';
+        case "ur10e", name = 'universalUR10e';
+        case "ur3",   name = 'universalUR3';
+        case "ur5",   name = 'universalUR5';
+        case "ur10",  name = 'universalUR10';
+        case "ur16e", name = 'universalUR16e';
+        otherwise
+            error('Unsupported ur_type "%s". Add mapping in mapURTypeToRobotName.', ur_type);
+    end
+end
+
+
+function mode = parseDualityMode(s)
+% Map user strings to 'velocity' or 'effort'
+switch lower(string(s))
+    case {"velocity","vel","speed"}
+        mode = 'velocity';
+    case {"effort","force","torque"}
+        mode = 'effort';
     otherwise
-        error('Unsupported ur_type "%s". Add mapping in mapURTypeToRobotName.', ur_type);
+        mode = 'velocity';
+end
+end
+
+function S_eff = selectScaling(S, dualMode)
+% Return scaling matrix for ellipsoid:
+% - 'velocity': axes ∝ σ (S)
+% - 'effort'  : axes ∝ 1/σ (inv(S)), with regularization
+s = diag(S);
+if strcmp(dualMode,'velocity')
+    S_eff = S;
+else
+    eps_s = 1e-9;
+    S_eff = diag(1./max(s, eps_s));
 end
 end
 
@@ -358,8 +402,9 @@ msg.data = uint8([]);
 send(pub, msg);
 end
 
-function publishEllipsoidPointCloud(pub, node, U, S, p_ee, res, frame_id)
+function publishEllipsoidPointCloud(pub, node, U, S, p_ee, res, frame_id, dualMode)
 % Build & publish sensor_msgs/PointCloud2 with x,y,z,rgb (FLOAT32)
+% dualMode: 'velocity' (axes ∝ σ) or 'effort' (axes ∝ 1/σ)
 if ~(isequal(size(U),[3 3]) && isequal(size(S),[3 3]))
     error('U and S must be 3x3.');
 end
@@ -370,10 +415,14 @@ p_ee = reshape(p_ee,1,3);
 
 % Unit sphere -> ellipsoid
 [xs,ys,zs] = sphere(res);          % (res+1)x(res+1)
-P  = [xs(:)'; ys(:)'; zs(:)']./2;  % 3xN (radius=0.5 for density)
-SP = S * P;         % 3xN
-E0 = U * SP;        % 3xN
-E  = E0 + p_ee.';   % 3xN
+P   = [xs(:)'; ys(:)'; zs(:)']./2; % 3xN (radius=0.5 for density)
+
+% Select scaling per duality
+S_eff = selectScaling(S, dualMode);
+
+SP = S_eff * P;         % 3xN
+E0 = U * SP;            % 3xN
+E  = E0 + p_ee.';       % 3xN
 
 % Color by local radius
 r    = sqrt(sum(SP.^2,1));
