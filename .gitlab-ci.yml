@@ -3,7 +3,7 @@ pages:
   image: python:3.13.9-slim-trixie
   script:
     - apt update
-    - apt install -qy mkdocs-material mkdocs-material-extensions python3-mdx-math
+    - apt install -qy mkdocs-material mkdocs-material-extensions python3-mdx-math mkdocs-redirects
     - cd robotics
     - mkdocs build --site-dir ../public
   cache:

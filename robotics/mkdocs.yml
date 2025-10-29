@@ -10,6 +10,9 @@ theme:
 
 plugins:
   - search
+  - redirects:
+      redirect_maps:
+        index.md: Curriculum.md
 
 extra_javascript:
   - js/mathjax-config.js
