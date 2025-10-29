@@ -1,0 +1,19 @@
+# The Docker image that will be used to build your app
+pages:
+  stage: deploy
+  image: python:3.13.9-slim-trixie
+  script:
+    - apt update
+    - apt install -qy mkdocs-material mkdocs-material-extensions python3-mdx-math
+    - cd robotics
+    - mkdocs build --site-dir public
+  cache:
+    key: ${CI_COMMIT_REF_SLUG}
+    paths:
+      - ~/.cache/ 
+  artifacts:
+    paths:
+      - robotics/public
+  rules:
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    
