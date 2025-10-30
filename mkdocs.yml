@@ -11,10 +11,16 @@ theme:
 plugins:
   - search
 
-extra_javascript:
-  - js/mathjax-config.js
-  - https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-AMS-MML_HTMLorMML
-
 markdown_extensions:
-  - mdx_math
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
 
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js
+  - javascripts/katex-init.js
+  
