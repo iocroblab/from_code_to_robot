@@ -2,12 +2,12 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 1.2 \- Modeling of a Robot</span>
+# Exercise 1.2 \- Modeling of a Robot
 
 In this exercise you will model a Universal UR3e robot from given DH parameters.
 
 
- <img src="Solution-1-2_media/image_0.svg" width="334" alt="image_0.svg">
+ ![image_0.svg](Solution-1-2_media/image_0.svg)
 
 
 Please store your solutions in the predefined variables!

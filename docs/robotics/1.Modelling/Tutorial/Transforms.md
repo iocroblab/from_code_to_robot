@@ -1,6 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Basics of Translation and Rotation</span>
-
+# Basics of Translation and Rotation
 # Introduction
 
 In this section you will learn how to represent translations and rotations in a 3D space. 
@@ -19,8 +18,7 @@ A translation along x\-axis can be represented by $\left\lbrack \begin{array}{c}
 visualizeTranslation([2,0,0]);
 ```
 
-<center><img src="Transforms_media/figure_0.png" width="474" alt="figure_0.png"></center>
-
+![figure_0.png](Transforms_media/figure_0.png)
 
 For a translation along all axis the vector will be $\left\lbrack \begin{array}{c} \Delta \;x\newline \Delta \;y\newline \Delta \;z \end{array}\right\rbrack$ . Note that the values are w.r.t. (with respect to) the source frame. 
 
@@ -28,8 +26,7 @@ For a translation along all axis the vector will be $\left\lbrack \begin{array}{
 visualizeTranslation([2,3,5]);
 ```
 
-<center><img src="Transforms_media/figure_1.png" width="474" alt="figure_1.png"></center>
-
+![figure_1.png](Transforms_media/figure_1.png)
 
 ```matlab
 x_trans=0.52
@@ -79,9 +76,8 @@ Rotations can be represented in a few different ways. We are going to work with 
 
 The angle of rotation for a  counter clockwise movement  is positive (use right hand rule) 
 
-<p style="text-align:left">
-   <img src="Transforms_media/image_0.png" width="214" alt="image_0.png">
-</p>
+
+![image_0.png](Transforms_media/image_0.png)
 
 ## How to define a simple rotation
 
@@ -99,8 +95,7 @@ Rx =
 visualizeRotation(double(subs(Rx, alpha, pi/4)),'x') %alpha = 45° = pi/4
 ```
 
-<center><img src="Transforms_media/figure_2.png" width="562" alt="figure_2.png"></center>
-
+![figure_2.png](Transforms_media/figure_2.png)
 
 ```matlab
 Ry=roty(beta)
@@ -113,8 +108,7 @@ Ry =
 visualizeRotation(double(subs(Ry, beta, pi/4)),'y') %beta = 45° = pi/4
 ```
 
-<center><img src="Transforms_media/figure_3.png" width="562" alt="figure_3.png"></center>
-
+![figure_3.png](Transforms_media/figure_3.png)
 
 ```matlab
 Rz=rotz(gamma)
@@ -127,8 +121,7 @@ Rz =
 visualizeRotation(double(subs(Rz, gamma, pi/4)), 'z') %gamma = 45° = pi/4
 ```
 
-<center><img src="Transforms_media/figure_4.png" width="562" alt="figure_4.png"></center>
-
+![figure_4.png](Transforms_media/figure_4.png)
 
 Multiplying these rotations with one another, gives us complex rotations in 3D space. 
 
@@ -293,9 +286,8 @@ clear all;
 
 Quaternions provide a four\-parameter, singularity\-free way to encode any 3D rotation.
 
-<p style="text-align:left">
-   <img src="Transforms_media/image_1.svg" width="214" alt="image_1.svg">
-</p>
+
+![image_1.svg](Transforms_media/image_1.svg)
 
 
 A unit quaternion is represented by $q=\left\lbrack w\;,x,y,z\right\rbrack$ 

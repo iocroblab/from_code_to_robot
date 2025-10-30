@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Joint Space Trajectory Planning </span>
+# Joint Space Trajectory Planning 
 
 Trajectory planning is a cornerstone of robot motion control: it defines **how** a robot moves between two configurations or end\-effector poses over time, subject to requirements on smoothness, timing, and physical limits (velocities, accelerations) of its joints or links.  By generating continuous profiles for position, velocity and acceleration, trajectory planners enable robots to carry out tasks safely, precisely and efficiently—whether following a pick\-and\-place path, welding a seam, or cooperating with humans.
 
@@ -65,9 +65,8 @@ Using these values yields the trajectories:
 
 The position graph follows the cubic function with the parameters A,B,C,D.
 
-<p style="text-align:left">
-   <img src="Joint_Space_Trajectory_Planning_media/image_0.svg" width="646" alt="image_0.svg">
-</p>
+
+![image_0.svg](Joint_Space_Trajectory_Planning_media/image_0.svg)
 
 
 you can code this using the symbolic toolbox. 
@@ -206,8 +205,7 @@ xlabel('Time (s)');
 ylabel('Acceleration');
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_0.png" width="562" alt="figure_0.png"></center>
-
+![figure_0.png](Joint_Space_Trajectory_Planning_media/figure_0.png)
 ### Multiple waypoints
 
 You may also give multiple waypoints at once. You can define specific : 
@@ -240,8 +238,7 @@ xlabel('Time (s)');
 ylabel('Acceleration');
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_1.png" width="562" alt="figure_1.png"></center>
-
+![figure_1.png](Joint_Space_Trajectory_Planning_media/figure_1.png)
 
 to access the polynominal coefficients use:  
 
@@ -339,8 +336,7 @@ legend show;
 hold off;
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_2.png" width="562" alt="figure_2.png"></center>
-
+![figure_2.png](Joint_Space_Trajectory_Planning_media/figure_2.png)
 ## **Quintic** Profile
 
 While the cubic profile only accounts for desired position and speed at the target time, the quintic profile allows to also define a desired acceleration at the start and end of a movement. This can result in the acceleration to be 0 at the start and end, thus making the robot motion much more smooth than in a cubic profile. See the profiles in the figure below. 
@@ -360,9 +356,8 @@ To achieve a quintic profile as seen below, you need to solve the following para
 
 solving these equations will result in a trajectory as seen below: 
 
-<p style="text-align:left">
-   <img src="Joint_Space_Trajectory_Planning_media/image_1.svg" width="702" alt="image_1.svg">
-</p>
+
+![image_1.svg](Joint_Space_Trajectory_Planning_media/image_1.svg)
 
 ### Robotic System Toolbox
 
@@ -419,8 +414,7 @@ xlabel('Time (s)');
 ylabel('Acceleration');
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_3.png" width="562" alt="figure_3.png"></center>
-
+![figure_3.png](Joint_Space_Trajectory_Planning_media/figure_3.png)
 
 # Trapezoidal Profile
 
@@ -432,9 +426,8 @@ A trapezoidal profile is defined by three phases:
 
 See the joint speed profile below. 
 
-<p style="text-align:left">
-   <img src="Joint_Space_Trajectory_Planning_media/image_2.svg" width="652" alt="image_2.svg">
-</p>
+
+![image_2.svg](Joint_Space_Trajectory_Planning_media/image_2.svg)
 
 
 This trajectory is defined by the cruise speed $v_c$ and the maximum acceleration $a_{\max }$ .
@@ -482,9 +475,8 @@ resulting in a total time of
 
 In case the joint displacement $\Delta q\;$ is small w.r.t. to the desired cruise velocity and acceleration, the cruise velocity may not  be reached before the deacceleration phase. 
 
-<p style="text-align:left">
-   <img src="Joint_Space_Trajectory_Planning_media/image_3.svg" width="342" alt="image_3.svg">
-</p>
+
+![image_3.svg](Joint_Space_Trajectory_Planning_media/image_3.svg)
 
 
 The maximum reachable velocity can be computed as:
@@ -570,8 +562,7 @@ plot(time, a, 'LineWidth', 2);
 ylabel('Acceleration'); xlabel('Time [s]'); grid on;
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_4.png" width="562" alt="figure_4.png"></center>
-
+![figure_4.png](Joint_Space_Trajectory_Planning_media/figure_4.png)
 
 ```matlab
 clear all
@@ -653,8 +644,7 @@ xlabel('Time [s]');
 grid on;
 ```
 
-<center><img src="Joint_Space_Trajectory_Planning_media/figure_5.png" width="562" alt="figure_5.png"></center>
-
+![figure_5.png](Joint_Space_Trajectory_Planning_media/figure_5.png)
 # Example Trajectories in Rviz
 
 Execute the buttons below to see a trajectory in Rviz. 

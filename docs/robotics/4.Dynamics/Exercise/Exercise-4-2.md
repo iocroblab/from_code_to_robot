@@ -1,7 +1,7 @@
 
-# <span style="color:rgb(213,80,0)">Exercise 4.2 \- Effort\-Based Control using the Dynamic Model </span>
+# Exercise 4.2 \- Effort\-Based Control using the Dynamic Model 
 
-In this exercise, you will implement a **joint\-space PD controller** with **gravity and dynamic compensation** for a UR manipulator. The goal is to drive all joints of the robot smoothly toward a desired configuration (<samp>qd</samp>) while respecting joint torque limits.
+In this exercise, you will implement a **joint\-space PD controller** with **gravity and dynamic compensation** for a UR manipulator. The goal is to drive all joints of the robot smoothly toward a desired configuration (`qd`) while respecting joint torque limits.
 
 # Task
 
@@ -27,8 +27,8 @@ Hint: Remember to set the gravity and data structure.
 
 Use the following helper functions to communicate with the simulator:
 
--  **<samp>[q, q_dot, ~] = GetJointValues('All')</samp>**Reads the current **joint positions** (<samp>q</samp>, in radians) and **joint velocities** (<samp>q_dot</samp>, in radians/second`) from the ROS network.Both are returned as 6×1 column vectors. 
--  **<samp>SendJointTorques(tau_sat)</samp>**Sends a 6×1 vector of torques (in **Nm**) to the robot joints.The vector must respect the robot’s torque limits. 
+-  **`[q, q_dot, ~] = GetJointValues('All')`**Reads the current **joint positions** (`q`, in radians) and **joint velocities** (`q_dot`, in radians/second`) from the ROS network.Both are returned as 6×1 column vectors. 
+-  **`SendJointTorques(tau\_sat)`**Sends a 6×1 vector of torques (in **Nm**) to the robot joints.The vector must respect the robot’s torque limits. 
 # **Controller Structure**
 
 The implemented PD controller with dynamics compensation has the following general form:
@@ -52,9 +52,8 @@ To avoid unrealistic commands, we apply **torque saturation** using element-wise
 
 Use the figure below to construct the torque limit vector specific to your robot. 
 
-<p style="text-align:left">
-   <img src="Exercise-4-2_media/image_0.png" width="607" alt="image_0.png">
-</p>
+
+![image_0.png](Exercise-4-2_media/image_0.png)
 
 # Other properties: 
 

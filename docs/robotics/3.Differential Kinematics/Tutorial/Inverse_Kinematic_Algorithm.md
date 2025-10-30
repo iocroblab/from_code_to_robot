@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Inverse Kinematic Algorithm</span>
+# Inverse Kinematic Algorithm
 
 Utilizing the Jacobian lets us setup an algorithm to find a numerical inverse kinematic solution. This approach can be used for redundnant manipulators or manipulators where no closed\-form solution (analytical solution) exists. 
 
@@ -35,9 +35,8 @@ until convergence.
 The Jacobian used for computations is only valid for the joint configuration they were computed with. Choosing a timestep $\Delta t$ that is too large may result not result in convergence. 
 
 ### Control scheme: 
-<p style="text-align:left">
-   <img src="Inverse_Kinematic_Algorithm_media/image_0.svg" width="542" alt="image_0.svg">
-</p>
+
+![image_0.svg](Inverse_Kinematic_Algorithm_media/image_0.svg)
 
 
 where $k\left(\cdot \right)$ is the forward kinematic of the q. 
@@ -67,9 +66,8 @@ Choosing $\dot{q} =J_A^T \left(q\right)\cdot K\cdot e$ then:
 if $\dot{x_d } =0$ , then $\dot{V} <0$ when $J_A$ is full rank, assuring asymptotic stability. 
 
 ### Scheme: 
-<p style="text-align:left">
-   <img src="Inverse_Kinematic_Algorithm_media/image_1.svg" width="522" alt="image_1.svg">
-</p>
+
+![image_1.svg](Inverse_Kinematic_Algorithm_media/image_1.svg)
 
 
 where $k\left(\cdot \right)$ is the forward kinematic of the manipulator. 

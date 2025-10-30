@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 2.4 \- Joint Space Trajectory Planning</span>
+# Exercise 2.4 \- Joint Space Trajectory Planning
 
 In this exercise you will develop functions to compute joint trajectories. 
 

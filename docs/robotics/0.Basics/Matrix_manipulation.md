@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Basic Matrix manipulation</span>
+# Basic Matrix manipulation
 
 In this tutorial we will explain some of the basics of working with matrices in matlab. 
 
@@ -10,7 +10,7 @@ In this tutorial we will explain some of the basics of working with matrices in 
 Please enable "Output inline" on the right side of your scroll bar. 
 
 
- <img src="Matrix_manipulation_media/image_0.png" width="22" alt="image_0.png">
+ ![image_0.png](Matrix_manipulation_media/image_0.png)
 
 # Create a Matrix
 -  Create a matrix structure by using square brackets \[ \] 

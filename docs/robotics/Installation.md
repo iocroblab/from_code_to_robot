@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Installation Steps for this Tutorial</span>
+# Installation Steps for this Tutorial
 1.  Install MATLAB 2025a
 2. Robotic System Toolbox
 3. Ros Toolbox

@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Curriculum</span>
+# Curriculum
 
 Below you will find the proposed order of tutorials and exercises for the robotics section of the From\-Code\-to\-Robot project. 
 

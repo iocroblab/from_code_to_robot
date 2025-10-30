@@ -1,6 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">From Code to Robot: ROBOTICS</span>
-
+# From Code to Robot: ROBOTICS
 ## [Curriculum](./Curriculum.md)
 ## [Installation](./Installation.md)
 ## [Demo](./Demo.md)

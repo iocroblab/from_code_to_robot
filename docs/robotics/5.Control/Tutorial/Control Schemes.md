@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Control </span>
+# Control 
 
 In this tutorial, we will study two important control strategies for robot manipulators: **centralized** and **decentralized control**.
 
@@ -28,9 +28,8 @@ This approach has the advantage of simplicity: it requires only local joint meas
 
 A common improvement is to include **feedforward terms** based on approximate knowledge of the dynamics. For example, adding gravity compensation or partial torque predictions helps reduce the effect of couplings. This way, decentralized controllers can achieve good performance without becoming overly complex.
 
-<p style="text-align:left">
-   <img src="Control_Schemes_media/image_0.svg" width="627" alt="image_0.svg">
-</p>
+
+![image_0.svg](Control_Schemes_media/image_0.svg)
 
 ## Gravity\-Compensated PD Control
 
@@ -51,7 +50,7 @@ simplifies to
 for $\dot{q_d } =0$ 
 
 
-Resulting in the control scheme: <img src="Control_Schemes_media/image_1.svg" width="615" alt="image_1.svg">
+Resulting in the control scheme: ![image_1.svg](Control_Schemes_media/image_1.svg)
 
 # Centralized Control
 

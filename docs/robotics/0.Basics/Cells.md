@@ -2,16 +2,15 @@
 
 clear all;
 
-# <span style="color:rgb(213,80,0)">Cell Arrays in MATLAB</span>
+# Cell Arrays in MATLAB
 
 In this tutorial we will explain what MATLAB cell arrays are and how to work with them.
 
 
 Please enable "Output inline" on the right side of your scroll bar.
 
-<p style="text-align:left">
-   <img src="Cells_media/image_0.png" width="22" alt="image_0.png">
-</p>
+
+![image_0.png](Cells_media/image_0.png)
 
 # Create a Cell Array
 

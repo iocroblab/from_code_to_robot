@@ -2,7 +2,7 @@
 ```matlab
 clear all;
 ```
-# <span style="color:rgb(213,80,0)">Structures in MATLAB</span>
+# Structures in MATLAB
 
 In this tutorial we will explain what MATLAB structures are and how to work with them.
 
@@ -10,7 +10,7 @@ In this tutorial we will explain what MATLAB structures are and how to work with
 Please enable "Output inline" on the right side of your scroll bar. 
 
 
- <img src="Structures_media/image_0.png" width="22" alt="image_0.png">
+ ![image_0.png](Structures_media/image_0.png)
 
 # Create a Simple Structure
 
@@ -78,9 +78,7 @@ robot2 = struct with fields:
 
 ```
 
-<p style="text-align:left">
-   <img src="Structures_media/image_1.png" width="372" alt="image_1.png">
-</p>
+![image_1.png](Structures_media/image_1.png)
 
 # Accessing Fields
 

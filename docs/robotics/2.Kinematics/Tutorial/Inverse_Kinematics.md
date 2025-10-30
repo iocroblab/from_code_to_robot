@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Inverse Kinematics</span>
+# Inverse Kinematics
 
 Where forward kinematics asks "Given joint angles, where is the end\-effector?", inverse kinematics (IK) poses the reverse question: "Given a desired end\-effector pose, what joint angles achieve it?" IK is the cornerstone of robotic motion planning and control. Whether programming a manipulator to grasp an object, guiding a humanoid's hand to a switch, or coordinating a mobile manipulator's arm and base, computing valid joint configurations from spatial goals is essential.
 
@@ -32,8 +32,7 @@ removeBody(anthropomorphic_arm, "wrist_1_link");
 show(anthropomorphic_arm, [0,-pi/2,0]')
 ```
 
-<center><img src="Inverse_Kinematics_media/figure_0.png" width="562" alt="figure_0.png"></center>
-
+![figure_0.png](Inverse_Kinematics_media/figure_0.png)
 
 For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A03
 
@@ -69,17 +68,15 @@ For a desired location of the EndEffector in the reachable workspace we can solv
 
 Consider this sketch of an anthropomorphic arm, its frames and a desired target pose. Notice that the origin of Frame 0 and Frame 1 coincide, therefore the distance from Z0 and Z1 to the target are identical. In the figure below the distance from frame 1 to the target is marked as R. Consider a sphere (yellow) around Joint 1 with a radius R. 
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_0.svg" width="253" alt="image_0.svg">
-</p>
+
+![image_0.svg](Inverse_Kinematics_media/image_0.svg)
 
 \matlabheadingtwo{ $$ {\textrm{Computing}\;\theta }_3 $$ }
 
 Look at the 2\-D projection below. The yellow circle is the sphere with the radius R, the pink sphere is the rotation of Joint 3 with $\theta_3$ with a radius of $a_2$ , the length of Joint 3. We want to find the solutions to $\theta_3$ so that the EndEffector frame lies on the yellow sphere. Notice how there are two solutions that fulfill this task:
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_1.svg" width="397" alt="image_1.svg"> 
-</p>
+
+![image_1.svg](Inverse_Kinematics_media/image_1.svg) 
 
 
 Squaring and summing the cartesian coordinates from Frame 1 (or Frame 0 if they coincide) to the target pose, gives us an expression for the required arm reach:
@@ -121,9 +118,8 @@ with this you can compute $q_3$ as
 
 In the figure below (left) you see a green torus, that is on the sphere surface at the Z\-height of the target pose.  To compute $\theta_2$ , you align the link (red) that results from the chosen $\theta_3$ with the green circle. Notice how for each angle of $\theta_3$ there are two solutions, resulting in a total of four solutions, that fulfill this task:
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_2.svg" width="632" alt="image_2.svg">
-</p>
+
+![image_2.svg](Inverse_Kinematics_media/image_2.svg)
 
 
 From the expressions for $x_{\textrm{desired}}$ and $y_{\textrm{desired}}$ we can obtain the equation: 
@@ -149,9 +145,8 @@ using these expressions we can derive the solutions for $\theta_2$
 
 The figure below is a 2\-D projection from above. To align the EndEffector with the target pose rotate the $Z_0$ Axis with $\theta_1$ . Notice how there are two solutions depending on the $\theta_3$ and $\theta_2$ configuration: 
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_3.svg" width="649" alt="image_3.svg">
-</p>
+
+![image_3.svg](Inverse_Kinematics_media/image_3.svg)
 
 
 We can rewrite expressions for $x_{\textrm{desired}}$ and $y_{\textrm{desired}}$ as:
@@ -177,24 +172,21 @@ The IK of the anthropomorphic arm as four solutions:
 
 Applying a solution configuration results in the anthropomorphic arm reaching the target pose. 
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_4.svg" width="257" alt="image_4.svg">
-</p>
+
+![image_4.svg](Inverse_Kinematics_media/image_4.svg)
 
 
 See below the different solutions illustrated 
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_5.svg" width="779" alt="image_5.svg">
-</p>
+
+![image_5.svg](Inverse_Kinematics_media/image_5.svg)
 
 # Spherical wrist
 
 The Spherical wrist is another example of a unique configuration for closed form solutions. Notice how all the origins of the joint frames intersect in a single point. The spherical wrist configuration is used to control the orientation of the EndEffector. 
 
-<p style="text-align:left">
-   <img src="Inverse_Kinematics_media/image_6.svg" width="502" alt="image_6.svg">
-</p>
+
+![image_6.svg](Inverse_Kinematics_media/image_6.svg)
 
 
 For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A36
@@ -463,5 +455,4 @@ for i = 1:size(ikConfig,1)
 end
 ```
 
-<center><img src="Inverse_Kinematics_media/figure_1.png" width="562" alt="figure_1.png"></center>
-
+![figure_1.png](Inverse_Kinematics_media/figure_1.png)

@@ -2,7 +2,7 @@
 ```matlab
 clear all 
 ```
-# <span style="color:rgb(213,80,0)">Modelling with Robotic System Toolbox</span>
+# Modelling with Robotic System Toolbox
 
 This tutorial explains how to set up a robot in the Robotic System Toolbox. 
 
@@ -23,9 +23,8 @@ We now need to fill this objects fields with the values corresponding to the rob
 
 Let's consider a simple planar robot: 
 
-<p style="text-align:left">
-   <img src="Modelling_with_RS_toolbox_media/image_0.svg" width="239" alt="image_0.svg">
-</p>
+
+![image_0.svg](Modelling_with_RS_toolbox_media/image_0.svg)
 
 
 and its DH parameters:

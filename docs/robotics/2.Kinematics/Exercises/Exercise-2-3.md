@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 2.3 \- Inverse Kinematic Anthropomorpic arm with Spherical Wrist</span>
+# Exercise 2.3 \- Inverse Kinematic Anthropomorpic arm with Spherical Wrist
 
 In this Exercise you will compute the inverse kinematic of an antropomorphic arm with a spherical wrist
 
@@ -28,9 +28,7 @@ Consider the following set of DH parameters:
 |      |      |      |      |       |
 
 
-<p style="text-align:left">
-   <img src="Exercise-2-3_media/image_0.svg" width="413" alt="image_0.svg">
-</p>
+![image_0.svg](Exercise-2-3_media/image_0.svg)
 
 
 In the case of this manipulator with a spherical wrist, the solution is decoupled between position and orientation, i.e. the three joints of the arm are used to position the end\-effector, and thethree joints are used to fix its orientation.

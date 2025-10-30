@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Exercise 5.1. Decenteralized Control</span>
+# Exercise 5.1. Decenteralized Control
 
 ```matlab
 Kp = diag([60 60 45 30 20 12]);

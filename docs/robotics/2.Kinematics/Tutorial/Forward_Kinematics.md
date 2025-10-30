@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Forward Kinematic</span>
+# Forward Kinematic
 
 A foundational capability enabling robots to interact reliably with their environment is the ability to compute where each part of the mechanism will be, given a set of joint inputs. This process, known as **forward kinematics**, underpins everything from basic motion visualization to advanced trajectory planning. In this tutorial, we'll explore the mathematical framework and practical implementation strategies that allow you to determine an end\-effector's pose (position and orientation) in space, given the configuration of its joints.
 
@@ -121,8 +121,7 @@ plotTransforms(M(1:3,4,i)',tform2quat(M(:,:,i)))
 end
 ```
 
-<center><img src="Forward_Kinematics_media/figure_0.png" width="562" alt="figure_0.png"></center>
-
+![figure_0.png](Forward_Kinematics_media/figure_0.png)
 
 Following these steps will result in a homogeneous transformation matrix that concatenates all the DH parameters. We will call these transformation matrices $A_{\textrm{source}\;\textrm{link}\to \textrm{target}\;\textrm{link}}$ . Using the Symbolic Toolbox we can setup a template as:
 
@@ -269,8 +268,7 @@ figure;
 show(ur3,[0;0;0;0;0;0]);
 ```
 
-<center><img src="Forward_Kinematics_media/figure_1.png" width="562" alt="figure_1.png"></center>
-
+![figure_1.png](Forward_Kinematics_media/figure_1.png)
 
 Or display it in ROS using the prebuild function: 
 

@@ -2,7 +2,7 @@
 ```matlab
 clear all
 ```
-# <span style="color:rgb(213,80,0)">Exercise 3.3 \- Velocity Teleoperation</span>
+# Exercise 3.3 \- Velocity Teleoperation
 
 In this exercise you will write a code to teleoperate a universal robot of your choice. 
 
@@ -62,10 +62,8 @@ To stop the programm press:
 
 You can see the controls in the terminal: 
 
-<p style="text-align:left">
-   <img src="Exercise-3-3_media/image_0.png" width="505" alt="image_0.png">
-</p>
 
+![image_0.png](Exercise-3-3_media/image_0.png)
 
 # Start Applications: 
 

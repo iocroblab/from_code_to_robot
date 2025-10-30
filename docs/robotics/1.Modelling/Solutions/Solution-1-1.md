@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 1.1 \- Find the Transforms</span>
+# Exercise 1.1 \- Find the Transforms
 
 In this exercise you will need to find transforms between coordinate frames. 
 
@@ -13,9 +13,8 @@ Please store your solutions in the predefined variables!
 
 given this set of Coordinate frames:
 
-<p style="text-align:left">
-   <img src="Solution-1-1_media/image_0.svg" width="360" alt="image_0.svg">
-</p>
+
+![image_0.svg](Solution-1-1_media/image_0.svg)
 
 
 Answer all the questions and store your solution in the correct variables.
@@ -135,9 +134,8 @@ Calibrate the Camera and find the location of the object w.r.t. the world frame.
 
 Look at the following setup: 
 
-<p style="text-align:left">
-   <img src="Solution-1-1_media/image_1.svg" width="697" alt="image_1.svg">
-</p>
+
+![image_1.svg](Solution-1-1_media/image_1.svg)
 
 
 To calibrate the camera we want to locate it w.r.t. the world frame.

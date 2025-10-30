@@ -2,16 +2,15 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 3.2 \- Inverse Kinematic Algorithm</span>
+# Exercise 3.2 \- Inverse Kinematic Algorithm
 
 In this exercise you will setup an inverse kinematics algorithm using the pseudoinverse of the jacobian. 
 
 
 Consider this UR3e robot: 
 
-<p style="text-align:left">
-   <img src="Solutions-3-2_media/image_0.png" width="420" alt="image_0.png">
-</p>
+
+![image_0.png](Solutions-3-2_media/image_0.png)
 
 
 Consider this DH table for the UR3e: 
@@ -30,9 +29,8 @@ Consider this DH table for the UR3e:
 
 The control scheme you have to implement is: 
 
-<p style="text-align:left">
-   <img src="Solutions-3-2_media/image_1.svg" width="447" alt="image_1.svg">
-</p>
+
+![image_1.svg](Solutions-3-2_media/image_1.svg)
 
 
 where $k\left(\cdot \right)$ is the forward kinematic of the q. 

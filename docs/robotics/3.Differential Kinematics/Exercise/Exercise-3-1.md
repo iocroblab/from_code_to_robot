@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 3.1 \- Jacobian </span>
+# Exercise 3.1 \- Jacobian 
 
 In this exercise you will setup different function relating to the jacobian of a UR3e robot. 
 
@@ -10,9 +10,7 @@ In this exercise you will setup different function relating to the jacobian of a
 Consider this UR3e robot and its dimensions. 
 
 
-<p style="text-align:left">
-   <img src="Exercise-3-1_media/image_0.png" width="253" alt="image_0.png">
-</p>
+![image_0.png](Exercise-3-1_media/image_0.png)
 
 # Task 1
 

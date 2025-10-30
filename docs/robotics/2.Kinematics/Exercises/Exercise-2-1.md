@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 2.1 \- Forward Kinematics</span>
+# Exercise 2.1 \- Forward Kinematics
 
 In this exercise you will setup the forward kinematics equations for different robot manipulators. 
 
@@ -18,7 +18,7 @@ Answer all the questions and store your solution in the correct variable
 
 # Task 1
 
-Given this Spherical Wrist setup. <img src="Exercise-2-1_media/image_0.svg" width="569" alt="image_0.svg">
+Given this Spherical Wrist setup. ![image_0.svg](Exercise-2-1_media/image_0.svg)
 
 1.  Find the DH parameters and setup the Forward Kinematics matrix.
 

@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Symbolic Math Toolbox</span>
+# Symbolic Math Toolbox
 
 This tutorial will utilize the symbolic math toolbox. This short tutorial will explain some of the basic functionalities that will be used in future tutorials.
 
@@ -13,7 +13,7 @@ The Symbolic Math Toolbox is a powerful tool for calculations, as it lets us use
 Please enable "Output inline" on the right side of your scroll bar. 
 
 
- <img src="Symbolic_Math_toolbox_media/image_0.png" width="22" alt="image_0.png">
+ ![image_0.png](Symbolic_Math_toolbox_media/image_0.png)
 
 # Create a Symbolic Variable 
 

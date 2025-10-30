@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 1.3 \- Find the DH parameters</span>
+# Exercise 1.3 \- Find the DH parameters
 
 In this exercise you will compute the DH parameters of an arbitrary robot manipulator, setup the equations using the symbolic toolbox and the define the robot using the robotic system toolbox. 
 
@@ -13,15 +13,14 @@ Please store your solutions in the predefined variables!
 
 Find the DH parameters and homogeneous transforms to describe the following robot manipulator:
 
-<p style="text-align:left">
-   <img src="Exercise-1-3_media/image_0.svg" width="386" alt="image_0.svg">
-</p>
+
+![image_0.svg](Exercise-1-3_media/image_0.svg)
 
 
 Answer all the questions and store your solution in the correct variable
 
 # Task 1
-1.  Define <u>real</u> symbolic variables for each joint (q1, ..., qn)
+1.  Define real symbolic variables for each joint (q1, ..., qn)
 2. Store them in a column array (q)
 3. Define the position limits for each of the joints, for revolute joints the limit is $\pm 2\pi \;$ (limit\_1, ..., limit\_n)
 

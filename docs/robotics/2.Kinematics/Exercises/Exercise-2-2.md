@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 2.2 \- Inverse Kinematic Planar Arms</span>
+# Exercise 2.2 \- Inverse Kinematic Planar Arms
 
 In this Exercise you will compute the inverse kinematic solutions of differnet planar manipulators
 
@@ -17,9 +17,8 @@ Compute the solutions to the inverse kinematics to reach a desired position or p
 Answer all the questions and store your solution in the correct variable
 
 # Task 1
-<p style="text-align:left">
-   <img src="Exercise-2-2_media/image_0.svg" width="281" alt="image_0.svg">
-</p>
+
+![image_0.svg](Exercise-2-2_media/image_0.svg)
 
 
 Reach the Position 
@@ -44,10 +43,8 @@ You can check your work by clicking the Run:
 check_exercise('2-2-1')
 ```
 # Task 2
-<p style="text-align:left">
-   <img src="Exercise-2-2_media/image_1.svg" width="281" alt="image_1.svg">
-</p>
 
+![image_1.svg](Exercise-2-2_media/image_1.svg)
 
 
 Reach the Position 
@@ -73,9 +70,8 @@ check_exercise('2-2-2')
 
 ```
 # Task 3
-<p style="text-align:left">
-   <img src="Exercise-2-2_media/image_2.svg" width="281" alt="image_2.svg">
-</p>
+
+![image_2.svg](Exercise-2-2_media/image_2.svg)
 
 
 Reach the pose: 

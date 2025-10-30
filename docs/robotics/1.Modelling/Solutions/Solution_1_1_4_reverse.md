@@ -51,5 +51,4 @@ TCamC = 4x4
  hold off
 ```
 
-<center><img src="Solution_1_1_4_reverse_media/figure_0.png" width="498" alt="figure_0.png"></center>
-
+![figure_0.png](Solution_1_1_4_reverse_media/figure_0.png)

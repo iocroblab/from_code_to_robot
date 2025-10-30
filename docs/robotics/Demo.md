@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Demonstration</span>
+# Demonstration
 ```matlab
 StartRviz('ur3e');
 ```

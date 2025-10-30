@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Differential Kinematics \- Jacobians</span>
+# Differential Kinematics \- Jacobians
 
 Differential kinematics is the study of how infinitesimal changes in a robot's joint coordinates translate into instantaneous linear and angular velocities of its end\-effector.  By focusing on velocity relationships rather than finite displacements, it provides the foundation for velocity control, trajectory following, and real\-time motion planning in robotic manipulators.
 
@@ -29,18 +29,14 @@ for n joints.
 
 Picture a single Joint that rotates at a constant angular velocity $\dot{\;\theta \;}$ , as the entire joint will rotate at this angular velocity, we can visualize the linear velocities at a given moment. The velocity w.r.t. the joint axis can be computed as $||\vec{\;v} ||=\dot{\theta} \cdot \textrm{distance}\;\textrm{to}\;\textrm{center}\;\textrm{of}\;\textrm{rotation}$ , resulting in a  linear speed increase  with the distance to the axis. Look at the image below, you can see that at this configuration, a rotation of $\dot{\theta_1 }$ will result in a velocity in \-x direction, and no velocities in y or z direction. 
 
-<p style="text-align:left">
-   <img src="Jacobians_media/image_0.svg" width="274" alt="image_0.svg">
-</p>
 
+![image_0.svg](Jacobians_media/image_0.svg)
 
 
 At the next configuration, the situation has changed. While there is still no velocity in z direction, the velocity vector now has a non zero component in x and y position. Notice how a Jacobian is only valid for the joint configuration it was computed for, thus it needs to be recomputed for each time instance. 
 
-<p style="text-align:left">
-   <img src="Jacobians_media/image_1.svg" width="631" alt="image_1.svg">
-</p>
 
+![image_1.svg](Jacobians_media/image_1.svg)
 
 ## Translation part $J_p \left(q\right)$ \- Revolute Joints
 
@@ -56,10 +52,8 @@ you must consider all the joints and links that come after a given joint. As a r
 
 Below you can see an image that illusrtrates how the endeffector velocity may behave if multiple joints are actuated. Notice how Joint 1 impacts both the Z1 frame and the EE frame. While. in this example, the second Joint only influences the target frame. 
 
-<p style="text-align:left">
-   <img src="Jacobians_media/image_2.svg" width="544" alt="image_2.svg">
-</p>
 
+![image_2.svg](Jacobians_media/image_2.svg)
 
 ## Translation part $J_p \left(q\right)$ \- Prismatic Joints
 
@@ -67,9 +61,7 @@ The translational part for prismatic joints is computed easier, as the actuator 
 
  $$ ||\vec{\;v} ||=\dot{\;q} =\dot{\;d} =||\;\vec{\;z} \cdot \dot{\;q} \;|| $$ 
 
-<p style="text-align:left">
-   <img src="Jacobians_media/image_3.svg" width="209" alt="image_3.svg">
-</p>
+![image_3.svg](Jacobians_media/image_3.svg)
 
 
 The formula is 
@@ -100,9 +92,8 @@ To use the rotation part of the jacobian, multiply the joint speed vector as:
 
  $$ \left\lbrack \begin{array}{c} \omega_x \;\newline \omega_y \newline \omega_z  \end{array}\right\rbrack =J_{\Theta \;} \left(q\right)\cdot \dot{\;q} $$ 
 ## Matlab implementation
-<p style="text-align:left">
-   <img src="Jacobians_media/image_4.svg" width="379" alt="image_4.svg">
-</p>
+
+![image_4.svg](Jacobians_media/image_4.svg)
 
 
 consider the DH parameters of an anthropomorpic arm:

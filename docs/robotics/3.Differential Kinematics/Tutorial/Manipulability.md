@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Manipulability</span>
+# Manipulability
 
 Manipulability is a key concept in robotics that quantifies how easily a manipulator can produce motion or exert forces in different directions from a given configuration. It is closely linked to the properties of the robot's Jacobian matrix, which maps joint velocities to end\-effector velocities. By studying the  *rank* of the Jacobian, we can determine whether the robot can achieve arbitrary velocities in task space or if it is operating under constraints. Situations where the Jacobian loses rank are known as  *singularities. At these singularity* configurations certain directions of motion become unattainable or require disproportionately large joint velocities. Conversely, robots with more joints than the minimum required to perform a task exhibit *redundancy*, which can be exploited to improve manipulability, avoid obstacles, or optimize secondary criteria. Understanding these interrelated concepts is essential for effective motion planning, control, and safe operation of robotic manipulators.
 
@@ -94,8 +94,7 @@ axis equal; grid on; xlabel x; ylabel y; zlabel z;
 title(sprintf('Translational manipulability m = %.4g', m_t)); hold off; 
 ```
 
-<center><img src="Manipulability_media/figure_0.png" width="562" alt="figure_0.png"></center>
-
+![figure_0.png](Manipulability_media/figure_0.png)
 
 see in Rviz
 
@@ -149,8 +148,7 @@ title("Voxelized Manipulability-Encoded Workspace")
 hold off
 ```
 
-<center><img src="Manipulability_media/figure_1.png" width="562" alt="figure_1.png"></center>
-
+![figure_1.png](Manipulability_media/figure_1.png)
 # Rank of the Jacobian 
 
 The rank of the Jacobian provides crucial information about the robot's manipulability. For a given task\-space dimension N, the rank of the corresponding part of the Jacobian should be N to achieve full manipulability. If the Jacobian's rank is less than N, there exists at least one motion that cannot be realized or independently controlled.
@@ -181,9 +179,7 @@ The figure below shows a fully streteched out arm, for the shown configuration, 
 
  $$ J\left(q\right)=\left\lbrack \begin{array}{cc} -a_1 \cdot \sin \left(q_1 \right)-a_2 \cdot \sin \left(q_1 +q_2 \right) & -a_2 \cdot \sin \left(q_1 +q_2 \right)\newline a_1 \cdot \cos \left(q_1 \right)+a_2 \cdot \cos \left(q_1 +q_2 \right) & a_2 \cdot \cos \left(q_1 +q_2 \right) \end{array}\right\rbrack $$ 
 
-<p style="text-align:left">
-   <img src="Manipulability_media/image_0.svg" width="333" alt="image_0.svg">
-</p>
+![image_0.svg](Manipulability_media/image_0.svg)
 
 ### Internal singularities 
 -  Occur inside the reachable workspace 
@@ -193,9 +189,7 @@ The figure below shows a spherical wrist in a singular configuration. As $\theta
 
  $$ J_{\Theta } =\left\lbrack \begin{array}{ccc} \vec{\;z_3 }  & \vec{\;z_4 }  & \vec{\;z_5 }  \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} \vec{\;z_3 }  & \vec{\;z_4 }  & \vec{\;z_3 }  \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 1 & 0 & 1\newline 0 & 1 & 0\newline 0 & 0 & 0 \end{array}\right\rbrack $$ 
 
-<p style="text-align:left">
-   <img src="Manipulability_media/image_1.svg" width="468" alt="image_1.svg">
-</p>
+![image_1.svg](Manipulability_media/image_1.svg)
 
 ## Decoupeling of Singularities 
 
@@ -214,9 +208,7 @@ Then $\det \left(J\right)=\det \left(J_{11} \right)\cdot \det \left(J_{22} \righ
 -  Depend on the kinemaitc structure  
 -  For the anthropomorphic arm:  
 
-<p style="text-align:left">
-   <img src="Manipulability_media/image_2.svg" width="151" alt="image_2.svg"> 
-</p>
+![image_2.svg](Manipulability_media/image_2.svg) 
 
 
 given the Jacobian of the anthropomorphic arm: 
@@ -235,9 +227,7 @@ then $\det \left(J_p \right)=0$ if:
 -  Caused by allignment of $z_3$ and $z_5$ 
 -  Happens when $q_5 =0$ , or $q_5 =\pi \;$ 
 
-<p style="text-align:left">
-   <img src="Manipulability_media/image_3.svg" width="468" alt="image_3.svg">
-</p>
+![image_3.svg](Manipulability_media/image_3.svg)
 
 
 with $J_{22} =\left\lbrack \begin{array}{ccc} \vec{\;z_3 }  & \vec{\;z_4 }  & \vec{\;z_5 }  \end{array}\right\rbrack$ 

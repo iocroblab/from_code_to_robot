@@ -2,7 +2,7 @@
 ```matlab
 clear all; 
 ```
-# <span style="color:rgb(213,80,0)">Exercise 2.4 \- Trajectory Planning</span>
+# Exercise 2.4 \- Trajectory Planning
 
 In this exercise you will develop functions to compute joint trajectories. 
 
@@ -107,8 +107,7 @@ N = 100;
 plotTrajectory(q_trajectory, qd_trajectory, qdd_trajectory, timevec)
 ```
 
-<center><img src="Solutions-2-4_media/figure_0.png" width="562" alt="figure_0.png"></center>
-
+![figure_0.png](Solutions-2-4_media/figure_0.png)
 # Task 2
 
 Write a function that takes two joint configurations and computes the quintic trajectory for each joint. You may use your previously defined function
@@ -156,8 +155,7 @@ N = 300;
 plotTrajectory(q_trajectory, qd_trajectory, qdd_trajectory, timevec)
 ```
 
-<center><img src="Solutions-2-4_media/figure_1.png" width="562" alt="figure_1.png"></center>
-
+![figure_1.png](Solutions-2-4_media/figure_1.png)
 
 ```matlab
 JointStatesToRviz(q_trajectory, 'ur3e', [], T);
@@ -299,22 +297,19 @@ end
 plotTrajectory(q, qd, qdd, timevec);
 ```
 
-<center><img src="Solutions-2-4_media/figure_2.png" width="562" alt="figure_2.png"></center>
-
+![figure_2.png](Solutions-2-4_media/figure_2.png)
 
 ```matlab
 plotTrajectory(qt,qdt,qddt, timevec);
 ```
 
-<center><img src="Solutions-2-4_media/figure_3.png" width="562" alt="figure_3.png"></center>
-
+![figure_3.png](Solutions-2-4_media/figure_3.png)
 
 ```matlab
 plotTrajectory(q-qt', qd-qdt', qdd-qddt', timevec);
 ```
 
-<center><img src="Solutions-2-4_media/figure_4.png" width="562" alt="figure_4.png"></center>
-
+![figure_4.png](Solutions-2-4_media/figure_4.png)
 
 You can check your work by clicking the Run: 
 

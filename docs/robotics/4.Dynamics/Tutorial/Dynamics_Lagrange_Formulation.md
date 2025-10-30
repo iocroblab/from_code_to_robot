@@ -1,5 +1,5 @@
 
-# <span style="color:rgb(213,80,0)">Dynamics </span>
+# Dynamics 
 
 In robotics, understanding the dynamics of a manipulator is essential for precise motion control, trajectory planning, and interaction with the environment. Dynamics describes the relationship between forces, torques, and the resulting motion of the robot, capturing the influence of inertia, Coriolis and centrifugal forces, and gravity.
 
@@ -28,9 +28,8 @@ which computes the joint accelerations resulting from a given set of joint torqu
 
 Consider this two link manipulator
 
-<p style="text-align:left">
-   <img src="Dynamics_Lagrange_Formulation_media/image_0.svg" width="599" alt="image_0.svg">
-</p>
+
+![image_0.svg](Dynamics_Lagrange_Formulation_media/image_0.svg)
 
 
 with the following properties of the link: 
