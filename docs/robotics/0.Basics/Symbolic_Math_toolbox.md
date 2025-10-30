@@ -36,7 +36,8 @@ syms var1 var2 var3 real real
 MyVars = [var1 var2 var3]
 ```
 MyVars = 
- $\displaystyle \left(\begin{array}{ccc} {\textrm{var}}_1  & {\textrm{var}}_2  & {\textrm{var}}_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} {\textrm{var}}_1  & {\textrm{var}}_2  & {\textrm{var}}_3  \end{array}\right) $$ 
  
 
 When spelling out greek letters as variables, they be converted into their symbols on display: 
@@ -46,7 +47,8 @@ syms alpha beta gamma Delta delta
 MyVars = [alpha, beta, gamma, Delta, delta]
 ```
 MyVars = 
- $\displaystyle \left(\begin{array}{ccccc} \alpha  & \beta  & \gamma  & \Delta  & \delta  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccccc} \alpha  & \beta  & \gamma  & \Delta  & \delta  \end{array}\right) $$ 
  
 # Substituting variables
 
@@ -112,7 +114,8 @@ timevec = 5x1
 EquationVector = subs(Equation4,x,timevec)
 ```
 EquationVector = 
- $\displaystyle \left(\begin{array}{c} 0\newline \frac{25\,y}{4}+\frac{125}{4}\newline 25\,y+250\newline \frac{225\,y}{4}+\frac{3375}{4}\newline 100\,y+2000 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{c} 0\newline \frac{25\,y}{4}+\frac{125}{4}\newline 25\,y+250\newline \frac{225\,y}{4}+\frac{3375}{4}\newline 100\,y+2000 \end{array}\right) $$ 
  
 # Converting symbolic variables
 
@@ -128,6 +131,7 @@ ValueDouble = double(Value2)
 ```matlabTextOutput
 ValueDouble = 7
 ```
+
 
 If you try to insert symbolic variables into numeric variables you need to convert the numeric matrix into a symbolic matrix: 
 
@@ -148,21 +152,24 @@ Matrix_symb = [alpha, beta;
                gamma, delta]
 ```
 Matrix_symb = 
- $\displaystyle \left(\begin{array}{cc} \alpha  & \beta \newline \gamma  & \delta  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{cc} \alpha  & \beta \newline \gamma  & \delta  \end{array}\right) $$ 
  
 
 ```matlab
 Matrix_combined = sym(Matrix_1)
 ```
 Matrix_combined = 
- $\displaystyle \left(\begin{array}{ccc} 1 & 1 & 1\newline 1 & 1 & 1\newline 1 & 1 & 1 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} 1 & 1 & 1\newline 1 & 1 & 1\newline 1 & 1 & 1 \end{array}\right) $$ 
  
 
 ```matlab
 Matrix_combined(1:2,1:2) = Matrix_symb
 ```
 Matrix_combined = 
- $\displaystyle \left(\begin{array}{ccc} \alpha  & \beta  & 1\newline \gamma  & \delta  & 1\newline 1 & 1 & 1 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} \alpha  & \beta  & 1\newline \gamma  & \delta  & 1\newline 1 & 1 & 1 \end{array}\right) $$ 
  
 # Working with Symbolic Variables 
 
@@ -217,28 +224,32 @@ MatrixEquation = [x^2,      x*y,       x*y*z;
                   x*y*z,    y*z,       z^2  ]
 ```
 MatrixEquation = 
- $\displaystyle \left(\begin{array}{ccc} x^2  & x\,y & x\,y\,z\newline x\,y & y^2  & y\,z\newline x\,y\,z & y\,z & z^2  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} x^2  & x\,y & x\,y\,z\newline x\,y & y^2  & y\,z\newline x\,y\,z & y\,z & z^2  \end{array}\right) $$ 
  
 
 ```matlab
 diff_Matrix1 = diff(MatrixEquation, x)
 ```
 diff_Matrix1 = 
- $\displaystyle \left(\begin{array}{ccc} 2\,x & y & y\,z\newline y & 0 & 0\newline y\,z & 0 & 0 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} 2\,x & y & y\,z\newline y & 0 & 0\newline y\,z & 0 & 0 \end{array}\right) $$ 
  
 
 ```matlab
 diff_Matrix2 = diff(MatrixEquation, x,y)
 ```
 diff_Matrix2 = 
- $\displaystyle \left(\begin{array}{ccc} 0 & 1 & z\newline 1 & 0 & 0\newline z & 0 & 0 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} 0 & 1 & z\newline 1 & 0 & 0\newline z & 0 & 0 \end{array}\right) $$ 
  
 
 ```matlab
 diff_Matrix3 = diff(MatrixEquation, x,y,z)
 ```
 diff_Matrix3 = 
- $\displaystyle \left(\begin{array}{ccc} 0 & 0 & 1\newline 0 & 0 & 0\newline 1 & 0 & 0 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} 0 & 0 & 1\newline 0 & 0 & 0\newline 1 & 0 & 0 \end{array}\right) $$ 
  
 ## Rewriting Equations
 
@@ -298,6 +309,7 @@ solutions = struct with fields:
 
 ```
 
+
 We can also let it solve for a variable that depends on others: 
 
 ```matlab
@@ -306,3 +318,4 @@ parameter_solution_a = solve(Eq1, a)
 parameter_solution_a = 
  $\displaystyle -\frac{b}{5}$
  
+

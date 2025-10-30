@@ -16,16 +16,15 @@ below you will see a model of an Anthropomorphic arm with a spherical wrist.
 
 Consider the following set of DH parameters: 
 
-|      |      |      |      |      |
+||||||
 | :-: | :-- | :-: | :-: | :-- |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0 <br>  | pi/2 <br>  | 0 <br>  | $\displaystyle \theta_1$ <br>   |
-| 2 <br>  | 0.3 <br>  | 0 <br>  | 0 <br>  | $\displaystyle \theta_2$ <br>   |
-| 3 <br>  |   0.2 <br>  | pi/2 <br>  | 0 <br>  | $\displaystyle \theta_3$ <br>   |
-| 4 <br>  | 0 <br>  | \-pi/2 <br>  | 0.2 <br>  | $\displaystyle \theta_4$ <br>   |
-| 5 <br>  | 0 <br>  | pi/2 <br>  | 0 <br>  | $\displaystyle \theta_5$ <br>   |
-| 6 <br>  | 0 <br>  | 0 <br>  | 0.15 <br>  | $\displaystyle \theta_6$ <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0  | pi/2  | 0  | $\displaystyle \theta_1$   |
+| 2  | 0.3  | 0  | 0  | $\displaystyle \theta_2$   |
+| 3  |   0.2  | pi/2  | 0  | $\displaystyle \theta_3$   |
+| 4  | 0  | \-pi/2  | 0.2  | $\displaystyle \theta_4$   |
+| 5  | 0  | pi/2  | 0  | $\displaystyle \theta_5$   |
+| 6  | 0  | 0  | 0.15  | $\displaystyle \theta_6$   |
 
 
 ![image_0.svg](Exercise-2-3_media/image_0.svg)
@@ -34,7 +33,7 @@ Consider the following set of DH parameters:
 In the case of this manipulator with a spherical wrist, the solution is decoupled between position and orientation, i.e. the three joints of the arm are used to position the end\-effector, and thethree joints are used to fix its orientation.
 
 
-Given the end\-effector position $p_{\textrm{ee}}$ and orientation $R_{\textrm{ee}}$ , the following steps should be followed:
+Given the end\-effector position $p_{\textrm{ee}}$ and orientation $R_{\textrm{ee}}$, the following steps should be followed:
 
 1.  Compute the wrist position $p_w =p_{\textrm{ee}} -d_6 \cdot z_6$
 2. Solve inverse kinematics for the Anthropomorphic Arm: $\theta_3 ,\theta_2 ,\theta_1$
@@ -124,3 +123,4 @@ You can check your work by clicking the Run:
 check_exercise('2-3-3')
 
 ```
+

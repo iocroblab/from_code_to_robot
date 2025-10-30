@@ -12,10 +12,10 @@ The eqation:
 
  $$ B\left(q\right)\cdot \;\ddot{\;q} +C\left(q,\dot{q} \right)\cdot \dot{q} +F\cdot \dot{q} +g\left(q\right)=\tau $$ 
 
-with the inertia matrix $B\left(q\right)$ , the Coriolis matrix $C\left(q,\dot{q} \right)$ , the friction matrix $F$ and the gravity term $g\left(q\right)$ , 
+with the inertia matrix $B\left(q\right)$, the Coriolis matrix $C\left(q,\dot{q} \right)$, the friction matrix $F$ and the gravity term $g\left(q\right)$, 
 
 
-describes the torque $\tau$ exerted on the joints for a given configuration q and its velocity $\dot{q}$ . 
+describes the torque $\tau$ exerted on the joints for a given configuration q and its velocity $\dot{q}$. 
 
 
 This lagrange formulation can be rewritten to get the **forward dynamics** equation:
@@ -34,22 +34,20 @@ Consider this two link manipulator
 
 with the following properties of the link: 
 
-|      |      |      |      |      |
+||||||
 | :-- | :-- | :-- | :-- | :-- |
-| Link <br>  | Mass \[kg\] <br>  | Radius \[m\] <br>  | Link length \[m\] <br>  | Center of mass \[m\] <br>   |
-| 1 <br>  | 0.5  <br>  | 0.04 <br>  | 0.5 <br>  | 0.25 <br>   |
-| 2 <br>  | 0.7 <br>  | 0.04 <br>  | 0.7 <br>  | 0.35 <br>   |
-|      |      |      |      |       |
+| Link  | Mass \[kg\]  | Radius \[m\]  | Link length \[m\]  | Center of mass \[m\]   |
+| 1  | 0.5   | 0.04  | 0.5  | 0.25   |
+| 2  | 0.7  | 0.04  | 0.7  | 0.35   |
 
 
 The manipulator can be modeled using these DH parameters: 
 
-|      |      |      |      |      |
+||||||
 | :-: | :-: | :-: | :-: | :-- |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0.5 <br>  | 0 <br>  | 0 <br>  | $\displaystyle q_1$ <br>   |
-| 2 <br>  | 0.7 <br>  | 0 <br>  | 0 <br>  | $\displaystyle q_2$ <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0.5  | 0  | 0  | $\displaystyle q_1$   |
+| 2  | 0.7  | 0  | 0  | $\displaystyle q_2$   |
 
 ```matlab
         %a      alpha   d       theta
@@ -74,12 +72,12 @@ The inertia matrix of a robotic manipulator, captures how the robot's mass and g
 
 with 
 
--  $m_{l_i }$ : mass of link i 
--  $J_P^{l_i }$ : linear part of Jacobian of link i 
--  $J_{\Theta }^{l_i }$ : rotational part of Jacobian of link i 
--  $R_i$ : rotation matrix from link i frame to base frame 
--  $I_{l_i }$ : inertia tensor of link i in its local frame 
--  $B\left(q\right)$ : total inertia matrix of the manipulator 
+-  $m_{l_i }$: mass of link i 
+-  $J_P^{l_i }$: linear part of Jacobian of link i 
+-  $J_{\Theta }^{l_i }$: rotational part of Jacobian of link i 
+-  $R_i$: rotation matrix from link i frame to base frame 
+-  $I_{l_i }$: inertia tensor of link i in its local frame 
+-  $B\left(q\right)$: total inertia matrix of the manipulator 
 
 To compute the intertia matrix for the example manipulator you need to compute: 
 
@@ -168,10 +166,10 @@ B_twolink_subs = double(subs(B_twolink, [q1 q2], config.'))
 The robotic system toolbox allows us to compute the intertia matrix. 
 
 
-The center of mass is configured as a structur property of a body as a vector $\left\lbrack \begin{array}{ccc} x & y & z \end{array}\right\rbrack$ realative to the body frame in $\left\lbrack \mathrm{m}\right\rbrack$ , this means for our manipulator the distance in x is negative!
+The center of mass is configured as a structur property of a body as a vector $\left\lbrack \begin{array}{ccc} x & y & z \end{array}\right\rbrack$ realative to the body frame in $\left\lbrack \mathrm{m}\right\rbrack$, this means for our manipulator the distance in x is negative!
 
 
-the inertia matrix is passed as a vector of the form: $\left\lbrack \begin{array}{cccccc} I_{\textrm{xx}}  & I_{\textrm{yy}}  & I_{\textrm{zz}}  & I_{\textrm{yz}}  & I_{\textrm{xz}}  & I_{\textrm{xy}}  \end{array}\right\rbrack \;\textrm{in}\;\left\lbrack \frac{\textrm{kg}}{{\mathrm{m}}^2 }\right\rbrack$ , however the inertia matrix here is about the joint frame. To convert the previously computed Inertia, you need to apply the parallel\-axis theorem. 
+the inertia matrix is passed as a vector of the form: $\left\lbrack \begin{array}{cccccc} I_{\textrm{xx}}  & I_{\textrm{yy}}  & I_{\textrm{zz}}  & I_{\textrm{yz}}  & I_{\textrm{xz}}  & I_{\textrm{xy}}  \end{array}\right\rbrack \;\textrm{in}\;\left\lbrack \frac{\textrm{kg}}{{\mathrm{m}}^2 }\right\rbrack$, however the inertia matrix here is about the joint frame. To convert the previously computed Inertia, you need to apply the parallel\-axis theorem. 
 
 
 For this cylinder, only $I_{\textrm{yy}}$ and $I_{\textrm{zz}}$ will be altered as: 
@@ -330,7 +328,7 @@ G_toolbox = gravityTorque(twolink, config)
 The friction term in robot dynamics accounts for resistive torques at the joints due to internal friction in motors, gears, and bearings. Unlike the inertia, Coriolis, or gravity terms, friction is non\-conservative and depends on the motion of the joints rather than their configuration.
 
 
-The Friction term consists of two parts, the viscous friction depending on $B_m$ scaled by the squared gear ratio $G^2$ and the Coulomb friction $T_c$ scaled by $G$ .
+The Friction term consists of two parts, the viscous friction depending on $B_m$ scaled by the squared gear ratio $G^2$ and the Coulomb friction $T_c$ scaled by $G$.
 
  $$ F\cdot \dot{q} =B_m \cdot G^2 \cdot \dot{q} +T_c \cdot \textrm{sign}\left(\dot{q} \right) $$ 
 ## Matlab Implementation \- Symbolic Toolbox
@@ -402,4 +400,5 @@ tau_force = inverseDynamics(twolink, config, [],[], fext1)
 ```
 
 The outout of this function is a vector containing the required joint torques to fulfill the input requirement. 
+
 

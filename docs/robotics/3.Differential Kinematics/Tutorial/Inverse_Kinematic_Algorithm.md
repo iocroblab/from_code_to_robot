@@ -17,7 +17,7 @@ Select $\dot{q}$ so that $\dot{e} =\dot{x_d } -\dot{x_{\textrm{ee}} } =\dot{x_d 
 
 ### Theory: 
 
-If we choose $\dot{q} =J_A^{-1} \left(q\right)\cdot \left(\dot{x_d } +K\cdot e\right)$ , then the error dynamics is linear: 
+If we choose $\dot{q} =J_A^{-1} \left(q\right)\cdot \left(\dot{x_d } +K\cdot e\right)$, then the error dynamics is linear: 
 
  $$ \dot{e} +K\cdot e=0 $$ 
 
@@ -25,7 +25,7 @@ The convergence to zero depends on the eigenvalues of K. The larger the Eigenval
 
 ### Algorithm: 
 
-for each discrete time step k with $\Delta t$ :
+for each discrete time step k with $\Delta t$:
 
  $$ q\left(t_{k+1} \right)=q\left(t_k \right)+\dot{q} \left(t_k \right)\cdot \Delta t $$ 
 
@@ -63,7 +63,7 @@ Choosing $\dot{q} =J_A^T \left(q\right)\cdot K\cdot e$ then:
 
  $$ \dot{V} \left(e\right)=e^T \cdot K\cdot \dot{x_d } -e^T \cdot K\cdot J_A^T \left(q\right)\cdot \dot{q} $$ 
 
-if $\dot{x_d } =0$ , then $\dot{V} <0$ when $J_A$ is full rank, assuring asymptotic stability. 
+if $\dot{x_d } =0$, then $\dot{V} <0$ when $J_A$ is full rank, assuring asymptotic stability. 
 
 ### Scheme: 
 
@@ -75,3 +75,4 @@ where $k\left(\cdot \right)$ is the forward kinematic of the manipulator.
 ### Notes: 
 -  Only the computation of $J_A^T \left(q\right)$ and $k\left(\cdot \right)$ is required.  
 -  The error in orientation has to be handled with care (the use of Euler angles is not the best option)  
+

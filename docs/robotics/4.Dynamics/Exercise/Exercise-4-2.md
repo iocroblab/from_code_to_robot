@@ -86,3 +86,4 @@ You can visualize the Kineo Static Duality as a manipulability ellipsoid using t
 
 
 ```
+

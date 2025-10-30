@@ -29,12 +29,11 @@ Let's consider a simple planar robot:
 
 and its DH parameters:
 
-|      |      |      |      |      |
+||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0.30 <br>  | 0 <br>  | 0 <br>  | 0 <br>   |
-| 2 <br>  | 0.25 <br>  | pi/2 <br>  | 0 <br>  | 0 <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0.30  | 0  | 0  | 0   |
+| 2  | 0.25  | pi/2  | 0  | 0   |
 
 
 ```matlab
@@ -173,3 +172,4 @@ you can specify the robot with the extention 'ur5e' ( default is ur3e).
 ```matlab
 JointStatesToRviz(myconfig, 'ur5e'); 
 ```
+

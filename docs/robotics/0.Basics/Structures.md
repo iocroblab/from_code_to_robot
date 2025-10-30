@@ -33,6 +33,7 @@ robot = struct with fields:
 
 ```
 
+
 Equivalent creation with struct()
 
 ```matlab
@@ -48,6 +49,7 @@ robot2 = struct with fields:
     payload: 2.5000
 
 ```
+
 # Nested Structures
 
 Structures can contain other structures, enabling hierarchical data.
@@ -78,6 +80,7 @@ robot2 = struct with fields:
 
 ```
 
+
 ![image_1.png](Structures_media/image_1.png)
 
 # Accessing Fields
@@ -105,6 +108,7 @@ robot = struct with fields:
     payload: 3
 
 ```
+
 ## Access nested field
 ```matlab
 link1_length = robot2.links(1).length
@@ -135,6 +139,7 @@ end
 ```matlabTextOutput
 RobotMaxSpeed = 1.2000
 ```
+
 # Adding and Removing Fields
 
 Use setfield and rmfield, or direct manipulation.
@@ -156,6 +161,7 @@ robot = struct with fields:
 
 ```
 
+
 Remove a field
 
 ```matlab
@@ -170,3 +176,5 @@ robot = struct with fields:
     maxSpeed: 1.2000
 
 ```
+
+

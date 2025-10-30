@@ -60,7 +60,10 @@ plotTrajectory(q_traj_ex, q_dot_traj, linspace(0,T_example, size(q_traj_ex,2)))
 ```
 
 
+
 ```matlabTextOutput
 Error using JointStatesToRviz (line 406)
 JointConfiguration must have 6 columns.
 ```
+
+

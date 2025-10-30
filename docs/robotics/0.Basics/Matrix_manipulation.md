@@ -23,7 +23,8 @@ M = [m11, m12, m13 ; %row separated by semicolon
      m31  m32  m33] %column separated by space
 ```
 M = 
- $\displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & m_{13} \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & m_{13} \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right) $$ 
  
 
 The functions eye() lets you create an identity matrix: 
@@ -39,6 +40,7 @@ IdentityMatrix = 3x3
      0     0     1
 
 ```
+
 
 To create a matrix of zeros or ones you can use the functions below. You can define the dimensions as (row,column):
 
@@ -63,6 +65,7 @@ ZeroMatrix = 2x2
      0     0
 
 ```
+
 # Transpose a Matrix
 
 Transpose a matrix by extending it with an apostrophe '
@@ -71,7 +74,8 @@ Transpose a matrix by extending it with an apostrophe '
 M_transposed = M'
 ```
 M_transposed = 
- $\displaystyle \left(\begin{array}{ccc} m_{11}  & m_{21}  & m_{31} \newline m_{12}  & m_{22}  & m_{32} \newline m_{13}  & m_{23}  & m_{33}  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{21}  & m_{31} \newline m_{12}  & m_{22}  & m_{32} \newline m_{13}  & m_{23}  & m_{33}  \end{array}\right) $$ 
  
 
 This can also be used to transform a row vector in a column vector. This can be done with a variable or with the array itself. 
@@ -81,21 +85,24 @@ syms v1 v2 v3 real
 V_column = [v1, v2, v3]
 ```
 V_column = 
- $\displaystyle \left(\begin{array}{ccc} v_1  & v_2  & v_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} v_1  & v_2  & v_3  \end{array}\right) $$ 
  
 
 ```matlab
 V_row = [v1, v2, v3]'
 ```
 V_row = 
- $\displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right) $$ 
  
 
 ```matlab
 V_row_2 = V_column'
 ```
 V_row_2 = 
- $\displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right) $$ 
  
 # Invert a Matrix
 
@@ -150,6 +157,7 @@ Sample_Matrix_inv_3 = 3x3
     0.6111   -0.2778    0.0833
 
 ```
+
 ## Invert a non square Matrix 
 
 To invert a non square Matrix you can use the pseudo inverse:
@@ -188,6 +196,7 @@ Sample_Matrix_non_square_inverse_2 = 2x3
     0.1214    0.2175   -0.1653
 
 ```
+
 # Access Matrix Elements 
 
 To access a specific elements of a matrix you can include (row,column) as an extension of the variable: 
@@ -205,7 +214,8 @@ You can also access sections of your matrix if you define a region as (start\_ro
 M(1:2,1:2)
 ```
 ans = 
- $\displaystyle \left(\begin{array}{cc} m_{11}  & m_{12} \newline m_{21}  & m_{22}  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{cc} m_{11}  & m_{12} \newline m_{21}  & m_{22}  \end{array}\right) $$ 
  
 
 With this Notation we can also write into specific elements of the matrix and override them:
@@ -214,14 +224,16 @@ With this Notation we can also write into specific elements of the matrix and ov
 M(1:3, 3)=V_row
 ```
 M = 
- $\displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & v_1 \newline m_{21}  & m_{22}  & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & v_1 \newline m_{21}  & m_{22}  & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right) $$ 
  
 
 ```matlab
 M(1:2,1:2)=eye(2)
 ```
 M = 
- $\displaystyle \left(\begin{array}{ccc} 1 & 0 & v_1 \newline 0 & 1 & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} 1 & 0 & v_1 \newline 0 & 1 & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right) $$ 
  
 # Combining Matrices 
 
@@ -324,6 +336,7 @@ Matrix_combined_4(:,:,3) =
      3     3     3
 
 ```
+
 # Mathematical Operations with Matrices
 
 To add two matrices of the same size: 
@@ -354,6 +367,7 @@ Matrix_added = 3x3
 
 ```
 
+
 To subtract matrices of the same size: 
 
 ```matlab
@@ -368,6 +382,7 @@ Matrix_subtracted = 3x3
 
 ```
 
+
 To multiply two matrices: 
 
 ```matlab
@@ -381,6 +396,7 @@ Matrix_multiply = 3x3
      6    12    18
 
 ```
+
 
 To have element\-wise operations like
 
@@ -423,6 +439,7 @@ Matrix_element_squared = 3x3
      1     4     9
 
 ```
+
 # Other useful Functions 
 ### Dimensions
 
@@ -438,6 +455,7 @@ columns = 3
 dimensions = 3
 ```
 
+
 if you are only interested in some of the dimensions: 
 
 ```matlab
@@ -447,6 +465,7 @@ if you are only interested in some of the dimensions:
 ```matlabTextOutput
 rows = 3
 ```
+
 ### Summing of Matrix elements
 
 You can sum matrix column elements by using the sum() function: 
@@ -461,6 +480,7 @@ Matrix_column_sum = 1x3
 
 ```
 
+
 you can add all the elements of a Matrix to each other by giving the option input "all":
 
 ```matlab
@@ -470,6 +490,7 @@ Matrix_total_sum = sum(Matrix_4,"all")
 ```matlabTextOutput
 Matrix_total_sum = 18
 ```
+
 ### Maximum/Minimum
 
 You can extract the maximum or minimum value of each column by using the max() or min() function 
@@ -505,6 +526,7 @@ MinAll = min(Matrix_4, [], "all")
 ```matlabTextOutput
 MinAll = 1
 ```
+
 ### Rank
 
 Using the rank() function you can extract the rank of you matrix, which is defined as the number of linearly independent columns (or rows) in that matrix. The rank provides insight into the dimensionality of the column space of the matrix.
@@ -520,6 +542,7 @@ IdentityRank = rank(eye(4))
 IdentityRank = 4
 ```
 
+
 However for the Matrix 4, which contains the same row multiple times the rank is only 1. 
 
 ```matlab
@@ -529,3 +552,5 @@ MatrixRank = rank(Matrix_4)
 ```matlabTextOutput
 MatrixRank = 1
 ```
+
+

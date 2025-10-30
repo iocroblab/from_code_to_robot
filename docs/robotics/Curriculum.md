@@ -83,27 +83,27 @@ In this tutorial you will setup different functions to compute trajectories for 
 
 This package explains the relation between joint velocities and cartesian velocities of the endeffector. Building on this knowlege you will learn how to setup a numerical inverse kinematic algorithm and learn about the manipulability of robots and what challanges occure. 
 
-## [Jacobians](./3.Differential Kinematics/Tutorial/Jacobians.md)
+## [Jacobians](<./3.Differential Kinematics/Tutorial/Jacobians.md>)
 
 This tutorial explains the computations of geometric and analytical Jacobian matrix using the Symbolic Toolbox.  Additionally you will learn how to utilize the Robotic System Toolbox for the computations. 
 
-## [Manipulability](./3.Differential Kinematics/Tutorial/Manipulability.md) 
+## [Manipulability](<./3.Differential Kinematics/Tutorial/Manipulability.md>) 
 
 This tutorial explains if and with how much efford a robot can move in specific configurations. It will explain the concept of singularities and redundancy and showcase some examples in Rviz. 
 
-### [Exercise 3.1 \- Jacobian](./3.Differential Kinematics/Exercise/Exercise-3-1.md) 
+### [Exercise 3.1 \- Jacobian](<./3.Differential Kinematics/Exercise/Exercise-3-1.md>) 
 
 In this exercise you will setup functions to symbolically compute the geometric and analytical jacobians and calculate the required joint speeds to achieve a specific motion. You will visualize this motion in Rviz and will analyze how the manipulability and joint speeds change when being near a singular configuration.
 
-## [Inverse Kinematic Algorithm](./3.Differential Kinematics/Tutorial/Inverse_Kinematic_Algorithm.md)
+## [Inverse Kinematic Algorithm](<./3.Differential Kinematics/Tutorial/Inverse_Kinematic_Algorithm.md>)
 
 This tutorial explains two approaches on how to utilize the jacobians to setup a numerical inverse kinematic algorithm.
 
-### [Exercise 3.2 \- Inverse Kinematic Algorithm](./3.Differential Kinematics/Exercise/Exercise-3-2.md)
+### [Exercise 3.2 \- Inverse Kinematic Algorithm](<./3.Differential Kinematics/Exercise/Exercise-3-2.md>)
 
 In this exercise you will setup the pseudo inverse kinematic algorithm and analyze the convergence and error it procudes. You will use quaternions to compute the orientation error using the analytical jacobian. 
 
-### [Exercise 3.3 \- Velocity Teleoperation](./3.Differential Kinematics/Exercise/Exercise-3-3.md)
+### [Exercise 3.3 \- Velocity Teleoperation](<./3.Differential Kinematics/Exercise/Exercise-3-3.md>)
 
 In this exercise you will simulate a robot and controll the endeffector with your keyboard by computing the required joint speeds. 
 
@@ -130,4 +130,5 @@ In this exercise you will compute the required joint accelerations to track a gi
 # 5. Control 
 
 This package explains differnet approaches to robotic control algorithms. E.g. centeralized and decenteralized control schemes, feedforward control and how Simulink can be utilized for robot control. 
+
 

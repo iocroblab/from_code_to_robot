@@ -33,7 +33,7 @@ for the each part of the Jacobian (translation and rotation) we can compute the 
 
  $$ J_t \;=U*\Sigma *V\prime $$ 
 
-where U is a matrix of the semi axis vectors of the elipsoid, $\Sigma$ holds the singular values, $\sigma_i$ , which are equal to the length of the axis. Finally V holds the realtive configuration to achieve velocities in the axis of U. 
+where U is a matrix of the semi axis vectors of the elipsoid, $\Sigma$ holds the singular values, $\sigma_i$, which are equal to the length of the axis. Finally V holds the realtive configuration to achieve velocities in the axis of U. 
 
 
 The manipulability index is the volume of the ellipsoid. 
@@ -105,6 +105,7 @@ JointStatesToRviz(config, 'ur3e', [],  'Ellipsoid', true);
 ```matlabTextOutput
 gz-modified
 ```
+
 ## Robotic System Toolbox
 
 using the Robotic System Toolbox, you can easily compute the manipulability index of a configuration. 
@@ -175,7 +176,7 @@ There are two types of Singularities:
 -  Occure when the robot is retracted/outstretched (for UR e.g. configuration \[0,\-pi/2,0,\-pi/2,0,0\]) 
 -  This can generally be avoided if the target pose is inside the reachable workspace 
 
-The figure below shows a fully streteched out arm, for the shown configuration, no velocity in only x or y is possible. In other terms, if $\theta_2 =0$ you can consider the robot arm to be a single joint controlled by $\theta_1$ with the length $a_1 +a_2$ . As you need at least one joint per DoF, this manipulator only has 1 DoF left. 
+The figure below shows a fully streteched out arm, for the shown configuration, no velocity in only x or y is possible. In other terms, if $\theta_2 =0$ you can consider the robot arm to be a single joint controlled by $\theta_1$ with the length $a_1 +a_2$. As you need at least one joint per DoF, this manipulator only has 1 DoF left. 
 
  $$ J\left(q\right)=\left\lbrack \begin{array}{cc} -a_1 \cdot \sin \left(q_1 \right)-a_2 \cdot \sin \left(q_1 +q_2 \right) & -a_2 \cdot \sin \left(q_1 +q_2 \right)\newline a_1 \cdot \cos \left(q_1 \right)+a_2 \cdot \cos \left(q_1 +q_2 \right) & a_2 \cdot \cos \left(q_1 +q_2 \right) \end{array}\right\rbrack $$ 
 
@@ -202,7 +203,7 @@ Let $p_e$ be the place where the three wrist joints axes intersect:
 
  $$ \left\lbrack \begin{array}{c} J_{12} \newline J_{22}  \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} z_3 \cdot \;\left(p_e -p_3 \right) & z_4 \cdot \;\left(p_e -p_4 \right) & z_5 \cdot \;\left(p_e -p_5 \right)\newline z_3  & z_4  & z_5  \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 0 & 0 & 0\newline z_3  & z_4  & z_5  \end{array}\right\rbrack $$ 
 
-Then $\det \left(J\right)=\det \left(J_{11} \right)\cdot \det \left(J_{22} \right)$ , i.e. the singularities of the manipulator are those of the arm ( $\det \left(J_{11} \right)=0$ ) plus those of the arm ( $\det \left(J_{22} \right)=0$ ).
+Then $\det \left(J\right)=\det \left(J_{11} \right)\cdot \det \left(J_{22} \right)$, i.e. the singularities of the manipulator are those of the arm ( $\det \left(J_{11} \right)=0$ ) plus those of the arm ( $\det \left(J_{22} \right)=0$ ).
 
 ### Arm singularities
 -  Depend on the kinemaitc structure  
@@ -225,7 +226,7 @@ then $\det \left(J_p \right)=0$ if:
 -  $\displaystyle a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)=0$ 
 ### Wrist singuarities
 -  Caused by allignment of $z_3$ and $z_5$ 
--  Happens when $q_5 =0$ , or $q_5 =\pi \;$ 
+-  Happens when $q_5 =0$, or $q_5 =\pi \;$ 
 
 ![image_3.svg](Manipulability_media/image_3.svg)
 
@@ -245,6 +246,7 @@ ans = logical
    1
 
 ```
+
 # Redundancy
 
 A manipulator is said to be kinematically redundant when it has more degrees of freedom (DoFs) than the dimensionality of its task space. The task space typically corresponds to the number of independent variables required to fully specify the end\-effector's position and orientation (e.g., 6 DoFs for a full 3D pose). For example, a 7\-joint robotic arm operating in three\-dimensional space has 7 DoFs, but the end\-effector pose only requires 6, the extra DoF introduces redundancy. Redundancy allows the robot to achieve the same end\-effector pose with multiple joint configurations, enabling optimization of secondary criteria such as obstacle avoidance, joint limit avoidance, energy efficiency, preferred postures or manipulability. Understanding and exploiting redundancy is fundamental in trajectory planning and inverse kinematics.
@@ -259,4 +261,5 @@ Remember that:
 
 To compute the ideal joint configuration to maximize the manipulability of a redundant manipulator: 
 
- $$ \begin{array}{l} \dot{q} =J^{\dagger} \cdot v_e +\left(I_n -J^{\dagger} \cdot J\right)\cdot {\dot{q} }_0 \newline {\dot{q} }_0 =k_0 \cdot {\left(\frac{\partial \omega (q)}{\partial q}\right)}^T \newline \omega (q)=\sqrt{\det \left(J(q)\cdot J^T (q)\right)} \end{array} $$ 
+ $$ \begin{array}{l} \dot{\mathbf{q}} =J^{\dagger} \cdot {\mathbf{v}}_e +\left(I_n -J^{\dagger} \cdot J\right)\cdot {\dot{\mathbf{q}} }_0 \newline {\dot{\mathbf{q}} }_0 =k_0 \cdot {\left(\frac{\partial \omega (\mathbf{q})}{\partial \mathbf{q}}\right)}^T \newline \omega (\mathbf{q})=\sqrt{\det \left(J(\mathbf{q})\cdot J^T (\mathbf{q})\right)} \end{array} $$ 
+

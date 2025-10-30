@@ -16,16 +16,15 @@ Please store your solutions in the predefined variables!
 
 Given the DH parameters of a UR3e Robot: 
 
-|      |      |      |      |      |
+||||||
 | :-: | :-- | :-: | :-: | :-: |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0 <br>  | pi/2 <br>  | 0.15185 <br>  | 0 <br>   |
-| 2 <br>  | \-0.24355 <br>  | 0 <br>  | 0 <br>  | 0 <br>   |
-| 3 <br>  | \-0.2132 <br>  | 0 <br>  | 0 <br>  | 0 <br>   |
-| 4 <br>  | 0 <br>  | pi/2 <br>  | 0.13105 <br>  | 0 <br>   |
-| 5 <br>  | 0 <br>  | \-pi/2 <br>  | 0.08535 <br>  | 0 <br>   |
-| 6 <br>  | 0 <br>  | 0 <br>  | 0.0921 <br>  | 0 <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0  | pi/2  | 0.15185  | 0   |
+| 2  | \-0.24355  | 0  | 0  | 0   |
+| 3  | \-0.2132  | 0  | 0  | 0   |
+| 4  | 0  | pi/2  | 0.13105  | 0   |
+| 5  | 0  | \-pi/2  | 0.08535  | 0   |
+| 6  | 0  | 0  | 0.0921  | 0   |
 
 
 The base and the coordinate frame of the first joint are identical!
@@ -77,6 +76,7 @@ Checking Variable joints
 checking body elements
 checking joint elements
 ```
+
 # Task 2
 
 1.  Link the DH parameters to the corresponding joints.
@@ -119,3 +119,4 @@ You can check your work by clicking the Run:
  
 check_exercise('1-2-3')
 ```
+

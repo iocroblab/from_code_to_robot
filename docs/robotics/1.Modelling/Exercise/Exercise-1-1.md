@@ -49,6 +49,7 @@ Checking variable structure:
 Checking Variable T12 
 [OK]   T12 is of type double
 ```
+
 # Task 2
 1.  Find the homogeneous transform between frame 1 and frame 4.
 2. Find the origin of frame 4 w.r.t. frame 1.
@@ -81,6 +82,7 @@ Checking Variable origin14
 [OK]   origin14 is of type double
 [FAIL] origin14 does not match expected value
 ```
+
 # Task 3
 1.  Find the homogeneous transform from frame 4 to frame 1.
 2. Give the origin of frame 1 w.r.t. frame 4.
@@ -112,6 +114,7 @@ Checking variable structure:
 
 Test 1: Checking Transform TB0
 ```
+
 # Task 4
 
 Calibrate the Camera and find the location of the object w.r.t. the world frame. 
@@ -175,3 +178,4 @@ You can check your work by clicking the Run:
  
 check_exercise('1-1-4')
 ```
+

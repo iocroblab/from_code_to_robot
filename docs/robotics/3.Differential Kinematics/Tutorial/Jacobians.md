@@ -4,7 +4,7 @@
 Differential kinematics is the study of how infinitesimal changes in a robot's joint coordinates translate into instantaneous linear and angular velocities of its end\-effector.  By focusing on velocity relationships rather than finite displacements, it provides the foundation for velocity control, trajectory following, and real\-time motion planning in robotic manipulators.
 
 
-At the heart of differential kinematics lies the **geometric Jacobian**, J(q), which maps the vector of joint velocities $\dot{\;q}$ to the spatial velocity of the end\-effector, $v=\left\lbrack \begin{array}{c} \dot{\;p} \newline \omega  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \dot{\;x} \newline \dot{\;y} \newline \dot{\;z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$ , via $v=J\left(q\right)\cdot \dot{\;q}$ . 
+At the heart of differential kinematics lies the **geometric Jacobian**, J(q), which maps the vector of joint velocities $\dot{\;q}$ to the spatial velocity of the end\-effector, $v=\left\lbrack \begin{array}{c} \dot{\;p} \newline \omega  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \dot{\;x} \newline \dot{\;y} \newline \dot{\;z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$, via $v=J\left(q\right)\cdot \dot{\;q}$. 
 
 
 Here, the upper block of J(q) captures how joint motions induce translational velocity, while the lower block captures induced angular velocity
@@ -27,7 +27,7 @@ and the rotational part $J_{\Theta } \left(q\right)\in \mathbb{R}{\;}^{3\;x\;n\;
 for n joints. 
 
 
-Picture a single Joint that rotates at a constant angular velocity $\dot{\;\theta \;}$ , as the entire joint will rotate at this angular velocity, we can visualize the linear velocities at a given moment. The velocity w.r.t. the joint axis can be computed as $||\vec{\;v} ||=\dot{\theta} \cdot \textrm{distance}\;\textrm{to}\;\textrm{center}\;\textrm{of}\;\textrm{rotation}$ , resulting in a  linear speed increase  with the distance to the axis. Look at the image below, you can see that at this configuration, a rotation of $\dot{\theta_1 }$ will result in a velocity in \-x direction, and no velocities in y or z direction. 
+Picture a single Joint that rotates at a constant angular velocity $\dot{\;\theta \;}$, as the entire joint will rotate at this angular velocity, we can visualize the linear velocities at a given moment. The velocity w.r.t. the joint axis can be computed as $||\vec{\;v} ||=\dot{\theta} \cdot \textrm{distance}\;\textrm{to}\;\textrm{center}\;\textrm{of}\;\textrm{rotation}$, resulting in a  linear speed increase  with the distance to the axis. Look at the image below, you can see that at this configuration, a rotation of $\dot{\theta_1 }$ will result in a velocity in \-x direction, and no velocities in y or z direction. 
 
 
 ![image_0.svg](Jacobians_media/image_0.svg)
@@ -40,7 +40,7 @@ At the next configuration, the situation has changed. While there is still no ve
 
 ## Translation part $J_p \left(q\right)$ \- Revolute Joints
 
-To find the direction of the velocity, you use the cross product. Remember that the cross product of two vectors yields a vector perpendicular to its computation vectors. For this application, we want to find the vector that is perpendicular to both the joint axis (z) and the direction to the End Effector or target frame. The size (magnitude) of this vector will be defined by the distance (length) to the End Effector as the length of the z axis is $\vec{\;z_i } =A_{i-1}^0 \cdot \;\;\left\lbrack \begin{array}{c} 0\newline 0\newline 1 \end{array}\right\rbrack$ ; $||\vec{\;z_i } ||=1$ 
+To find the direction of the velocity, you use the cross product. Remember that the cross product of two vectors yields a vector perpendicular to its computation vectors. For this application, we want to find the vector that is perpendicular to both the joint axis (z) and the direction to the End Effector or target frame. The size (magnitude) of this vector will be defined by the distance (length) to the End Effector as the length of the z axis is $\vec{\;z_i } =A_{i-1}^0 \cdot \;\;\left\lbrack \begin{array}{c} 0\newline 0\newline 1 \end{array}\right\rbrack$; $||\vec{\;z_i } ||=1$ 
 
 
 The formula is
@@ -98,13 +98,12 @@ To use the rotation part of the jacobian, multiply the joint speed vector as:
 
 consider the DH parameters of an anthropomorpic arm:
 
-|      |      |      |      |      |
+||||||
 | :-: | :-- | :-: | :-: | :-- |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0 <br>  | pi/2 <br>  | 0 <br>  | $\displaystyle \theta_1$ <br>   |
-| 2 <br>  | 0.3 <br>  | 0 <br>  | 0 <br>  | $\displaystyle \theta_2$ <br>   |
-| 3 <br>  |   0.4 <br>  | pi/2 <br>  | 0 <br>  | $\displaystyle \theta_3$ <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0  | pi/2  | 0  | $\displaystyle \theta_1$   |
+| 2  | 0.3  | 0  | 0  | $\displaystyle \theta_2$   |
+| 3  |   0.4  | pi/2  | 0  | $\displaystyle \theta_3$   |
 
 ```matlab
 syms q1 q2 q3 q4 q5 q6 real 
@@ -192,7 +191,7 @@ Given a translation vector of the endeffector $p_{\textrm{ee}}$ (here the anthro
 
  $$ p_{\textrm{ee}} =\left\lbrack \begin{array}{c} \cos \left(q_1 \right)\cdot \left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)\newline \sin \left(q_1 \right)\cdot \left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)\newline a_2 \cdot \sin \left(q_2 \right)+a_3 \cdot \sin \left(q_2 +q_3 \right) \end{array}\right\rbrack =\left\lbrack \begin{array}{c} x\newline y\newline z \end{array}\right\rbrack $$ 
 
- $$ J_p (q)=\left\lbrack \begin{array}{ccc} \frac{\partial x}{\partial q_1 } & \frac{\partial x}{\partial q_2 } & \frac{\partial x}{\partial q_3 }\newline \frac{\partial y}{\partial q_1 } & \frac{\partial y}{\partial q_2 } & \frac{\partial y}{\partial q_3 }\newline \frac{\partial z}{\partial q_1 } & \frac{\partial z}{\partial q_2 } & \frac{\partial z}{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} -\sin (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\cos (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\cos (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline \cos (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\sin (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\sin (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline 0 & a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 ) & a_3 \cdot \cos (q_2 +q_3 ) \end{array}\right\rbrack . $$ 
+ $$ J_p (\mathbf{q})=\left\lbrack \begin{array}{ccc} \frac{\partial x}{\partial q_1 } & \frac{\partial x}{\partial q_2 } & \frac{\partial x}{\partial q_3 }\newline \frac{\partial y}{\partial q_1 } & \frac{\partial y}{\partial q_2 } & \frac{\partial y}{\partial q_3 }\newline \frac{\partial z}{\partial q_1 } & \frac{\partial z}{\partial q_2 } & \frac{\partial z}{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} -\sin (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\cos (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\cos (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline \cos (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\sin (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\sin (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline 0 & a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 ) & a_3 \cdot \cos (q_2 +q_3 ) \end{array}\right\rbrack . $$ 
 
 ## Rotation part $J_{\Phi \;} \left(q\right)$ \- ZYZ 
 
@@ -205,7 +204,7 @@ Example:
 For the ZYZ euler angles $\phi ,\theta \;$ and $\psi \;$ you need to find an expression that represents the angles in terms of the end effector rotation matrix. Refer to the tutorial "Transforms" in the section Modelling for other representations. 
 
 
-Given the end effector rotaton matrix $R_{\textrm{ee}}$ :
+Given the end effector rotaton matrix $R_{\textrm{ee}}$:
 
  $$ R_{ee} =\Phi_{ee} =\left\lbrack \begin{array}{ccc} \cos (q_1 )\cdot \cos (q_2 +q_3 ) & -\cos (q_1 )\cdot \sin (q_2 +q_3 ) & \sin (q_1 )\newline \sin (q_1 )\cdot \cos (q_2 +q_3 ) & -\sin (q_1 )\cdot \sin (q_2 +q_3 ) & -\cos (q_1 )\newline \sin (q_2 +q_3 ) & \cos (q_2 +q_3 ) & 0 \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} r_{11}  & r_{12}  & r_{13} \newline r_{21}  & r_{22}  & r_{23} \newline r_{31}  & r_{32}  & r_{33}  \end{array}\right\rbrack =R_z (\phi )\cdot R_{y^{\prime } } (\theta )\cdot R_{z^{\prime \prime } } (\psi ) $$ 
 
@@ -213,7 +212,7 @@ Given the end effector rotaton matrix $R_{\textrm{ee}}$ :
 
 now differentiating these angles w.r.t. the joints yields the rotation part  of the Jacobian $J_{\Phi \;} \left(q\right)$ 
 
- $$ J_{\phi } (q)=\left\lbrack \begin{array}{ccc} \frac{\partial \phi }{\partial q_1 } & \frac{\partial \phi }{\partial q_2 } & \frac{\partial \phi }{\partial q_3 }\newline \frac{\partial \theta }{\partial q_1 } & \frac{\partial \theta }{\partial q_2 } & \frac{\partial \theta }{\partial q_3 }\newline \frac{\partial \psi }{\partial q_1 } & \frac{\partial \psi }{\partial q_2 } & \frac{\partial \psi }{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack $$ 
+ $$ J_{\phi } (\mathbf{q})=\left\lbrack \begin{array}{ccc} \frac{\partial \phi }{\partial q_1 } & \frac{\partial \phi }{\partial q_2 } & \frac{\partial \phi }{\partial q_3 }\newline \frac{\partial \theta }{\partial q_1 } & \frac{\partial \theta }{\partial q_2 } & \frac{\partial \theta }{\partial q_3 }\newline \frac{\partial \psi }{\partial q_1 } & \frac{\partial \psi }{\partial q_2 } & \frac{\partial \psi }{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack $$ 
 ### Conversion between $J_{\Theta } \left(q\right)$ and $J_{\Phi } \left(q\right)$ 
 
 The rotation parts of the geometric and analytical jacobians are related by the matrix $T_A \left(\Phi \right)$ and can be converted to one another. 
@@ -224,9 +223,9 @@ with
 
  $$ T_A \left(\Phi \right)=\left\lbrack \begin{array}{ccc} 0 & -\sin \left(\phi \right) & \cos \left(\phi \right)\cdot \sin \left(\theta \right)\newline 0 & -\sin \left(\phi \right)\cdot \sin \left(\theta \right) & -\sin \left(\phi \right)\cdot \sin \left(\theta \right)\newline 1 & \cos \left(\theta \right) & \cos \left(\theta \right) \end{array}\right\rbrack $$ 
 
- $$ J_{\Theta } (q)=T_A (\Phi )\cdot J_{\Phi } (q)=\left\lbrack \begin{array}{ccc} 0 & -\sin (\phi ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \cos (\phi ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & 0 & \cos (\theta ) \end{array}\right\rbrack \cdot \left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 0 & \cos (\phi )\cdot \sin (\theta ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \sin (\phi )\cdot \sin (\theta ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & \cos (\theta ) & \cos (\theta ) \end{array}\right\rbrack $$ 
+ $$ J_{\Theta } (\mathbf{q})=T_A (\Phi )\cdot J_{\Phi } (q)=\left\lbrack \begin{array}{ccc} 0 & -\sin (\phi ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \cos (\phi ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & 0 & \cos (\theta ) \end{array}\right\rbrack \cdot \left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 0 & \cos (\phi )\cdot \sin (\theta ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \sin (\phi )\cdot \sin (\theta ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & \cos (\theta ) & \cos (\theta ) \end{array}\right\rbrack $$ 
 
-since $\phi =q_1 -\frac{\pi }{2}$ and $\theta =\frac{\pi }{2}$ , then $\cos \left(\phi \right)=\sin \left(q_1 \right),\;\;\;\sin \left(\phi \right)=-\cos \left(q_1 \right),\;\;\cos \left(\theta \right)=0$ and $\sin \left(\theta \right)=1$ . Therefore: 
+since $\phi =q_1 -\frac{\pi }{2}$ and $\theta =\frac{\pi }{2}$, then $\cos \left(\phi \right)=\sin \left(q_1 \right),\;\;\;\sin \left(\phi \right)=-\cos \left(q_1 \right),\;\;\cos \left(\theta \right)=0$ and $\sin \left(\theta \right)=1$. Therefore: 
 
  $$ J_{\Theta } \left(q\right)=\left\lbrack \begin{array}{ccc} 0 & \sin \left(q_1 \right) & \sin \left(q_1 \right)\newline 0 & -\cos \left(q_1 \right) & -\cos \left(q_1 \right)\newline 1 & 0 & 0 \end{array}\right\rbrack $$ 
 ### Velocity vector from Rotation part $J_{\Phi \;} \left(q\right)$ 
@@ -257,4 +256,5 @@ To use the rotation part of the jacobian, multiply the joint speed vector as:
 
  J_A_subs = subs(J_A, [q1,q2,q3], Config)
 ```
+
 

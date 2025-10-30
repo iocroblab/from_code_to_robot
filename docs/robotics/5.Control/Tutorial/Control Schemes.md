@@ -63,3 +63,4 @@ The robot dynamics can be written in the standard form:
 
 In a centralized scheme, the controller uses this model to compute torques that cancel out the nonlinear terms. This results in a simpler, often linear, closed\-loop behavior. The advantage is much better tracking accuracy, especially in tasks involving multiple joints moving simultaneously. The drawback is that centralized control requires a reasonably accurate model of the robot. If the parameters are uncertain or change over time, performance may deteriorate.
 
+

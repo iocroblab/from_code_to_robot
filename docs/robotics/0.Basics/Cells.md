@@ -25,9 +25,12 @@ Use curly braces { } to define cells, separating entries by commas or spaces, an
 ```matlab
 C = {'text', 42, [1,2,3]}
 ```
+
+
 | |1|2|3|
 |:--:|:--:|:--:|:--:|
 |1|'text'|42|[1,2,3]|
+
 
 
 Define a 2×2 cell array
@@ -36,10 +39,13 @@ Define a 2×2 cell array
 C2 = { 'pi',    pi; ...
     'matrix', [1 2;3 4] }
 ```
+
+
 | |1|2|
 |:--:|:--:|:--:|
 |1|'pi'|3.1416|
 |2|'matrix'|[1,2;3,4]|
+
 
 # Accessing Cell Elements
 
@@ -58,6 +64,7 @@ cell1 = 1x1 cell array
 
 ```
 
+
 Extract the content (numeric 42)
 
 ```matlab
@@ -67,6 +74,7 @@ value42 = C{2}
 ```matlabTextOutput
 value42 = 42
 ```
+
 
 Access part of the matrix inside cell
 
@@ -78,6 +86,7 @@ subval = C2{2,2}(1,2)
 ```matlabTextOutput
 subval = 2
 ```
+
 # Modifying Cell Elements
 
 Assign into cells with curly braces { } to overwrite contents, or with parentheses ( ) to overwrite cell itself.
@@ -88,9 +97,12 @@ Change the second cell content to a string
 ```matlab
 C{2} = 'answer'
 ```
+
+
 | |1|2|3|
 |:--:|:--:|:--:|:--:|
 |1|'text'|'answer'|[1,2,3]|
+
 
 
 Replace entire cell with another cell
@@ -98,9 +110,12 @@ Replace entire cell with another cell
 ```matlab
 C(3) = {ones(3)}
 ```
+
+
 | |1|2|3|
 |:--:|:--:|:--:|:--:|
 |1|'text'|'answer'|[1,1,1;1,1,1;1,1,1]|
+
 
 
 Add a new cell at the end
@@ -108,9 +123,12 @@ Add a new cell at the end
 ```matlab
 C{4} = @sin
 ```
+
+
 | |1|2|3|4|
 |:--:|:--:|:--:|:--:|:--:|
 |1|'text'|'answer'|[1,1,1;1,1,1;1,1,1]|@sin|
+
 
 # Nested Cell Arrays
 
@@ -122,9 +140,12 @@ Create nested cell
 ```matlab
 Cnested = { 'level1', { 'level2', { 100, 200 } } }
 ```
+
+
 | |1|2|
 |:--:|:--:|:--:|
 |1|'level1'|1x2 cell|
+
 
 
 Access deeply nested value 200
@@ -156,15 +177,19 @@ A = 2x2
 
 ```
 
+
  Convert to cell array
 
 ```matlab
 Acell = num2cell(A)
 ```
+
+
 | |1|2|
 |:--:|:--:|:--:|
 |1|10|20|
 |2|30|40|
+
 
 
 Convert back to numeric (if all cells contain scalars)
@@ -179,3 +204,5 @@ Anum = 2x2
     30    40
 
 ```
+
+

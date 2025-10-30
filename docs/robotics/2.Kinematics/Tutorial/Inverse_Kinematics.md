@@ -36,13 +36,12 @@ show(anthropomorphic_arm, [0,-pi/2,0]')
 
 For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A03
 
-|      |      |      |      |      |
+||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 1 <br>  | 0 <br>  | pi/2 <br>  | 0 <br>  | q1 <br>   |
-| 2 <br>  | a2 <br>  | 0 <br>  | 0 <br>  | q2 <br>   |
-| 3 <br>  | a3 <br>  | 0 <br>  | 0 <br>  | q3 <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 1  | 0  | pi/2  | 0  | q1   |
+| 2  | a2  | 0  | 0  | q2   |
+| 3  | a3  | 0  | 0  | q3   |
 
 ```matlab
 syms a2 a3 q1 q2 q3 real
@@ -58,7 +57,8 @@ A03 = A01 * A12 * A23;
 A03 = simplify(A03)
 ```
 A03 = 
- $\displaystyle \begin{array}{l} \left(\begin{array}{cccc} \cos \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & \sin \left(q_1 \right) & \cos \left(q_1 \right)\,\sigma_1 \newline \cos \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\cos \left(q_1 \right) & \sin \left(q_1 \right)\,\sigma_1 \newline \sin \left(q_2 +q_3 \right) & \cos \left(q_2 +q_3 \right) & 0 & a_3 \,\sin \left(q_2 +q_3 \right)+a_2 \,\sin \left(q_2 \right)\newline 0 & 0 & 0 & 1 \end{array}\right)\\\mathrm{}\\\textrm{where}\\\mathrm{}\\\;\;\sigma_1 =a_3 \,\cos \left(q_2 +q_3 \right)+a_2 \,\cos \left(q_2 \right)\end{array}$
+
+  $$ \displaystyle \begin{array}{l} \left(\begin{array}{cccc} \cos \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & \sin \left(q_1 \right) & \cos \left(q_1 \right)\,\sigma_1 \newline \cos \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\cos \left(q_1 \right) & \sin \left(q_1 \right)\,\sigma_1 \newline \sin \left(q_2 +q_3 \right) & \cos \left(q_2 +q_3 \right) & 0 & a_3 \,\sin \left(q_2 +q_3 \right)+a_2 \,\sin \left(q_2 \right)\newline 0 & 0 & 0 & 1 \end{array}\right)\\\mathrm{}\\\textrm{where}\\\mathrm{}\\\;\;\sigma_1 =a_3 \,\cos \left(q_2 +q_3 \right)+a_2 \,\cos \left(q_2 \right)\end{array} $$ 
  
 
 For a desired location of the EndEffector in the reachable workspace we can solve it using a set of equations. 
@@ -71,9 +71,9 @@ Consider this sketch of an anthropomorphic arm, its frames and a desired target 
 
 ![image_0.svg](Inverse_Kinematics_media/image_0.svg)
 
-\matlabheadingtwo{ $$ {\textrm{Computing}\;\theta }_3 $$ }
+## $$ {\textrm{Computing}\;\theta }_3 $$
 
-Look at the 2\-D projection below. The yellow circle is the sphere with the radius R, the pink sphere is the rotation of Joint 3 with $\theta_3$ with a radius of $a_2$ , the length of Joint 3. We want to find the solutions to $\theta_3$ so that the EndEffector frame lies on the yellow sphere. Notice how there are two solutions that fulfill this task:
+Look at the 2\-D projection below. The yellow circle is the sphere with the radius R, the pink sphere is the rotation of Joint 3 with $\theta_3$ with a radius of $a_2$, the length of Joint 3. We want to find the solutions to $\theta_3$ so that the EndEffector frame lies on the yellow sphere. Notice how there are two solutions that fulfill this task:
 
 
 ![image_1.svg](Inverse_Kinematics_media/image_1.svg) 
@@ -94,14 +94,14 @@ solving for $\cos \left(q_3 \right)$ yields the expression:
 
  $$ \cos \left(q_3 \right)=\frac{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 +z_{\textrm{desired}}^2 -a_2^2 -a_3^2 }{\;2\cdot a_2 \cdot a_3 }\; $$ 
 
-The solution is admissible if $-1\le \cos \left(q_3 \right)\le 1$ , which is equivalent to the desired point lying in the reachable workspace. 
+The solution is admissible if $-1\le \cos \left(q_3 \right)\le 1$, which is equivalent to the desired point lying in the reachable workspace. 
 
  $$ |a_2 -a_3 |\le \sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 +z_{\textrm{desired}}^2 \;}\le |a_2 +a_3 | $$ 
 
 where $|a_2 -a_3 |\;$ represents the arm being folded onto itself $q_3 =\pi \;$ 
 
 
-and $|a_2 +a_3 |$ the arm fully extended $q_3 =0$ .
+and $|a_2 +a_3 |$ the arm fully extended $q_3 =0$.
 
 
 using the property: 
@@ -114,9 +114,9 @@ using the property:
 with this you can compute $q_3$ as
 
  $$ q_3 =\theta_3 =\textrm{atan2}\left(\sin \left(q_3 \right),\cos \left(q_3 \right)\right)\left\lbrace \begin{array}{ll} \theta_{3,I} =\textrm{atan2}\left(\sin^+ \left(q_3 \right),\cos \left(q_3 \right)\right)\in \left\lbrack -\pi ,\pi \;\right\rbrack  & \newline \theta_{3,\textrm{II}} =\textrm{atan2}\left(\sin^- \left(q_3 \right),\cos \left(q_3 \right)\right)=-\theta {\;}_{3,1}  &  \end{array}\right. $$ 
-\matlabheadingtwo{ $$ \textrm{Computing}\;\theta_2 $$ }
+## $$ \textrm{Computing}\;\theta_2 $$
 
-In the figure below (left) you see a green torus, that is on the sphere surface at the Z\-height of the target pose.  To compute $\theta_2$ , you align the link (red) that results from the chosen $\theta_3$ with the green circle. Notice how for each angle of $\theta_3$ there are two solutions, resulting in a total of four solutions, that fulfill this task:
+In the figure below (left) you see a green torus, that is on the sphere surface at the Z\-height of the target pose.  To compute $\theta_2$, you align the link (red) that results from the chosen $\theta_3$ with the green circle. Notice how for each angle of $\theta_3$ there are two solutions, resulting in a total of four solutions, that fulfill this task:
 
 
 ![image_2.svg](Inverse_Kinematics_media/image_2.svg)
@@ -126,7 +126,7 @@ From the expressions for $x_{\textrm{desired}}$ and $y_{\textrm{desired}}$ we ca
 
  $$ x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 ={\left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)}^2 $$ 
 
-Including the equation for $z_{\textrm{desired}}$ yields a system of equations that lets us solve for $q_2$ :
+Including the equation for $z_{\textrm{desired}}$ yields a system of equations that lets us solve for $q_2$:
 
  $$ \textrm{System}\;\textrm{of}\;\textrm{equation}\left\lbrace \begin{array}{ll} a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)=\pm \sqrt{\;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 } & \newline z_{\textrm{desired}}^2 =a_2 \cdot \sin \left(q_2 \right)+a_3 \cdot \sin \left(q_2 +q_3 \right) &  \end{array}\right. $$ 
 
@@ -139,11 +139,11 @@ this lets us express sinus and cosinus of $\theta_2 \;$ as:
 
 using these expressions we can derive the solutions for $\theta_2$ 
 
- $$ \theta_2 =\textrm{atan2}\left(\sin \left(q_2 \right),\;\cos \left(q_2 \right)\right)= $$ $$ \left\lbrace \begin{array}{ll} \theta_{2,I}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~+\sqrt{~~~}~\newline \theta_{2,II}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~-\sqrt{~~~}\newline \theta_{2,III}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~+\sqrt{~~~}\newline \theta_{2,IV}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~-\sqrt{~~~} \end{array}\right. $$ 
+ $ \theta_2 =\textrm{atan2}\left(\sin \left(q_2 \right),\;\cos \left(q_2 \right)\right)= $ $ \left\lbrace \begin{array}{ll} \theta_{2,I}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~+\sqrt{~~~}~\newline \theta_{2,II}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~-\sqrt{~~~}\newline \theta_{2,III}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~+\sqrt{~~~}\newline \theta_{2,IV}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~-\sqrt{~~~} \end{array}\right. $ 
 
-\matlabheadingtwo{ $$ \textrm{Computing}\;\theta_1 $$ }
+## $$ \textrm{Computing}\;\theta_1 $$
 
-The figure below is a 2\-D projection from above. To align the EndEffector with the target pose rotate the $Z_0$ Axis with $\theta_1$ . Notice how there are two solutions depending on the $\theta_3$ and $\theta_2$ configuration: 
+The figure below is a 2\-D projection from above. To align the EndEffector with the target pose rotate the $Z_0$ Axis with $\theta_1$. Notice how there are two solutions depending on the $\theta_3$ and $\theta_2$ configuration: 
 
 
 ![image_3.svg](Inverse_Kinematics_media/image_3.svg)
@@ -162,12 +162,11 @@ using this we can compute the solutions for $\theta_1$ as, notice how the expres
 
 The IK of the anthropomorphic arm as four solutions: 
 
-|      |      |      |
+||||
 | :-- | :-- | :-- |
-|  | $\displaystyle {\sin \left(q_3 \right)}^+$ <br>  | $\displaystyle \sin \left(q_3 {\left.\right)}^- \right.$ <br>   |
-| $\displaystyle +\sqrt{\;\;\;\;\;\;\;}$ <br>  | $\displaystyle \theta_{1,\mathrm{I}} \;;\;\theta_{2,\mathrm{I}} \;;\theta_{3,\mathrm{I}}$ <br>  | $\displaystyle \theta_{1,\mathrm{I}} \;;\;\theta_{2,\textrm{III}} \;;\theta_{3,\textrm{II}}$ <br>   |
-| $\displaystyle -\sqrt{\;\;\;\;\;\;\;}$ <br>  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{II}} \;;\theta_{3,\mathrm{I}}$ <br>  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{IV}} \;;\theta_{3,\textrm{II}}$ <br>   |
-|      |      |       |
+|  | $\displaystyle {\sin \left(q_3 \right)}^+$  | $\displaystyle \sin \left(q_3 {\left.\right)}^- \right.$   |
+| $\displaystyle +\sqrt{\;\;\;\;\;\;\;}$  | $\displaystyle \theta_{1,\mathrm{I}} \;;\;\theta_{2,\mathrm{I}} \;;\theta_{3,\mathrm{I}}$  | $\displaystyle \theta_{1,\mathrm{I}} \;;\;\theta_{2,\textrm{III}} \;;\theta_{3,\textrm{II}}$   |
+| $\displaystyle -\sqrt{\;\;\;\;\;\;\;}$  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{II}} \;;\theta_{3,\mathrm{I}}$  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{IV}} \;;\theta_{3,\textrm{II}}$   |
 
 
 Applying a solution configuration results in the anthropomorphic arm reaching the target pose. 
@@ -191,13 +190,12 @@ The Spherical wrist is another example of a unique configuration for closed form
 
 For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A36
 
-|      |      |      |      |      |
+||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link <br>  | a \[m\] <br>  | alpha <br>  | d \[m\] <br>  | theta <br>   |
-| 4 <br>  | 0 <br>  | \-pi/2 <br>  | 0 <br>  | q4 <br>   |
-| 5 <br>  | 0 <br>  | pi/2 <br>  | 0 <br>  | q5 <br>   |
-| 6 <br>  | 0 <br>  | 0 <br>  | d6 <br>  | q6 <br>   |
-|      |      |      |      |       |
+| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| 4  | 0  | \-pi/2  | 0  | q4   |
+| 5  | 0  | pi/2  | 0  | q5   |
+| 6  | 0  | 0  | d6  | q6   |
 
 ```matlab
 syms d6 q4 q5 q6 real
@@ -215,7 +213,8 @@ A36 = A34 * A45 * A56;
 simplify(A36)
 ```
 ans = 
- $\displaystyle \left(\begin{array}{cccc} \cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\cos \left(q_6 \right)-\sin \left(q_4 \right)\,\sin \left(q_6 \right) & -\cos \left(q_6 \right)\,\sin \left(q_4 \right)-\cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\cos \left(q_4 \right)\,\sin \left(q_5 \right)\newline \cos \left(q_4 \right)\,\sin \left(q_6 \right)+\cos \left(q_5 \right)\,\cos \left(q_6 \right)\,\sin \left(q_4 \right) & \cos \left(q_4 \right)\,\cos \left(q_6 \right)-\cos \left(q_5 \right)\,\sin \left(q_4 \right)\,\sin \left(q_6 \right) & \sin \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\sin \left(q_4 \right)\,\sin \left(q_5 \right)\newline -\cos \left(q_6 \right)\,\sin \left(q_5 \right) & \sin \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_5 \right) & d_6 \,\cos \left(q_5 \right)\newline 0 & 0 & 0 & 1 \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{cccc} \cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\cos \left(q_6 \right)-\sin \left(q_4 \right)\,\sin \left(q_6 \right) & -\cos \left(q_6 \right)\,\sin \left(q_4 \right)-\cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\cos \left(q_4 \right)\,\sin \left(q_5 \right)\newline \cos \left(q_4 \right)\,\sin \left(q_6 \right)+\cos \left(q_5 \right)\,\cos \left(q_6 \right)\,\sin \left(q_4 \right) & \cos \left(q_4 \right)\,\cos \left(q_6 \right)-\cos \left(q_5 \right)\,\sin \left(q_4 \right)\,\sin \left(q_6 \right) & \sin \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\sin \left(q_4 \right)\,\sin \left(q_5 \right)\newline -\cos \left(q_6 \right)\,\sin \left(q_5 \right) & \sin \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_5 \right) & d_6 \,\cos \left(q_5 \right)\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
 To compute the joint angles $\theta_4 ,\theta_5$ and $\theta_6$ so that: 
@@ -225,11 +224,11 @@ To compute the joint angles $\theta_4 ,\theta_5$ and $\theta_6$ so that:
  $$ \theta_5 =\textrm{atan2}\left(\pm \sqrt{{\left(a_x \right)}^2 +{\left(a_y \right)}^2 },a_z \right) $$ 
 
  $$ \theta_5 =\left\lbrace \begin{array}{ll} \;\theta_5 \in \left(0,\pi \;\right) & \textrm{if}+\sqrt{\;\;\;\;\;\;\;}\textrm{is}\;\textrm{chosen}\to \sin \left(\theta_5 \right)>0\newline \theta_5 \in \left(-\pi \;,0\right) & \textrm{if}-\sqrt{\;\;\;\;\;\;\;}\textrm{is}\;\textrm{chosen}\to \sin \left(\theta_5 \right)<0 \end{array}\right. $$ 
-### Case $\sin \left(\theta_5 \right)>0$ :
+### Case $\sin \left(\theta_5 \right)>0$:
  $$ \theta_4 =\textrm{atan2}\left(a_y ,a_x \right) $$ 
 
  $$ \theta_6 =\textrm{atan2}\left(s_z ,-n_z \right) $$ 
-### Case $\sin \left(\theta_5 \right)<0$ :
+### Case $\sin \left(\theta_5 \right)<0$:
  $$ \theta_4 =\textrm{atan2}\left({-a}_y ,-a_x \right) $$ 
 
  $$ \theta_6 =\textrm{atan2}\left(-s_z ,n_z \right) $$ 
@@ -243,14 +242,16 @@ syms roll pitch yaw real
 Eul_ZYZ = rotz(roll)*roty(pitch)*rotz(yaw)
 ```
 Eul_ZYZ = 
- $\displaystyle \left(\begin{array}{ccc} \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right)-\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{pitch}\right)\newline \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right)+\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right) & \cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\newline -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{pitch}\right) \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right)-\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{pitch}\right)\newline \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right)+\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right) & \cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\newline -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{pitch}\right) \end{array}\right) $$ 
  
 
 ```matlab
 Spherical_rot = subs(A36(1:3,1:3), [q4, q5, q6], [roll, pitch, yaw])
 ```
 Spherical_rot = 
- $\displaystyle \left(\begin{array}{ccc} \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right)-\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{pitch}\right)\newline \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right)+\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right) & \cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\newline -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{pitch}\right) \end{array}\right)$
+
+  $$ \displaystyle \left(\begin{array}{ccc} \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right)-\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{pitch}\right)\newline \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right)+\cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right) & \cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)-\cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\newline -\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right) & \sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{pitch}\right) \end{array}\right) $$ 
  
 
 ```matlab
@@ -262,6 +263,7 @@ ans = logical
    1
 
 ```
+
 ## Closed Form Solution Conditions
 
 A six\-DOF manipulator has a closed\-form solution if either condition is true:
@@ -286,6 +288,7 @@ TargetPose = 4x4
          0         0         0    1.0000
 
 ```
+
 ## Generic Solver
 
 start by creating an inverse kinematics object as: 
@@ -318,6 +321,7 @@ base_name = ur3e.BaseName
 ```matlabTextOutput
 base_name = 'base_link'
 ```
+
 
 To obtain a solution call the inverse kinematics object, specify the endeffector frame, the target pose weights and initial joint states. 
 
@@ -367,6 +371,7 @@ TargetPose = 4x4
 
 ```
 
+
 Setup the analytical solver:
 
 ```matlab
@@ -385,6 +390,7 @@ AnalyticalSolver =
 
 ```
 
+
 Your robot may have multiple joints that qualify for analytical solving. View and choose the desired group them by:
 
 ```matlab
@@ -401,6 +407,7 @@ Index      Base Name   EE Body Name     Type                    Actions
     2      base_link          tool0   RRRSSS   Use this kinematic group
 ```
 
+
 To view the chosen kinematics group: 
 
 ```matlab
@@ -414,6 +421,7 @@ ans = struct with fields:
 
 ```
 
+
 Generate a function object for the serlected kinematics group: 
 
 ```matlab
@@ -425,6 +433,7 @@ ans = function_handle with value:
     @IKSolver
 
 ```
+
 
 Obtain the analytical solutions to the robot by: 
 
@@ -441,6 +450,7 @@ ikConfig = 4x6
 
 ```
 
+
 This function will always return a row data format. Keep this in mind when using the solutions. 
 
 
@@ -456,3 +466,4 @@ end
 ```
 
 ![figure_1.png](Inverse_Kinematics_media/figure_1.png)
+

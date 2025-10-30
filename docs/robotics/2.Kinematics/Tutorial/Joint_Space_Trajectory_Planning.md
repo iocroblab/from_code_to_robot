@@ -252,6 +252,7 @@ ans = 1x4
 
 ```
 
+
 where each row corresponds to a waypoint
 
 ```matlab
@@ -263,6 +264,7 @@ ans = 1x4
    -0.0663    0.1648    0.8000    1.0472
 
 ```
+
 ### Joint Configurations
 
 You can also compute the trajectories of entire joint configurations: 
@@ -430,14 +432,14 @@ See the joint speed profile below.
 ![image_2.svg](Joint_Space_Trajectory_Planning_media/image_2.svg)
 
 
-This trajectory is defined by the cruise speed $v_c$ and the maximum acceleration $a_{\max }$ .
+This trajectory is defined by the cruise speed $v_c$ and the maximum acceleration $a_{\max }$.
 
 
 The joint states can be described by the following set of equations:  
 
  $$ q(t)=\left\lbrace \begin{array}{ll} q_0 +\frac{1}{2}\cdot sign(\Delta q)\cdot a_{\max } \cdot t^2 , & 0\le t<t_a \newline q_a +sign(\Delta q)\cdot v_{\textrm{c}} \cdot (t-t_a ), & t_a \le t<t_a +t_c \newline q_f -\frac{1}{2}\cdot sign(\Delta q)\cdot a_{\max } \cdot (t_f -t)^2 , & t_a +t_c \le t\le t_f  \end{array}\right. $$ 
 
-with the initial joint state $q_0$ and the target joint state $q_f$ at the time $t_f$ and the direction of the displacement $\textrm{sign}\left(\Delta q\right)$ . 
+with the initial joint state $q_0$ and the target joint state $q_f$ at the time $t_f$ and the direction of the displacement $\textrm{sign}\left(\Delta q\right)$. 
 
 
 Where the time to reach $t_a$ can be calculated as: 
@@ -456,7 +458,7 @@ now let
 
  $$ \Delta q=q_f -q_0 $$ 
 
-since the displacement between $t_0$ and $t_a$ is equal to the displacement between $t_c$ and $t_f$ , we can use the following formulation to determine the value of $t_c$ which represents the time spend at constant velocity 
+since the displacement between $t_0$ and $t_a$ is equal to the displacement between $t_c$ and $t_f$, we can use the following formulation to determine the value of $t_c$ which represents the time spend at constant velocity 
 
  $$ {\Delta q}_c =\Delta q-2\cdot \left(\frac{1}{2}\cdot a_{\max } \cdot t_a^2 \right) $$ 
 
@@ -483,7 +485,7 @@ The maximum reachable velocity can be computed as:
 
  $$ v_{\max } =\sqrt{\;a_{\max } \cdot |\Delta q|\;} $$ 
 
-if $v_{\max } <v_c$ this profile will have a triangular shape without reaching $v_c$ .
+if $v_{\max } <v_c$ this profile will have a triangular shape without reaching $v_c$.
 
 
 where: 
@@ -710,3 +712,4 @@ TimeToComplete = 1;
 URModel = 'ur3e';
 JointStatesToRviz(yourTrajectory, URModel, TimeToComplete)
 ```
+

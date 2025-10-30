@@ -33,7 +33,7 @@ Solve this exercise without using the function:
 
 -  dh2tf() 
 
-and without using the relation matrix $T_A \left(\Phi \right)$ : 
+and without using the relation matrix $T_A \left(\Phi \right)$: 
 
 -  $\displaystyle T_A \left(\Phi \right)=\left\lbrack \begin{array}{ccc} 0 & -\sin \left(\phi \right) & \cos \left(\phi \right)\cdot \sin \left(\theta \right)\newline 0 & -\sin \left(\phi \right)\cdot \sin \left(\theta \right) & -\sin \left(\phi \right)\cdot \sin \left(\theta \right)\newline 1 & \cos \left(\theta \right) & \cos \left(\theta \right) \end{array}\right\rbrack$ 
 ```matlab
@@ -65,7 +65,7 @@ Solve this exercise using an analytical approach! Use the function:
 
 -  diff() 
 
-Solve this exercise without using the relation matrix $T_A \left(\Phi \right)$ : 
+Solve this exercise without using the relation matrix $T_A \left(\Phi \right)$: 
 
 -  $\displaystyle T_A \left(\Phi \right)=\left\lbrack \begin{array}{ccc} 0 & -\sin \left(\phi \right) & \cos \left(\phi \right)\cdot \sin \left(\theta \right)\newline 0 & -\sin \left(\phi \right)\cdot \sin \left(\theta \right) & -\sin \left(\phi \right)\cdot \sin \left(\theta \right)\newline 1 & \cos \left(\theta \right) & \cos \left(\theta \right) \end{array}\right\rbrack$ 
 ```matlab
@@ -120,7 +120,7 @@ check_exercise('3-1-3')
 Use your function from Task 3 to compute a trajectory that follows the desired motion. 
 
 
-Approximate the new joint states by $q_{k+1} =q_k +\dot{q} \cdot \Delta t$ where $\dot{q}$ is the computed joint velocity for the configuration $q_k$ . 
+Approximate the new joint states by $q_{k+1} =q_k +\dot{q} \cdot \Delta t$ where $\dot{q}$ is the computed joint velocity for the configuration $q_k$. 
 
 
 The function takes four inputs: 
@@ -175,4 +175,5 @@ plotTrajectory(q_traj_ex, q_dot_traj, linspace(0,T_example,T_example/dt_example)
 ```
 
 Try adjusting some parameters and see how the trajectory behaves. Keep in mind that the computation may take some time depending on the resolution and hardware. 
+
 
