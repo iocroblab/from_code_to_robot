@@ -29,7 +29,7 @@ This approach has the advantage of simplicity: it requires only local joint meas
 A common improvement is to include **feedforward terms** based on approximate knowledge of the dynamics. For example, adding gravity compensation or partial torque predictions helps reduce the effect of couplings. This way, decentralized controllers can achieve good performance without becoming overly complex.
 
 <p style="text-align:left">
-   <img src="Control_Schemes_media/image_0.svg" width="627" alt="image_0.svg">
+   <img src="./Control_Schemes_media/image_0.svg" width="627" alt="image_0.svg">
 </p>
 
 ## Gravity\-Compensated PD Control
