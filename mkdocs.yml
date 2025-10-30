@@ -2,7 +2,7 @@ site_name: RS-Toolbox Docs
 site_description: Documentation for RS-Toolbox
 site_author: RS-Toolbox
 
-docs_dir: RS-Toolbox_docs
+docs_dir: docs
 
 theme:
   name: material
@@ -10,9 +10,6 @@ theme:
 
 plugins:
   - search
-  - redirects:
-      redirect_maps:
-        index.md: Curriculum.md
 
 extra_javascript:
   - js/mathjax-config.js
