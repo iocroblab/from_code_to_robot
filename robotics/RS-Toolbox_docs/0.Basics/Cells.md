@@ -10,7 +10,7 @@ In this tutorial we will explain what MATLAB cell arrays are and how to work wit
 Please enable "Output inline" on the right side of your scroll bar.
 
 <p style="text-align:left">
-   <img src="Cells_media/image_0.png" width="22" alt="image_0.png">
+   <img src="./Cells_media/image_0.png" width="22" alt="image_0.png">
 </p>
 
 # Create a Cell Array

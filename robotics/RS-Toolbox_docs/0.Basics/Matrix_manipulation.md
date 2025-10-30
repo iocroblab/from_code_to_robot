@@ -22,8 +22,7 @@ M = [m11, m12, m13 ; %row separated by semicolon
      m21, m22, m23 ; %column separated by comma
      m31  m32  m33] %column separated by space
 ```
-M = 
- $\displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & m_{13} \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right)$
+$$ M = \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & m_{13} \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right)$$
  
 
 The functions eye() lets you create an identity matrix: 
@@ -70,8 +69,8 @@ Transpose a matrix by extending it with an apostrophe '
 ```matlab
 M_transposed = M'
 ```
-M_transposed = 
- $\displaystyle \left(\begin{array}{ccc} m_{11}  & m_{21}  & m_{31} \newline m_{12}  & m_{22}  & m_{32} \newline m_{13}  & m_{23}  & m_{33}  \end{array}\right)$
+M_transposed = $$
+ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{21}  & m_{31} \newline m_{12}  & m_{22}  & m_{32} \newline m_{13}  & m_{23}  & m_{33}  \end{array}\right)$$
  
 
 This can also be used to transform a row vector in a column vector. This can be done with a variable or with the array itself. 
