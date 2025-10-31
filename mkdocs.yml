@@ -1,0 +1,26 @@
+site_name: RS-Toolbox Docs
+site_description: Documentation for RS-Toolbox
+site_author: RS-Toolbox
+
+docs_dir: docs
+
+theme:
+  name: material
+  language: en
+
+plugins:
+  - search
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.superfences
+
+extra_css:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js
+  - https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js
+  - javascripts/katex-init.js
+  
