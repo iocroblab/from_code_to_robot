@@ -1,0 +1,54 @@
+{
+  "exercise": {
+    "id": "3-1-2",
+    "description": "Check Analytical Jacobian (ZYZ) via symbolic differentiation",
+
+    "variables": [
+      {
+        "description": "Check if Ja is a 6x6 numerical matrix",
+        "name": "exist('Ja','var') && ismatrix(Ja) && isequal(size(Ja),[6,6]) && isa(Ja,'double')",
+        "expected": true,
+        "output_ok": "Ja is a 6x6 double matrix",
+        "output_fail": "Ja is missing or has incorrect type/size"
+      },
+      {
+        "description": "Check if Rank is a numerical scalar",
+        "name": "exist('Rank','var') && isscalar(Rank) && isa(Rank,'double')",
+        "expected": true,
+        "output_ok": "Rank is a numerical scalar",
+        "output_fail": "Rank is missing or has incorrect type"
+      }
+    ],
+
+    "tests": [
+      {
+        "setup": "
+            Config = [pi/6, -pi/4, pi/3, -pi/2, pi/8, 0]';
+            [Ja, Rank] = ComputeAnalyticalJacobian(Config);
+
+            ur3e = loadrobot('universalUR3e','DataFormat','column');
+            Jg = geometricJacobian(ur3e, Config, 'tool0');
+            T = getTransform(ur3e, Config, 'tool0');
+            R = T(1:3,1:3);
+
+            phi = atan2(R(2,3), R(1,3));
+            theta = atan2(sqrt(R(1,3)^2 + R(2,3)^2), R(3,3));
+            psi = atan2(R(3,2), -R(3,1));
+
+            Tphi = [
+                sin(psi)/sin(theta),   cos(psi)/sin(theta),   0;
+                cos(psi),             -sin(psi),             0;
+               -sin(psi)*cot(theta),  -cos(psi)*cot(theta),  1
+            ];
+
+            Ja_expected = [Tphi zeros(3); zeros(3) eye(3)] * Jg;
+        ",
+        "name": "all(abs(Ja(:) - Ja_expected(:)) < 1e-4) && (Rank == 6)",
+        "description": "Check Analytical Jacobian vs geometricJacobian-derived expected and rank",
+        "expected": true,
+        "output_ok": "[OK] Analytical Jacobian matches expected and rank is 6",
+        "output_fail": "[FAIL] Analytical Jacobian does not match or rank is incorrect"
+      }
+    ]
+  }
+}

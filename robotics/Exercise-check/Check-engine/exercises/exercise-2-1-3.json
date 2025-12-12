@@ -1,0 +1,110 @@
+{
+    "exercise": {
+        "id": "2-1-3",
+        "description": "spherical_wrist Structure",
+        "variables": [
+            {
+                "name": "spherical_wrist",
+                "type": "rigidBodyTree"
+            },
+            {
+                "description": "Checking spherical_wrist data format",
+                "name": "spherical_wrist.DataFormat",
+                "expected": "column",
+                "output_ok": "Correct data format"
+              },
+            {
+                "name": "bodies",
+                "type": "cell"
+            },
+            {
+                "description": "Number of bodies",
+                "name": "size(bodies)",
+                "expected": [3,1],
+                "output_ok": "correct number of bodies",
+                "output_fail": "incorrect number of bodies"
+            },
+            {
+                "name": "joints",
+                "type": "cell"
+            },
+            {
+                "description": "Number of joints",
+                "name": "size(joints)",
+                "expected": [3,1],
+                "output_ok": "correct number of joints",
+                "output_fail": "incorrect number of joints"
+            },
+            {
+                "description": "Checking joint type",
+                "name": "spherical_wrist.Bodies{1}.Joint.Type",
+                "expected": "revolute",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "spherical_wrist.Bodies{2}.Joint.Type",
+                "expected": "revolute",
+                "hidden": true
+            },
+            {
+                "description": "Checking joint type",
+                "name": "spherical_wrist.Bodies{3}.Joint.Type",
+                "expected": "revolute",
+                "hidden": true
+            },
+            {
+                "description": "Checking base name",
+                "name": "spherical_wrist.BaseName",
+                "expected": "world",
+                "hidden": false
+            },
+
+            {
+                "description": "Checking if DH parameters are correct",
+                "name": "getTransform(spherical_wrist, homeConfiguration(spherical_wrist), 'world', 'wrist_3_link')",
+                "expected": [[1.0000,0.0000,0.0000,0.0000],[0.0000,1.0000,0.0000,0.0000],[0.0000,0.0000,1.0000,-0.2000],[0.0000,0.0000,0.0000,1.0000]],
+                "output_ok": "DH parameters correctly linked to joints",
+                "output_fail": "DH parameters not correctly linked"
+
+            }
+        ],
+        "tests": [
+            {
+                "setup": "robot = evalin('base','spherical_wrist');",
+                "description": "Checking body and joint names",
+                "code": "
+                            bodynames={};
+                            jointnames={};
+                                for i=1:3
+                                bodynames{i}=robot.Bodies{i}.Name;
+                            jointnames{i}=robot.Bodies{i}.Joint.Name;
+                            end
+                            okjointnames={'wrist_1_joint',    'wrist_2_joint',    'wrist_3_joint'};
+                            okbodynames={'wrist_1_link',    'wrist_2_link',   'wrist_3_link'};
+                            
+                            if strcmp(bodynames,okbodynames)
+                            disp('[OK] Bodies named correctly');
+                            else
+                            disp('[FAIL] Bodies named incorrectly');
+                            disp('expected:')
+                            disp(okbodynames)
+                            disp('got:')
+                            disp(bodynames)
+                            end
+                            if strcmp(jointnames, okjointnames)
+                            disp('[OK] Joints named correctly');
+                            else
+                            disp('[FAIL] Joints named incorrectly');
+                            disp('expected:' );
+                            disp(okjointnames);
+                            disp('got: ')
+                            disp(jointnames);
+                            end
+                            "
+
+}
+
+]
+}
+}

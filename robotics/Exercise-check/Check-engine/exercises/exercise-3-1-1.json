@@ -1,0 +1,53 @@
+{
+  "exercise": {
+    "id": "3-1-1",
+    "description": "Check symbolic geometric Jacobian J",
+
+    "variables": [
+
+      {
+        "description": "Check all q variables are sym and real",
+        "name": "isa(q1,'sym') && isa(q2,'sym') && isa(q3,'sym') && isa(q4,'sym') && isa(q5,'sym') && isa(q6,'sym') && isreal(q1) && isreal(q2) && isreal(q3) && isreal(q4) && isreal(q5) && isreal(q6)",
+        "expected": true,
+        "output_ok": "All q variables are of type sym and real",
+        "output_fail": "One or more q variables are not sym or not real"
+      },
+
+      {
+        "description": "Check all Jacobian matrices are sym and have correct dimensions",
+        "name": "isa(Jtheta,'sym') && isa(Jp,'sym') && isa(J,'sym') && isequal(size(Jtheta),[3,6]) && isequal(size(Jp),[3,6]) && isequal(size(J),[6,6])",
+        "expected": true,
+        "output_ok": "Jtheta, Jp, and J are sym and have correct sizes",
+        "output_fail": "One or more matrices are not sym or have incorrect size"
+      }
+
+    ],
+
+    "tests": [
+      {
+        "setup": "J = evalin('base','J');",
+        "description": "Compare symbolic J with Robotics Toolbox geometricJacobian",
+        "code": "
+            ur3e = loadrobot('universalUR3e', DataFormat='column');
+            Config = [0,-pi/3,pi/7,pi/2,pi/2,0]';
+            
+            J_toolbox = geometricJacobian(ur3e, Config, 'tool0');
+            
+            syms q1 q2 q3 q4 q5 q6 real
+            J_sub = subs(J, [q1 q2 q3 q4 q5 q6], Config');
+            
+            J_diff = double(round(J_sub,4) - round(J_toolbox,4));
+            
+            isCorrect = all(abs(J_diff(:)) < 1e-4);
+            
+            if isCorrect
+                disp('[OK] Symbolic Jacobian matches Toolbox Jacobian');
+            else
+                disp('[FAIL] Symbolic Jacobian does NOT match Toolbox Jacobian');
+            end
+        ",
+        "expected": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "exercise": {
+        "id": "2-3-1",
+        "description": "Checking IK solutions for spherical wrist",
+        "variables": [
+            {
+                "description": "Checking spherical solution size",
+                "name": "size(spherical_solutions)",
+                "expected": [[2.0000,3.0000]],
+                "output_ok": "correct solutions size",
+                "output_fail": "incorrect solution dimensions"
+            },
+            {
+                "description": "checking spherical_solutions",
+                "name": "sortrows(spherical_solutions)",
+                "expected": [[-0.2490,-0.5619,-0.4101],[2.8926,0.5619,2.7315]] ,
+                "hidden": true,
+                "output_ok": "correct solutions",
+                "output_fail": "incorrect solution"
+            },            
+            {
+                "description": "Checking complete solution size",
+                "name": "size(solutions)",
+                "expected": [[8.0000,6.0000]],
+                "output_ok": "correct solutions size",
+                "output_fail": "incorrect solution dimensions"
+            },
+            {
+                "description": "checking complete solutions",
+                "name": "sortrows(solutions)",
+                "expected":  [[-2.1723,-3.0049,-1.9215,-0.2490,-0.5619,-0.4101],[-2.1723,-3.0049,-1.9215,2.8926,0.5619,2.7315],[-2.1723,0.9536,1.9215,-0.2490,-0.5619,-0.4101],[-2.1723,0.9536,1.9215,2.8926,0.5619,2.7315],[0.9693,-0.1367,1.9215,-0.2490,-0.5619,-0.4101],[0.9693,-0.1367,1.9215,2.8926,0.5619,2.7315],[0.9693,2.1880,-1.9215,-0.2490,-0.5619,-0.4101],[0.9693,2.1880,-1.9215,2.8926,0.5619,2.7315]],
+                "hidden": true,
+                "output_ok": "correct solutions",
+                "output_fail": "incorrect solution"
+            }
+        ]
+    }
+}
