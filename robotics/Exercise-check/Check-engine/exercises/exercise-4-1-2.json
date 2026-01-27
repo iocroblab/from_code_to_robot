@@ -1,0 +1,70 @@
+{
+  "exercise": {
+    "id": "4-1-2",
+    "description": "Checking Threelink Setup",
+        "variables":
+            [
+                {
+        "name": "threelink",
+        "type": "rigidBodyTree"
+      },
+        {
+        "description": "Checking threelink data format",
+        "name": "threelink.DataFormat",
+        "expected": "column",
+        "output_ok": "Correct data format", 
+            "hidden": false
+      },
+        {
+        "description": "Checking threelink gravity",
+        "name": "threelink.Gravity",
+        "expected": [0.0000,0.0000,-9.8100], 
+        "hidden": false
+      },
+       {
+        "description": "Checking threelink center of mass for body 1",
+        "name": "threelink.Bodies{1}.CenterOfMass",
+        "expected": [[0.1500,0.0000,0.0000]], 
+        "hidden": false
+      },
+                {
+        "description": "Checking threelink center of mass for body 2",
+        "name": "threelink.Bodies{2}.CenterOfMass",
+        "expected": [[0.2500,0.0000,0.0000]]
+      },
+                {
+        "description": "Checking threelink center of mass for body 3",
+        "name": "threelink.Bodies{3}.CenterOfMass",
+        "expected": [[0.2500,0.0000,0.0000]]
+      },{
+        "description": "Checking threelink Inertia for body 1",
+        "name": "threelink.Bodies{1}.Inertia",
+        "expected": [[0.0083,0.1542,0.1542,0.0000,0.0000,0.0000]]
+      },{
+        "description": "Checking threelink Inertia for body 2",
+        "name": "threelink.Bodies{2}.Inertia",
+        "expected": [[0.0050,0.2525,0.2525,0.0000,0.0000,0.0000]]
+      },{
+        "description": "Checking threelink Inertia for body 3",
+        "name": "threelink.Bodies{3}.Inertia",
+        "expected": [[0.0050,0.2525,0.2525,0.0000,0.0000,0.0000]]
+      }
+        ,{
+        "description": "Checking threelink Mass for body 1",
+        "name": "threelink.Bodies{1}.Mass",
+        "expected": 5
+        },{
+        "description": "Checking threelink Mass for body 2",
+        "name": "threelink.Bodies{2}.Mass",
+        "expected": 3
+        }
+                ,{
+        "description": "Checking threelink Mass for body 3",
+        "name": "threelink.Bodies{3}.Mass",
+        "expected": 3
+        }
+
+            ]
+          
+            }
+            }

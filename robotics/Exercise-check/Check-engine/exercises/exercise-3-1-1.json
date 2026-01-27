@@ -34,7 +34,8 @@
             J_toolbox = geometricJacobian(ur3e, Config, 'tool0');
             
             syms q1 q2 q3 q4 q5 q6 real
-            J_sub = subs(J, [q1 q2 q3 q4 q5 q6], Config');
+            J_sub = double(subs(J, [q1,q2,q3,q4,q5,q6], ...
+                 [Config(1)+pi, Config(2:6)']));
             
             J_diff = double(round(J_sub,4) - round(J_toolbox,4));
             

@@ -1,0 +1,29 @@
+{
+  "exercise": {
+    "id": "4-1-4",
+    "description": "Checking C Matrix",
+        "variables":
+            [
+       {
+        "description": "Checking C matrix in configuration 1",
+        "name": "subs(C, [q1,q2,q3, qd1,qd2,qd3],[0,0,0,0,0,0])",
+        "expected": [[0.0000,0.0000,0.0000],[0.0000,0.0000,0.0000],[0.0000,0.0000,0.0000]], 
+        "hidden": false
+       },
+                {
+        "description": "Checking C matrix in configuration 2",
+        "name": "subs(C, [q1,q2,q3, qd1,qd2,qd3],[pi/7,pi/5,-pi/3,-pi/9,pi/13,pi/22])",
+        "expected": [[-0.1412,0.2672,-0.1071],[-0.2672,0.0464,0.1249],[0.1071,-0.0785,0.0000]], 
+        "hidden": false
+       },
+                {
+        "description": "Checking C matrix in configuration 3",
+        "name": "subs(C, [q1,q2,q3, qd1,qd2,qd3],[pi/10,pi/11,-pi/12,-pi/7,pi/3,pi/5])",
+        "expected": [[-0.6253,0.2627,0.0089],[-0.2627,0.0610,0.1626],[-0.0089,-0.1016,0.0000]], 
+        "hidden": false
+       }
+
+            ]
+          
+            }
+            }

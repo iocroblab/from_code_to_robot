@@ -1,0 +1,23 @@
+{
+  "exercise": {
+    "id": "4-1-3",
+    "description": "Checking B Matrix",
+        "variables":
+            [
+       {
+        "description": "Checking B matrix in configuration 1",
+        "name": "subs(B, [q1,q2,q3],[0,0,0])",
+        "expected": [[4.4992,0.0000,0.0000],[0.0000,2.0050,0.6275],[0.0000,0.6275,0.2525]], 
+        "hidden": false
+       },
+                {
+        "description": "Checking B matrix in configuration 2",
+        "name": "subs(B, [q1,q2,q3],[pi/2,pi/3,-pi/19])",
+        "expected": [[2.2530,0.0000,0.0000],[0.0000,1.9948,0.6224],[0.0000,0.6224,0.2525]], 
+        "hidden": false
+       }
+
+            ]
+          
+            }
+            }

@@ -1,0 +1,61 @@
+{
+  "exercise": {
+    "id": "4-1-1",
+    "description": "Checking Variables and Inertias",
+        "variables":
+            [
+            {
+                "name": "q1",
+                "type": "sym"
+            },
+            {
+                "name": "q2",
+                "type": "sym"
+            },
+            {
+                "name": "q3",
+                "type": "sym"
+            },
+            {
+                "description": "Checking if position variables are real",
+                "name": "isreal(q1)&&isreal(q2)&&isreal(q3)",
+                "expected": true, 
+                "output_ok": "variables are setup correctly", 
+                "output_fail": "one or more variables are not assumed as real"
+
+            },{
+                "name": "qd1",
+                "type": "sym"
+            },
+            {
+                "name": "qd2",
+                "type": "sym"
+            },
+            {
+                "name": "qd3",
+                "type": "sym"
+            },
+            {
+                "description": "Checking if velocity variables are real",
+                "name": "isreal(qd1)&&isreal(qd2)&&isreal(qd3)",
+                "expected": true, 
+                "output_ok": "variables are setup correctly", 
+                "output_fail": "one or more variables are not assumed as real"
+
+            },
+            {
+                "name": "I1",
+                "expected": [[0.0083,0.0000,0.0000],[0.0000,0.0417,0.0000],[0.0000,0.0000,0.0417]]
+            },
+            {
+                "name": "I2",
+                "expected": [[0.0050,0.0000,0.0000],[0.0000,0.0650,0.0000],[0.0000,0.0000,0.0650]]
+            },
+            {
+                "name": "I3",
+                "expected": [[0.0050,0.0000,0.0000],[0.0000,0.0650,0.0000],[0.0000,0.0000,0.0650]]
+            }          
+            ]
+          
+            }
+            }
