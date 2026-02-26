@@ -1,43 +1,46 @@
-function StaticFrameBroadcaster(homogeneousTransform)    
+function StaticFrameBroadcaster(T, childFrame, parentFrame)
 
-    % FRAMEBROADCASTER Function to publish a static transform using ROS 2
-    %
-    % Input Arguments:
-    %     homogeneousTransform - A 4x4 matrix representing the transformation
+arguments
+    T (4,4) double
+    childFrame (1,1) string = "Target_frame"
+    parentFrame (1,1) string = "base_link"
+end
 
-    % Validate the input homogeneous transform
-    if ~isequal(size(homogeneousTransform), [4, 4])
-        error('Input must be a 4x4 homogeneous transformation matrix.');
-    end
-    
-    % Create a ROS 2 node for broadcasting transforms
-    tf2broadcaster_node = ros2node("tf2broadcaster_node", 0);
-    % Create a transform tree with specified Quality of Service settings
-    qos = struct('History', 'keeplast', 'Depth', 10, 'Reliability', 'reliable', 'Durability', 'volatile');
-    tftree = ros2tf(tf2broadcaster_node,'StaticBroadcasterQoS',qos);
+persistent node tftree
 
+% Keep node alive across calls
+if isempty(node) || ~isvalid(node)
+    node = ros2node("tf2_static_broadcaster");
     
-    % Create a TransformStamped message
-    tfStampedMsg = ros2message('geometry_msgs/TransformStamped');
-    tfStampedMsg.child_frame_id = 'Target_frame'; % Set the child frame ID
-    tfStampedMsg.header.frame_id = 'world'; % Set the parent frame ID
+    % Correct QoS for /tf_static
+    qos = struct( ...
+        'History',     'keeplast', ...
+        'Depth',       1, ...
+        'Reliability', 'reliable', ...
+        'Durability',  'transientlocal');
     
-    % Extract translation from the homogeneous transform
-    tfStampedMsg.transform.translation.x = homogeneousTransform(1,4);
-    tfStampedMsg.transform.translation.y = homogeneousTransform(2,4);
-    tfStampedMsg.transform.translation.z = homogeneousTransform(3,4);
-    
-    % Convert rotation matrix to quaternion
-    Tquat=rotm2quat(homogeneousTransform(1:3,1:3)); 
-    % Set the quaternion values in the message
-    tfStampedMsg.transform.rotation.w = Tquat(1);
-    tfStampedMsg.transform.rotation.x = Tquat(2);
-    tfStampedMsg.transform.rotation.y = Tquat(3);
-    tfStampedMsg.transform.rotation.z = Tquat(4);
-    
-    % Send the transform message
-    sendTransform(tftree,tfStampedMsg, "UseStatic",true)
-    % Print confirmation of the published transform
-    fprintf("Published static transform: %s → %s\n", ...
-            tfStampedMsg.header.frame_id, tfStampedMsg.child_frame_id);
+    tftree = ros2tf(node, "StaticBroadcasterQoS", qos);
+end
+
+msg = ros2message("geometry_msgs/TransformStamped");
+msg.child_frame_id = char(childFrame);
+msg.header.frame_id = char(parentFrame);
+
+% Stamp (don't leave zero time)
+msg.header.stamp = ros2time(node, "now");
+
+msg.transform.translation.x = T(1,4);
+msg.transform.translation.y = T(2,4);
+msg.transform.translation.z = T(3,4);
+
+q = rotm2quat(T(1:3,1:3)); % [w x y z]
+msg.transform.rotation.w = q(1);
+msg.transform.rotation.x = q(2);
+msg.transform.rotation.y = q(3);
+msg.transform.rotation.z = q(4);
+
+sendTransform(tftree, msg, "UseStatic", true);
+
+fprintf("Published static transform: %s → %s\n", parentFrame, childFrame);
+
 end

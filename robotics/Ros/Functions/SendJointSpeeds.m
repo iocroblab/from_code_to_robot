@@ -1,29 +1,37 @@
 function pub = SendJointSpeeds(qdot, topic)
-% SendJointSpeeds Publish a 6-element joint velocity vector to a ROS 2 velocity controller.
+% SendJointSpeeds Publish a 3- or 6-element joint velocity vector to a ROS 2 velocity controller.
 %
 %   pub = SendJointSpeeds(qdot)
 %   pub = SendJointSpeeds(qdot, topic)
 %
 % Inputs
-%   qdot : [6x1] or [1x6] double, joint speeds [rad/s] in the controller's joint order.
+%   qdot : [3x1], [1x3], [6x1], or [1x6] double.
+%          If 3 elements are provided → padded to 6.
+%
 %   topic: (optional) topic string. Default: "/forward_velocity_controller/commands"
 %
 % Output
-%   pub  : (optional) the persistent ros2publisher handle.
-%
-% Notes
-% - Uses persistent ROS 2 node "matlab_velocity_pub".
-% - Call in a loop with ros2rate to hold velocity over time.
+%   pub  : (optional) ros2publisher handle.
 
     if nargin < 2 || isempty(topic)
         topic = "/forward_velocity_controller/commands";
     end
 
-    % Validate and shape input
-    if ~isnumeric(qdot) || numel(qdot) ~= 6
-        error("SendJointSpeeds:InputSize", "qdot must be a 6-element numeric vector.");
+    % Validate numeric
+    if ~isnumeric(qdot)
+        error("SendJointSpeeds:InputType", "qdot must be numeric.");
     end
-    qdot = reshape(double(qdot), 1, 6);
+
+    % Accept 3 or 6 elements
+    n = numel(qdot);
+    if n == 3
+        qdot = reshape(double(qdot), 1, 3);
+    elseif n == 6
+        qdot = reshape(double(qdot), 1, 6);
+    else
+        error("SendJointSpeeds:InputSize", ...
+              "qdot must be a 3- or 6-element numeric vector.");
+    end
 
     % Persistent node & publisher
     persistent node velPub currentTopic

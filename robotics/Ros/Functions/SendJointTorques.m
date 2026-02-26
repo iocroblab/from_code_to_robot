@@ -1,29 +1,35 @@
 function pub = SendJointTorques(tau, topic)
-% SendJointTorques Publish a 6-element torque vector to a ROS 2 effort controller.
+% SendJointTorques Publish a 3- or 6-element torque vector to a ROS 2 effort controller.
 %
 %   pub = SendJointTorques(tau)
 %   pub = SendJointTorques(tau, topic)
 %
 % Inputs
-%   tau   : [6x1] or [1x6] double, torques [Nm] in the controller's joint order.
+%   tau   : [3x1], [1x3], [6x1], or [1x6] double
+%
 %   topic : (optional) topic string. Default: "/forward_effort_controller/commands"
 %
 % Output
-%   pub   : (optional) the persistent ros2publisher handle.
-%
-% Notes
-% - Uses persistent ROS 2 node "matlab_effort_pub" and publisher for efficiency.
-% - Call in a loop with ros2rate to hold torque over time.
+%   pub   : (optional) ros2publisher handle.
 
     if nargin < 2 || isempty(topic)
         topic = "/forward_effort_controller/commands";
     end
 
-    % Validate and shape input
-    if ~isnumeric(tau) || numel(tau) ~= 6
-        error("SendJointTorques:InputSize", "tau must be a 6-element numeric vector.");
+    % Validate numeric
+    if ~isnumeric(tau)
+        error("SendJointTorques:InputType", "tau must be numeric.");
     end
-    tau = reshape(double(tau), 1, 6);
+
+    n = numel(tau);
+    if n == 3
+        tau = reshape(double(tau), 1, 3);
+    elseif n == 6
+        tau = reshape(double(tau), 1, 6);
+    else
+        error("SendJointTorques:InputSize", ...
+              "tau must be a 3- or 6-element numeric vector.");
+    end
 
     % Persistent node & publisher
     persistent node effortPub currentTopic
@@ -36,7 +42,7 @@ function pub = SendJointTorques(tau, topic)
         currentTopic = topic;
     end
 
-    % Build + send message
+    % Build + send
     msg = ros2message("std_msgs/Float64MultiArray");
     msg.data = tau;
     send(effortPub, msg);

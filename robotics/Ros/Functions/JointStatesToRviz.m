@@ -3,7 +3,6 @@ function success = JointStatesToRviz(JointConfiguration, ur_type, time, varargin
 % ellipsoid to RViz. If a trajectory is given, optionally publish a yellow
 % PointCloud2 of the end-effector path. Also supports clearing topics.
 %
-%   success = JointStatesToRviz(JointConfiguration, ur_type, time, Name,Value)
 %
 %   Inputs
 %     JointConfiguration : [N x 6] or [1 x 6] joint angles (rad).
@@ -49,13 +48,23 @@ if isempty(ur_type)
     ur_type = 'ur3e';
 end
 
-% ---- Normalize JointConfiguration to [N x 6] ----
-if size(JointConfiguration,2) ~= 6 && size(JointConfiguration,1) == 6
-    JointConfiguration = JointConfiguration.'; % make row
+% ---- Normalize JointConfiguration to [N x D], D = 3 or 6 ----
+D = size(JointConfiguration,2);
+
+% If it was given as [D x N], transpose it
+if D ~= 3 && D ~= 6
+    % maybe it's transposed: check rows
+    if size(JointConfiguration,1) == 3 || size(JointConfiguration,1) == 6
+        JointConfiguration = JointConfiguration.';  % force row-based
+        D = size(JointConfiguration,2);
+    end
 end
-if size(JointConfiguration,2) ~= 6
-    error('JointConfiguration must have 6 columns.');
+
+% Now check again
+if D ~= 3 && D ~= 6
+    error('JointConfiguration must have 3 or 6 columns.');
 end
+
 N = size(JointConfiguration,1);
 
 % ---- Parse options ----
@@ -130,13 +139,29 @@ catch ME
 end
 
 % ---------- Load / cache UR model ----------
+persistent cachedModel cachedUrType
+
 try
-    mdlName = mapURTypeToRobotName(ur_type);
-    model = loadrobot(mdlName, "DataFormat", "row", "Gravity", [0 0 -9.81]); %#ok<NASGU>
+    % (Re)load only if first time or ur_type changed
+    if isempty(cachedModel) || ~strcmpi(cachedUrType, ur_type)
+        if strcmpi(ur_type, 'threelink')
+            cachedModel = importrobot('threelink.urdf', "DataFormat", "row");
+            cachedModel.Gravity = [0 0 -9.81];
+        else
+            mdlName = mapURTypeToRobotName(ur_type);
+            cachedModel = loadrobot(mdlName, "DataFormat", "row", "Gravity", [0 0 -9.81]);
+        end
+        cachedUrType = ur_type;
+    end
+
+    % Use cached model
+    model = cachedModel;
+
 catch ME
     warning('Failed to load robot model for "%s": %s', ur_type, ME.message);
     return
 end
+
 
 % ---------- Clear topics if disabled ----------
 if ~doTrajectory
@@ -173,12 +198,20 @@ if precompEll
         for k = find(sendMask)
             q  = JointConfiguration(k,:);
             J  = geometricJacobian(model, q, char(opt.ToolFrame));
-            % Split J robustly into translational vs rotational
+            if ~strcmp(dualMode, 'velocity')
+                J = pinv(J);
+            end                    
             if mean(vecnorm(J(1:3,:),2,2)) > mean(vecnorm(J(4:6,:),2,2))
-                Jr = J(1:3,:); Jt = J(4:6,:);
-            else
-                Jt = J(1:3,:); Jr = J(4:6,:);
-            end
+                        Jr = J(1:3,:)/2; Jt = J(4:6,:)/2;
+                    else
+                        Jt = J(1:3,:)/2; Jr = J(4:6,:)/2;
+                    end
+                    if norm(Jr)>2
+                        Jr=Jr/norm(Jr); 
+                    end
+                    if norm(Jr)>2
+                        Jr=Jr/norm(Jr); 
+                    end
             switch lower(opt.EllipsoidKind)
                 case {'trans','t','translation','translational'}, Jx = Jt;
                 case {'rot','r','rotation','rotational'},         Jx = Jr;
@@ -188,7 +221,10 @@ if precompEll
             [U,S,~] = svd(Jx,'econ');   % 3x3
             S_eff = selectScaling(S, dualMode);  % NEW: velocity -> S; effort -> inv(S)
 
+
             T  = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
+
+
             p  = single(T(1:3,4));
             SP = S_eff * P;              % 3xM
             E  = U * SP + p;             % 3xM
@@ -244,10 +280,19 @@ for i = 1:N
                 else
                     % Fallback: compute & publish on-the-fly
                     J = geometricJacobian(model, q, char(opt.ToolFrame));  % 6x6
+                    if ~strcmp(dualMode, 'velocity')
+                        J = pinv(J);
+                    end
                     if mean(vecnorm(J(1:3,:),2,2)) > mean(vecnorm(J(4:6,:),2,2))
-                        Jr = J(1:3,:); Jt = J(4:6,:);
+                        Jr = J(1:3,:)/(2); Jt = J(4:6,:)/(2);
                     else
-                        Jt = J(1:3,:); Jr = J(4:6,:);
+                        Jt = J(1:3,:)/2; Jr = J(4:6,:)/2;
+                    end
+                    if norm(Jr)>2
+                        Jr=Jr/norm(Jr); 
+                    end
+                    if norm(Jr)>2
+                        Jr=Jr/norm(Jr); 
                     end
                     switch lower(opt.EllipsoidKind)
                         case {'trans','t','translation','translational'}, Jx = Jt;
@@ -255,7 +300,14 @@ for i = 1:N
                         otherwise,                                        Jx = Jt;
                     end
                     [U,S,~] = svd(Jx,'econ');   % 3x3
-                    T_ee = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
+                    if strcmp(ur_type, 'threelink')
+                        T_ee  = getTransform(model, q, char(opt.ToolFrame), 'base_link');
+
+                    else
+                        T_ee  = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
+
+                    end
+                    %T_ee = getTransform(model, q, char(opt.ToolFrame), model.BaseName);
                     p_ee = T_ee(1:3,4).';        % 1x3
 
                     % NEW: pass duality mode to use S or inv(S)
@@ -328,6 +380,7 @@ if strcmp(dualMode,'velocity')
 else
     eps_s = 1e-9;
     S_eff = diag(1./max(s, eps_s));
+    S_eff = S; 
 end
 end
 

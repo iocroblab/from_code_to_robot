@@ -64,17 +64,3 @@ function success = i_callNative(pauseFlag, srvName, srvType)
         success = false;
     end
 end
-
-function success = i_callCLI(pauseFlag, worldName)
-    pauseStr = lower(string(pauseFlag)); % "true"/"false"
-    cmd = sprintf(['ros2 service call /world/%s/control ' ...
-                   'ros_gz_interfaces/srv/ControlWorld ' ...
-                   '"{world_control: {pause: %s}}"'], worldName, pauseStr);
-    [status,out] = system(cmd);
-    if status ~= 0
-        warning("PauseGazebo:CLIFailed","CLI call failed (%d): %s", status, out);
-        success = false;
-    else
-        success = true;
-    end
-end

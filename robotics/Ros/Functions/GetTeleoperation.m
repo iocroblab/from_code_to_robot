@@ -17,11 +17,9 @@ function [v6, teleopMode] = GetTeleoperation()
         subTwist = ros2subscriber(node, "/cmd_vel", "geometry_msgs/Twist");
         subMode  = ros2subscriber(node, "/teleop_mode", "std_msgs/String");
 
-        % lastV6   = zeros(6,1,'double');
-        % lastMode = "";
     end
 
-    % Try to grab any fresh messages very quickly (non-blocking-ish)
+    % Try to grab any fresh messages 
     try
          msg =subTwist.LatestMessage;  % 1 ms timeout
          v6 = [ double(msg.linear.x);  double(msg.linear.y);  double(msg.linear.z); ...
@@ -39,19 +37,6 @@ function [v6, teleopMode] = GetTeleoperation()
         % no new /teleop_mode; keep lastMode
     end
 
-    % v6 = lastV6;
-    % teleopMode = lastMode;
 
 
 end
-% function twistcallback(msg)
-%     global v6 
-%     v6 = [ double(msg.linear.x);  double(msg.linear.y);  double(msg.linear.z); ...
-%                double(msg.angular.x); double(msg.angular.y); double(msg.angular.z) ];
-% 
-% end
-% 
-% function modecallback(msg)
-%     global teleopMode
-%      teleopMode = string(msg.data);
-% end
