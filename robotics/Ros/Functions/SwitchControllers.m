@@ -13,13 +13,13 @@ function success = SwitchControllers(mode, varargin)
 %
 % Name–Value:
 %   'Docker'     : logical (default true)
-%   'DockerName' : char    (default 'gz-modified')
+%   'DockerName' : char    (default 'FCTR-container')
 %
 % 
 
     % ---------- Defaults ----------
     opts.Docker     = true;
-    opts.DockerName = 'gz-modified';
+    opts.DockerName = 'FCTR-container';
     opts.Strict     = true;
     opts.Debug      = false;   % NEW (default false)
 

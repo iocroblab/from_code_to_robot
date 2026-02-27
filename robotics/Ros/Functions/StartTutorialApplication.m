@@ -18,14 +18,15 @@ function status = StartTutorialApplication(Application, varargin)
 %       Special passthrough supported: 'threelink'
 %
 %   Workspace selection:
-%     'workspace' | 'Workspace' | 'ws' | 'WS' : default 'git_ws'
+%     'workspace' | 'Workspace' | 'ws' | 'WS' : default 'fctr_ws'
 %       Path can be absolute or relative to HOME. Used as terminal CWD (native)
 %       and as the "cd" target inside the environment.
 %
 %   Controller selection (applies to Simulation and Hardware):
-%     'Trajectory' | 'controller' :
-%         '' (default) | 'Position' | 'Speed' | 'Torque' | 'Trajectory' |
-%         'scaled_joint_trajectory_controller'
+%     'controller' :
+%          'Trajectory' (default) | 'Position' | 'Speed' | 'Torque' |
+%         'scaled_joint_trajectory_controller' (or other ros native
+%         controller name forward_..._controller)
 %
 %   Hardware driver inputs (Application == 'Hardware'):
 %     'robot_ip'    : default '192.168.56.101' (always included)
@@ -34,7 +35,7 @@ function status = StartTutorialApplication(Application, varargin)
 %
 %   Environment / terminal behavior:
 %     'Docker'     : logical, default true
-%     'DockerName' : char, default 'gz-modified'
+%     'DockerName' : char, default 'FCTR-container'
 %     'Detach'     : logical
 %
 % RETURNS
@@ -42,10 +43,10 @@ function status = StartTutorialApplication(Application, varargin)
 
 % ---------- Defaults ----------
 opts.Model      = 'ur3e';
-opts.Controller = '';
+opts.Controller = 'Trajectory';
 opts.Docker     = true;
-opts.DockerName = 'gz-modified';
-opts.Workspace  = 'git_ws';
+opts.DockerName = 'FCTR-container';
+opts.Workspace  = 'fctr_ws';
 opts.RobotIP    = '192.168.56.101';
 opts.ComputerIP = '';
 opts.Detach     = false;
@@ -178,11 +179,11 @@ end
         end
 
         switch c
-            case "position"
+            case {"position","forward_position_controller"}
                 arg = 'initial_joint_controller:=forward_position_controller';
-            case {"speed","velocity"}
+            case {"speed","velocity","forward_velocity_controller"}
                 arg = 'initial_joint_controller:=forward_velocity_controller';
-            case {"torque","effort"}
+            case {"torque","effort","forward_effort_controller"}
                 arg = 'initial_joint_controller:=forward_effort_controller';
             case {"trajectory","scaled","scaled_joint_trajectory_controller"}
                 arg = 'initial_joint_controller:=scaled_joint_trajectory_controller';
