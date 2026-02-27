@@ -130,6 +130,7 @@ innerParts = {
     sprintf('cd ~/%s', wsPath)
     'source /opt/ros/jazzy/setup.bash'
     sprintf('source %s', setupBash)
+    sprintf('export ROS_DOMAIN_ID=%s',getenv("ROS_DOMAIN_ID"))
 };
 
 if ~isempty(strtrim(appCmd))
@@ -251,23 +252,23 @@ end
     end
 
     function launcher = buildLauncher(o, isWinLocal, wsAbsLocal, innerLocal, innerQuotedLocal)
-        if o.Docker
+               if o.Docker
             if isWinLocal
                 if o.Detach
-                    launcher = sprintf('wsl docker exec -dit %s %s', o.DockerName, innerQuotedLocal);
+                    launcher = sprintf('wsl docker exec -dit -e ROS_DOMAIN_ID=%s %s %s', getenv("ROS_DOMAIN_ID"), o.DockerName, innerQuotedLocal);
                 else
                     launcher = sprintf(['cmd /c start "" wsl bash -lc ', ...
-                        '"docker exec -it %s bash -lc ''%s; exec bash''"'], ...
-                        o.DockerName, escapeForBashLC(innerLocal));
+                        '"docker exec -it -e ROS_DOMAIN_ID=%s %s bash -lc ''%s; exec bash''"'], ...
+                       getenv("ROS_DOMAIN_ID"), o.DockerName, escapeForBashLC(innerLocal));
                 end
             else
                 if o.Detach
-                    launcher = sprintf('docker exec -d %s bash -lc %s', o.DockerName, innerQuotedLocal);
+                    launcher = sprintf('docker exec -d -e ROS_DOMAIN_ID=%s %s bash -lc %s', getenv("ROS_DOMAIN_ID"), o.DockerName, innerQuotedLocal);
                 else
                     innerUnwrapped = regexprep(innerQuotedLocal, '^bash -lc\s+"(.*)"$', '$1');
                     launcher = sprintf(['env -u LD_LIBRARY_PATH gnome-terminal -- bash -lc ', ...
-                        '"xhost +local:docker; docker exec -it %s bash -lc ''%s''; exec bash" &'], ...
-                        o.DockerName, innerUnwrapped);
+                        '"xhost +local:docker; docker exec -it -e ROS_DOMAIN_ID=%s %s bash -lc ''%s''; exec bash" &'], ...
+                        getenv("ROS_DOMAIN_ID"), o.DockerName, innerUnwrapped);
                 end
             end
         else
