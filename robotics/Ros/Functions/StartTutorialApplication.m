@@ -36,8 +36,14 @@ function status = StartTutorialApplication(Application, varargin)
 %   Trajectory tracker additional inputs (Appliucation == 'Trajectory')
 %     'num_points'  : default 200 (can be changed to increase or decrease
 %     the number of points displayed)
-%     Aöoas acceüted: 'trajectory_points','trajectory_resolution',
+%     Alias accepted: 'trajectory_points','trajectory_resolution',
 %     'num_trajectory_points'
+%
+%   Teleopertaion  additional inputs (Appliucation == 'Teleoperation')
+%     'linear_speed'  : default 0.2 (can be changed to increase or decrease
+%     base speed for linear twists)
+%     'angular_speed'  : default 1 (can be changed to increase or decrease
+%     base speed for angular twists)
 %
 %   Environment / terminal behavior:
 %     'Docker'     : logical, default true
@@ -57,6 +63,8 @@ opts.RobotIP    = '192.168.56.101';
 opts.ComputerIP = '';
 opts.Detach     = false;
 opts.num_trajectory_points = 200; 
+opts.linear_speed = 0.2; 
+opts.angular_speed = 1.0; 
 
 % ---------- Parse Name–Value ----------
 if mod(numel(varargin),2)~=0
@@ -91,8 +99,15 @@ for k = 1:2:numel(varargin)
 
         case "detach"
             opts.Detach = logical(val);
+
         case {"num_points", "trajectory_points","trajectory_resolution", "num_trajectory_points"}
             opts.num_trajectory_points = val; 
+        
+        case{"linear_speed"}
+            opts.linear_speed = val; 
+
+        case{"angular_speed"}
+            opts.angular_speed = val; 
 
         otherwise
             error('Unknown option "%s".', name);
@@ -115,7 +130,7 @@ isWin = ispc;
 ur_type = toURType(opts.Model);
 controllerArg = buildControllerArg(opts.Controller);
 
-[appCmd, appKind] = applicationRegistry(Application, ur_type, controllerArg, opts.num_trajectory_points);
+[appCmd, appKind] = applicationRegistry(Application, ur_type, controllerArg, opts.num_trajectory_points, opts.linear_speed, opts.angular_speed);
 
 if strcmp(appKind,'hardware')
     base = sprintf(['ros2 launch ur_robot_driver ur_control.launch.py ', ...
@@ -202,7 +217,7 @@ end
         end
     end
 
-    function [cmd, kind] = applicationRegistry(app, ur, carg, trajectory_points)
+    function [cmd, kind] = applicationRegistry(app, ur, carg, trajectory_points, linear_speed, angular_speed)
         a = lower(strtrim(string(app)));
         kind = 'normal';
 
@@ -226,7 +241,7 @@ end
                 kind = 'hardware';
 
             case "teleoperation"
-                cmd = 'ros2 run tutorialteleop tutorial_teleop';
+                cmd = sprintf('ros2 run tutorialteleop tutorial_teleop --ros-args -p linear_speed:=%f -p angular_speed:=%f', linear_speed, angular_speed);
 
             case "trajectory"
                 cmd = sprintf('ros2 run trajectory_tracker track_trajectory --ros-args -p num_points:=%d',trajectory_points);
