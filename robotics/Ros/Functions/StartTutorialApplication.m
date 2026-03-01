@@ -32,6 +32,12 @@ function status = StartTutorialApplication(Application, varargin)
 %     'robot_ip'    : default '192.168.56.101' (always included)
 %     'computer_ip' : default '' (mapped to reverse_ip; required only if Docker==true)
 %     Alias accepted: 'reverse_ip'
+%   
+%   Trajectory tracker additional inputs (Appliucation == 'Trajectory')
+%     'num_points'  : default 200 (can be changed to increase or decrease
+%     the number of points displayed)
+%     Aöoas acceüted: 'trajectory_points','trajectory_resolution',
+%     'num_trajectory_points'
 %
 %   Environment / terminal behavior:
 %     'Docker'     : logical, default true
@@ -50,6 +56,7 @@ opts.Workspace  = 'fctr_ws';
 opts.RobotIP    = '192.168.56.101';
 opts.ComputerIP = '';
 opts.Detach     = false;
+opts.num_trajectory_points = 200; 
 
 % ---------- Parse Name–Value ----------
 if mod(numel(varargin),2)~=0
@@ -84,6 +91,8 @@ for k = 1:2:numel(varargin)
 
         case "detach"
             opts.Detach = logical(val);
+        case {"num_points", "trajectory_points","trajectory_resolution", "num_trajectory_points"}
+            opts.num_trajectory_points = val; 
 
         otherwise
             error('Unknown option "%s".', name);
@@ -106,7 +115,7 @@ isWin = ispc;
 ur_type = toURType(opts.Model);
 controllerArg = buildControllerArg(opts.Controller);
 
-[appCmd, appKind] = applicationRegistry(Application, ur_type, controllerArg);
+[appCmd, appKind] = applicationRegistry(Application, ur_type, controllerArg, opts.num_trajectory_points);
 
 if strcmp(appKind,'hardware')
     base = sprintf(['ros2 launch ur_robot_driver ur_control.launch.py ', ...
@@ -193,7 +202,7 @@ end
         end
     end
 
-    function [cmd, kind] = applicationRegistry(app, ur, carg)
+    function [cmd, kind] = applicationRegistry(app, ur, carg, trajectory_points)
         a = lower(strtrim(string(app)));
         kind = 'normal';
 
@@ -220,7 +229,7 @@ end
                 cmd = 'ros2 run tutorialteleop tutorial_teleop';
 
             case "trajectory"
-                cmd = 'ros2 run trajectory_tracker track_trajectory';
+                cmd = sprintf('ros2 run trajectory_tracker track_trajectory --ros-args -p num_points:=%d',trajectory_points);
 
             case "safety_nodes"
                 if strcmpi(ur,'threelink')
