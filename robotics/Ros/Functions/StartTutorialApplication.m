@@ -50,6 +50,10 @@ function status = StartTutorialApplication(Application, varargin)
 %     'DockerName' : char, default 'FCTR-container'
 %     'Detach'     : logical
 %
+%   Rendering options:
+%     'useSoftwareGL' : logical, default true (change to false for a better
+%     performance on a machine with a good GPU)
+%
 % RETURNS
 %   status : system() return code of the launcher command (0 is success)
 
@@ -65,6 +69,7 @@ opts.Detach     = false;
 opts.num_trajectory_points = 200; 
 opts.linear_speed = 0.2; 
 opts.angular_speed = 1.0; 
+opts.useSoftwareGL = true;
 
 % ---------- Parse Name–Value ----------
 if mod(numel(varargin),2)~=0
@@ -155,7 +160,11 @@ innerParts = {
     'source /opt/ros/jazzy/setup.bash'
     sprintf('source %s', setupBash)
     sprintf('export ROS_DOMAIN_ID=%s',getenv("ROS_DOMAIN_ID"))
+    'export QT_X11_NO_MITSHM=1'
 };
+if opts.useSoftwareGL
+    innerParts{end+1} = 'export LIBGL_ALWAYS_SOFTWARE=1';
+end
 
 if ~isempty(strtrim(appCmd))
     innerParts{end+1} = appCmd; %#ok<AGROW>
