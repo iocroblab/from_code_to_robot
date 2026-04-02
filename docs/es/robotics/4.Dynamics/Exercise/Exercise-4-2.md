@@ -19,7 +19,7 @@ At each control step, you will:
 
 Instead of using the standard library of MATLAB, for this exercise import the robot using the raw URDF file. 
 
--  importrobot(\["robotics/Resources/urdf/ur5e.urdf"\]); 
+-  importrobot(\["robotics/Ros/src/ur5e.urdf"\]); 
 
 Hint: Remember to set the gravity and data structure. While you can define the data structure during import, the gravity needs to be defined later. 
 
@@ -178,7 +178,7 @@ StartTutorialApplication('Safety_nodes','docker',false); %sends a 0 torque when 
 
 ```matlab
 tau_lim = [150 150 150 28 28 28]'; %UR5e
-robot = importrobot(["robotics/Resources/urdf/ur3e.urdf"], DataFormat="column");
+robot = importrobot(["robotics/Ros/src/ur3e.urdf"], DataFormat="column");
 g = [0,0,-9.81]';
 robot.Gravity=g;
 

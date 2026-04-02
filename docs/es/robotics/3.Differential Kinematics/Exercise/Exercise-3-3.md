@@ -70,14 +70,14 @@ You can see the controls in the terminal:
 To start the required programs and simulations execute (once): 
 
 ```matlab
-% StartTutorialApplication('Simulation', 'Controller','Speed','model','ur5e'); 
+% StartTutorialApplication('Simulation', 'Controller','Speed'); 
 % StartTutorialApplication('Teleoperation');
 ```
 
 If you run this on a native ubuntu system (no docker): 
 
 ```matlab
-StartTutorialApplication('Simulation', 'Controller', 'Speed', 'Docker',false,'model','ur5e'); 
+StartTutorialApplication('Simulation', 'Controller', 'Speed', 'Docker',false); 
 StartTutorialApplication('Teleoperation', 'Docker', false);
 ```
 

@@ -33,10 +33,10 @@ A common improvement is to include **feedforward terms** based on approximate kn
 
 ## Gravity\-Compensated PD Control
 
-One of the simplest ways to improve decentralized control is to add **gravity compensation**. The idea is that, without compensation, the controller must fight against the constant gravitational torques acting on the joints. This can lead to large steady\-state errors.
+One of the simplest ways to improve decentralized control is to add **gravity compensation**. The idea is that, without compensation, the controller must fight against the constant gravitational torques acting on the joints. This can lead to large steady\-state errors, especially when holding the manipulator in a fixed posture.
 
 
-By explicitly including a feedforward term equal to the gravity vector g(q), we can cancel the static gravitational effect.
+By explicitly including a feedforward term equal to the gravity vector g(q), we can cancel the static gravitational effect. The controller then only needs to handle the deviations from the desired trajectory.
 
 
 The control law:
@@ -51,10 +51,6 @@ for $\dot{q_d } =0$
 
 
 Resulting in the control scheme: ![image_1.svg](Control_Schemes_media/image_1.svg)
-
-# PID Control
-
-Another way to improve the decentralized control and eliminate steady state error is done by introducing an integration term. It is important to add some anti windup mechanism to stop the integration term from building up when the position is far away. The Idea is to move the joints as close as possible to the desired position using a feedforward PD + gravity compensation scheme. The integral term will eliminate any steady state error. 
 
 # Centralized Control
 
