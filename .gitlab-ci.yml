@@ -1,16 +1,19 @@
+stages:
+  - deploy
+
 pages:
   stage: deploy
-  image: python:3.13.9-slim-trixie
+  image: python:3.13-slim
   script:
-    - apt update
-    - apt install -qy mkdocs-material mkdocs-material-extensions python3-mdx-math katex
+    - pip install --no-cache-dir mkdocs mkdocs-material mkdocs-material-extensions mkdocs-static-i18n python-markdown-math
     - mkdocs build --site-dir public
   cache:
     key: ${CI_COMMIT_REF_SLUG}
     paths:
-      - ~/.cache/ 
+      - ~/.cache/
   artifacts:
     paths:
       - public
   rules:
-    - if: $CI_COMMIT_BRANCH == "Development"
+    - if: $CI_COMMIT_BRANCH == "Public"
+

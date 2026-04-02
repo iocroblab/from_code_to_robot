@@ -1,6 +1,8 @@
-site_name: RS-Toolbox Docs
-site_description: Documentation for RS-Toolbox
-site_author: RS-Toolbox
+site_name: From Code to Robot
+site_description: Project Documentation
+site_author: Institute of Industrial and Control Engineering (IOC) - Universitat Politècnica de Catalunya
+site_url: https://teaching.ioc.upc.edu/from-code-to-robot/
+use_directory_urls: true
 
 docs_dir: docs
 
@@ -10,6 +12,19 @@ theme:
 
 plugins:
   - search
+  - i18n:
+      docs_structure: folder
+      languages:
+        - locale: en
+          name: English
+          default: true
+          build: true
+        - locale: ca
+          name: Català
+          build: true
+        - locale: es
+          name: Español
+          build: true
 
 markdown_extensions:
   - pymdownx.arithmatex:
