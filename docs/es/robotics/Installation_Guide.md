@@ -1,5 +1,5 @@
 
-# Installation Guide – From Code to Robot Tutorial
+# Installation Guide
 
 This tutorial provides a **reproducible ROS 2 Jazzy environment** compatible with MATLAB R2025.
 
