@@ -81,9 +81,11 @@ function check_variables(vars)
                             output = get_output(var, 'fail', sprintf('%s mismatch', name));
                             fprintf('[FAIL] %s\n', output);
                         else
+                            for i=1:size(expected,3)
                             fprintf('[FAIL] mismatch in expected output for variable %s;\nExpected: %s\nGot: %s\n', ...
-                                    name, mat2str(expected, 4), mat2str(val, 4));
-                        end
+                                    name, mat2str(expected(:,:,i), 4), mat2str(val(:,:,i), 4));
+                            end
+                            end
                     end
                 catch e
                     fprintf('[ERROR] Comparison failed for %s: %s\n', name, e.message);
