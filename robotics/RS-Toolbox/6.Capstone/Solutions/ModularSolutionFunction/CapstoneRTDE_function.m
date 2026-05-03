@@ -1,21 +1,19 @@
-function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
-% CapstoneROS_function(e, fruit, Name,Value,...)
+function CapstoneRTDE_function(e, urRTDEObject, varargin)
+% CapstoneRTDE_function(e, urRTDEObject, Name,Value,...)
 %
 % Real-time teleop/vision-error driven velocity IK controller.
 % This function is intended to be called INSIDE an external rate-controlled loop.
 %
 % Required inputs:
-%   e     : [3x1] or [1x3] error signal [e_x, e_z, e_scale]
-%   fruit : string/char label of currently detected fruit (e.g., "orange")
-%   urRTDEObject: ur RTDE object created with urRTDEClient(robot_ip)
+%   e            : [3x1] or [1x3] error signal [e_x, e_z, e_scale]
+%   urRTDEObject : UR RTDE object created with urRTDEClient(robot_ip)
 %
 % Name-Value (all optional):
-%   'ur_model'            : 'ur3e' (default) or 'ur5e','ur10e','ur16e','ur3','ur5','ur10'
-%   'kx'                  : 0.3 (default)
-%   'kz'                  : 0.3 (default)
-%   'kt'                  : 0.3 (default)
-%   'q_dot_limits'        : ones(6,1) (default)
-%   'fruit_to_be_tracked' : 'orange' (default)
+%   'ur_model'     : 'ur3e' (default) or 'ur5e','ur10e','ur16e','ur3','ur5','ur10'
+%   'kx'           : 0.3 (default)
+%   'kz'           : 0.3 (default)
+%   'kt'           : 0.3 (default)
+%   'q_dot_limits' : ones(6,1) (default)
 %
 % Notes:
 % - Setup (robot model + workspace radii + visualization) is done once.
@@ -27,21 +25,17 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
     p.FunctionName = mfilename;
 
     addRequired(p, 'e', @(x) isnumeric(x) && (numel(x) == 3) && all(isfinite(x)));
-    addRequired(p, 'fruit', @(x) (isstring(x) || ischar(x)));
 
     addParameter(p, 'ur_model', 'ur3e', @(x) (isstring(x) || ischar(x)));
     addParameter(p, 'kx', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'kz', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'kt', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'q_dot_limits', ones(6,1), @(x) isnumeric(x) && isequal(size(x), [6,1]) && all(isfinite(x)) && all(x >= 0));
-    addParameter(p, 'fruit_to_be_tracked', 'orange', @(x) (isstring(x) || ischar(x)));
 
-    parse(p, e, fruit, varargin{:});
+    parse(p, e, varargin{:});
     opts = p.Results;
 
     e = e(:);
-    fruit = string(fruit);
-    fruit_to_be_tracked = string(opts.fruit_to_be_tracked);
 
     % -------------------- Persistent state --------------------
     persistent setup_completed
@@ -90,16 +84,6 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
         VisualizeWorkspace(R_home);
     end
 
-    % -------------------- If wrong fruit: stop (safety) --------------------
-    if ~strcmpi(fruit, fruit_to_be_tracked)
-        % Safety behavior: stop if not tracking target fruit
-        try
-            SendJointSpeeds(zeros(6,1));
-        catch
-        end
-        return;
-    end
-
     % -------------------- Main control --------------------
     try
         % --- Joint state ---
@@ -138,9 +122,7 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
 
         % If outside workspace or scaling kills motion -> stop for safety
         if s <= 0
-            
-            sendSpeedJCommands(ur , zeros(6,1));
-
+            sendSpeedJCommands(urRTDEObject, zeros(6,1));
             return;
         end
 
@@ -187,7 +169,7 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
         Jgeo = geometricJacobian(ur, q, "tool0");     % typically [omega; v]
         J = [Jgeo(4:6,:); Jgeo(1:3,:)];               % force [v; omega]
 
-        % Damping based on linear part (your original choice)
+        % Damping based on linear part
         Jv = J(1:3,:);
         sigma_min = min(svd(Jv));
 
@@ -214,7 +196,6 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
         q_dot = min(max(q_dot, -q_dot_limits_safe), q_dot_limits_safe);
 
         % --- Command + visualize ---
-        
         sendSpeedJCommands(urRTDEObject, q_dot);
 
         JointStatesToRviz(q, string(opts.ur_model), [], ...
@@ -222,7 +203,7 @@ function CapstoneRTDE_function(e, fruit, urRTDEObject, varargin)
 
     catch ME
         try
-            sendSpeedJCommands(ur , zeros(6,1));
+            sendSpeedJCommands(urRTDEObject, zeros(6,1));
         catch
         end
         rethrow(ME);

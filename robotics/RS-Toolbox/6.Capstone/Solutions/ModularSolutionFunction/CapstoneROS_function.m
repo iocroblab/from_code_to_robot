@@ -1,20 +1,18 @@
-function CapstoneROS_function(e, fruit, varargin)
-% CapstoneROS_function(e, fruit, Name,Value,...)
+function CapstoneROS_function(e, varargin)
+% CapstoneROS_function(e, Name,Value,...)
 %
 % Real-time teleop/vision-error driven velocity IK controller.
 % This function is intended to be called INSIDE an external rate-controlled loop.
 %
 % Required inputs:
-%   e     : [3x1] or [1x3] error signal [e_x, e_z, e_scale]
-%   fruit : string/char label of currently detected fruit (e.g., "orange")
+%   e : [3x1] or [1x3] error signal [e_x, e_z, e_scale]
 %
 % Name-Value (all optional):
-%   'ur_model'            : 'ur3e' (default) or 'ur5e','ur10e','ur16e','ur3','ur5','ur10'
-%   'kx'                  : 0.3 (default)
-%   'kz'                  : 0.3 (default)
-%   'kt'                  : 0.3 (default)
-%   'q_dot_limits'        : ones(6,1) (default)
-%   'fruit_to_be_tracked' : 'orange' (default)
+%   'ur_model'     : 'ur3e' (default) or 'ur5e','ur10e','ur16e','ur3','ur5','ur10'
+%   'kx'           : 0.3 (default)
+%   'kz'           : 0.3 (default)
+%   'kt'           : 0.3 (default)
+%   'q_dot_limits' : ones(6,1) (default)
 %
 % Notes:
 % - Setup (robot model + workspace radii + visualization) is done once.
@@ -26,21 +24,17 @@ function CapstoneROS_function(e, fruit, varargin)
     p.FunctionName = mfilename;
 
     addRequired(p, 'e', @(x) isnumeric(x) && (numel(x) == 3) && all(isfinite(x)));
-    addRequired(p, 'fruit', @(x) (isstring(x) || ischar(x)));
 
     addParameter(p, 'ur_model', 'ur3e', @(x) (isstring(x) || ischar(x)));
     addParameter(p, 'kx', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'kz', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'kt', 0.3, @(x) isnumeric(x) && isscalar(x) && isfinite(x));
     addParameter(p, 'q_dot_limits', ones(6,1), @(x) isnumeric(x) && isequal(size(x), [6,1]) && all(isfinite(x)) && all(x >= 0));
-    addParameter(p, 'fruit_to_be_tracked', 'orange', @(x) (isstring(x) || ischar(x)));
 
-    parse(p, e, fruit, varargin{:});
+    parse(p, e, varargin{:});
     opts = p.Results;
 
     e = e(:);
-    fruit = string(fruit);
-    fruit_to_be_tracked = string(opts.fruit_to_be_tracked);
 
     % -------------------- Persistent state --------------------
     persistent setup_completed
@@ -87,16 +81,6 @@ function CapstoneROS_function(e, fruit, varargin)
             recomputeWorkspace(ur, ur_home);
 
         VisualizeWorkspace(R_home);
-    end
-
-    % -------------------- If wrong fruit: stop (safety) --------------------
-    if ~strcmpi(fruit, fruit_to_be_tracked)
-        % Safety behavior: stop if not tracking target fruit
-        try
-            SendJointSpeeds(zeros(6,1));
-        catch
-        end
-        return;
     end
 
     % -------------------- Main control --------------------
@@ -184,7 +168,7 @@ function CapstoneROS_function(e, fruit, varargin)
         Jgeo = geometricJacobian(ur, q, "tool0");     % typically [omega; v]
         J = [Jgeo(4:6,:); Jgeo(1:3,:)];               % force [v; omega]
 
-        % Damping based on linear part (your original choice)
+        % Damping based on linear part
         Jv = J(1:3,:);
         sigma_min = min(svd(Jv));
 
