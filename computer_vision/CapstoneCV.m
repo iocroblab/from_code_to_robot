@@ -1,12 +1,10 @@
-function [centroid, BB_size, bbox, score] = Capstone_Vision_demo( ...
-    cam, yolo_model, minConf, tracked_fruit, video_scale, showImage)
+function [centroid, BB_size, best_match_fruit] = Capstone_Vision_demo(cam, yolo_model, minConf, video_scale, showImage)
 
     % Optional input default
-    if nargin < 6
+    if nargin < 5
         showImage = false;
     end
-
-    tracked_fruit = string(tracked_fruit);
+    best_match_fruit = ""; 
 
     % Get frame
     I = snapshot(cam);
@@ -21,8 +19,10 @@ function [centroid, BB_size, bbox, score] = Capstone_Vision_demo( ...
     % Run detector
     [bboxes, scores, labels] = detect(yolo_model, I_small);
 
-    % Keep only desired fruit above confidence threshold
-    idx = labels == tracked_fruit & scores >= minConf;
+    wantedFruits = ["banana", "apple", "orange"];
+    
+    %keep only confident fruit idx
+    idx = scores >= minConf & ismember(string(labels), wantedFruits);
 
     % Default outputs if nothing is found
     centroid = [];
@@ -34,11 +34,14 @@ function [centroid, BB_size, bbox, score] = Capstone_Vision_demo( ...
         % Filter detections
         filteredBboxes = bboxes(idx, :);
         filteredScores = scores(idx);
+        filterdLabels = labels(idx); 
 
         % Pick highest-confidence detection
         [score, bestIdx] = max(filteredScores);
 
         bbox = filteredBboxes(bestIdx, :);   % pixel bbox: [x y width height]
+        
+        best_match_fruit = filterdLabels(bestIdx);
 
         % Pixel centroid
         centroid_px = [bbox(1) + bbox(3)/2, ...
@@ -61,7 +64,7 @@ function [centroid, BB_size, bbox, score] = Capstone_Vision_demo( ...
         Iout = I_small;
 
         if ~isempty(bbox)
-            annotation = string(tracked_fruit) + ": " + string(round(score, 2));
+            annotation = string(best_match_fruit) + ": " + string(round(score, 2));
 
             Iout = insertObjectAnnotation(Iout, ...
                 "rectangle", ...
@@ -86,7 +89,7 @@ function [centroid, BB_size, bbox, score] = Capstone_Vision_demo( ...
         end
 
         imshow(Iout);
-        title("Detected " + string(tracked_fruit));
+        title("Detected " + string(best_match_fruit));
         drawnow;
     end
 
