@@ -1,13 +1,17 @@
-function [centroid, BB_size, best_match_fruit] = Capstone_Vision_demo(cam, yolo_model, minConf, video_scale, showImage)
+function [centroid, BB_size, best_match_fruit, Iout] = Capstone_Vision_demo(cam, yolo_model, minConf, video_scale, showImage, outputImage)
 
     % Optional input default
     if nargin < 5
         showImage = false;
+        outputImage = false;
+    elseif nargin < 6
+        outputImage = false; 
     end
-    best_match_fruit = ""; 
+    best_match_fruit =""; 
 
     % Get frame
     I = snapshot(cam);
+    Iout = []; 
 
     % Downsample
     I_small = imresize(I, video_scale);
@@ -58,9 +62,8 @@ function [centroid, BB_size, best_match_fruit] = Capstone_Vision_demo(cam, yolo_
         BB_size = [BB_size_px(1) / imageWidth, ...
                    BB_size_px(2) / imageHeight];
     end
-
     % Optional visualization
-    if showImage
+    if showImage||outputImage
         Iout = I_small;
 
         if ~isempty(bbox)
@@ -87,10 +90,11 @@ function [centroid, BB_size, best_match_fruit] = Capstone_Vision_demo(cam, yolo_
                 "FontSize", 12, ...
                 "BoxOpacity", 0.6);
         end
-
-        imshow(Iout);
-        title("Detected " + string(best_match_fruit));
-        drawnow;
+        if showImage
+            imshow(Iout);
+            title("Detected " + string(best_match_fruit));
+            drawnow;
+        end
     end
 
 end
