@@ -232,13 +232,13 @@ end
 
         switch a
             case "rviz"
-                cmd = sprintf('ros2 launch ur_description view_ur.launch.py ur_type:=%s', ur);
+                cmd = sprintf('ros2 launch fctr_ur_package view_ur.launch.py ur_type:=%s', ur);
 
             case "simulation"
                 if strcmpi(ur,'threelink')
                     base = 'ros2 launch threelink_manipulator spawn_robot.launch.py';
                 else
-                    base = sprintf('ros2 launch ur_simulation_gz ur_sim_control.launch.py ur_type:=%s', ur);
+                    base = sprintf('ros2 launch fctr_ur_package ur_sim_control.launch.py ur_type:=%s', ur);
                 end
                 cmd = base;
                 if ~isempty(strtrim(carg))
