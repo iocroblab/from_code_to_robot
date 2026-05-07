@@ -48,10 +48,10 @@ Example (native Linux):
 **Select Docker container name**
 
 
-`'DockerName','gz-modified'`
+`'DockerName','FCTR-container'`
 
 
-Default container: `gz-modified`
+Default container: `FCTR-container`
 
 
 Use this if you created your own container or renamed it.

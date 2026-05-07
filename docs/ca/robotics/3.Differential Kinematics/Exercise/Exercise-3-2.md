@@ -39,7 +39,7 @@ where $k\left(\cdot \right)$ is the forward kinematic of the q.
 Write a function that computes a solution to the inverse kinematic using the pseudoinverse of the Jacobian. The function has the following inputs: 
 
 1.  the initial joint states as a row vector ( $q_0 \in {\mathbb{R}}^{6\textrm{x1}}$ )
-2. desired pose vector using euler angles (ZYZ) $x_{\textrm{desired}} =\left\lbrack \begin{array}{c} x\newline y\newline z\newline \phi \newline \theta \newline \psi  \end{array}\right\rbrack$
+2. desired position vector (only considering cartesian position) $x_{\textrm{desired}} =\left\lbrack \begin{array}{c} x\newline y\newline z \end{array}\right\rbrack$
 3. gain (k)
 4. tolerance (tol)
 5. max iterations (Imax)
@@ -47,7 +47,7 @@ Write a function that computes a solution to the inverse kinematic using the pse
 The function should return the required joint states as a row vector ( $q\in {\mathbb{R}}^{6\textrm{x1}}$ )
 
 
-For this task, consider $\dot{x_d } =\left\lbrack \begin{array}{c} 0\newline 0\newline 0\newline 0\newline 0\newline 0 \end{array}\right\rbrack$ and $\Delta t=0\ldotp 01\;s$ 
+For this task, consider $\dot{x_d } =\left\lbrack \begin{array}{c} 0\newline 0\newline 0 \end{array}\right\rbrack$ and $\Delta t=0\ldotp 01\;s$ 
 
 
 Use the following function name for your solution:
@@ -95,13 +95,6 @@ q=[];
 end
 
 ```
-
-You can check your work by clicking the Run: 
-
-```matlab
- 
-check_exercise('3-2-1')
-```
 # Task 2
 
 Extend your function from before. 
@@ -122,13 +115,13 @@ Use "tic" and "toc" to measure the computational time.
 
 Use the following function name for your solution:
 
--   ExtendedPseudoInverseAlgorithm(t\_desired, k, dt, tol, Imax) 
+-   ExtendedPseudoInverseAlgorithm(q0, x\_desired, k, dt, tol, Imax, dt) 
 
 Solve this exercise without using the function: 
 
 -  inverseKinematics() 
 ```matlab
-function [q,total_time,total_iterations,solution_error] = ExtendedPseudoInverseAlgorithm(t_desired, k, dt, tol, Imax)
+function [q,total_time,total_iterations,solution_error] = ExtendedPseudoInverseAlgorithm(x_desired, k, dt, tol, Imax, dt)
 
 q=[]; 
 total_time = []; 

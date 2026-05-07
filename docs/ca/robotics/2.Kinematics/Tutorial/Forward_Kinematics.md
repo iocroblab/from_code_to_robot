@@ -295,12 +295,18 @@ show(ur3,[0;0;0;0;0;0]);
 
 ![figure_1.png](Forward_Kinematics_media/figure_1.png)
 
-Or display it in ROS using the prebuild function (make sure you have it initialized): 
+Or display it in ROS using the prebuild function JointStatesToRviz().
+
+
+To start Rviz: 
+
+```matlab
+StartTutorialApplication('Rviz','model','ur3e'); 
+%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
+%when using a native ROS workspace
+```
 
 ```matlab
 JointStatesToRviz([0;0;0;0;0;0],'ur3');
 ```
-
-Remember you first need to initialize the robot using StartTutorialApplication().
-
 

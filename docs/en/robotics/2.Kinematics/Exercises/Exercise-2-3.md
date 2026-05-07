@@ -21,8 +21,8 @@ Consider the following set of DH parameters:
 | Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
 | 1  | 0  | pi/2  | 0  | $\displaystyle \theta_1$   |
 | 2  | 0.3  | 0  | 0  | $\displaystyle \theta_2$   |
-| 3  |   0.2  | pi/2  | 0  | $\displaystyle \theta_3$   |
-| 4  | 0  | \-pi/2  | 0.2  | $\displaystyle \theta_4$   |
+| 3  |   0  | pi/2  | 0  | $\displaystyle \theta_3$   |
+| 4  | 0  | \-pi/2  | 0.4  | $\displaystyle \theta_4$   |
 | 5  | 0  | pi/2  | 0  | $\displaystyle \theta_5$   |
 | 6  | 0  | 0  | 0.15  | $\displaystyle \theta_6$   |
 
@@ -56,8 +56,8 @@ syms q1 q2 q3 q4 q5 q6 real
         % a      alpha      d       theta
 DH = [    0,     pi/2,     0,       q1;    % Link 1
           0.3,   0,        0,       q2;    % Link 2
-          0.2,   pi/2,     0,       q3;    % Link 3
-          0,     -pi/2,    0.2,     q4;    % Link 4
+          0,     pi/2,     0,       q3+pi/2;    % Link 3
+          0,     -pi/2,    0.4,     q4;    % Link 4
           0,     pi/2,     0,       q5;    % Link 5
           0,     0,        0.15,    q6];   % Link 6
 
@@ -91,11 +91,17 @@ check_exercise('2-3-1')
 1.  Compute $R_3^0 \left(\theta_1 ,\theta_2 ,\theta_3 \right)$
 2. Compute $R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)={R_3^0 }^T \cdot R_{\textrm{ee}}$
 
-Use the following variables  to store your solution:
+ *hint: the rotation R03 and R36 changes for each anthropomorpic arm solution.* 
+
+
+Use the following variables to store your solution:
 
 -  Ree (Rotation of the end\-effector) 
--  R03 (Rotation from frame 0 to frame 3) 
--  R36 (Rotation from frame 3 to frame 6) 
+-  R03 (Rotation from frame 0 to frame 3 as a 3D matrix) 
+-  R36 (Rotation from frame 3 to frame 6 as a 3D matrix) 
+
+*hint: you can use cat(3,Mat1,Mat2,Mat3,Mat4) to obtain a 3D array.*
+
 ```matlab
 Ree = []; 
 R03 = []; 
@@ -110,14 +116,15 @@ check_exercise('2-3-2')
 
 ```
 # Task 3
-1.  Solve inverse kinematics for Spherical Wrist: $\theta_4 ,\theta_5 ,\theta_6$
+1.  Solve the inverse kinematics for Spherical Wrist: $\theta_4 ,\theta_5 ,\theta_6$
 
 Use the following variables  to store your solution:
 
--  spherical\_solutions (inverse kinematic solution where each row is a solution)  
 -  solutions (complete inverse kinematic solution for the anthropomorphic arm with spherical wrist, where each row represents a unique solution) 
+
+*hint: You must compute two spherical wrist soluitions for each corresponding anthropomorpic arm solution.*
+
 ```matlab
-spherical_solutions = [];
 solutions = [];
 ```
 

@@ -209,10 +209,6 @@ To view the robot in another configuration:
 ```matlab
 myconfig_2 = [0;-pi/2];  %column vector because we defined the robot as: robot = rigidBodyTree("DataFormat","column")
 show(robot, myconfig_2) %we only have two joints
-
-%This configuration is the one needed for the JointStatesToRviz
-myconfig = [0,-pi/2,0,-pi/2,0,0]; 
-
 ```
 # Visualize in Rviz
 
@@ -221,7 +217,17 @@ In this tutorial can use the ROS2 visualization tool Rviz. Once  **Rviz is runni
 
 you can specify the robot with the extension 'ur5e' ( default is ur3e). 
 
+
+To start Rviz: 
+
 ```matlab
+StartTutorialApplication('Rviz','model','ur3e'); 
+%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
+%when using a native ROS workspace
+```
+
+```matlab
+myconfig = [0,-pi/2,0,-pi/2,0,0]; 
 JointStatesToRviz(myconfig, 'ur5e'); 
 ```
 

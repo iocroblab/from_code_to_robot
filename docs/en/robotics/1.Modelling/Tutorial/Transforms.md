@@ -31,16 +31,32 @@ visualizeTranslation([2,3,5]);
 
 With the following code, you can create a new frame and make its location known. The function `transl()` defines a new coordinate frame  whose origin is offset (translated) from its parent frame (starting point) the provided distances. The `TargetFrameBroadcaster` then publishes this new frame. Fix values between \-1 and 1.
 
+
+To start the visualization tool Rviz: 
+
+```matlab
+StartTutorialApplication('Rviz','model','ur3e'); 
+```
+
+```matlabTextOutput
+FCTR-container
+```
+
+```matlab
+%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
+%when using a native ROS workspace
+```
+
 ```matlab
 x_trans=0.34
 ```
 
 ```matlabTextOutput
-x_trans = 0.4400
+x_trans = 0.3400
 ```
 
 ```matlab
-y_trans=0.02
+y_trans=0.04
 ```
 
 ```matlabTextOutput
@@ -61,10 +77,7 @@ TargetFrameBroadcaster(transl([x_trans,y_trans,z_trans]),'my_frame')
 ```
 
 ```matlabTextOutput
-TargetFrameBroadcaster is not found in the current folder or on the MATLAB path, but exists in:
-    /home/janrosell/git-projects/from-code-to-robot/from-code-to-robot/robotics/Ros/Functions
-
-Change the MATLAB current folder or add its folder to the MATLAB path.
+Published static transform: world → my_frame
 ```
 
 ## Obtaining the translation vector
