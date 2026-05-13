@@ -46,7 +46,7 @@ function TargetFrameBroadcaster(homogeneousTransform, childFrame, parentFrame)
     tfStampedMsg.transform.rotation.z = Tquat(4);
     
     % Send the transform message
-    sendTransform(tftree,tfStampedMsg, "UseStatic", false)
+    sendTransform(tftree,tfStampedMsg, "UseStatic", true)
     % Print confirmation of the published transform
     fprintf("Published static transform: %s → %s\n", ...
             tfStampedMsg.header.frame_id, tfStampedMsg.child_frame_id);
