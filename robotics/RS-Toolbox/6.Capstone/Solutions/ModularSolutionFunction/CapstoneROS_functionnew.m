@@ -69,8 +69,8 @@ function CapstoneROS_functionnew(e, Base_fruit, TCP_fruit, tracked_fruit, vararg
         v_max_lin = 0.25;    % [m/s]
         v_max_ang = 1.00;    % [rad/s], kept for safety although angular command is zero
 
-        sigma_thresh = 0.02;
-        lambda_max   = 0.02;
+        sigma_thresh = 0.05;
+        lambda_max   = 1.0;
 
         ur_name_RS_Toolbox = desired_name_RS;
         ur = loadrobot(char(ur_name_RS_Toolbox), ...
