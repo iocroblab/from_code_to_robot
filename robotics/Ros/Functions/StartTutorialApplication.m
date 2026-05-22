@@ -138,8 +138,13 @@ controllerArg = buildControllerArg(opts.Controller);
 [appCmd, appKind] = applicationRegistry(Application, ur_type, controllerArg, opts.num_trajectory_points, opts.linear_speed, opts.angular_speed);
 
 if strcmp(appKind,'hardware')
+    if opts.Docker
+        ws_root='/home/user'; 
+    else
+        ws_root = '$HOME'; 
+    end
     base = sprintf(['ros2 launch ur_robot_driver ur_control.launch.py ', ...
-        'ur_type:=%s robot_ip:=%s'], ur_type, opts.RobotIP);
+        'ur_type:=%s robot_ip:=%s rviz_config_file:=%s/fctr_ws/src/from_code_to_robot_ros2_stack/fctr_ur_package/rviz/view_robot.rviz'], ur_type, opts.RobotIP, ws_root);
 
     if opts.Docker
         if isempty(strtrim(opts.ComputerIP))
