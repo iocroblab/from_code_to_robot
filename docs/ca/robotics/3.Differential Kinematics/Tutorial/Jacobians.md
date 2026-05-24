@@ -1,117 +1,116 @@
+# Cinemàtica diferencial \- Jacobians
 
-# Differential Kinematics \- Jacobians
-
-Differential kinematics is the study of how infinitesimal changes in a robot's joint coordinates translate into instantaneous linear and angular velocities of its end\-effector. By focusing on velocity relationships rather than finite displacements, it provides the foundation for velocity control, trajectory following, and real\-time motion planning in robotic manipulators.
-
-
-At the heart of differential kinematics lies the **geometric Jacobian**, J(q), which maps the vector of joint velocities $\dot{\;q}$ to the spatial velocity of the end\-effector, $v=\left\lbrack \begin{array}{c} \dot{\;p} \newline \omega  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \dot{\;x} \newline \dot{\;y} \newline \dot{\;z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$, via $v=J\left(q\right)\cdot \dot{\;q}$. 
+La cinemàtica diferencial és l’estudi de com els canvis infinitesimals en les coordenades articulars d’un robot es tradueixen en velocitats lineals i angulars instantànies del seu efector final. Centrant-se en les relacions de velocitat més que no pas en desplaçaments finits, proporciona la base per al control de velocitat, el seguiment de trajectòries i la planificació de moviment en temps real en manipuladors robòtics.
 
 
-Here, the upper block of J(q) captures how joint motions induce translational velocity, while the lower block captures induced angular velocity.
+Al centre de la cinemàtica diferencial hi ha el **jacobià geomètric**, J(q), que mapeja el vector de velocitats articulars $\dot{\;q}$ a la velocitat espacial de l’efector final, $v=\left\lbrack \begin{array}{c} \dot{\;p} \newline \omega  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \dot{\;x} \newline \dot{\;y} \newline \dot{\;z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$, mitjançant $v=J\left(q\right)\cdot \dot{\;q}$. 
 
 
-In addition to the geometric form, one often works with the **analytical Jacobian**, which relates joint velocities to the time\-derivative of a chosen orientation parametrization (e.g., ZYZ Euler angles).  This requires an additional transformation that accounts for the kinematics of the orientation representation, ensuring compatibility with whatever angular coordinates are used for control or trajectory specification.
+Aquí, el bloc superior de J(q) captura com els moviments articulars indueixen velocitat translacional, mentre que el bloc inferior captura la velocitat angular induïda.
 
-# Geometric Jacobian
 
-The Geometric Jacobian can be partitioned in two parts. 
+A més de la forma geomètrica, sovint es treballa amb el **jacobià analític**, que relaciona les velocitats articulars amb la derivada temporal d’una parametrització d’orientació escollida (p. ex., angles d’Euler ZYZ). Això requereix una transformació addicional que tingui en compte la cinemàtica de la representació de l’orientació, garantint la compatibilitat amb les coordenades angulars que es facin servir per al control o l’especificació de trajectòries.
+
+# Jacobià geomètric
+
+El jacobià geomètric es pot dividir en dues parts. 
 
  $$ J\left(q\right)=\left\lbrack \begin{array}{c} J_p \left(q\right)\newline J_{\Theta } \left(q\right) \end{array}\right\rbrack $$ 
 
-the translational part $J_p \left(q\right)\in {\mathbb{R}}^{3\;x\;n}$ 
+la part translacional $J_p \left(q\right)\in {\mathbb{R}}^{3\;x\;n}$ 
 
 
-and the rotational part $J_{\Theta } \left(q\right)\in \mathbb{R}{\;}^{3\;x\;n\;}$ 
+i la part rotacional $J_{\Theta } \left(q\right)\in \mathbb{R}{\;}^{3\;x\;n\;}$ 
 
 
-for n joints. 
+per a n articulacions. 
 
 
-Picture a single Joint that rotates at a constant angular velocity $\dot{\;\theta \;}$, as the entire joint will rotate at this angular velocity, we can visualize the linear velocities at a given moment. The velocity w.r.t. the joint axis can be computed as $||\vec{\;v} ||=\dot{\theta} \cdot \textrm{distance}\;\textrm{to}\;\textrm{center}\;\textrm{of}\;\textrm{rotation}$, resulting in a linear speed increase with the distance to the axis. Look at the image below, you can see that at this configuration, a rotation of $\dot{\theta_1 }$ will result in a velocity in the x\-direction, and no velocities in y or z direction. 
+Imagina una única articulació que gira a una velocitat angular constant $\dot{\;\theta \;}$. Com que tota l’articulació girarà a aquesta velocitat angular, podem visualitzar les velocitats lineals en un moment donat. La velocitat respecte de l’eix articular es pot calcular com $||\vec{\;v} ||=\dot{\theta} \cdot \textrm{distància}\;\textrm{al}\;\textrm{centre}\;\textrm{de}\;\textrm{rotació}$, donant lloc a un augment lineal de la velocitat amb la distància a l’eix. Observa la imatge següent: pots veure que, en aquesta configuració, una rotació de $\dot{\theta_1 }$ donarà lloc a una velocitat en la direcció x, i a cap velocitat en les direccions y o z. 
 
 
 ![image_0.svg](Jacobians_media/image_0.svg)
 
 
-At the next configuration, the situation has changed. While there is still no velocity in the z\-direction, the velocity vector now has a non zero component in x and y position. Notice how a Jacobian is only valid for the joint configuration it was computed for, thus it needs to be recomputed for each time instance. 
+A la configuració següent, la situació ha canviat. Tot i que encara no hi ha velocitat en la direcció z, el vector de velocitat ara té una component no nul·la en les posicions x i y. Observa que un jacobià només és vàlid per a la configuració articular per a la qual s’ha calculat; per tant, s’ha de recalcular per a cada instant de temps. 
 
 
 ![image_1.svg](Jacobians_media/image_1.svg)
 
-## Translation part $J_p \left(q\right)$ \- Revolute Joints
+## Part translacional $J_p \left(q\right)$ \- Articulacions rotatives
 
-To find the direction of the velocity, you use the cross product. Remember that the cross product of two vectors yields a vector perpendicular to its computation vectors. For this application, we want to find the vector that is perpendicular to both the joint axis (z) and the direction to the end\-effector or target frame. The size (magnitude) of this vector will be defined by the distance (length) to the end\-effector, as the length of the z axis is $\vec{\;z_i } =A_{i-1}^0 \cdot \;\;\left\lbrack \begin{array}{c} 0\newline 0\newline 1 \end{array}\right\rbrack$ with $||\vec{\;z_i } ||=1$ 
+Per trobar la direcció de la velocitat, fas servir el producte vectorial. Recorda que el producte vectorial de dos vectors dona un vector perpendicular als vectors de càlcul. Per a aquesta aplicació, volem trobar el vector que és perpendicular tant a l’eix articular (z) com a la direcció cap a l’efector final o marc objectiu. La mida (magnitud) d’aquest vector vindrà definida per la distància (longitud) fins a l’efector final, ja que la longitud de l’eix z és $\vec{\;z_i } =A_{i-1}^0 \cdot \;\;\left\lbrack \begin{array}{c} 0\newline 0\newline 1 \end{array}\right\rbrack$ amb $||\vec{\;z_i } ||=1$ 
 
 
-The formula is
+La fórmula és
 
  $$ J_{p,i} \;\left(q\right)=\vec{\;z_{i-1} } \times \left(p_{\textrm{ee}} -p_{i-1} \right) $$ 
 
-where you must consider all the joints and links that come after the given joint, as a rotation of the base will influence all consecutive joints going into the direction of the end\-effector. 
+on has de considerar totes les articulacions i enllaços que venen després de l’articulació donada, ja que una rotació de la base influirà en totes les articulacions consecutives en direcció cap a l’efector final. 
 
 
-Below you can see an image that illustrates how the end\-effector velocity may behave if multiple joints are actuated. Notice how Joint 1 impacts both the Z1 frame and the EE frame. while the second Joint only influences the target frame. 
+A continuació pots veure una imatge que il·lustra com es pot comportar la velocitat de l’efector final si s’actuen múltiples articulacions. Observa com l’articulació 1 afecta tant el marc Z1 com el marc EE, mentre que la segona articulació només influeix en el marc objectiu. 
 
 
 ![image_2.svg](Jacobians_media/image_2.svg)
 
-## Translation part $J_p \left(q\right)$ \- Prismatic Joints
+## Part translacional $J_p \left(q\right)$ \- Articulacions prismàtiques
 
-The translational part for prismatic joints is computed easier, as the actuator speed $\dot{\;q}$ is directly the speed of the joint. Thus the magnitude of the speed vector is
+La part translacional per a articulacions prismàtiques es calcula més fàcilment, ja que la velocitat de l’actuador $\dot{\;q}$ és directament la velocitat de l’articulació. Per tant, la magnitud del vector de velocitat és
 
  $$ ||\vec{\;v} ||=\dot{\;q} =\dot{\;d} =||\;\vec{\;z} \cdot \dot{\;q} \;|| $$ 
 
 ![image_3.svg](Jacobians_media/image_3.svg)
 
 
-The formula is 
+La fórmula és 
 
  $$ J_{p,i} \;\left(q\right)=\vec{\;z_{i-1} } =A_{i-1}^0 \cdot \;\;\left\lbrack \begin{array}{c} 0\newline 0\newline 1 \end{array}\right\rbrack $$ 
-### Velocity vector from Translation part $J_{p\;} \left(q\right)$ 
+### Vector de velocitat a partir de la part translacional $J_{p\;} \left(q\right)$ 
 
-To compute the velocity vector, multiply the joint speed vector as: 
+Per calcular el vector de velocitat, multiplica el vector de velocitats articulars com: 
 
  $$ \left\lbrack \begin{array}{c} \dot{x\;} \newline \dot{y\;} \newline \dot{z\;}  \end{array}\right\rbrack =J_p \left(q\right)\cdot \dot{\;q} $$ 
-## Rotational part $J_{\Theta } \left(q\right)$ \- Revolute Joints
+## Part rotacional $J_{\Theta } \left(q\right)$ \- Articulacions rotatives
 
-Similar to the translation of a prismatic joint, the rotational part of $J_{\Theta } \left(q\right)$ is the joint speed. 
+De manera similar a la translació d’una articulació prismàtica, la part rotacional de $J_{\Theta } \left(q\right)$ és la velocitat articular. 
 
  $$ ||\omega_i ||=\dot{\;q} =\dot{\;\theta \;} $$ 
 
-now 
+ara 
 
  $$ J_{\theta ,i} \;\left(q\right)=\vec{\;z_{i-1} } $$ 
-## Rotation part $J_{\Theta } \left(q\right)$ \- Prismatic Joints
+## Part rotacional $J_{\Theta } \left(q\right)$ \- Articulacions prismàtiques
 
-Prismatic joints only actuate linearly, thus the rotational part becomes 0. 
+Les articulacions prismàtiques només actuen linealment; per tant, la part rotacional esdevé 0. 
 
  $$ J_{\Theta ,i} \;\left(q\right)=0 $$ 
-### Velocity vector from Rotation part $J_{\Theta } \left(q\right)$ 
+### Vector de velocitat a partir de la part rotacional $J_{\Theta } \left(q\right)$ 
 
-To use the rotation part of the jacobian, multiply the joint speed vector as: 
+Per fer servir la part rotacional del jacobià, multiplica el vector de velocitats articulars com: 
 
  $$ \left\lbrack \begin{array}{c} \omega_x \;\newline \omega_y \newline \omega_z  \end{array}\right\rbrack =J_{\Theta \;} \left(q\right)\cdot \dot{\;q} $$ 
-## Matlab implementation
+## Implementació en Matlab
 
 ![image_4.svg](Jacobians_media/image_4.svg)
 
 
-consider the DH parameters of an anthropomorpic arm:
+considera els paràmetres DH d’un braç antropomòrfic:
 
 ||||||
 | :-: | :-- | :-: | :-: | :-- |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0  | pi/2  | 0  | $\displaystyle \theta_1$   |
 | 2  | 0.3  | 0  | 0  | $\displaystyle \theta_2$   |
 | 3  |   0.4  | pi/2  | 0  | $\displaystyle \theta_3$   |
 
 ```matlab
 syms q1 q2 q3 q4 q5 q6 real 
-% DH Parameters Table
+% Taula de paràmetres DH
         % a      alpha      d       theta
-DH = [    0,     pi/2,     0,       q1;    % Link 1
-          0.3,   0,        0,       q2;    % Link 2
-          0.4,   0,        0,       q3;    % Link 3
+DH = [    0,     pi/2,     0,       q1;    % Enllaç 1
+          0.3,   0,        0,       q2;    % Enllaç 2
+          0.4,   0,        0,       q3;    % Enllaç 3
           ]; 
 
 A01 = dh2tf(DH(1,:)); 
@@ -146,17 +145,17 @@ simplify(J)
 
 Config = [0,-pi/2,0]; 
 
-% Substitute the joint variables with the configuration values
+% Substitueix les variables articulars pels valors de configuració
 J_substituted = subs(J, [q1, q2, q3], Config(1:3))
 
 ```
-### Robotic System Toolbox Implementation
+### Implementació amb Robotic System Toolbox
 
-We can use the Robotic System Toolbox to get the geometric jacobian. However, the function geometricJacobian returns the Jacobian in the format: 
+Podem fer servir el Robotic System Toolbox per obtenir el jacobià geomètric. Tanmateix, la funció geometricJacobian retorna el jacobià en el format: 
 
  $$ J=\left\lbrack \begin{array}{c} J_{\Theta \;} \newline J_p  \end{array}\right\rbrack $$ 
 
-Notice how the translation and rotation part are switched. 
+Observa com la part translacional i la part rotacional estan intercanviades. 
 
 ```matlab
 ur3e = loadrobot("universalUR3e", "DataFormat", "column"); 
@@ -165,75 +164,75 @@ J_toolbox = geometricJacobian(ur3e, Config2, 'tool0')
 J_p_toolbox = J_toolbox(4:6,:); 
 J_theta_toolbox = J_toolbox(1:3,:); 
 ```
-# Analytical Jacobian
+# Jacobià analític
 
-The analytical Jacobian relates the joint velocities of a manipulator directly to the time derivatives of a chosen position–orientation parameterization of the end\-effector, such as Euler angles or roll–pitch–yaw angles.
-
-
-Unlike the geometric Jacobian, which uses angular velocity vectors for the rotational part, the analytical Jacobian expresses both linear and angular motion in terms that match the chosen coordinate representation. The linear velocity part is obtained by differentiating the end\-effector position vector with respect to the joint variables, while the angular part is obtained by transforming angular velocity into orientation parameter rates through a configuration\-dependent mapping matrix.
+El jacobià analític relaciona les velocitats articulars d’un manipulador directament amb les derivades temporals d’una parametrització posició-orientació escollida de l’efector final, com ara angles d’Euler o angles roll-pitch-yaw.
 
 
-This form is particularly useful when control laws, trajectory planning, or constraints are specified directly in position–orientation coordinates rather than in spatial velocity form.
+A diferència del jacobià geomètric, que fa servir vectors de velocitat angular per a la part rotacional, el jacobià analític expressa tant el moviment lineal com l’angular en termes que coincideixen amb la representació de coordenades escollida. La part de velocitat lineal s’obté derivant el vector de posició de l’efector final respecte de les variables articulars, mentre que la part angular s’obté transformant la velocitat angular en taxes dels paràmetres d’orientació mitjançant una matriu de mapatge dependent de la configuració.
 
 
-The analytical Jacobian consists of two parts: 
+Aquesta forma és especialment útil quan les lleis de control, la planificació de trajectòries o les restriccions s’especifiquen directament en coordenades posició-orientació en lloc de fer-ho en forma de velocitat espacial.
+
+
+El jacobià analític consta de dues parts: 
 
  $$ J_A \left(q\right)=\left\lbrack \begin{array}{c} J_p \left(q\right)\newline J_{\Phi } \left(q\right) \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \frac{\partial p_{\textrm{ee}} }{\partial q}\newline \frac{\partial \;\Phi_{\textrm{ee}} \;}{\partial q} \end{array}\right\rbrack $$ 
 
-In contrast to the Geometric Jacobian, using the analytical computation approach of the jacobian, only has one formula for prismatic and revolute joints.
+En contrast amb el jacobià geomètric, fent servir l’enfocament de càlcul analític del jacobià, només hi ha una fórmula per a articulacions prismàtiques i rotatives.
 
-## Translation part $J_p \left(q\right)$ 
+## Part translacional $J_p \left(q\right)$ 
 
-As the analytical jacobian relies on derivation, it directly maps changes in joint states to velocities (and thus in position), without using geometric relations. Both translation parts of the geometric and analytical jacobian are identical. 
+Com que el jacobià analític es basa en la derivació, mapeja directament els canvis en els estats articulars a velocitats (i, per tant, a posició), sense fer servir relacions geomètriques. Les parts translacionals del jacobià geomètric i analític són idèntiques. 
 
 
-Given a translation vector of the end\-effector $p_{\textrm{ee}}$ (here the anthropomorphic arm), the translational part $J_p \left(q\right)$ is computed as follows: 
+Donat un vector de translació de l’efector final $p_{\textrm{ee}}$ (aquí, el braç antropomòrfic), la part translacional $J_p \left(q\right)$ es calcula de la manera següent: 
 
  $$ p_{\textrm{ee}} =\left\lbrack \begin{array}{c} \cos \left(q_1 \right)\cdot \left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)\newline \sin \left(q_1 \right)\cdot \left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)\newline a_2 \cdot \sin \left(q_2 \right)+a_3 \cdot \sin \left(q_2 +q_3 \right) \end{array}\right\rbrack =\left\lbrack \begin{array}{c} x\newline y\newline z \end{array}\right\rbrack $$ 
 
  $$ J_p (\mathbf{q})=\left\lbrack \begin{array}{ccc} \frac{\partial x}{\partial q_1 } & \frac{\partial x}{\partial q_2 } & \frac{\partial x}{\partial q_3 }\newline \frac{\partial y}{\partial q_1 } & \frac{\partial y}{\partial q_2 } & \frac{\partial y}{\partial q_3 }\newline \frac{\partial z}{\partial q_1 } & \frac{\partial z}{\partial q_2 } & \frac{\partial z}{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} -\sin (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\cos (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\cos (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline \cos (q_1 )\cdot \big(a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 )\big) & -\sin (q_1 )\cdot \big(a_2 \cdot \sin (q_2 )+a_3 \cdot \sin (q_2 +q_3 )\big) & -\sin (q_1 )\cdot a_3 \cdot \sin (q_2 +q_3 )\newline 0 & a_2 \cdot \cos (q_2 )+a_3 \cdot \cos (q_2 +q_3 ) & a_3 \cdot \cos (q_2 +q_3 ) \end{array}\right\rbrack . $$ 
 
-## Rotation part $J_{\Phi \;} \left(q\right)$ \- ZYZ 
+## Part rotacional $J_{\Phi \;} \left(q\right)$ \- ZYZ 
 
-To compute the rotational part of the analytical jacobian, one must first decide which angle representation to use. 
-
-
-Example: 
+Per calcular la part rotacional del jacobià analític, primer s’ha de decidir quina representació angular es farà servir. 
 
 
-For the ZYZ euler angles $\phi ,\theta \;$ and $\psi \;$ you need to find an expression that represents the angles in terms of the end\-effector rotation matrix. Refer to the tutorial "Transforms" in the section Modelling for other representations. 
+Exemple: 
 
 
-Given the end\-effector rotaton matrix $R_{\textrm{ee}}$:
+Per als angles d’Euler ZYZ $\phi ,\theta \;$ i $\psi \;$ has de trobar una expressió que representi els angles en termes de la matriu de rotació de l’efector final. Consulta el tutorial "Transforms" a la secció Modelling per a altres representacions. 
+
+
+Donada la matriu de rotació de l’efector final $R_{\textrm{ee}}$:
 
  $$ R_{ee} =\Phi_{ee} =\left\lbrack \begin{array}{ccc} \cos (q_1 )\cdot \cos (q_2 +q_3 ) & -\cos (q_1 )\cdot \sin (q_2 +q_3 ) & \sin (q_1 )\newline \sin (q_1 )\cdot \cos (q_2 +q_3 ) & -\sin (q_1 )\cdot \sin (q_2 +q_3 ) & -\cos (q_1 )\newline \sin (q_2 +q_3 ) & \cos (q_2 +q_3 ) & 0 \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} r_{11}  & r_{12}  & r_{13} \newline r_{21}  & r_{22}  & r_{23} \newline r_{31}  & r_{32}  & r_{33}  \end{array}\right\rbrack =R_z (\phi )\cdot R_{y^{\prime } } (\theta )\cdot R_{z^{\prime \prime } } (\psi ) $$ 
 
  $$ \begin{array}{l} \phi =atan2(r_{23} ,\,r_{13} )=atan2\big(-\cos (q_1 ),\,\sin (q_1 )\big)=q_1 -\frac{\pi }{2}\newline \theta =atan2\big(\sqrt{r_{13}^2 +r_{23}^2 },\,r_{33} \big)=atan2(1,\,0)=\frac{\pi }{2}\newline \psi =atan2(r_{32} ,\,-r_{31} )=atan2\big(\cos (q_2 +q_3 ),\,-\sin (q_2 +q_3 )\big)=q_2 +q_3 +\frac{\pi }{2} \end{array} $$ 
 
-now differentiating these angles w.r.t. the joints yields the rotation part  of the Jacobian $J_{\Phi \;} \left(q\right)$ 
+ara, derivant aquests angles respecte de les articulacions, s’obté la part rotacional del jacobià $J_{\Phi \;} \left(q\right)$ 
 
  $$ J_{\phi } (\mathbf{q})=\left\lbrack \begin{array}{ccc} \frac{\partial \phi }{\partial q_1 } & \frac{\partial \phi }{\partial q_2 } & \frac{\partial \phi }{\partial q_3 }\newline \frac{\partial \theta }{\partial q_1 } & \frac{\partial \theta }{\partial q_2 } & \frac{\partial \theta }{\partial q_3 }\newline \frac{\partial \psi }{\partial q_1 } & \frac{\partial \psi }{\partial q_2 } & \frac{\partial \psi }{\partial q_3 } \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack $$ 
-### Conversion between $J_{\Theta } \left(q\right)$ and $J_{\Phi } \left(q\right)$ 
+### Conversió entre $J_{\Theta } \left(q\right)$ i $J_{\Phi } \left(q\right)$ 
 
-The rotation parts of the geometric and analytical jacobians are related by the matrix $T_A \left(\Phi \right)$ and can be converted to one another. 
+Les parts rotacionals dels jacobians geomètric i analític estan relacionades per la matriu $T_A \left(\Phi \right)$ i es poden convertir l’una en l’altra. 
 
  $$ J_{\Theta \;} \left(q\right)=T_A \left(\Phi \right)\cdot J_{\Phi } \left(q\right) $$ 
 
-with 
+amb 
 
  $$ T_A \left(\Phi \right)=\left\lbrack \begin{array}{ccc} 0 & -\sin \left(\phi \right) & \cos \left(\phi \right)\cdot \sin \left(\theta \right)\newline 0 & -\sin \left(\phi \right)\cdot \sin \left(\theta \right) & -\sin \left(\phi \right)\cdot \sin \left(\theta \right)\newline 1 & \cos \left(\theta \right) & \cos \left(\theta \right) \end{array}\right\rbrack $$ 
 
  $$ J_{\Theta } (\mathbf{q})=T_A (\Phi )\cdot J_{\Phi } (q)=\left\lbrack \begin{array}{ccc} 0 & -\sin (\phi ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \cos (\phi ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & 0 & \cos (\theta ) \end{array}\right\rbrack \cdot \left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right\rbrack =\left\lbrack \begin{array}{ccc} 0 & \cos (\phi )\cdot \sin (\theta ) & \cos (\phi )\cdot \sin (\theta )\newline 0 & \sin (\phi )\cdot \sin (\theta ) & \sin (\phi )\cdot \sin (\theta )\newline 1 & \cos (\theta ) & \cos (\theta ) \end{array}\right\rbrack $$ 
 
-since $\phi =q_1 -\frac{\pi }{2}$ and $\theta =\frac{\pi }{2}$, then $\cos \left(\phi \right)=\sin \left(q_1 \right),\;\;\;\sin \left(\phi \right)=-\cos \left(q_1 \right),\;\;\cos \left(\theta \right)=0$ and $\sin \left(\theta \right)=1$. Therefore: 
+com que $\phi =q_1 -\frac{\pi }{2}$ i $\theta =\frac{\pi }{2}$, aleshores $\cos \left(\phi \right)=\sin \left(q_1 \right),\;\;\;\sin \left(\phi \right)=-\cos \left(q_1 \right),\;\;\cos \left(\theta \right)=0$ i $\sin \left(\theta \right)=1$. Per tant: 
 
  $$ J_{\Theta } \left(q\right)=\left\lbrack \begin{array}{ccc} 0 & \sin \left(q_1 \right) & \sin \left(q_1 \right)\newline 0 & -\cos \left(q_1 \right) & -\cos \left(q_1 \right)\newline 1 & 0 & 0 \end{array}\right\rbrack $$ 
-### Velocity vector from Rotation part $J_{\Phi \;} \left(q\right)$ 
+### Vector de velocitat a partir de la part rotacional $J_{\Phi \;} \left(q\right)$ 
 
-To use the rotation part of the jacobian, multiply the joint speed vector as: 
+Per fer servir la part rotacional del jacobià, multiplica el vector de velocitats articulars com: 
 
  $$ \left\lbrack \begin{array}{c} \dot{\;\phi \;} \newline \dot{\;\theta \;} \newline \dot{\;\psi \;}  \end{array}\right\rbrack =J_{\Phi } \left(q\right)\cdot \dot{\;q} $$ 
-## Matlab implementation
+## Implementació en Matlab
 ```matlab
  Jpa_1 = diff(pee, q1);
  Jpa_2 = diff(pee, q2);
@@ -266,6 +265,3 @@ J_A =
 J_A_subs = 
 
   $$ \displaystyle \left(\begin{array}{ccc} 0 & \frac{7}{10} & \frac{2}{5}\newline 0 & 0 & 0\newline 0 & 0 & 0\newline 1 & 0 & 0\newline 0 & 0 & 0\newline 0 & 1 & 1 \end{array}\right) $$ 
- 
-
-

@@ -1,57 +1,56 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 1.3 \- Find the DH parameters
+# Exercici 1.3 \- Trobar els paràmetres DH
 
-In this exercise you will compute the DH parameters of an arbitrary robot manipulator, setup the equations using the symbolic toolbox and the define the robot using the robotic system toolbox. 
+En aquest exercici calcularàs els paràmetres DH d’un manipulador robòtic arbitrari, configuraràs les equacions utilitzant la toolbox simbòlica i definiràs el robot amb la Robotic System Toolbox. 
 
 
-Please store your solutions in the predefined variables!
+Guarda les teves solucions a les variables predefinides!
 
-# Task description:
+# Descripció de la tasca:
 
-Find the DH parameters and homogeneous transforms to describe the following robot manipulator:
+Troba els paràmetres DH i les transformacions homogènies per descriure el manipulador robòtic següent:
 
 
 ![image_0.svg](Exercise-1-3_media/image_0.svg)
 
 
-Answer all the questions and store your solution in the correct variable
+Respon totes les preguntes i guarda la teva solució a la variable correcta.
 
-# Task 1
-1.  Define real symbolic variables for each joint (q1, ..., qn)
-2. Store them in a column array (q)
-3. Define the position limits for each of the joints, for revolute joints the limit is $\pm 2\pi \;$ (limit\_1, ..., limit\_n)
+# Tasca 1
+1.  Defineix variables simbòliques reals per a cada articulació (q1, ..., qn)
+2. Guarda-les en un array columna (q)
+3. Defineix els límits de posició per a cadascuna de les articulacions; per a les articulacions rotacionals el límit és $\pm 2\pi \;$ (limit\_1, ..., limit\_n)
 
-Use the following variables to store your solution:
+Utilitza les variables següents per guardar la teva solució:
 
--  qi (joint position of joint i) 
--  q (an array with all the symbolic joint states) 
--  limit\_i (array with minimum and maximum permitted joint value) 
+-  qi (posició de l’articulació i) 
+-  q (un array amb tots els estats simbòlics de les articulacions) 
+-  limit\_i (array amb el valor mínim i màxim permès de l’articulació) 
 ```matlab
 q=[];
 limit_1=[];
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-3-1')
 ```
-# Task 2
-1.  compute the DH parameters, include  the symbolic joints in their correct position.
-2. Compute the homogeneous transform between the base and the first joint (TB0)
-3. Compute the homogeneous transform between the frame 3 and the tool frame (T4tool)
+# Tasca 2
+1.  calcula els paràmetres DH, incloent-hi les articulacions simbòliques a la seva posició correcta.
+2. Calcula la transformació homogènia entre la base i la primera articulació (TB0)
+3. Calcula la transformació homogènia entre el sistema 3 i el sistema de l’eina (T4tool)
 
-You can use the function dh2tf(DH) to get the homogeneous transform from a row of DH parameters. 
+Pots utilitzar la funció dh2tf(DH) per obtenir la transformació homogènia a partir d’una fila de paràmetres DH. 
 
 
-Use the following variables to store your solution:
+Utilitza les variables següents per guardar la teva solució:
 
 -  DH (a , alpha, d, theta) 
--  TB0 (homogeneous transform from base to frame 0) 
+-  TB0 (transformació homogènia de la base al sistema 0) 
 -  T3tool 
 ```matlab
 DH=[
@@ -62,36 +61,36 @@ TB0 = [];
 T3tool = []; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-3-2')
 
 ```
-# Task 3
-1.  Setup the robot using the Robotic System toolbox
-2. Define the data format as column
+# Tasca 3
+1.  Configura el robot utilitzant la Robotic System Toolbox
+2. Defineix el format de dades com a column
 
-use the following names:
+utilitza els noms següents:
 
--  body\_base (body name for base offset) 
--  base\_link (joint name for body\_base) 
--  body\_1, ..., body\_n (bodies for joints) 
--  joint\_1, ..., joint\_n (robot joints) 
--  tool (body name of the tool) 
--  tool\_link (joint name for tool body) 
+-  body\_base (nom del cos per al desplaçament de la base) 
+-  base\_link (nom de l’articulació per a body\_base) 
+-  body\_1, ..., body\_n (cossos per a les articulacions) 
+-  joint\_1, ..., joint\_n (articulacions del robot) 
+-  tool (nom del cos de l’eina) 
+-  tool\_link (nom de l’articulació per al cos de l’eina) 
 
-Use the following variables to store your solution:
+Utilitza les variables següents per guardar la teva solució:
 
--  robot (name of your robot) 
--  bodies (cell array containing all bodies) 
--  joints (cell array containing all joints) 
+-  robot (nom del teu robot) 
+-  bodies (cell array que conté tots els cossos) 
+-  joints (cell array que conté totes les articulacions) 
 
-Note: 
+Nota: 
 
 
-in order to use your previously setup DH parameters, you need to convert them to a double. Use the subs() function to substitute your symbolic variables into numeric ones. Remember that the toolbox will disregard any item in the controlled field (e.g. theta for revolute joints)
+per utilitzar els paràmetres DH que has configurat prèviament, els has de convertir a double. Utilitza la funció subs() per substituir les teves variables simbòliques per valors numèrics. Recorda que la toolbox ignorarà qualsevol element del camp controlat (per exemple, theta per a articulacions rotacionals)
 
 ```matlab
 bodies = [];
@@ -99,21 +98,20 @@ joints = [];
 robot = [];
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-3-3')
 ```
-# Task 4
-1.  Set the home configuration so the robot matches the image (use the lower limit for the first joint)
-2. Set the joint limits
+# Tasca 4
+1.  Estableix la configuració inicial perquè el robot coincideixi amb la imatge (utilitza el límit inferior per a la primera articulació)
+2. Estableix els límits de les articulacions
 
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-3-4')
 ```
-

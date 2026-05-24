@@ -1,33 +1,32 @@
+# Exercici 4.1 \- Càlcul de termes dinàmics
 
-# Exercise 4.1 \- Dynamic Term Computations
-
-In this exercise you will setup functions to compute the dynamics terms of the lagrange formulation for a threelink manipulator. 
+En aquest exercici configuraràs funcions per calcular els termes dinàmics de la formulació de Lagrange per a un manipulador de tres enllaços. 
 
 
 ![image_0.svg](Exercise-4-1_media/image_0.svg)
 
 |||||||
 | :-- | :-- | :-- | :-- | :-- | :-- |
-| Link  | Mass \[kg\]  | Link width \[m\]  | Link height \[m\]  | Link length \[m\]  | Center of mass \[m\]   |
+| Enllaç  | Massa $begin:math:display$kg$end:math:display$  | Amplada de l’enllaç $begin:math:display$m$end:math:display$  | Alçada de l’enllaç $begin:math:display$m$end:math:display$  | Longitud de l’enllaç $begin:math:display$m$end:math:display$  | Centre de massa $begin:math:display$m$end:math:display$   |
 | 1  | 5  | 0.1  | 0.1  | 0.3  | 0.15   |
 | 2  | 3  | 0.1  | 0.1  | 0.5  | 0.25   |
 | 3  | 3  | 0.1  | 0.1  | 0.5  | 0.25   |
 
 
-The manipulator can be modeled using these DH parameters: 
+El manipulador es pot modelar fent servir aquests paràmetres DH: 
 
 ||||||
 | :-: | :-: | :-- | :-: | :-- |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0.3  | $\displaystyle \frac{\pi }{2}$  | 0.2  | $\displaystyle q_1$   |
 | 2  | 0.5  | 0  | 0  | $\displaystyle q_2$   |
 | 3  | 0.5  | 0  | 0  | $\displaystyle q_3$   |
 
 
-For this tutorial only consider the three bar links. 
+Per a aquest tutorial considera només els tres enllaços de barra. 
 
 
-You can compute their inertia as follows: 
+Pots calcular-ne la inèrcia de la manera següent: 
 
 
 ![image_1.png](Exercise-4-1_media/image_1.png)
@@ -37,21 +36,21 @@ You can compute their inertia as follows:
  $$ I_{\textrm{yy}} =I =\frac{1}{12}\cdot \;m\cdot \left(w^2 +h^2 \right) $$ 
 
  $$ I_{\textrm{zz}} =\frac{1}{12}\cdot \;m\cdot \left(w^2 +L^2 \right) $$ 
-# Task 1: Setup
+# Tasca 1: Configuració
 
-Calculate the inertias for the links in their Center of Mass and store them in the variables: 
+Calcula les inèrcies dels enllaços al seu centre de massa i desa-les a les variables: 
 
 -  I1 
 -  I2 
 -  I3 
 
-Setup a symbolic array q containing the following **real** symbolic variables for the joint angles
+Configura un array simbòlic q que contingui les variables simbòliques **reals** següents per als angles articulars
 
 -  q1 
 -  q2 
 -  q3 
 
-Setup a symbolic array qd containing the following **real** symbolic variables for the joint velocities
+Configura un array simbòlic qd que contingui les variables simbòliques **reals** següents per a les velocitats articulars
 
 -  qd1 
 -  qd2 
@@ -66,94 +65,93 @@ qd = [];
 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('4-1-1')
 ```
-# Task 2: Setup the Robot 
+# Tasca 2: Configura el robot 
 
-Load the urdf file for the threelink manipulator by using
+Carrega el fitxer urdf per al manipulador de tres enllaços fent servir
 
 -  importrobot("threelink\_noInertia.urdf") 
 
-Store it in the variable
+Desa’l a la variable
 
 -  threelink 
--  Set set the gravity to $\left\lbrack \begin{array}{c} 0\newline 0\newline -9\ldotp 81 \end{array}\right\rbrack$ 
--  Set the Inertias in the correct frame 
--  Set the center of mass for each body 
+-  Defineix la gravetat com $\left\lbrack \begin{array}{c} 0\newline 0\newline -9\ldotp 81 \end{array}\right\rbrack$ 
+-  Defineix les inèrcies en el marc correcte 
+-  Defineix el centre de massa de cada cos 
 
-*hint: remember to use the parallel axis shift*
+*pista: recorda fer servir el desplaçament d’eixos paral·lels*
 
 ```matlab
 threelink = []; 
 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('4-1-2')
 ```
-# Task 3: Inertia Matrix
+# Tasca 3: Matriu d’inèrcia
 
-Build the Inertia matrix for the three link manipulator using the symbolic toolbox. 
+Construeix la matriu d’inèrcia per al manipulador de tres enllaços fent servir el toolbox simbòlic. 
 
 
-Store the matrix in the variable
+Desa la matriu a la variable
 
--  B ( B should depend on q1, q2, q3) 
+-  B (B ha de dependre de q1, q2, q3) 
 ```matlab
 B = 0;
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('4-1-3')
 ```
-# Task 3: Coriolis Matrix 
+# Tasca 3: Matriu de Coriolis 
 
-Build the Coriolis matrix for the three link manipulator using the symbolic toolbox. 
+Construeix la matriu de Coriolis per al manipulador de tres enllaços fent servir el toolbox simbòlic. 
 
 
-Store the matrix in the variable
+Desa la matriu a la variable
 
--  C ( C should depend on q1, q2, q3, qd1, qd2, qd3) 
+-  C (C ha de dependre de q1, q2, q3, qd1, qd2, qd3) 
 ```matlab
 C = 0; 
 ```
 
-*hint: in Case you verify your matrice yourself, remember that the toolbox function velocityProduct returns C\*qd*
+*pista: en cas que verifiquis la teva matriu tu mateix, recorda que la funció del toolbox velocityProduct retorna C\*qd*
 
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('4-1-4')
 ```
-# Task 5: Gravity Compensation 
+# Tasca 5: Compensació de gravetat 
 
-Build the Gravity compensation term for the three link manipulator using the symbolic toolbox. 
+Construeix el terme de compensació de gravetat per al manipulador de tres enllaços fent servir el toolbox simbòlic. 
 
 
-Store the matrix in the variable
+Desa la matriu a la variable
 
--  G (G should depend on q1, q2, q3) 
+-  G (G ha de dependre de q1, q2, q3) 
 ```matlab
 G = 0; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('4-1-5')
 
 ```
-

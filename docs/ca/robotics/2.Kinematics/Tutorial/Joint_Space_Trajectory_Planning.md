@@ -1,89 +1,88 @@
+# Planificació de trajectòries en l’espai articular 
 
-# Joint Space Trajectory Planning 
+La planificació de trajectòries és una pedra angular del control del moviment robòtic: defineix **com** es mou un robot entre dues configuracions o postures de l’efector final al llarg del temps, subjecte a requisits de suavitat, temporització i límits físics (velocitats, acceleracions) de les seves articulacions o enllaços. Generant perfils continus de posició, velocitat i acceleració, els planificadors de trajectòries permeten als robots dur a terme tasques de manera segura, precisa i eficient, tant si segueixen una trajectòria de pick-and-place, com si solden una junta o cooperen amb humans.
 
-Trajectory planning is a cornerstone of robot motion control: it defines **how** a robot moves between two configurations or end\-effector poses over time, subject to requirements on smoothness, timing, and physical limits (velocities, accelerations) of its joints or links. By generating continuous profiles for position, velocity and acceleration, trajectory planners enable robots to carry out tasks safely, precisely and efficiently—whether following a pick\-and\-place path, welding a seam, or cooperating with humans.
+# Espai cartesià i espai articular
 
-# Cartesian Space and Joint Space
+La solució de cinemàtica inversa mapeja les coordenades cartesianes a l’espai articular. Si volem moure el robot d’una postura cartesiana a una altra, obtenim les posicions articulars inicials i la solució a la postura desitjada. Donades aquestes configuracions, hem de calcular com es mourà cada articulació per tenir una trajectòria suau.
 
-The inverse kinematics solution maps cartesian coordinates into the joint space. If we want to move the robot from one cartesian pose to another, we acquire the initial joint positions and the solution at the desired pose. Given these configurations, we need to compute how each joint will move to have a smooth trajectory.
+# Interpolació polinòmica
 
-# Polynomial Interpolation
+La interpolació polinòmica ens permet calcular els estats articulars, les velocitats i les acceleracions per seguir un perfil específic. Normalment faràs servir una equació cúbica o quíntica.
 
-Polynomial interpolation allows us to compute the joint states, speeds and accelerations in order to track a specific profile. Usually you will use a cubic or quintic equation.
+## Perfil cúbic
 
-## Cubic Profile
-
-To achieve a cubic profile as seen below, you need to solve the following parametric equations:
-
-
- $S\left(t\right)=A\cdot t^3 +B\cdot t^2 +C\cdot t+D$ = Joint Position
+Per aconseguir un perfil cúbic com el que es veu a continuació, has de resoldre les equacions paramètriques següents:
 
 
- $\dot{\;S} \left(t\right)=3\cdot A\cdot t^2 +2\cdot B\cdot t+C$ = Joint Speed
+ $S\left(t\right)=A\cdot t^3 +B\cdot t^2 +C\cdot t+D$ = posició articular
 
 
-This system of equations has four unknowns (A,B,C,D), therefore you need to come up with 4 equations to solve this system. 
+ $\dot{\;S} \left(t\right)=3\cdot A\cdot t^2 +2\cdot B\cdot t+C$ = velocitat articular
 
 
-For a set of desired parameters like: 
+Aquest sistema d’equacions té quatre incògnites (A,B,C,D); per tant, has de plantejar 4 equacions per resoldre aquest sistema. 
 
--          Initial joint state = 0 
--          Desired joint state = $\frac{\pi }{2}$ 
--          Initial  velocity = 0 
--          Desired velocity at the desired joint state = 0 
--          Time for movement = 5 s 
 
-it results in the following linear system: 
+Per a un conjunt de paràmetres desitjats com: 
+
+-          Estat articular inicial = 0 
+-          Estat articular desitjat = $\frac{\pi }{2}$ 
+-          Velocitat inicial = 0 
+-          Velocitat desitjada a l’estat articular desitjat = 0 
+-          Temps per al moviment = 5 s 
+
+dona lloc al sistema lineal següent: 
 
  $$ \left\lbrace \begin{array}{ll} ~I & S(0)=0=D\newline ~II & \dot{S} (0)=0=C\newline ~III & S(5)=\pi /2=A\cdot 5^3 +B\cdot 5^2 +C\cdot 5+D\newline ~IV & \dot{S} (5)=0=3\cdot A\cdot 5^2 +2\cdot B\cdot 5+C \end{array}\right. $$ 
 
-We can simplify the equations III and IV when substituting the results of I&II as: 
+Podem simplificar les equacions III i IV substituint els resultats de I&II com: 
 
  $$ \left\lbrace \begin{array}{ll} ~I & S(0)=0=D\newline ~II & \dot{S} (0)=0=C\newline ~III & S(5)=\pi /2=A\cdot 5^3 +B\cdot 5^2 \newline ~IV & \dot{S} (5)=0=3\cdot A\cdot 5^2 +2\cdot B\cdot 5 \end{array}\right. $$ 
 
-where we can find a parametric equation for B when rewriting IV as:
+on podem trobar una equació paramètrica per a B reescrivint IV com:
 
  $$ B=-7\ldotp 5\cdot A $$ 
 
-Substituting this in equation III we can derive: 
+Substituint això a l’equació III podem derivar: 
 
  $$ A=-\frac{\pi }{125} $$ 
 
-and finally 
+i finalment 
 
  $$ B=\frac{3}{50}\cdot \pi \; $$ 
 
-Using these values yields the trajectories: 
+Fer servir aquests valors dona lloc a les trajectòries: 
 
 
-*The position graph follows the cubic function with the parameters A,B,C,D.*
+*El gràfic de posició segueix la funció cúbica amb els paràmetres A,B,C,D.*
 
 
 ![image_0.svg](Joint_Space_Trajectory_Planning_media/image_0.svg)
 
 
-You can code this using the symbolic toolbox. To do so, create symbolic variables for the parameters and time
+Pots programar això fent servir el toolbox simbòlic. Per fer-ho, crea variables simbòliques per als paràmetres i el temps
 
 ```matlab
 clear all 
 syms A B C D t real
 ```
 
-Define the parametric function and its derivative: 
+Defineix la funció paramètrica i la seva derivada: 
 
 ```matlab
 S = A * t^3 + B*t^2 + C*t + D;
 S_d = diff(S, t);
 ```
 
-Create expressions for t=0 
+Crea expressions per a t=0 
 
 ```matlab
 S_0 = subs(S, t, 0) == 0;
 S_d0 = subs(S_d, t, 0) == 0;
 ```
 
-and for T = desired time
+i per a T = temps desitjat
 
 ```matlab
 T = 5; 
@@ -91,24 +90,24 @@ S_T = subs(S, t, T) == pi/2;
 S_dT = subs(S_d, t, T) == 0;
 ```
 
-Now either find the solutions algebraically or use the solve function of the symbolic toolbox: 
+Ara pots trobar les solucions algebraicament o fer servir la funció solve del toolbox simbòlic: 
 
 ```matlab
 eqns = [S_0, S_d0,  S_T, S_dT];
 vars = [A, B, C, D];
-% Use vpasolve for numerical solutions
+% Fes servir vpasolve per a solucions numèriques
 sol = solve(eqns, vars);
 ```
 
-Convert the solution to a matrix: 
+Converteix la solució a una matriu: 
 
 ```matlab
-% Convert solution to a matrix
+% Converteix la solució a una matriu
 solution = struct2cell(sol);
 solution = cell2mat(solution);
 ```
 
-Substitute the values for the parameters A,B,C,D into the equations for position, velocity and acceleration:
+Substitueix els valors dels paràmetres A,B,C,D a les equacions de posició, velocitat i acceleració:
 
 ```matlab
 posfunc = subs(S, vars, solution')
@@ -132,7 +131,7 @@ accfunc =
  $\displaystyle \frac{3\,\pi }{25}-\frac{6\,\pi \,t}{125}$
  
 
-To get a vector containing the joint states at discrete time you can substitute a time vector into the equations and obtain the joint positions, velocities and accelerations:
+Per obtenir un vector que contingui els estats articulars en temps discret, pots substituir un vector de temps a les equacions i obtenir les posicions, velocitats i acceleracions articulars:
 
 ```matlab
 time = linspace(0, T, 100);
@@ -142,63 +141,63 @@ acceleration = double(subs(accfunc, t, time));
 ```
 ### Robotic System Toolbox
 
-To generate this trajectory using the robotic system toolbox, you can use the cubicpolytraj() function: 
+Per generar aquesta trajectòria fent servir el Robotic System Toolbox, pots fer servir la funció cubicpolytraj(): 
 
 
-Start by creating a time vector defining the resolution:
+Comença creant un vector de temps que defineixi la resolució:
 
 ```matlab
 clear all
 T = 3; 
 ```
 
-Create an equally spaced time vector as: 
+Crea un vector de temps igualment espaiat com: 
 
 ```matlab
 timevec = linspace(0, T, 100);
 ```
 
-Define the desired waypoint
+Defineix el waypoint desitjat
 
 ```matlab
 waypoints = [0, pi/2]; 
 ```
 
-Define at which times these waypoints have to be reached
+Defineix en quins temps s’han d’assolir aquests waypoints
 
 ```matlab
 timepoints = [0,T];
 ```
 
-Finally, call the trajectory planning function
+Finalment, crida la funció de planificació de trajectòries
 
 ```matlab
 [position,velocity,acceleration,pp] = cubicpolytraj(waypoints,timepoints,timevec); 
-% Plot the cubic trajectory
+% Representa gràficament la trajectòria cúbica
 figure;
 subplot(3,1,1);
 plot(timevec,position);
-title('Cubic Trajectory Position vs Time');
-xlabel('Time (s)');
-ylabel('Position');
+title('Posició de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Posició');
 
 subplot(3,1,2);
 plot(timevec,velocity);
-title('Cubic Trajectory Velocity vs Time');
-xlabel('Time (s)');
-ylabel('Velocity');
+title('Velocitat de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Velocitat');
 
 subplot(3,1,3);
 plot(timevec,acceleration);
-title('Cubic Trajectory Acceleration vs Time');
-xlabel('Time (s)');
-ylabel('Acceleration');
+title('Acceleració de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Acceleració');
 ```
 
 ![figure_0.png](Joint_Space_Trajectory_Planning_media/figure_0.png)
-### Multiple waypoints
+### Múltiples waypoints
 
-You may also give multiple waypoints at once. You can define them following this code: 
+També pots donar múltiples waypoints alhora. Pots definir-los seguint aquest codi: 
 
 ```matlab
 timevec = linspace(0, 2*T, 100);
@@ -207,33 +206,33 @@ timepoints = [0,T, 2*T];
 velocities = [0,0.8,0];
 [position,velocity,acceleration,pp] = cubicpolytraj(waypoints,timepoints,timevec, "VelocityBoundaryCondition",velocities); 
 
-% Plot the Quintic trajectory
+% Representa gràficament la trajectòria quíntica
 figure;
 subplot(3,1,1);
 plot(timevec,position);
-title('Cubic Trajectory Position vs Time');
-xlabel('Time (s)');
-ylabel('Position');
+title('Posició de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Posició');
 
 subplot(3,1,2);
 plot(timevec,velocity);
-title('Cubic Trajectory Velocity vs Time');
-xlabel('Time (s)');
-ylabel('Velocity');
+title('Velocitat de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Velocitat');
 
 subplot(3,1,3);
 plot(timevec,acceleration);
-title('Cubic Trajectory Acceleration vs Time');
-xlabel('Time (s)');
-ylabel('Acceleration');
+title('Acceleració de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Acceleració');
 ```
 
 ![figure_1.png](Joint_Space_Trajectory_Planning_media/figure_1.png)
 
-to access the polynomial coefficients use:  
+per accedir als coeficients polinòmics fes servir:  
 
 ```matlab
-pp.coefs(2,:) %coefficients for trajectory from 0 -> pi/2 (same as calculated above)
+pp.coefs(2,:) %coeficients per a la trajectòria de 0 -> pi/2 (igual que s’ha calculat anteriorment)
 ```
 
 ```matlabTextOutput
@@ -243,10 +242,10 @@ ans = 1x4
 ```
 
 
-where each row corresponds to a waypoint
+on cada fila correspon a un waypoint
 
 ```matlab
-pp.coefs(3,:) %coefficients for the trajectory from pi/2 -> pi 
+pp.coefs(3,:) %coeficients per a la trajectòria de pi/2 -> pi 
 ```
 
 ```matlabTextOutput
@@ -255,9 +254,9 @@ ans = 1x4
 
 ```
 
-### Joint Configurations
+### Configuracions articulars
 
-You can also compute the trajectories of entire joint configurations: 
+També pots calcular les trajectòries de configuracions articulars completes: 
 
 ```matlab
 initialConfig = [0, 0, 0]; 
@@ -288,201 +287,201 @@ waypoints = 3x2
 
 figure;
 
-% Define colors for each joint
+% Defineix colors per a cada articulació
 colors = lines(size(position, 1));
 
-% Position
+% Posició
 subplot(3,1,1);
 hold on;
 for i = 1:size(position, 1)
     plot(timevec, position(i,:), 'Color', colors(i,:), 'DisplayName', sprintf('Joint %d', i));
 end
-title('Cubic Trajectory Position vs Time');
-xlabel('Time (s)');
-ylabel('Position');
+title('Posició de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Posició');
 legend show;
 hold off;
 
-% Velocity
+% Velocitat
 subplot(3,1,2);
 hold on;
 for i = 1:size(velocity, 1)
     plot(timevec, velocity(i,:), 'Color', colors(i,:), 'DisplayName', sprintf('Joint %d', i));
 end
-title('Cubic Trajectory Velocity vs Time');
-xlabel('Time (s)');
-ylabel('Velocity');
+title('Velocitat de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Velocitat');
 legend show;
 hold off;
 
-% Acceleration
+% Acceleració
 subplot(3,1,3);
 hold on;
 for i = 1:size(acceleration, 1)
     plot(timevec, acceleration(i,:), 'Color', colors(i,:), 'DisplayName', sprintf('Joint %d', i));
 end
-title('Cubic Trajectory Acceleration vs Time');
-xlabel('Time (s)');
-ylabel('Acceleration');
+title('Acceleració de la trajectòria cúbica vs temps');
+xlabel('Temps (s)');
+ylabel('Acceleració');
 legend show;
 hold off;
 ```
 
 ![figure_2.png](Joint_Space_Trajectory_Planning_media/figure_2.png)
-## **Quintic** Profile
+## Perfil **quíntic**
 
-While the cubic profile only accounts for desired position and speed at the target time, the quintic profile allows to also define a desired acceleration at the start and end of a movement. This can result in the acceleration to be 0 at the start and end, thus making the robot motion much more smooth than in a cubic profile (ee the profiles in the figure below). 
-
-
-To achieve a quintic profile as seen below, you need to solve the following parametric equations:
+Mentre que el perfil cúbic només té en compte la posició i la velocitat desitjades en el temps objectiu, el perfil quíntic també permet definir una acceleració desitjada a l’inici i al final d’un moviment. Això pot fer que l’acceleració sigui 0 a l’inici i al final, fent així que el moviment del robot sigui molt més suau que en un perfil cúbic (vegeu els perfils de la figura següent). 
 
 
- $S\left(t\right)=A\cdot t^5 +B\cdot t^4 +C\cdot t^3 +D\cdot t^2 +E\cdot t+F$ = Joint Position
+Per aconseguir un perfil quíntic com el que es veu a continuació, has de resoldre les equacions paramètriques següents:
 
 
- $\dot{\;S} \left(t\right)=5\cdot A\cdot t^4 +4\cdot B\cdot t^3 +3\cdot C\cdot t^2 +2\cdot D\cdot t+E$ = Joint Speed
+ $S\left(t\right)=A\cdot t^5 +B\cdot t^4 +C\cdot t^3 +D\cdot t^2 +E\cdot t+F$ = posició articular
 
 
- $\ddot{\;S} \left(t\right)=20\cdot A\cdot t^3 +12\cdot B\cdot t^2 +6\cdot C\cdot t+2\cdot D$ = Joint acceleration
+ $\dot{\;S} \left(t\right)=5\cdot A\cdot t^4 +4\cdot B\cdot t^3 +3\cdot C\cdot t^2 +2\cdot D\cdot t+E$ = velocitat articular
 
 
-solving these equations will result in the following trajectory:  
+ $\ddot{\;S} \left(t\right)=20\cdot A\cdot t^3 +12\cdot B\cdot t^2 +6\cdot C\cdot t+2\cdot D$ = acceleració articular
+
+
+resoldre aquestes equacions donarà lloc a la trajectòria següent:  
 
 
 ![image_1.svg](Joint_Space_Trajectory_Planning_media/image_1.svg)
 
 ### Robotic System Toolbox
 
-To generate this trajectory using the robotic system toolbox, you can use the quinticpolytraj() function. 
+Per generar aquesta trajectòria fent servir el Robotic System Toolbox, pots fer servir la funció quinticpolytraj(). 
 
 
-In order to define the resolution, we must first create a time vector:
+Per definir la resolució, primer hem de crear un vector de temps:
 
 ```matlab
 clear all
 T = 3; 
 ```
 
-and then, create an equally spaced time vector as: 
+i després, crear un vector de temps igualment espaiat com: 
 
 ```matlab
 timevec = linspace(0, T, 100);
 ```
 
-Define the desired waypoint
+Defineix el waypoint desitjat
 
 ```matlab
 waypoints = [0, pi/2]; 
 ```
 
-Define at which times these waypoints have to be reached
+Defineix en quins temps s’han d’assolir aquests waypoints
 
 ```matlab
 timepoints = [0,T];
 ```
 
-call the trajectory planning function
+crida la funció de planificació de trajectòries
 
 ```matlab
 [position,velocity,acceleration,pp] = quinticpolytraj(waypoints,timepoints,timevec); 
-% Plot the Quintic trajectory
+% Representa gràficament la trajectòria quíntica
 figure;
 subplot(3,1,1);
 plot(timevec,position);
-title('Quintic Trajectory Position vs Time');
-xlabel('Time (s)');
-ylabel('Position');
+title('Posició de la trajectòria quíntica vs temps');
+xlabel('Temps (s)');
+ylabel('Posició');
 
 subplot(3,1,2);
 plot(timevec,velocity);
-title('Quintic Trajectory Velocity vs Time');
-xlabel('Time (s)');
-ylabel('Velocity');
+title('Velocitat de la trajectòria quíntica vs temps');
+xlabel('Temps (s)');
+ylabel('Velocitat');
 
 subplot(3,1,3);
 plot(timevec,acceleration);
-title('Quintic Trajectory Acceleration vs Time');
-xlabel('Time (s)');
-ylabel('Acceleration');
+title('Acceleració de la trajectòria quíntica vs temps');
+xlabel('Temps (s)');
+ylabel('Acceleració');
 ```
 
 ![figure_3.png](Joint_Space_Trajectory_Planning_media/figure_3.png)
 
-# Trapezoidal Profile
+# Perfil trapezoidal
 
-A trapezoidal profile is defined by three phases:
+Un perfil trapezoidal es defineix per tres fases:
 
--  Acceleration phase, with a constant acceleration $a_{\max }$ 
--  Constant velocity phase, with the constant cruise speed $v_c$ 
--  Deacceleration phase, with a constant acceleration $-a_{\max }$ 
+-  Fase d’acceleració, amb una acceleració constant $a_{\max }$ 
+-  Fase de velocitat constant, amb la velocitat de creuer constant $v_c$ 
+-  Fase de desacceleració, amb una acceleració constant $-a_{\max }$ 
 
-See the joint speed profile below. 
+Observa el perfil de velocitat articular següent. 
 
 
 ![image_2.svg](Joint_Space_Trajectory_Planning_media/image_2.svg)
 
 
-This trajectory is defined by the cruise speed $v_c$ and the maximum acceleration $a_{\max }$.
+Aquesta trajectòria es defineix per la velocitat de creuer $v_c$ i l’acceleració màxima $a_{\max }$.
 
 
-The joint states can be described by the following set of equations:  
+Els estats articulars es poden descriure amb el conjunt d’equacions següent:  
 
  $$ q(t)=\left\lbrace \begin{array}{ll} q_0 +\frac{1}{2}\cdot sign(\Delta q)\cdot a_{\max } \cdot t^2 , & 0\le t<t_a \newline q_a +sign(\Delta q)\cdot v_{\textrm{c}} \cdot (t-t_a ), & t_a \le t<t_a +t_c \newline q_f -\frac{1}{2}\cdot sign(\Delta q)\cdot a_{\max } \cdot (t_f -t)^2 , & t_a +t_c \le t\le t_f  \end{array}\right. $$ 
 
-with the initial joint state $q_0$ and the target joint state $q_f$ at the time $t_f$ and the direction of the displacement $\textrm{sign}\left(\Delta q\right)$. 
+amb l’estat articular inicial $q_0$ i l’estat articular objectiu $q_f$ en el temps $t_f$ i la direcció del desplaçament $\textrm{sign}\left(\Delta q\right)$. 
 
 
-The time to reach $t_a$ can be calculated as: 
+El temps per arribar a $t_a$ es pot calcular com: 
 
  $$ t_a =\frac{v_c }{a_{\max } } $$ 
 
-resulting in the joint state 
+donant lloc a l’estat articular 
 
  $$ q\left(t_a \right)=q_a =q_0 +\frac{1}{2}\cdot a_{\max } \cdot t_a^2 $$ 
 
-with a displacement of
+amb un desplaçament de
 
  $$ \Delta q_a =\frac{1}{2}\cdot a_{\max } \cdot t_a^2 $$ 
 
-Now let
+Ara sigui
 
  $$ \Delta q=q_f -q_0 $$ 
 
-Since the displacement between $t_0$ and $t_a$ is equal to the displacement between $t_c$ and $t_f$, we can use the following formulation to determine the value of $t_c$, representing the time spent at constant velocity 
+Com que el desplaçament entre $t_0$ i $t_a$ és igual al desplaçament entre $t_c$ i $t_f$, podem fer servir la formulació següent per determinar el valor de $t_c$, que representa el temps passat a velocitat constant 
 
  $$ {\Delta q}_c =\Delta q-2\cdot \left(\frac{1}{2}\cdot a_{\max } \cdot t_a^2 \right) $$ 
 
-where $\Delta q_c$ represents the displacement during the constant velocity phase. The resulting joint position at the end of this phase is defined as:
+on $\Delta q_c$ representa el desplaçament durant la fase de velocitat constant. La posició articular resultant al final d’aquesta fase es defineix com:
 
  $$ q_c =q_a +\Delta q_c \; $$ 
 
-Finally, we obtain the duration of the constant velocity phase: 
+Finalment, obtenim la durada de la fase de velocitat constant: 
 
  $$ t_c =\frac{{\Delta \;q}_c }{v_c } $$ 
 
-resulting in a total time of
+donant lloc a un temps total de
 
  $$ t_f =2\cdot t_a +t_c $$ 
-## Special Case
+## Cas especial
 
-In case the joint displacement $\Delta q\;$ is small w.r.t. to the desired cruise velocity and acceleration, the cruise velocity may not  be reached before the deacceleration phase. 
+En cas que el desplaçament articular $\Delta q\;$ sigui petit respecte de la velocitat de creuer i l’acceleració desitjades, és possible que no s’arribi a la velocitat de creuer abans de la fase de desacceleració. 
 
 
 ![image_3.svg](Joint_Space_Trajectory_Planning_media/image_3.svg)
 
 
-The maximum reachable velocity can be computed as:
+La velocitat màxima assolible es pot calcular com:
 
  $$ v_{\max } =\sqrt{\;a_{\max } \cdot |\Delta q|\;} $$ 
 
-if $v_{\max } <v_c$ this profile will have a triangular shape without reaching $v_c$.
+si $v_{\max } <v_c$ aquest perfil tindrà una forma triangular sense arribar a $v_c$.
 
 
-where: 
+on: 
 
  $$ t_a =\sqrt{\;\frac{|\Delta q|\;}{a_{\max } }} $$ 
 
-and
+i
 
  $$ t_f =2\cdot t_a $$ 
 ```matlab
@@ -536,7 +535,7 @@ for i = 1:length(time)
     end
 end
 
-% Apply direction and offset
+% Aplica la direcció i el desplaçament inicial
 q = q0 + direction * double(q);
 v = direction * double(v);
 a = direction * a;
@@ -561,10 +560,10 @@ clear all
 ```
 ## Robotic System Toolbox
 
-To generate this trajectory using the robotic system toolbox, you can use the trapveltraj() function: 
+Per generar aquesta trajectòria fent servir el Robotic System Toolbox, pots fer servir la funció trapveltraj(): 
 
 
-Define the waypoints 
+Defineix els waypoints 
 
 ```matlab
 q0 = 0; 
@@ -574,19 +573,19 @@ a_max=0.3;
 waypoints = [q0 , qf];
 ```
 
-Define the amount of steps to reach the waypoints
+Defineix la quantitat de passos per arribar als waypoints
 
 ```matlab
 N = 100; 
 ```
 
-Call the function with the options for velocity and acceleration constrains:
+Crida la funció amb les opcions per a restriccions de velocitat i acceleració:
 
 ```matlab
 [q, v, a, time, pp]=trapveltraj(waypoints, N, "PeakVelocity", v_c, "Acceleration", a_max);
 ```
 
-Other optional constrains are EndTime to define the duration of the trajectory and AccelTime, defining the length of the acceleration phases. 
+Altres restriccions opcionals són EndTime per definir la durada de la trajectòria i AccelTime, que defineix la durada de les fases d’acceleració. 
 
 ```matlab
 desiredTime = 10; 
@@ -594,52 +593,52 @@ desiredAccelerationTime = 3.5;
 [q2, v2, a2, time2, pp2]=trapveltraj(waypoints, N, "EndTime",desiredTime, "AccelTime",desiredAccelerationTime);
 ```
 
-You can combine any combination of two constrains to generate a trajectory.
+Pots combinar qualsevol combinació de dues restriccions per generar una trajectòria.
 
 ```matlab
 figure;
 subplot(3,2,1); 
 plot(time, q, 'LineWidth', 2);
-title('Position (q) vs Time');
-ylabel('Position'); 
+title('Posició (q) vs temps');
+ylabel('Posició'); 
 grid on;
 
 subplot(3,2,3); 
 plot(time, v, 'LineWidth', 2);
-title('Velocity (v) vs Time');
-ylabel('Velocity'); 
+title('Velocitat (v) vs temps');
+ylabel('Velocitat'); 
 grid on;
 
 subplot(3,2,5); 
 plot(time, a, 'LineWidth', 2);
-title('Acceleration (a) vs Time');
-ylabel('Acceleration'); 
+title('Acceleració (a) vs temps');
+ylabel('Acceleració'); 
 grid on;
 
 subplot(3,2,2); 
 plot(time2, q2, 'LineWidth', 2);
-title('Position (q2) vs Time2');
-ylabel('Position'); 
+title('Posició (q2) vs temps2');
+ylabel('Posició'); 
 grid on;
 
 subplot(3,2,4); 
 plot(time2, v2, 'LineWidth', 2);
-title('Velocity (v2) vs Time2');
-ylabel('Velocity'); 
+title('Velocitat (v2) vs temps2');
+ylabel('Velocitat'); 
 grid on;
 
 subplot(3,2,6); 
 plot(time2, a2, 'LineWidth', 2);
-title('Acceleration (a2) vs Time2');
-ylabel('Acceleration'); 
-xlabel('Time [s]'); 
+title('Acceleració (a2) vs temps2');
+ylabel('Acceleració'); 
+xlabel('Temps [s]'); 
 grid on;
 ```
 
 ![figure_5.png](Joint_Space_Trajectory_Planning_media/figure_5.png)
-# Example Trajectories in Rviz
+# Exemples de trajectòries a Rviz
 
-Execute the buttons below to see a trajectory in Rviz. 
+Executa els botons següents per veure una trajectòria a Rviz. 
 
 ```matlab
 initialConfig = zeros(1,6); 
@@ -696,12 +695,12 @@ ans = logical
 ```
 
 
-To view your own trajectory you can use the prebuild function JointStatesToRviz with the inputs: 
+Per veure la teva pròpia trajectòria, pots fer servir la funció preconstruïda JointStatesToRviz amb les entrades: 
 
-1.  Joint state or trajectory
-2. UR model (leave it empty as "\[ \]" to have ur3e by default)
-3. Time to complete the joint trajectory
-4. (optional) input 'trajectory' and a boolean value to display the trajectory as a yellow line in Rviz, this is true by default for trajectories. (to stop the display of an old trajectory hit the reset button on the bottom left corner)
+1.  Estat articular o trajectòria
+2. Model UR (deixa’l buit com "$begin:math:display$ $end:math:display$" per tenir ur3e per defecte)
+3. Temps per completar la trajectòria articular
+4. (opcional) entrada 'trajectory' i un valor booleà per mostrar la trajectòria com una línia groga a Rviz; això és true per defecte per a trajectòries. (per aturar la visualització d’una trajectòria antiga, prem el botó de reinici a la cantonada inferior esquerra)
 ```matlab
  
 yourTrajectory = zeros(1,6); 
@@ -717,6 +716,4 @@ ans = logical
 ```
 
 
-*Know that this code will send your arm robot to the pose \[0 0 0 0 0 0\]*
-
-
+*Recorda que aquest codi enviarà el teu braç robot a la postura $begin:math:display$0 0 0 0 0 0$end:math:display$*

@@ -1,29 +1,28 @@
+# Cinemàtica inversa
 
-# Inverse Kinematics
-
-Where forward kinematics asks "Given joint angles, where is the end\-effector?", inverse kinematics (IK) poses the reverse question: "Given a desired end\-effector pose, what joint angles achieve it?" IK is the cornerstone of robotic motion planning and control. Whether programming a manipulator to grasp an object, guiding a humanoid's hand to a switch, or coordinating a mobile manipulator's arm and base, computing valid joint configurations from spatial goals is essential.
+Quan la cinemàtica directa pregunta "Donats uns angles articulars, on és l’efector final?", la cinemàtica inversa (IK) planteja la pregunta inversa: "Donada una postura desitjada de l’efector final, quins angles articulars l’assoleixen?" La IK és la pedra angular de la planificació i el control del moviment robòtic. Tant si es programa un manipulador per agafar un objecte, com si es guia la mà d’un humanoide cap a un interruptor, o es coordina el braç i la base d’un manipulador mòbil, calcular configuracions articulars vàlides a partir d’objectius espacials és essencial.
 
 
-If a manipulator's forward\-kinematics function 
+Si la funció de cinemàtica directa d’un manipulador 
 
  $$ T\left(q\right)=\left\lbrack \begin{array}{ccccc}  &  &  & | & \newline  & R\left(q\right) &  & | & t\left(q\right)\newline  &  &  & | & \newline -- & -- & -- & + & --\newline 0 & 0 & 0 & | & 1 \end{array}\right\rbrack $$ 
 
-maps joint variables $q\in {\mathbb{R}}^n \;$ to an end\-effector pose T, then inverse kinematics seeks one or more solutions q such that
+mapeja les variables articulars $q\in {\mathbb{R}}^n \;$ a una postura de l’efector final T, aleshores la cinemàtica inversa busca una o més solucions q tals que
 
  $$ T\left(q\right)=T_{\textrm{desired}} =\left\lbrack \begin{array}{ccccc}  &  &  & | & \newline  & R_{\textrm{desired}}  &  & | & t_{\textrm{desired}} \newline  &  &  & | & \newline -- & -- & -- & + & --\newline 0 & 0 & 0 & | & 1 \end{array}\right\rbrack $$ 
 
-Unlike forward kinematics, the IK problem may have zero, one, or infinite solutions, depending on the manipulator geometry, reachability, and redundancy.
+A diferència de la cinemàtica directa, el problema de la IK pot tenir zero, una o infinites solucions, depenent de la geometria del manipulador, l’assolibilitat i la redundància.
 
 
-Some manipulator structures have closed\-form solutions, allowing us to analytically compute all solutions to the desired transformation. Universal Robot models all posses the closed form solutions property, making them efficient to work with. 
+Algunes estructures de manipuladors tenen solucions en forma tancada, cosa que ens permet calcular analíticament totes les solucions per a la transformació desitjada. Tots els models d’Universal Robots posseeixen la propietat de solucions en forma tancada, fet que els fa eficients per treballar-hi. 
 
-# Anthropomorphic arm
+# Braç antropomòrfic
 
-The Anthropomorphic arm is an example of a structure with a closed form solution. This configuration is often used as it is possible to algebraically compute the different solutions and control the position (translation) of the end\-effector without considering a specific orientation. The first three Joints of a universal robot form this configuration. 
+El braç antropomòrfic és un exemple d’una estructura amb solució en forma tancada. Aquesta configuració s’utilitza sovint, ja que és possible calcular algebraicament les diferents solucions i controlar la posició (translació) de l’efector final sense considerar una orientació específica. Les tres primeres articulacions d’un robot universal formen aquesta configuració. 
 
 ```matlab
 anthropomorphic_arm=loadrobot("universalUR3", DataFormat="column");
-%removing all additional links
+%eliminació de tots els enllaços addicionals
 removeBody(anthropomorphic_arm, "tool0");
 removeBody(anthropomorphic_arm, "ee_link");
 removeBody(anthropomorphic_arm, "wrist_3_link");
@@ -36,7 +35,7 @@ show(anthropomorphic_arm, [0,-pi/2,0]')
 
 ```matlabTextOutput
 ans = 
-  Axes (Primary) with properties:
+  Eixos (principal) amb propietats:
 
              XLim: [-0.5000 0.5000]
              YLim: [-0.5000 0.5000]
@@ -46,16 +45,16 @@ ans =
          Position: [0.1300 0.1100 0.7750 0.8150]
             Units: 'normalized'
 
-  Show all properties
+  Mostra totes les propietats
 
 ```
 
 
-For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A03
+Per a un conjunt de paràmetres DH a, alpha, d (theta és l’estat articular), trobem la matriu de transformació homogènia A03
 
 ||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0  | pi/2  | 0  | q1   |
 | 2  | a2  | 0  | 0  | q2   |
 | 3  | a3  | 0  | 0  | q3   |
@@ -78,110 +77,110 @@ A03 =
   $$ \displaystyle \begin{array}{l} \left(\begin{array}{cccc} \cos \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\cos \left(q_1 \right) & \sin \left(q_1 \right) & \cos \left(q_1 \right)\,\sigma_1 \newline \cos \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\sin \left(q_2 +q_3 \right)\,\sin \left(q_1 \right) & -\cos \left(q_1 \right) & \sin \left(q_1 \right)\,\sigma_1 \newline \sin \left(q_2 +q_3 \right) & \cos \left(q_2 +q_3 \right) & 0 & a_3 \,\sin \left(q_2 +q_3 \right)+a_2 \,\sin \left(q_2 \right)\newline 0 & 0 & 0 & 1 \end{array}\right)\\\mathrm{}\\\textrm{where}\\\mathrm{}\\\;\;\sigma_1 =a_3 \,\cos \left(q_2 +q_3 \right)+a_2 \,\cos \left(q_2 \right)\end{array} $$ 
  
 
-For a desired location of the end\-effector in the reachable workspace we can solve it using a set of equations. 
+Per a una ubicació desitjada de l’efector final dins l’espai de treball assolible, ho podem resoldre fent servir un conjunt d’equacions. 
 
  $$ t_{\textrm{desired}} =\left\lbrack \begin{array}{c} x_{\textrm{desired}} \newline y_{\textrm{desired}} \newline z_{\textrm{desired}}  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} \cos \left(q_1 \right)\cdot \left(a_3 \cdot \cos \left(\textrm{q2}+\textrm{q3}\right)+a_2 \cdot \cos \left(\textrm{q2}\right)\right)\newline \sin \left(q_1 \right)\cdot \left(a_3 \cdot \cos \left(\textrm{q2}+\textrm{q3}\right)+a_2 \cdot \cos \left(\textrm{q2}\right)\right)\newline a_3 \cdot \sin \left(q_2 +q_3 \right)+a_2 \cdot \sin \left(q_2 \right) \end{array}\right\rbrack $$ 
 
 
-Consider this sketch of an anthropomorphic arm, its frames and a desired target pose. Notice that the origin of Frame 0 and Frame 1 coincide, therefore the distance from Z0 and Z1 to the target are identical. In the figure below the distance from frame 1 to the target is marked as R. Consider a sphere (yellow) around Joint 1 with a radius R. 
+Considera aquest esquema d’un braç antropomòrfic, els seus marcs i una postura objectiu desitjada. Observa que l’origen del marc 0 i del marc 1 coincideixen; per tant, la distància des de Z0 i Z1 fins a l’objectiu és idèntica. A la figura següent, la distància des del marc 1 fins a l’objectiu està marcada com a R. Considera una esfera (groga) al voltant de l’articulació 1 amb un radi R. 
 
 
 ![image_0.svg](Inverse_Kinematics_media/image_0.svg)
 
-## $$ {\textrm{Computing}\;\theta }_3 $$
+## $$ {\textrm{Càlcul}\;\theta }_3 $$
 
-Look at the 2\-D projection below. The yellow circle is the sphere with the radius R, the pink sphere is the rotation of Joint 3 with $\theta_3$ with a radius of $a_2$, corresponding to the length of Joint 3. We want to find the solutions to $\theta_3$ so that the end\-effector frame lies on the yellow sphere. Notice how there are two solutions that fulfill this task:
+Observa la projecció 2D següent. El cercle groc és l’esfera amb radi R; l’esfera rosa és la rotació de l’articulació 3 amb $\theta_3$ amb un radi de $a_2$, corresponent a la longitud de l’articulació 3. Volem trobar les solucions per a $\theta_3$ perquè el marc de l’efector final es trobi sobre l’esfera groga. Observa com hi ha dues solucions que compleixen aquesta tasca:
 
 
 ![image_1.svg](Inverse_Kinematics_media/image_1.svg) 
 
 
-Squaring and summing the cartesian coordinates from Frame 1 (or Frame 0 if they coincide) to the target pose, gives us an expression for the required arm reach:
+Elevat al quadrat i sumant les coordenades cartesianes des del marc 1 (o des del marc 0 si coincideixen) fins a la postura objectiu, obtenim una expressió per a l’abast requerit del braç:
 
  $$ \;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 +z_{\textrm{desired}}^2 =a_2^2 +a_3^2 +2\cdot \cos \left(q_3 \right)\cdot a_2 \cdot a_3 $$ 
 
-This equation represents the cosine law ( $c^2 =a^{2\;} +b^2 -2\textrm{ab}\cdot \cos \left(\gamma \right)$ ), however in robotics a fully extended arm is represented with joint angle of 0. Contrarily, in the cosine law for standard geometry, this extended arm would be computed with an angle of 180° (or $\pi$ ) . 
+Aquesta equació representa la llei del cosinus ( $c^2 =a^{2\;} +b^2 -2\textrm{ab}\cdot \cos \left(\gamma \right)$ ); tanmateix, en robòtica, un braç completament estès es representa amb un angle articular de 0. Per contra, en la llei del cosinus de la geometria estàndard, aquest braç estès es calcularia amb un angle de 180° (o $\pi$ ) . 
 
 
-This change in angle reference results in the following cosine law expression:
+Aquest canvi en la referència angular dona lloc a l’expressió següent de la llei del cosinus:
 
  $$ \vec{{||P}_{\textrm{desired}} ||} =a_2^2 +a_3^2 -2\cdot \cos \left(\theta \;+\pi \right)\cdot a_2 \cdot a_3 $$ 
 
-where we have substituted $\cos \left(\theta +\pi \;\right)$ for $-\cos \left(\theta \right)$.
+on hem substituït $\cos \left(\theta +\pi \;\right)$ per $-\cos \left(\theta \right)$.
 
 
-Solving for $\cos \left(q_3 \right)$ yields the expression: 
+Resolent per a $\cos \left(q_3 \right)$ s’obté l’expressió: 
 
  $$ \cos \left(q_3 \right)=\frac{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 +z_{\textrm{desired}}^2 -a_2^2 -a_3^2 }{\;2\cdot a_2 \cdot a_3 }\; $$ 
 
-The solution is admissible if $-1\le \cos \left(q_3 \right)\le 1$, which is equivalent to the desired point lying in the reachable workspace. 
+La solució és admissible si $-1\le \cos \left(q_3 \right)\le 1$, cosa que és equivalent al fet que el punt desitjat es trobi dins l’espai de treball assolible. 
 
  $$ |a_2 -a_3 |\le \sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 +z_{\textrm{desired}}^2 \;}\le |a_2 +a_3 | $$ 
 
-where $|a_2 -a_3 |\;$ represents the arm being folded onto itself $q_3 =\pi \;$ 
+on $|a_2 -a_3 |\;$ representa el braç plegat sobre si mateix $q_3 =\pi \;$ 
 
 
-and $|a_2 +a_3 |$ the arm fully extended $q_3 =0$.
+i $|a_2 +a_3 |$ el braç completament estès $q_3 =0$.
 
 
-Using the property: 
+Fer servir la propietat: 
 
 
- ${\sin \left(q_3 \;\right)}^2 +{\cos \left(q_3 \right)}^{2\;} =1$ lets us get two solutions for $\sin \left(\beta \;\right)$ as: 
+ ${\sin \left(q_3 \;\right)}^2 +{\cos \left(q_3 \right)}^{2\;} =1$ ens permet obtenir dues solucions per a $\sin \left(\beta \;\right)$ com: 
 
  $$ \sin \left(q_3 \right)=\pm \sqrt{\;1-\cos \left(q_3 \;\right)}\;\left\lbrace \begin{array}{ll} \sin^+ \left(q_3 \right)=+\sqrt{\;1-\cos \left(q_3 \right)} & \newline \sin^- \left(q_3 \right)=-\sqrt{\;1-\cos \left(q_3 \right)} &  \end{array}\right. $$ 
 
-with this you can compute $q_3$ as
+amb això pots calcular $q_3$ com
 
  $$ q_3 =\theta_3 =\textrm{atan2}\left(\sin \left(q_3 \right),\cos \left(q_3 \right)\right)\left\lbrace \begin{array}{ll} \theta_{3,I} =\textrm{atan2}\left(\sin^+ \left(q_3 \right),\cos \left(q_3 \right)\right)\in \left\lbrack -\pi ,\pi \;\right\rbrack  & \newline \theta_{3,\textrm{II}} =\textrm{atan2}\left(\sin^- \left(q_3 \right),\cos \left(q_3 \right)\right)=-\theta {\;}_{3,1}  &  \end{array}\right. $$ 
-## $$ \textrm{Computing}\;\theta_2 $$
+## $$ \textrm{Càlcul}\;\theta_2 $$
 
-In the figure below (left) you see a green torus, that is on the sphere surface at the Z\-height of the target pose. To compute $\theta_2$, you align the link (red) that results from the chosen $\theta_3$ with the green circle. Notice how for each angle of $\theta_3$ there are two solutions, resulting in a total of four solutions that fulfill this task:
+A la figura següent (esquerra) veus un tor verd, que es troba a la superfície de l’esfera a l’altura Z de la postura objectiu. Per calcular $\theta_2$, alinees l’enllaç (vermell) que resulta de la $\theta_3$ escollida amb el cercle verd. Observa com per a cada angle de $\theta_3$ hi ha dues solucions, cosa que dona un total de quatre solucions que compleixen aquesta tasca:
 
 
 ![image_2.svg](Inverse_Kinematics_media/image_2.svg)
 
 
-From the expressions for $x_{\textrm{desired}}$ and $y_{\textrm{desired}}$ we can obtain the equation: 
+A partir de les expressions per a $x_{\textrm{desired}}$ i $y_{\textrm{desired}}$ podem obtenir l’equació: 
 
  $$ x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 ={\left(a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)\right)}^2 $$ 
 
-Including the equation for $z_{\textrm{desired}}$ yields a system of equations that lets us solve for $q_2$:
+Incloure l’equació per a $z_{\textrm{desired}}$ dona lloc a un sistema d’equacions que ens permet resoldre $q_2$:
 
- $$ \textrm{System}\;\textrm{of}\;\textrm{equation}\left\lbrace \begin{array}{ll} a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)=\pm \sqrt{\;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 } & \newline z_{\textrm{desired}} =a_2 \cdot \sin \left(q_2 \right)+a_3 \cdot \sin \left(q_2 +q_3 \right) &  \end{array}\right. $$ 
+ $$ \textrm{Sistema}\;\textrm{d’}\;\textrm{equacions}\left\lbrace \begin{array}{ll} a_2 \cdot \cos \left(q_2 \right)+a_3 \cdot \cos \left(q_2 +q_3 \right)=\pm \sqrt{\;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 } & \newline z_{\textrm{desired}} =a_2 \cdot \sin \left(q_2 \right)+a_3 \cdot \sin \left(q_2 +q_3 \right) &  \end{array}\right. $$ 
 
-this lets us express sinus and cosinus of $q_2 \;$ as:
+això ens permet expressar el sinus i el cosinus de $q_2 \;$ com:
 
  $$ \cos \left(q_2 \right)=\frac{\pm \sqrt{\;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 }\cdot \left(a_2 +a_3 \cdot \cos \left(q_3 \right)\right)+z_{\textrm{desired}} \cdot a_3 \cdot \sin \left(q_3 \right)}{\;a_2^2 +a_3^2 +2\cdot a_2 \cdot a_3 \cdot \cos \left(q_3 \right)} $$ 
 
  $$ \sin \left(q_2 \right)=\frac{z_{\textrm{desired}} \cdot \left(a_2 +a_3 \cdot \cos \left(q_3 \right)\right)\mp \sqrt{\;x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 }\cdot a_3 \cdot \sin \left(q_3 \right)}{\;a_2^2 +a_3^2 +2\cdot a_2 \cdot a_3 \cdot \cos \left(q_3 \right)} $$ 
 
 
-using these expressions we can derive the solutions for $\theta_2$ 
+fent servir aquestes expressions podem derivar les solucions per a $\theta_2$ 
 
- $ \theta_2 =\textrm{atan2}\left(\sin \left(q_2 \right),\;\cos \left(q_2 \right)\right)= $ $ \left\lbrace \begin{array}{ll} \theta_{2,I}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~+\sqrt{~~~}~\newline \theta_{2,II}  & when~using~sin(q_3 )^+ ~(\theta_{3,I} )~and~-\sqrt{~~~}\newline \theta_{2,III}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~+\sqrt{~~~}\newline \theta_{2,IV}  & when~using~sin(q_3 )^- ~(\theta_{3,II} )~and~-\sqrt{~~~} \end{array}\right. $ 
+ $ \theta_2 =\textrm{atan2}\left(\sin \left(q_2 \right),\;\cos \left(q_2 \right)\right)= $ $ \left\lbrace \begin{array}{ll} \theta_{2,I}  & quan~es~fa~servir~sin(q_3 )^+ ~(\theta_{3,I} )~i~+\sqrt{~~~}~\newline \theta_{2,II}  & quan~es~fa~servir~sin(q_3 )^+ ~(\theta_{3,I} )~i~-\sqrt{~~~}\newline \theta_{2,III}  & quan~es~fa~servir~sin(q_3 )^- ~(\theta_{3,II} )~i~+\sqrt{~~~}\newline \theta_{2,IV}  & quan~es~fa~servir~sin(q_3 )^- ~(\theta_{3,II} )~i~-\sqrt{~~~} \end{array}\right. $ 
 
-## $$ \textrm{Computing}\;\theta_1 $$
+## $$ \textrm{Càlcul}\;\theta_1 $$
 
-The figure below is a 2\-D projection from above. To align the end\-effector with the target pose rotate the $Z_0$ Axis with $\theta_1$. Notice how there are two solutions depending on the $\theta_3$ and $\theta_2$ configuration: 
+La figura següent és una projecció 2D des de dalt. Per alinear l’efector final amb la postura objectiu, gira l’eix $Z_0$ amb $\theta_1$. Observa com hi ha dues solucions depenent de la configuració de $\theta_3$ i $\theta_2$: 
 
 
 ![image_3.svg](Inverse_Kinematics_media/image_3.svg)
 
 
-We can rewrite expressions for $x_{\textrm{desired}}$ and $y_{\textrm{desired}}$ as:
+Podem reescriure les expressions per a $x_{\textrm{desired}}$ i $y_{\textrm{desired}}$ com:
 
  $$ x_{\textrm{desired}} =\pm \cos \left(q_1 \right)\cdot \sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 } $$ 
 
  $$ y_{\textrm{desired}} =\pm \sin \left(q_1 \right)\cdot \sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 } $$ 
 
-using this we can compute the solutions for $\theta_1$. Notice how the expressions simplify as $\sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 }$ is a constant factor:
+fent servir això podem calcular les solucions per a $\theta_1$. Observa com les expressions se simplifiquen, ja que $\sqrt{x_{\textrm{desired}}^2 +y_{\textrm{desired}}^2 }$ és un factor constant:
 
- $$ \theta_1 =\textrm{atan2}\left(\sin \left(q_1 \right),\cos \left(q_1 \right)\right)=\left\lbrace \begin{array}{ll} \;\theta_{1,I} =\textrm{atan2}\left(y_{\textrm{desired}} ,\;\;\;\;\;\;\;\;x_{\textrm{desired}} \right) & \textrm{when}\;\textrm{using}+\sqrt{\;\;\;\;\;\;}\newline \theta_{1,\textrm{II}} =\textrm{atan2}\left({-y}_{\textrm{desired}} ,{\;-x}_{\textrm{desired}} \right) & \textrm{when}\;\textrm{using}-\sqrt{\;\;\;\;\;\;} \end{array}\right. $$ 
+ $$ \theta_1 =\textrm{atan2}\left(\sin \left(q_1 \right),\cos \left(q_1 \right)\right)=\left\lbrace \begin{array}{ll} \;\theta_{1,I} =\textrm{atan2}\left(y_{\textrm{desired}} ,\;\;\;\;\;\;\;\;x_{\textrm{desired}} \right) & \textrm{quan}\;\textrm{s’utilitza}+\sqrt{\;\;\;\;\;\;}\newline \theta_{1,\textrm{II}} =\textrm{atan2}\left({-y}_{\textrm{desired}} ,{\;-x}_{\textrm{desired}} \right) & \textrm{quan}\;\textrm{s’utilitza}-\sqrt{\;\;\;\;\;\;} \end{array}\right. $$ 
 
-## Inverse Kinematics Solutions of the Anthropomorphic Arm
+## Solucions de cinemàtica inversa del braç antropomòrfic
 
-The IK of the anthropomorphic arm has four solutions: 
+La IK del braç antropomòrfic té quatre solucions: 
 
 ||||
 | :-- | :-- | :-- |
@@ -190,30 +189,30 @@ The IK of the anthropomorphic arm has four solutions:
 | $\displaystyle -\sqrt{\;\;\;\;\;\;\;}$  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{II}} \;;\theta_{3,\mathrm{I}}$  | $\displaystyle \theta_{1,\textrm{II}} \;;\;\theta_{2,\textrm{IV}} \;;\theta_{3,\textrm{II}}$   |
 
 
-Applying a solution configuration results in the anthropomorphic arm reaching the target pose. 
+Aplicar una configuració solució fa que el braç antropomòrfic arribi a la postura objectiu. 
 
 
 ![image_4.svg](Inverse_Kinematics_media/image_4.svg)
 
 
-See below the different solutions illustrated 
+Mira a continuació les diferents solucions il·lustrades 
 
 
 ![image_5.svg](Inverse_Kinematics_media/image_5.svg)
 
-# Spherical wrist
+# Canell esfèric
 
-The Spherical wrist is another example of a unique configuration for closed form solutions. Notice how all the origins of the joint frames intersect in a single point. The spherical wrist configuration is used to control the orientation of the end\-effector. 
+El canell esfèric és un altre exemple d’una configuració única per a solucions en forma tancada. Observa com tots els orígens dels marcs articulars s’intersequen en un únic punt. La configuració de canell esfèric s’utilitza per controlar l’orientació de l’efector final. 
 
 
 ![image_6.svg](Inverse_Kinematics_media/image_6.svg)
 
 
-For a set of DH parameters a, alpha, d (theta is joint state) we find the homogeneous transformation matrix A36
+Per a un conjunt de paràmetres DH a, alpha, d (theta és l’estat articular), trobem la matriu de transformació homogènia A36
 
 ||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 4  | 0  | \-pi/2  | 0  | q4   |
 | 5  | 0  | pi/2  | 0  | q5   |
 | 6  | 0  | 0  | d6  | q6   |
@@ -238,25 +237,25 @@ ans =
   $$ \displaystyle \left(\begin{array}{cccc} \cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\cos \left(q_6 \right)-\sin \left(q_4 \right)\,\sin \left(q_6 \right) & -\cos \left(q_6 \right)\,\sin \left(q_4 \right)-\cos \left(q_4 \right)\,\cos \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\cos \left(q_4 \right)\,\sin \left(q_5 \right)\newline \cos \left(q_4 \right)\,\sin \left(q_6 \right)+\cos \left(q_5 \right)\,\cos \left(q_6 \right)\,\sin \left(q_4 \right) & \cos \left(q_4 \right)\,\cos \left(q_6 \right)-\cos \left(q_5 \right)\,\sin \left(q_4 \right)\,\sin \left(q_6 \right) & \sin \left(q_4 \right)\,\sin \left(q_5 \right) & d_6 \,\sin \left(q_4 \right)\,\sin \left(q_5 \right)\newline -\cos \left(q_6 \right)\,\sin \left(q_5 \right) & \sin \left(q_5 \right)\,\sin \left(q_6 \right) & \cos \left(q_5 \right) & d_6 \,\cos \left(q_5 \right)\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-To compute the joint angles $\theta_4 ,\theta_5$ and $\theta_6$ so that: 
+Per calcular els angles articulars $\theta_4 ,\theta_5$ i $\theta_6$ de manera que: 
 
  $$ R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)=R_{\textrm{desired}} =\left\lbrack \begin{array}{ccc} n_x  & s_x  & a_x \newline n_y  & s_y  & a_y \newline n_z  & s_z  & a_z  \end{array}\right\rbrack $$ 
-## Computing $\theta_4 ,\theta_5$ and $\theta_6$ 
+## Càlcul de $\theta_4 ,\theta_5$ i $\theta_6$ 
  $$ \theta_5 =\textrm{atan2}\left(\pm \sqrt{{\left(a_x \right)}^2 +{\left(a_y \right)}^2 },a_z \right) $$ 
 
- $$ \theta_5 =\left\lbrace \begin{array}{ll} \;\theta_5 \in \left(0,\pi \;\right) & \textrm{if}+\sqrt{\;\;\;\;\;\;\;}\textrm{is}\;\textrm{chosen}\to \sin \left(\theta_5 \right)>0\newline \theta_5 \in \left(-\pi \;,0\right) & \textrm{if}-\sqrt{\;\;\;\;\;\;\;}\textrm{is}\;\textrm{chosen}\to \sin \left(\theta_5 \right)<0 \end{array}\right. $$ 
-### Case $\sin \left(\theta_5 \right)>0$:
+ $$ \theta_5 =\left\lbrace \begin{array}{ll} \;\theta_5 \in \left(0,\pi \;\right) & \textrm{si}+\sqrt{\;\;\;\;\;\;\;}\textrm{és}\;\textrm{escollit}\to \sin \left(\theta_5 \right)>0\newline \theta_5 \in \left(-\pi \;,0\right) & \textrm{si}-\sqrt{\;\;\;\;\;\;\;}\textrm{és}\;\textrm{escollit}\to \sin \left(\theta_5 \right)<0 \end{array}\right. $$ 
+### Cas $\sin \left(\theta_5 \right)>0$:
  $$ \theta_4 =\textrm{atan2}\left(a_y ,a_x \right) $$ 
 
  $$ \theta_6 =\textrm{atan2}\left(s_z ,-n_z \right) $$ 
-### Case $\sin \left(\theta_5 \right)<0$:
+### Cas $\sin \left(\theta_5 \right)<0$:
  $$ \theta_4 =\textrm{atan2}\left({-a}_y ,-a_x \right) $$ 
 
  $$ \theta_6 =\textrm{atan2}\left(-s_z ,n_z \right) $$ 
 
-## Euler Angle ZYZ
+## Angle d’Euler ZYZ
 
-Notice how the joint angles of a spherical wrist when configured above, are identical to an Euler ZYZ notation. 
+Observa com els angles articulars d’un canell esfèric, quan està configurat com s’ha indicat anteriorment, són idèntics a una notació d’Euler ZYZ. 
 
 ```matlab
 syms roll pitch yaw real 
@@ -285,19 +284,19 @@ ans = logical
 
 ```
 
-## Closed Form Solution Conditions
+## Condicions de solució en forma tancada
 
-A six\-DOF manipulator has a closed\-form solution if either condition is true:
+Un manipulador de sis GDL té una solució en forma tancada si es compleix alguna d’aquestes condicions:
 
--  Three consecutive joints intersect at a common point (like in the case of the spherical wrist), 
--  Three consecutive revolute joint axes are parallel (as in UR robots) 
+-  Tres articulacions consecutives s’intersequen en un punt comú (com en el cas del canell esfèric), 
+-  Tres eixos articulars rotatius consecutius són paral·lels (com en els robots UR) 
 # Robotic System Toolbox
 
-The robotic System Toolbox features different solvers to acquire solutions to the inverse kinematics.
+El Robotic System Toolbox inclou diferents solucionadors per obtenir solucions de cinemàtica inversa.
 
 ```matlab
 ur3e=loadrobot("universalUR3e", DataFormat="column");
-% Define the target pose for the end-effector
+% Defineix la postura objectiu per a l’efector final
 TargetPose=getTransform(ur3e, [0;0;0;0;0;0], "tool0", "base_link")
 ```
 
@@ -310,30 +309,30 @@ TargetPose = 4x4
 
 ```
 
-## Generic Solver
+## Solucionador genèric
 
-Start by creating an inverse kinematics object as: 
+Comença creant un objecte de cinemàtica inversa com: 
 
 ```matlab
 ik = inverseKinematics('RigidBodyTree', ur3e);
 ```
 
-Define weights to determine the tolerance w.r.t. the orientation and position.
+Defineix pesos per determinar la tolerància respecte de l’orientació i la posició.
 
 
-The first three positions define the tolerance for the orientation, the last three define the tolerance for the position. Set them equal to each other if no additional information is given. 
+Les tres primeres posicions defineixen la tolerància per a l’orientació; les tres últimes defineixen la tolerància per a la posició. Fes-les iguals si no es dona informació addicional. 
 
 ```matlab
 weights = [1, 1, 1, 1, 1, 1];
 ```
 
-Define the initial condition of the joint configuration. This will help find solutions that are close to the current joint state, optimizing the effort to reach a specific target pose. 
+Defineix la condició inicial de la configuració articular. Això ajudarà a trobar solucions properes a l’estat articular actual, optimitzant l’esforç per arribar a una postura objectiu específica. 
 
 ```matlab
 initialConfig = [-pi; pi; pi/2; 0; 0; 0];
 ```
 
-This solver will find a solution from the base frame to the specified target frame. If you are unsure which one is the base frame you can obtain the name as: 
+Aquest solucionador trobarà una solució des del marc base fins al marc objectiu especificat. Si no tens clar quin és el marc base, en pots obtenir el nom així: 
 
 ```matlab
 base_name = ur3e.BaseName
@@ -344,13 +343,13 @@ base_name = 'base_link'
 ```
 
 
-To obtain a solution, call the inverse kinematics object, specify the end\-effector frame, the target pose weights and initial joint states. 
+Per obtenir una solució, crida l’objecte de cinemàtica inversa i especifica el marc de l’efector final, els pesos de la postura objectiu i els estats articulars inicials. 
 
 ```matlab
 [configSol, solInfo] = ik('tool0', TargetPose, weights, initialConfig);
 ```
 
-you will find the solution in configSol and additional information in solInfo. The acquired solution will have the same data format as previously defined in the robot, making it easy to work with. 
+trobaràs la solució a configSol i informació addicional a solInfo. La solució obtinguda tindrà el mateix format de dades que s’ha definit prèviament al robot, cosa que facilita treballar-hi. 
 
 ```matlab
 getTransform(ur3e, configSol,"tool0", base_name)
@@ -365,19 +364,19 @@ ans = 4x4
 
 ```
 
-## Analytical Inverse Kinematic
+## Cinemàtica inversa analítica
 
-The Robotic system toolbox also features an analytical inverse kinematic solver. This can be used to obtain all solutions if the robot features three consecutive joints intersecting at a common point (e.g. spherical wrist). 
+El Robotic System Toolbox també inclou un solucionador analític de cinemàtica inversa. Es pot fer servir per obtenir totes les solucions si el robot presenta tres articulacions consecutives que s’intersequen en un punt comú (p. ex., un canell esfèric). 
 
 
-Analyzing the UR models, you will notice that while they have three consecutive parallel joints, the UR models do not feature a spherical wrist. Due to this, they cannot be solved by the analytical inverse kinematic solver. See below an example of a robot featuring this specific configuration: 
+Analitzant els models UR, observaràs que, tot i que tenen tres articulacions paral·leles consecutives, els models UR no presenten un canell esfèric. Per això, no es poden resoldre amb el solucionador analític de cinemàtica inversa. A continuació es mostra un exemple d’un robot que presenta aquesta configuració específica: 
 
 ```matlab
 robot = loadrobot('abbIrb120','DataFormat','column');
 %show(robot, robot.homeConfiguration)
 ```
 
-Define the target pose as a homogeneous transform matrix:
+Defineix la postura objectiu com una matriu de transformació homogènia:
 
 ```matlab
 TargetPose = transl([0 0.5 0.5])
@@ -393,7 +392,7 @@ TargetPose = 4x4
 ```
 
 
-Setup the analytical solver:
+Configura el solucionador analític:
 
 ```matlab
 AnalyticalSolver = analyticalInverseKinematics(robot)
@@ -401,7 +400,7 @@ AnalyticalSolver = analyticalInverseKinematics(robot)
 
 ```matlabTextOutput
 AnalyticalSolver = 
-  analyticalInverseKinematics with properties:
+  analyticalInverseKinematics amb propietats:
 
              KinematicGroup: [1x1 struct]
               RigidBodyTree: [1x1 rigidBodyTree]
@@ -412,7 +411,7 @@ AnalyticalSolver =
 ```
 
 
-Your robot may have multiple joints that qualify for analytical solving. View and choose the desired group using:
+El teu robot pot tenir múltiples articulacions que compleixin els requisits per a la resolució analítica. Visualitza i escull el grup desitjat fent servir:
 
 ```matlab
 AnalyticalSolver.showdetails()
@@ -420,43 +419,43 @@ AnalyticalSolver.showdetails()
 
 ```matlabTextOutput
 --------------------
-Robot: (8 bodies)
+Robot: (8 cossos)
 
-Index      Base Name   EE Body Name     Type                    Actions
------      ---------   ------------     ----                    -------
-    1      base_link         link_6   RRRSSS   Use this kinematic group
-    2      base_link          tool0   RRRSSS   Use this kinematic group
+Índex     Nom base    Nom cos EE       Tipus                   Accions
+-----     ---------   ------------     ----                    -------
+    1     base_link        link_6   RRRSSS   Fes servir aquest grup cinemàtic
+    2     base_link         tool0   RRRSSS   Fes servir aquest grup cinemàtic
 ```
 
 
-To view the chosen kinematics group: 
+Per visualitzar el grup cinemàtic escollit: 
 
 ```matlab
 AnalyticalSolver.KinematicGroup
 ```
 
 ```matlabTextOutput
-ans = struct with fields:
+ans = struct amb camps:
                BaseName: 'base_link'
     EndEffectorBodyName: 'tool0'
 
 ```
 
 
-Generate a function object for the selected kinematics group: 
+Genera un objecte de funció per al grup cinemàtic seleccionat: 
 
 ```matlab
 generateIKFunction(AnalyticalSolver,'IKSolver')
 ```
 
 ```matlabTextOutput
-ans = function_handle with value:
+ans = function_handle amb valor:
     @IKSolver
 
 ```
 
 
-Obtain the analytical solutions to the robot by: 
+Obtén les solucions analítiques del robot amb: 
 
 ```matlab
 ikConfig = IKSolver(TargetPose)
@@ -472,10 +471,10 @@ ikConfig = 4x6
 ```
 
 
-This function will always return a row data format. Keep this in mind when using the solutions. 
+Aquesta funció sempre retornarà un format de dades en fila. Tingues-ho en compte quan facis servir les solucions. 
 
 
-Take a look at the solutions: 
+Dona un cop d’ull a les solucions: 
 
 ```matlab
 numSolutions = size(ikConfig, 1); 
@@ -487,4 +486,5 @@ end
 ```
 
 ![figure_1.png](Inverse_Kinematics_media/figure_1.png)
+
 

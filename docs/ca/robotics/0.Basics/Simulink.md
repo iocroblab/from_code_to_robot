@@ -1,147 +1,146 @@
-
 # Simulink 
-# How to add Blocks 
+# Com afegir blocs 
 
-In Simulink double click on an empty field and search for the block you want to insert in your plant.  
+A Simulink, fes doble clic en un camp buit i busca el bloc que vols inserir a la teva planta.  
 
 
 ![image_0.png](Simulink_media/image_0.png)
 
 
-Alternatively you can brows the block library. Navigate to the Simulation tab and click Library Browser. 
+Alternativament, pots navegar per la biblioteca de blocs. Ves a la pestanya Simulation i fes clic a Library Browser. 
 
 
 ![image_1.png](Simulink_media/image_1.png)
 
 
-The browser will open from where you can drag the desired blocks into your plant. 
+S’obrirà el navegador, des d’on pots arrossegar els blocs desitjats cap a la teva planta. 
 
 ![image_2.png](Simulink_media/image_2.png)
-# Connect Blocks
+# Connectar blocs
 
-To connect Blocks simply select the signal wire or block output and the desired block input. 
-
-
-![image_3.gif](Simulink_media/image_3.gif)
-
-# Format Blocks
-
-You can change the appearance of blocks by formatting them. 
-
--  Right click on a block and expand the Format tab. From here you are able to rotate or flip the block.  
--  You can change the size of a block by dragging one of its corners.  
-
-# Format Plant
-
-You can select a section of your model and drag it to create more space, the signal lines will stay intact and extend/retract. 
+Per connectar blocs, simplement selecciona el cable de senyal o la sortida del bloc i l’entrada del bloc desitjat. 
 
 
-You can drag the signal lines to make the plant easier to read. 
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/ConnectBlocks.webm)
+
+# Donar format als blocs
+
+Pots canviar l’aparença dels blocs donant-los format. 
+
+-  Fes clic dret sobre un bloc i desplega la pestanya Format. Des d’aquí pots rotar o invertir el bloc.  
+-  Pots canviar la mida d’un bloc arrossegant una de les seves cantonades.  
+
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/FormatBlocks.webm)
+
+# Donar format a la planta
+
+Pots seleccionar una secció del teu model i arrossegar-la per crear més espai; les línies de senyal es mantindran intactes i s’estendran o es retrauran. 
 
 
-![image_4.gif](Simulink_media/image_4.gif)
+Pots arrossegar les línies de senyal per fer que la planta sigui més fàcil de llegir. 
 
-# Tools and Blocks to use
 
-In Simulink you can use a variety of differnt blocks to achieve your desired behaviour. Below we will introduce a few blocks that you can use to solve the exercises of this Curriculum. (Alternative solutions are not wrong!)
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/FormatPlant.webm)
+
+# Eines i blocs a utilitzar
+
+A Simulink pots utilitzar una varietat de blocs diferents per aconseguir el comportament desitjat. A continuació introduirem alguns blocs que pots utilitzar per resoldre els exercicis d’aquest currículum. (Les solucions alternatives no són incorrectes!)
 
 ### Constant
 
-Constant lets you insert a numeric scalar or array, which you can also load from your workspace. 
+Constant et permet inserir un escalar numèric o un array, que també pots carregar des del workspace. 
 
 
-![image_5.gif](Simulink_media/image_5.gif)
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/Constant.webm)
 
 ### Sum
 
-The Sum block lets you add or subtract signals from one another. By changing the settings inside the block you can increase the amount of signals to be processed. By adding a | you can change the positions of inputs. 
+El bloc Sum et permet sumar o restar senyals entre si. Canviant la configuració dins del bloc pots augmentar la quantitat de senyals que s’han de processar. Afegint un | pots canviar les posicions de les entrades. 
 
 
-![image_6.gif](Simulink_media/image_6.gif)
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/Sum.webm)
 
 ### Scope
 
-The scope block lets you visualize your signal trajectories. Click above or below an input to create an additional signal input. You can delete it by selecting the input and pressing "del"
+El bloc Scope et permet visualitzar les trajectòries dels senyals. Fes clic a sobre o a sota d’una entrada per crear una entrada de senyal addicional. La pots eliminar seleccionant l’entrada i prement "del"
 
 
-![image_7.gif](Simulink_media/image_7.gif)
+[![videoThumb_false.png](Simulink_media/videoThumb_false.png)](../../Resources/Video_livescript/Simulink_basics/Scope.webm)
 
 ### Matrix Multiply
 
-To multiply matrices (matrix as an input). Can also be used to multiply a matrix with a vector. 
+Per multiplicar matrius (matriu com a entrada). També es pot utilitzar per multiplicar una matriu per un vector. 
+
+
+![image_3.png](Simulink_media/image_3.png)
+
+### Gain
+
+Té un guany estàtic. Es pot carregar des del workspace mitjançant el nom d’una variable. 
+
+
+Permet valors escalars i matrius com a guany. 
+
+
+Selecciona una opció de multiplicació adequada per a la teva aplicació. 
+
+
+![image_4.png](Simulink_media/image_4.png)
+
+### MatlabFunction
+
+Permet utilitzar codi dins de Simulink. Defineix entrades i sortides a la declaració de la funció. 
+
+
+![image_5.png](Simulink_media/image_5.png)
+
+### Saturation
+
+Aquest bloc s’utilitza per limitar un senyal. Defineix el límit superior i inferior permès. 
+
+
+Pot acceptar un vector com a límits (corresponent a la mida del vector d’entrada). 
+
+
+![image_6.png](Simulink_media/image_6.png)
+
+### Mux/Demux
+
+Els blocs Mux i Demux es poden utilitzar per separar o combinar senyals en un vector. 
+
+
+![image_7.png](Simulink_media/image_7.png)
+
+# Executar una simulació 
+
+Ves a la secció Simulation. Ho veuràs sota la pestanya SIMULATE. 
 
 
 ![image_8.png](Simulink_media/image_8.png)
 
-### Gain
 
-Has a static gain. Can be loaded from the workspace via a variable name. 
-
-
-Allows scalar valus and matrices as gain. 
-
-
-Select a desired Multiplication option for your application. 
+Per executar una simulació, primer has d’establir la durada de simulació desitjada. 
 
 
 ![image_9.png](Simulink_media/image_9.png)
 
-### MatlabFunction
 
-Allows to use code inside of simulink. Define inputs and outputs in the function declaration. 
+Estableix un nombre positiu o inf per a una execució contínua. 
+
+
+Per iniciar la simulació, prem Run 
 
 
 ![image_10.png](Simulink_media/image_10.png)
 
-### Saturation
 
-This block is used to limit a signal. Define the upper and lower allowed limit. 
-
-
-Can take a vector as the limits (corresponding to the input vector size) 
+També pots simular pas a pas prement el botó Step Forward. Tanmateix, això és més útil en aplicacions offline. 
 
 
 ![image_11.png](Simulink_media/image_11.png)
 
-### Mux/Demux
 
-Mux and Demux blocks can be used to seperate or combine signals into a vector. 
+Un cop en execució, pots pausar o aturar la simulació prement: 
 
 
 ![image_12.png](Simulink_media/image_12.png)
-
-# Run a Simulation 
-
-Navigate to the Simulation section. You will see under the tab SIMULATE. 
-
-
-![image_13.png](Simulink_media/image_13.png)
-
-
-To run a simulation you must first set the desired simulation length. 
-
-
-![image_14.png](Simulink_media/image_14.png)
-
-
-Set a positive number or inf for a continious execution. 
-
-
-To start the Simulation press Run 
-
-
-![image_15.png](Simulink_media/image_15.png)
-
-
-You can also simulate step by step by pressing the Step Forward button. However this is more useful in offline applications. 
-
-
-![image_16.png](Simulink_media/image_16.png)
-
-
-Once running you can pause or stop the simulation by pressing: 
-
-
-![image_17.png](Simulink_media/image_17.png)
-
-

@@ -1,60 +1,59 @@
+# Exercici 5.5 \- Universal Robots en l’espai de tasca fent servir control d’esforç
 
-# Exercise 5.5 \- Universal Robots in task space using effort control
+En aquest exercici controlaràs un manipulador Universal Robots fent servir una solució de cinemàtica inversa que es controla mitjançant la comanda d’esforç. 
 
-In this exercise you will control a Universal Robots manipulator using an inverse kinematic solution that is controller using the effort command. 
-
-# Start the Simulation
+# Inicia la simulació
 ```matlab
 urmodel = 'ur3e'
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model',urmodel, 'Docker', false);
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
-Remember that you can slow down the simulation as: 
+Recorda que pots alentir la simulació així: 
 
 
 SetSimulationSpeed( SpeedFactor, 'docker', false)
 
-# Load the Robot
+# Carrega el robot
 
-import your Universal robot of choice using urdf files and set gravity in \-z direction. 
-
-
-# Parameters
-
-Setup your parameters as in Exercise 4.2.
+importa el robot Universal de la teva elecció fent servir fitxers urdf i defineix la gravetat en direcció \-z. 
 
 
-Set: 
+# Paràmetres
 
--  Kp (can be scale during simulation) 
--  Kd (can be scale during simulation) 
--  taulim according to your robot 
-
-# Configurations 
-
-Try different configurations
+Configura els teus paràmetres com a l’Exercici 4.2.
 
 
-store them as: 
+Defineix: 
+
+-  Kp (es pot escalar durant la simulació) 
+-  Kd (es pot escalar durant la simulació) 
+-  taulim segons el teu robot 
+
+# Configuracions 
+
+Prova diferents configuracions
+
+
+desa-les com: 
 
 -  T\_desired\_1 
 -  T\_desired\_2 
 -  T\_desired\_3 
 -  qd\_desired 
 
-Using joint configurations and the forward kinematics ensures the resulting transforms are reachable by the robot.
+Fer servir configuracions articulars i la cinemàtica directa garanteix que les transformacions resultants siguin assolibles pel robot.
 
  $$ T_{\textrm{desired},i} \left(q_{\textrm{config},i} \right)=\textrm{forward}_\textrm{kinematics}\left(q_{\textrm{config},i} \right) $$ 
 
-or using the Robotic System Toolbox function as
+o fent servir la funció del Robotic System Toolbox com
 
 
  $T_{\textrm{desired},i}$ = getTransform(robot, config\_i, "tool0", "base\_link");
 
 
-However you can also try other transform matrices. You can build them by using the transl() and trotm(angle, 'axis') functions. 
+Tanmateix, també pots provar altres matrius de transformació. Les pots construir fent servir les funcions transl() i trotm(angle, 'axis'). 
 
 ```matlab
 config_example1 = [0,-pi/4,pi/2,-pi/3,pi/7,pi/5]';
@@ -67,16 +66,16 @@ config_example3 = [pi/3,pi/3,-pi/1.5,pi/9,pi/8,0]';
 T_desired_3 = getTransform(robot, config_example3, "tool0", "base_link");
 
 ```
-# Visualization
+# Visualització
 
-Visualize it in rviz. 
+Visualitza-ho a rviz. 
 
 ```matlab
 StaticFrameBroadcaster(T_desired_1, 'target_1');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target_1
+Transformació estàtica publicada: base_link → target_1
 ```
 
 ```matlab
@@ -84,7 +83,7 @@ StaticFrameBroadcaster(T_desired_2, 'target_2');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target_2
+Transformació estàtica publicada: base_link → target_2
 ```
 
 ```matlab
@@ -92,99 +91,97 @@ StaticFrameBroadcaster(T_desired_3, 'target_3');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target_3
+Transformació estàtica publicada: base_link → target_3
 ```
 
 # Dashboard
 
-In the Simulink file you will find the dashboard section that allows you to switch between the configurations, see the current torque output and scale the Kp and Kd matrix during simulation. 
+Al fitxer de Simulink trobaràs la secció dashboard que et permet canviar entre les configuracions, veure la sortida de parell actual i escalar les matrius Kp i Kd durant la simulació. 
 
-### Configuration Selector 
+### Selector de configuració 
 
-Check one of these boxes to select the goal transforms. 
+Marca una d’aquestes caselles per seleccionar les transformacions objectiu. 
 
 
 ![image_0.png](Exercise-5-5_media/image_0.png)
 
 
-this selection block is linked to: 
+aquest bloc de selecció està enllaçat amb: 
 
 
 ![image_1.png](Exercise-5-5_media/image_1.png)
 
-### Scale Kd and Kp
+### Escala Kd i Kp
 
-By using the sliders you can alter the gain value of their corresponding K\_scale blocks: 
+Fent servir els controls lliscants pots modificar el valor de guany dels seus blocs K\_scale corresponents: 
 
 
 ![image_2.png](Exercise-5-5_media/image_2.png)
 
-### View Torque Trajectory
+### Visualitza la trajectòria de parell
 
-The Dashboard scope allows you to see the current torques live during simulation (like a scope). 
+El scope del Dashboard et permet veure els parells actuals en directe durant la simulació (com un scope). 
 
 
 ![image_3.png](Exercise-5-5_media/image_3.png)
 
-# Task 1 
+# Tasca 1 
 
-Open the file Exercise\_5\_5\_1.slx and setup a control scheme that operates using a transformation matrix as an input. 
+Obre el fitxer Exercise\_5\_5\_1.slx i configura un esquema de control que operi fent servir una matriu de transformació com a entrada. 
 
-## Task 1.1
+## Tasca 1.1
 
-To obtain a valid joint configuration that satisfies the desired pose use the "inverse Kinematic" block
+Per obtenir una configuració articular vàlida que satisfaci la postura desitjada, fes servir el bloc "inverse Kinematic"
 
 
 ![image_4.png](Exercise-5-5_media/image_4.png)
 
 
-Specify: 
+Especifica: 
 
--  'robot' as Ridgid body tree 
--  'tool0' as EE 
-### Inputs: 
--  Desired Transform as Pose 
--  Current Joint Configuration as InitalGuess 
+-  'robot' com a Ridgid body tree 
+-  'tool0' com a EE 
+### Entrades: 
+-  Transformació desitjada com a Pose 
+-  Configuració articular actual com a InitalGuess 
 -  $\displaystyle \textrm{weights}\in {\mathbb{R}}^{6\textrm{x1}}$ 
 
-The weights input are the tolerances permitted. Set the tolerance to ${10}^{-3}$ for position and ${10}^{-2}$ for orientation. 
+Les entrades weights són les toleràncies permeses. Defineix la tolerància a ${10}^{-3}$ per a la posició i ${10}^{-2}$ per a l’orientació. 
 
-## Task 1.2
+## Tasca 1.2
 
-Use an inverse dynamic control scheme (as in Exercise 5.4) to move the endeffector to the solution of the inverse kinematic block. 
+Fes servir un esquema de control per dinàmica inversa (com a l’Exercici 5.4) per moure l’efector final fins a la solució del bloc de cinemàtica inversa. 
 
-# Task 2
+# Tasca 2
 
-Open the file Exercise\_5\_5\_2.slx and setup a control scheme that operates using a transformation matrix as an input. 
+Obre el fitxer Exercise\_5\_5\_2.slx i configura un esquema de control que operi fent servir una matriu de transformació com a entrada. 
 
-## Task 2.1
+## Tasca 2.1
 
-Identical as Task 1.1 
+Idèntica a la Tasca 1.1 
 
-## Task 1.2
+## Tasca 1.2
 
-Use a PID with gravity compensation control scheme to reach the computed joint configuration. 
+Fes servir un esquema de control PID amb compensació de gravetat per arribar a la configuració articular calculada. 
 
-### Tuning of Gains 
+### Ajust dels guanys 
 
-You can follow the approach of estimating the gains using the Inertia matrix or you try to experimentally determine good gains. 
+Pots seguir l’enfocament d’estimar els guanys fent servir la matriu d’inèrcia o provar de determinar experimentalment uns bons guanys. 
 
 
-You can tune the gains by using the vertical sliders, on the right side you will see the resulting gain matrix. 
+Pots ajustar els guanys fent servir els controls lliscants verticals; a la dreta veuràs la matriu de guany resultant. 
 
 
 ![image_5.png](Exercise-5-5_media/image_5.png)
 
 
-To use them you can use the "From" blocks: 
+Per fer-los servir pots utilitzar els blocs "From": 
 
 
 ![image_6.png](Exercise-5-5_media/image_6.png)
 
 
-You can do calculations with the matrices by e.g. using a matrix multiply block: 
+Pots fer càlculs amb les matrius, per exemple, fent servir un bloc de multiplicació de matrius: 
 
 
 ![image_7.png](Exercise-5-5_media/image_7.png)
-
-

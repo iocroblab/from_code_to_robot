@@ -1,70 +1,67 @@
-
 # Control 
 
-In this tutorial, we will study two important control strategies for robot manipulators: **centralized** and **decentralized control**.
+En aquest tutorial, estudiarem dues estratègies de control importants per a manipuladors robòtics: **control centralitzat** i **control descentralitzat**.
 
 
-The goal is to understand when each approach is appropriate, what assumptions they rely on, and how they affect performance.
+L’objectiu és entendre quan és apropiat cada enfocament, en quines hipòtesis es basen i com afecten el rendiment.
 
-# Motivation
+# Motivació
 
-Robotic manipulators are nonlinear and highly coupled systems.
-
-
-This means that the motion of one joint often influences the forces and torques acting on the others. For example, moving the shoulder of a robotic arm changes the torque required at the elbow, even if the elbow itself does not move.
+Els manipuladors robòtics són sistemes no lineals i altament acoblats.
 
 
-The task of the controller is to ensure that the manipulator follows a desired trajectory despite these couplings and nonlinear effects. There are two general philosophies to approach this problem:
-
--  In **decentralized control**, each joint is controlled separately, almost as if it were an independent system. The dynamic couplings with the other joints are not explicitly modeled, but instead treated as disturbances. This makes the controller simpler, but performance may degrade if the couplings are strong. 
--  In **centralized control**, the full dynamics of the manipulator are taken into account. The inertia matrix, Coriolis and centrifugal terms, and gravity are explicitly included in the control law, so that the couplings are actively compensated. This generally leads to more precise trajectory tracking, at the cost of requiring an accurate model and more computation. 
-# Decentralized Control
-
-In a decentralized control scheme, each joint of the manipulator is treated as an independent system. The idea is to design a simple controller, such as a PD controller, for each joint separately. The interactions between joints, which in reality exist due to the coupled dynamics, are not modeled explicitly. Instead, they are regarded as external disturbances that the local controller should reject as best as possible.
+Això vol dir que el moviment d’una articulació sovint influeix en les forces i els parells que actuen sobre les altres. Per exemple, moure l’espatlla d’un braç robòtic canvia el parell requerit al colze, encara que el colze mateix no es mogui.
 
 
-This approach has the advantage of simplicity: it requires only local joint measurements and basic modeling of each actuator. Moreover, decentralized control is robust in the sense that it does not depend on precise knowledge of the complete robot dynamics. However, it also has a clear drawback: when the manipulator executes fast or complex motions, the coupling effects become significant, and the performance of purely decentralized control degrades.
+La tasca del controlador és garantir que el manipulador segueixi una trajectòria desitjada malgrat aquests acoblaments i efectes no lineals. Hi ha dues filosofies generals per abordar aquest problema:
+
+-  En el **control descentralitzat**, cada articulació es controla per separat, gairebé com si fos un sistema independent. Els acoblaments dinàmics amb les altres articulacions no es modelen explícitament, sinó que es tracten com a pertorbacions. Això fa que el controlador sigui més senzill, però el rendiment pot degradar-se si els acoblaments són forts. 
+-  En el **control centralitzat**, es tenen en compte les dinàmiques completes del manipulador. La matriu d’inèrcia, els termes de Coriolis i centrífugs, i la gravetat s’inclouen explícitament en la llei de control, de manera que els acoblaments es compensen activament. Això generalment dona lloc a un seguiment de trajectòria més precís, a costa de requerir un model acurat i més càlcul. 
+# Control descentralitzat
+
+En un esquema de control descentralitzat, cada articulació del manipulador es tracta com un sistema independent. La idea és dissenyar un controlador senzill, com ara un controlador PD, per a cada articulació per separat. Les interaccions entre articulacions, que en realitat existeixen a causa de la dinàmica acoblada, no es modelen explícitament. En canvi, es consideren pertorbacions externes que el controlador local hauria de rebutjar tan bé com sigui possible.
 
 
-A common improvement is to include **feedforward terms** based on approximate knowledge of the dynamics. For example, adding gravity compensation or partial torque predictions helps reduce the effect of couplings. This way, decentralized controllers can achieve good performance without becoming overly complex.
+Aquest enfocament té l’avantatge de la simplicitat: només requereix mesures articulars locals i un modelatge bàsic de cada actuador. A més, el control descentralitzat és robust en el sentit que no depèn d’un coneixement precís de la dinàmica completa del robot. Tanmateix, també té un inconvenient clar: quan el manipulador executa moviments ràpids o complexos, els efectes d’acoblament esdevenen significatius i el rendiment d’un control purament descentralitzat es degrada.
+
+
+Una millora habitual és incloure **termes feedforward** basats en un coneixement aproximat de la dinàmica. Per exemple, afegir compensació de gravetat o prediccions parcials de parell ajuda a reduir l’efecte dels acoblaments. D’aquesta manera, els controladors descentralitzats poden assolir un bon rendiment sense esdevenir massa complexos.
 
 
 ![image_0.svg](Control_Schemes_media/image_0.svg)
 
-## Gravity\-Compensated PD Control
+## Control PD amb compensació de gravetat
 
-One of the simplest ways to improve decentralized control is to add **gravity compensation**. The idea is that, without compensation, the controller must fight against the constant gravitational torques acting on the joints. This can lead to large steady\-state errors.
-
-
-By explicitly including a feedforward term equal to the gravity vector g(q), we can cancel the static gravitational effect.
+Una de les maneres més senzilles de millorar el control descentralitzat és afegir **compensació de gravetat**. La idea és que, sense compensació, el controlador ha de lluitar contra els parells gravitatoris constants que actuen sobre les articulacions. Això pot provocar grans errors en règim estacionari.
 
 
-The control law:
+Incloent explícitament un terme feedforward igual al vector de gravetat g(q), podem cancel·lar l’efecte gravitatori estàtic.
+
+
+La llei de control:
 
  $$ u=g\left(q\right)+k_p \cdot \left(q_d -q\right)-k_d \cdot \left(\dot{q_d } -\dot{q} \right) $$ 
 
-simplifies to 
+se simplifica a 
 
  $$ u=g\left(q\right)+k_p \cdot \left(q_d -q\right)-k_d \cdot \dot{\;q} $$ 
 
-for $\dot{q_d } =0$ 
+per a $\dot{q_d } =0$ 
 
 
-Resulting in the control scheme: ![image_1.svg](Control_Schemes_media/image_1.svg)
+donant lloc a l’esquema de control: ![image_1.svg](Control_Schemes_media/image_1.svg)
 
-# PID Control
+# Control PID
 
-Another way to improve the decentralized control and eliminate steady state error is done by introducing an integration term. It is important to add some anti windup mechanism to stop the integration term from building up when the position is far away. The Idea is to move the joints as close as possible to the desired position using a feedforward PD + gravity compensation scheme. The integral term will eliminate any steady state error. 
+Una altra manera de millorar el control descentralitzat i eliminar l’error en règim estacionari és introduir un terme d’integració. És important afegir algun mecanisme anti-windup per evitar que el terme d’integració s’acumuli quan la posició és molt llunyana. La idea és moure les articulacions tan a prop com sigui possible de la posició desitjada fent servir un esquema feedforward PD + compensació de gravetat. El terme integral eliminarà qualsevol error en règim estacionari. 
 
-# Centralized Control
+# Control centralitzat
 
-In contrast, centralized control explicitly incorporates the coupled dynamics of the robot into the control law. Instead of treating joint interactions as disturbances, they are modeled and compensated using the full dynamic equations of the manipulator.
+En canvi, el control centralitzat incorpora explícitament la dinàmica acoblada del robot a la llei de control. En lloc de tractar les interaccions entre articulacions com a pertorbacions, es modelen i es compensen fent servir les equacions dinàmiques completes del manipulador.
 
 
-The robot dynamics can be written in the standard form:
+La dinàmica del robot es pot escriure en la forma estàndard:
 
  $$ B\left(q\right)\cdot \;\ddot{\;q} +C\left(q,\dot{q} \right)\cdot \dot{q} +F\cdot \dot{q} +g\left(q\right)=\tau $$ 
 
-In a centralized scheme, the controller uses this model to compute torques that cancel out the nonlinear terms. This results in a simpler, often linear, closed\-loop behavior. The advantage is much better tracking accuracy, especially in tasks involving multiple joints moving simultaneously. The drawback is that centralized control requires a reasonably accurate model of the robot. If the parameters are uncertain or change over time, performance may deteriorate.
-
-
+En un esquema centralitzat, el controlador fa servir aquest model per calcular parells que cancel·len els termes no lineals. Això dona lloc a un comportament en bucle tancat més senzill, sovint lineal. L’avantatge és una precisió de seguiment molt millor, especialment en tasques que impliquen múltiples articulacions movent-se simultàniament. L’inconvenient és que el control centralitzat requereix un model del robot raonablement acurat. Si els paràmetres són incerts o canvien amb el temps, el rendiment pot deteriorar-se.

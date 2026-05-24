@@ -1,18 +1,17 @@
+# Conceptes bàsics de translació i rotació
+# Introducció
 
-# Basics of Translation and Rotation
-# Introduction
-
-In this section you will learn how to represent translations and rotations in a 3D space. 
-
-
-After understanding the basic ideas of translation and rotations, we will combine them into homogeneous transform matrices, which will be the basis for the next tutorial. 
-
-# Translation
-
-Translations are represented by a vector of the same dimensions as the task space ${\mathbb{R}}^n \to {\mathbb{R}}^n$ 
+En aquesta secció aprendràs com representar translacions i rotacions en un espai 3D. 
 
 
-A translation along x\-axis can be represented by $\left\lbrack \begin{array}{c} \Delta \;x\newline 0\newline 0 \end{array}\right\rbrack$. Note that the values are w.r.t. (with respect to) the source frame. 
+Després d’entendre les idees bàsiques de translació i rotació, les combinarem en matrius de transformació homogènia, que seran la base del tutorial següent. 
+
+# Translació
+
+Les translacions es representen mitjançant un vector de les mateixes dimensions que l’espai de treball ${\mathbb{R}}^n \to {\mathbb{R}}^n$ 
+
+
+Una translació al llarg de l’eix x es pot representar amb $\left\lbrack \begin{array}{c} \Delta \;x\newline 0\newline 0 \end{array}\right\rbrack$. Tingues en compte que els valors són respecte de (with respect to) el sistema d’origen. 
 
 ```matlab
 visualizeTranslation([2,0,0]);
@@ -20,7 +19,7 @@ visualizeTranslation([2,0,0]);
 
 ![figure_0.png](Transforms_media/figure_0.png)
 
-For a translation along all axis the vector will be $\left\lbrack \begin{array}{c} \Delta \;x\newline \Delta \;y\newline \Delta \;z \end{array}\right\rbrack$. Note that the values are w.r.t. (with respect to) the source frame. 
+Per a una translació al llarg de tots els eixos, el vector serà $\left\lbrack \begin{array}{c} \Delta \;x\newline \Delta \;y\newline \Delta \;z \end{array}\right\rbrack$. Tingues en compte que els valors són respecte de (with respect to) el sistema d’origen. 
 
 ```matlab
 visualizeTranslation([2,3,5]);
@@ -29,34 +28,18 @@ visualizeTranslation([2,3,5]);
 ![figure_1.png](Transforms_media/figure_1.png)
 
 
-With the following code, you can create a new frame and make its location known. The function `transl()` defines a new coordinate frame  whose origin is offset (translated) from its parent frame (starting point) the provided distances. The `TargetFrameBroadcaster` then publishes this new frame. Fix values between \-1 and 1.
-
-
-To start the visualization tool Rviz: 
-
-```matlab
-StartTutorialApplication('Rviz','model','ur3e'); 
-```
-
-```matlabTextOutput
-FCTR-container
-```
-
-```matlab
-%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
-%when using a native ROS workspace
-```
+Amb el codi següent, pots crear un nou sistema de coordenades i fer-ne coneguda la ubicació. La funció `transl()` defineix un nou sistema de coordenades l’origen del qual està desplaçat (traduït) respecte del seu sistema pare (punt inicial) les distàncies proporcionades. Després, `TargetFrameBroadcaster` publica aquest nou sistema. Fixa valors entre \-1 i 1.
 
 ```matlab
 x_trans=0.34
 ```
 
 ```matlabTextOutput
-x_trans = 0.3400
+x_trans = 0.4400
 ```
 
 ```matlab
-y_trans=0.04
+y_trans=0.02
 ```
 
 ```matlabTextOutput
@@ -77,31 +60,34 @@ TargetFrameBroadcaster(transl([x_trans,y_trans,z_trans]),'my_frame')
 ```
 
 ```matlabTextOutput
-Published static transform: world → my_frame
+TargetFrameBroadcaster is not found in the current folder or on the MATLAB path, but exists in:
+    /home/janrosell/git-projects/from-code-to-robot/from-code-to-robot/robotics/Ros/Functions
+
+Change the MATLAB current folder or add its folder to the MATLAB path.
 ```
 
-## Obtaining the translation vector
+## Obtenció del vector de translació
 
-We can compute the translation vector by subtracting the coordinate frame origins as: 
+Podem calcular el vector de translació restant els orígens dels sistemes de coordenades com: 
 
- $$ \textrm{translation}\;\textrm{vector}=\textrm{target}\;\textrm{frame}-\textrm{source}\;\textrm{frame}\; $$ 
+ $$ \textrm{vector}\;\textrm{de}\;\textrm{translació}=\textrm{sistema}\;\textrm{objectiu}-\textrm{sistema}\;\textrm{origen}\; $$ 
 
-for the example above: 
+per a l’exemple anterior: 
 
  $$ \left\lbrack \begin{array}{c} t_x \newline t_y \newline t_z  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} 2\newline 3\newline 5 \end{array}\right\rbrack -\left\lbrack \begin{array}{c} 0\newline 0\newline 0 \end{array}\right\rbrack =\left\lbrack \begin{array}{c} 2\newline 3\newline 5 \end{array}\right\rbrack $$ 
-# Rotations
+# Rotacions
 
-Rotations can be represented in a few different ways. We are going to work with a matrix representation. Where $R\in {\mathbb{R}}^{3x3}$ 
+Les rotacions es poden representar de diverses maneres. Treballarem amb una representació matricial, on $R\in {\mathbb{R}}^{3x3}$ 
 
 
-The angle of rotation for a counter clockwise movement is positive (use right hand rule) 
+L’angle de rotació per a un moviment antihorari és positiu (utilitza la regla de la mà dreta). 
 
 
 ![image_0.png](Transforms_media/image_0.png)
 
-## How to define a simple rotation
+## Com definir una rotació simple
 
-We can use prebuild functions to get these matrices for a given rotation. 
+Podem utilitzar funcions predefinides per obtenir aquestes matrius per a una rotació donada. 
 
 ```matlab
 syms alpha beta gamma 
@@ -146,28 +132,28 @@ visualizeRotation(double(subs(Rz, gamma, pi/4)), 'z') %gamma = 45° = pi/4
 
 ![figure_4.png](Transforms_media/figure_4.png)
 
-Multiplying these rotations with one another, gives us complex rotations in 3D space. 
+Multiplicar aquestes rotacions entre si ens dona rotacions complexes en l’espai 3D. 
 
 
-The order of individual rotations is important for the final matrix, as each consecutive rotation relates to the new coordinate frame. 
+L’ordre de les rotacions individuals és important per a la matriu final, ja que cada rotació consecutiva fa referència al nou sistema de coordenades. 
 
 ```matlab
 clear all; 
 ```
-## Rotation Notation
+## Notació de rotacions
 
-In robotics we often need to switch between different ways of describing a 3\-D rotation. Instead of giving a full matrix, we can represent any rotation by a set of angles and a specific order. 
+En robòtica sovint hem de canviar entre diferents maneres de descriure una rotació 3D. En lloc de donar una matriu completa, podem representar qualsevol rotació mitjançant un conjunt d’angles i un ordre específic. 
 
 
-The main representations are:
+Les representacions principals són:
 
-## **Euler Angles (ZYZ)**
+## **Angles d’Euler (ZYZ)**
 
-Also called **moving\-axis** Euler angles (ϕ,  θ,  ψ), as the rotations revolve around the new updated axis:
+També anomenats angles d’Euler d’**eixos mòbils** (ϕ,  θ,  ψ), ja que les rotacions giren al voltant del nou eix actualitzat:
 
-1.  Rotate by ϕ about the original z.
-2. Rotate by θ about the new y.
-3. Rotate by ψ about the newest z.
+1.  Rotar ϕ al voltant del z original.
+2. Rotar θ al voltant del nou y.
+3. Rotar ψ al voltant del z més nou.
 ```matlab
 syms phi theta psi
 R = rotz(phi) * roty(theta) * rotz(psi)
@@ -177,7 +163,7 @@ R =
   $$ \displaystyle \left(\begin{array}{ccc} \cos \left(\phi \right)\,\cos \left(\psi \right)\,\cos \left(\theta \right)-\sin \left(\phi \right)\,\sin \left(\psi \right) & -\cos \left(\psi \right)\,\sin \left(\phi \right)-\cos \left(\phi \right)\,\cos \left(\theta \right)\,\sin \left(\psi \right) & \cos \left(\phi \right)\,\sin \left(\theta \right)\newline \cos \left(\phi \right)\,\sin \left(\psi \right)+\cos \left(\psi \right)\,\cos \left(\theta \right)\,\sin \left(\phi \right) & \cos \left(\phi \right)\,\cos \left(\psi \right)-\cos \left(\theta \right)\,\sin \left(\phi \right)\,\sin \left(\psi \right) & \sin \left(\phi \right)\,\sin \left(\theta \right)\newline -\cos \left(\psi \right)\,\sin \left(\theta \right) & \sin \left(\psi \right)\,\sin \left(\theta \right) & \cos \left(\theta \right) \end{array}\right) $$ 
  
 
-We can also use the build\-in functions for numerical values:
+També podem utilitzar les funcions predefinides per a valors numèrics:
 
 ```matlab
 Angles = [phi, theta, psi]; 
@@ -193,9 +179,9 @@ R_func = 3x3
 
 ```
 
-### Compute Euler Angles from Rotation Matrix
+### Calcular angles d’Euler a partir d’una matriu de rotació
 
-For the inverse of this problem (computing the angles from a rotation matrix), we can solve it analytically: 
+Per al problema invers (calcular els angles a partir d’una matriu de rotació), podem resoldre’l analíticament: 
 
  $$ R=\left\lbrack \begin{array}{ccc} r_{11}  & r_{12}  & r_{13} \newline r_{21}  & r_{22}  & r_{23} \newline r_{31}  & r_{32}  & r_{33}  \end{array}\right\rbrack $$ 
 
@@ -206,14 +192,14 @@ For the inverse of this problem (computing the angles from a rotation matrix), w
  $$ \psi =\textrm{atan2}\left(r_{32} ,\;{-r}_{31} \right)=\textrm{atan2}\left(-r_{32} ,\;r_{31} \right) $$ 
 
 
-We can also use the build\-in function rotm2eul(R, sequence) or tform2eul(T, sequence) for homogeneous transforms. 
+També podem utilitzar la funció predefinida rotm2eul(R, sequence) o tform2eul(T, sequence) per a transformacions homogènies. 
 
 
-For the example values: 
+Per als valors d’exemple: 
 
  $$ \begin{array}{l} \phi =~0\newline \theta =\frac{\pi }{2}\newline \psi =\frac{\pi }{3} \end{array} $$ 
 
-substituting $\phi ,~\theta ~and~\psi$: 
+substituint $\phi ,~\theta ~and~\psi$: 
 
 ```matlab
 R_subs = double(subs(R, [phi, theta, psi], [0, pi/2, pi/3]));  
@@ -227,30 +213,30 @@ ZYZ_angles = 1x3
 ```
 
 
- *Note that a same rotation matrix can be obtained with different combination of euler angles. This is why, the obtained angles are not equal to the ones computed.* 
+ *Tingues en compte que una mateixa matriu de rotació es pot obtenir amb diferents combinacions d’angles d’Euler. Per això, els angles obtinguts no són iguals als calculats.* 
 
 ```matlab
 clear all; 
 ```
-## Euler Angles (RPY/ZYX)
+## Angles d’Euler (RPY/ZYX)
 
-Also called **roll\-pitch\-yaw** (fixed axes) or ZYX Euler angles (roll,  pitch,  yaw). Here the angles correspond to a fixed reference frame where: 
-
-
- $\theta_r ~=~Roll~~\Rightarrow$ Rotation around X\-axis
+També anomenats **roll\-pitch\-yaw** (eixos fixos) o angles d’Euler ZYX (roll,  pitch,  yaw). Aquí els angles corresponen a un sistema de referència fix on: 
 
 
- $\theta_p ~=~Pitch~\Rightarrow$ Rotation around Y\-axis
+ $\theta_r ~=~Roll~~\Rightarrow$ Rotació al voltant de l’eix X
 
 
- $\theta_y ~=~Yaw~~\Rightarrow$ Rotation around Z\-axis
+ $\theta_p ~=~Pitch~\Rightarrow$ Rotació al voltant de l’eix Y
 
 
-This is achieved by applying the angles in the following order:
+ $\theta_y ~=~Yaw~~\Rightarrow$ Rotació al voltant de l’eix Z
 
-1.  Rotate by $\theta_y$ about the original Z.
-2. Rotate by $\theta_p$ about the original Y.
-3. Rotate by $\theta_r$ about the original X.
+
+Això s’aconsegueix aplicant els angles en l’ordre següent:
+
+1.  Rotar $\theta_y$ al voltant del Z original.
+2. Rotar $\theta_p$ al voltant del Y original.
+3. Rotar $\theta_r$ al voltant del X original.
 ```matlab
 syms roll pitch yaw 
 R = rotz(yaw) * roty(pitch) * rotx(roll)
@@ -260,7 +246,7 @@ R =
   $$ \displaystyle \left(\begin{array}{ccc} \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{yaw}\right) & \cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)-\cos \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right)+\cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{pitch}\right)\newline \cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\cos \left(\textrm{yaw}\right)+\sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right)\,\sin \left(\textrm{yaw}\right) & \cos \left(\textrm{roll}\right)\,\sin \left(\textrm{pitch}\right)\,\sin \left(\textrm{yaw}\right)-\cos \left(\textrm{yaw}\right)\,\sin \left(\textrm{roll}\right)\newline -\sin \left(\textrm{pitch}\right) & \cos \left(\textrm{pitch}\right)\,\sin \left(\textrm{roll}\right) & \cos \left(\textrm{pitch}\right)\,\cos \left(\textrm{roll}\right) \end{array}\right) $$ 
  
 
-We can also use the build\-in functions for numerical values:
+També podem utilitzar les funcions predefinides per a valors numèrics:
 
 ```matlab
 RPY = [roll, pitch, yaw];
@@ -276,9 +262,9 @@ R_num = 3x3
 
 ```
 
-### Compute RPY Angles from Rotation Matrix
+### Calcular angles RPY a partir d’una matriu de rotació
 
-For the inverse of this problem (computing the angles from a rotation matrix), we can solve it analytically: 
+Per al problema invers (calcular els angles a partir d’una matriu de rotació), podem resoldre’l analíticament: 
 
  $$ R=\left\lbrack \begin{array}{ccc} r_{11}  & r_{12}  & r_{13} \newline r_{21}  & r_{22}  & r_{23} \newline r_{31}  & r_{32}  & r_{33}  \end{array}\right\rbrack $$ 
 
@@ -289,14 +275,14 @@ For the inverse of this problem (computing the angles from a rotation matrix), w
  $$ \theta_y =\textrm{atan2}\left(r_{32} ,\;r_{33} \right)=\textrm{atan2}\left(-r_{32} ,-r_{33} \right) $$ 
 
 
-We can also use the build\-in function rotm2eul(R, sequence) or tform2eul(T,sequence) for homogeneous transforms.  
+També podem utilitzar la funció predefinida rotm2eul(R, sequence) o tform2eul(T,sequence) per a transformacions homogènies.  
 
 
-For the example values: 
+Per als valors d’exemple: 
 
  $$ \begin{array}{l} \theta_r =~0\newline \theta_p =\frac{\pi }{2}\newline \theta_y =\frac{\pi }{3} \end{array} $$ 
 
-substituting $\phi ,~\theta ~and~\psi$: 
+substituint $\phi ,~\theta ~and~\psi$: 
 
 ```matlab
 R_subs = double(subs(R, [roll, pitch, yaw], [0, pi/2, pi/3])); 
@@ -310,31 +296,31 @@ RPY_angles = 1x3
 ```
 
 
- *Note that a same rotation matrix can be obtained with different combination of euler angles. This is why, the obtained angles are not equal to the ones computed.* 
+ *Tingues en compte que una mateixa matriu de rotació es pot obtenir amb diferents combinacions d’angles d’Euler. Per això, els angles obtinguts no són iguals als calculats.* 
 
 ```matlab
 clear all; 
 ```
 ## Quaternions
 
-Quaternions provide a four\-parameter, singularity\-free way to encode any 3D rotation.
+Els quaternions proporcionen una manera de codificar qualsevol rotació 3D amb quatre paràmetres i sense singularitats.
 
 
 ![image_1.svg](Transforms_media/image_1.svg)
 
 
-A unit quaternion is represented by $q=\left\lbrack w\;,x,y,z\right\rbrack$ 
+Un quaternió unitari es representa amb $q=\left\lbrack w\;,x,y,z\right\rbrack$ 
 
 
-with 
+amb 
 
  $$ \begin{array}{l} w=\cos \left(\frac{\theta }{2}\right)\newline x=\sin \left(\frac{\theta }{2}\right)\cdot u_x \newline y=\sin \left(\frac{\theta }{2}\right)\cdot u_y \newline z=\sin \left(\frac{\theta }{2}\right)\cdot u_z  \end{array} $$ 
 
-The Rotation matrix can be constructed as: 
+La matriu de rotació es pot construir com: 
 
  $$ R=\left\lbrack \begin{array}{ccc} 2\cdot \;\left(w^2 +x^2 \right)-1 & \;\;\;\;\;2\cdot \;\left(x\cdot \;y-w\cdot z\right) & \;\;\;\;\;2\cdot \;\left(x\cdot z-w\cdot y\right)\newline 2\cdot \;\left(x\cdot \;y-w\cdot z\right) & \;\;\;\;\;2\cdot \;\left(w^2 +y^2 \right)-1 & \;\;\;\;\;2\cdot \;\left(y\cdot z-w\cdot x\right)\newline 2\cdot \;\left(x\cdot z-w\cdot y\right) & \;\;\;\;\;2\cdot \;\left(y\cdot z-w\cdot x\right) & \;\;\;\;\;2\cdot \;\left(w^2 +z^2 \right)-1 \end{array}\right\rbrack $$ 
 
-We can use build\-in functions to compute the Rotation Matrix from Quaternions. For example a quaternion describing a rotation around x with 90° would be: 
+Podem utilitzar funcions predefinides per calcular la matriu de rotació a partir de quaternions. Per exemple, un quaternió que descriu una rotació al voltant de x de 90° seria: 
 
  $$ \theta =\frac{\pi }{2}=90° $$ 
 
@@ -364,9 +350,9 @@ R = 3x3
 
 ```
 
-### Compute Quaternions from Rotation Matrix
+### Calcular quaternions a partir d’una matriu de rotació
 
-For the inverse of this problem (computing the angles from a rotation matrix), we can solve it analytically: 
+Per al problema invers (calcular els angles a partir d’una matriu de rotació), podem resoldre’l analíticament: 
 
  $$ R=\left\lbrack \begin{array}{ccc} r_{11}  & r_{12}  & r_{13} \newline r_{21}  & r_{22}  & r_{23} \newline r_{31}  & r_{32}  & r_{33}  \end{array}\right\rbrack $$ 
 
@@ -377,12 +363,12 @@ For the inverse of this problem (computing the angles from a rotation matrix), w
  $$ y=\frac{r_{13} -r_{31} }{4\cdot \;w} $$ 
 
  $$ z=\frac{r_{21} -r_{12} }{4\cdot \;w} $$ 
-### **Special Cases**
+### **Casos especials**
 
-The primary issue is encountered when the Trace of the matrix (sum of diagonal elements) is less or equal than 0. If so, the computations need to be adjusted, otherwise you might end up with imaginary numbers for w or with a division by 0 while calculating  x/y/z. 
+El problema principal apareix quan la traça de la matriu (suma dels elements diagonals) és menor o igual que 0. Si és així, els càlculs s’han d’ajustar; en cas contrari, podries acabar amb nombres imaginaris per a w o amb una divisió per 0 en calcular x/y/z. 
 
 
-To avoid this, you must first identify the greatest diagonal element and then calculate a scaling factor (S)
+Per evitar-ho, primer has d’identificar l’element diagonal més gran i després calcular un factor d’escala (S)
 
  $$ {\mathit{\mathbf{r}}}_{11} >{\mathit{\mathbf{r}}}_{22} \;\;\textrm{and}\;{\mathit{\mathbf{r}}}_{11} >{\mathit{\mathbf{r}}}_{33} $$ 
 
@@ -419,9 +405,9 @@ To avoid this, you must first identify the greatest diagonal element and then ca
  $$ y=\frac{r_{23} +r_{32} }{S} $$ 
 
  $$ z=0\ldotp 25\cdot S\;\; $$ 
-### Toolbox implementation
+### Implementació amb la toolbox
 
-We can also use the build\-in function rotm2quat(R) to compute the Quaternions from a rotation matrix
+També podem utilitzar la funció predefinida rotm2quat(R) per calcular els quaternions a partir d’una matriu de rotació.
 
 ```matlab
 q=rotm2quat(R)
@@ -436,14 +422,14 @@ q = 1x4
 ```matlab
 clear all; 
 ```
-# Homogeneous Transformations
+# Transformacions homogènies
 
-Homogeneous Transformations allow us to encode a translation and rotation in a single matrix of the form: 
+Les transformacions homogènies ens permeten codificar una translació i una rotació en una única matriu de la forma: 
 
  $$ T=\left\lbrack \begin{array}{ccccc}  &  &  & | & \newline  & R\in {\mathbb{R}}^{3\textrm{x3}}  &  & | & t\in {\mathbb{R}}^{3\textrm{x1}} \newline  &  &  & | & \newline -- & -- & -- & + & --\newline 0 & 0 & 0 & | & 1 \end{array}\right\rbrack =\left\lbrack \begin{array}{cccc} r_{11}  & r_{12}  & r_{13}  & \Delta \;x\newline r_{21}  & r_{22}  & r_{23}  & \Delta \;y\newline r_{13}  & r_{32}  & r_{33}  & \Delta \;z\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
-### Matlab implementation
+### Implementació a Matlab
 
-Here are some ways to create them:
+Aquí tens algunes maneres de crear-les:
 
 ```matlab
 syms theta dx dy dz real
@@ -480,7 +466,7 @@ T =
  
 
 
-We can also use functions to create homogeneous transform matrices:
+També podem utilitzar funcions per crear matrius de transformació homogènia:
 
 ```matlab
 T_Rotx = trotx(theta)
@@ -520,5 +506,3 @@ T_combined = T_trans * T_Rotx %note the order of multiplicands
 T_combined = 
 
   $$ \displaystyle \left(\begin{array}{cccc} 1 & 0 & 0 & \textrm{dx}\newline 0 & \cos \left(\theta \right) & -\sin \left(\theta \right) & \textrm{dy}\newline 0 & \sin \left(\theta \right) & \cos \left(\theta \right) & \textrm{dz}\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
- 
-

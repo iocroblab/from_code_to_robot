@@ -1,23 +1,22 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 3.2 \- Inverse Kinematic Algorithm
+# Exercici 3.2 \- Algorisme de cinemàtica inversa
 
-In this exercise you will setup an inverse kinematics algorithm using the pseudoinverse of the jacobian. 
+En aquest exercici configuraràs un algorisme de cinemàtica inversa fent servir la pseudoinversa del jacobià. 
 
 
-Consider this UR3e robot: 
+Considera aquest robot UR3e: 
 
 
 ![image_0.png](Exercise-3-2_media/image_0.png)
 
 
-Consider this DH table for the UR3e: 
+Considera aquesta taula DH per a l’UR3e: 
 
 ||||||
 | :-: | :-- | :-: | :-: | :-: |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0  | pi/2  | 0.15185  | q1   |
 | 2  | \-0.24355  | 0  | 0  | q2   |
 | 3  | \-0.2132  | 0  | 0  | q3   |
@@ -26,39 +25,39 @@ Consider this DH table for the UR3e:
 | 6  | 0  | 0  | 0.0921  | q6   |
 
 
-The control scheme you have to implement is: 
+L’esquema de control que has d’implementar és: 
 
 
 ![image_1.svg](Exercise-3-2_media/image_1.svg)
 
 
-where $k\left(\cdot \right)$ is the forward kinematic of the q. 
+on $k\left(\cdot \right)$ és la cinemàtica directa de q. 
 
-# Task 1
+# Tasca 1
 
-Write a function that computes a solution to the inverse kinematic using the pseudoinverse of the Jacobian. The function has the following inputs: 
+Escriu una funció que calculi una solució de la cinemàtica inversa fent servir la pseudoinversa del jacobià. La funció té les entrades següents: 
 
-1.  the initial joint states as a row vector ( $q_0 \in {\mathbb{R}}^{6\textrm{x1}}$ )
-2. desired position vector (only considering cartesian position) $x_{\textrm{desired}} =\left\lbrack \begin{array}{c} x\newline y\newline z \end{array}\right\rbrack$
-3. gain (k)
-4. tolerance (tol)
-5. max iterations (Imax)
+1.  els estats articulars inicials com a vector fila ( $q_0 \in {\mathbb{R}}^{6\textrm{x1}}$ )
+2. vector de postura desitjada fent servir angles d’Euler (ZYZ) $x_{\textrm{desired}} =\left\lbrack \begin{array}{c} x\newline y\newline z\newline \phi \newline \theta \newline \psi  \end{array}\right\rbrack$
+3. guany (k)
+4. tolerància (tol)
+5. iteracions màximes (Imax)
 
-The function should return the required joint states as a row vector ( $q\in {\mathbb{R}}^{6\textrm{x1}}$ )
-
-
-For this task, consider $\dot{x_d } =\left\lbrack \begin{array}{c} 0\newline 0\newline 0 \end{array}\right\rbrack$ and $\Delta t=0\ldotp 01\;s$ 
+La funció ha de retornar els estats articulars requerits com a vector fila ( $q\in {\mathbb{R}}^{6\textrm{x1}}$ )
 
 
-Use the following function name for your solution:
+Per a aquesta tasca, considera $\dot{x_d } =\left\lbrack \begin{array}{c} 0\newline 0\newline 0\newline 0\newline 0\newline 0 \end{array}\right\rbrack$ i $\Delta t=0\ldotp 01\;s$ 
+
+
+Fes servir el nom de funció següent per a la teva solució:
 
 -   PseudoInverseAlgorithm(q0, x\_desired, k, tol, Imax) 
 
-You may use the function below to compute the symbolic transform from the base to the endeffector. 
+Pots fer servir la funció següent per calcular la transformació simbòlica des de la base fins a l’efector final. 
 
 -  dh2tf() 
 
-Solve this exercise without using the function: 
+Resol aquest exercici sense fer servir la funció: 
 
 -  inverseKinematics() 
 ```matlab
@@ -95,33 +94,40 @@ q=[];
 end
 
 ```
-# Task 2
 
-Extend your function from before. 
+Pots comprovar la teva feina fent clic a Run: 
 
+```matlab
+ 
+check_exercise('3-2-1')
+```
+# Tasca 2
 
-Add the input: 
-
--  dt (time for discrete algorithm step) 
-
-Add the outputs: 
-
--  total\_time (time it takes for the algorithm to find a solution) 
--  total\_iterations (iterations until the solution was found) 
--  solution\_error (the pose square error for the solution configuration $\left({\textrm{error}}_{\textrm{solution}} \left(q\right)={e\left(q\right)}^T \cdot e\left(q\right)\right)$ ) 
-
-Use "tic" and "toc" to measure the computational time. 
+Amplia la funció anterior. 
 
 
-Use the following function name for your solution:
+Afegeix l’entrada: 
 
--   ExtendedPseudoInverseAlgorithm(q0, x\_desired, k, dt, tol, Imax, dt) 
+-  dt (temps per al pas discret de l’algorisme) 
 
-Solve this exercise without using the function: 
+Afegeix les sortides: 
+
+-  total\_time (temps que triga l’algorisme a trobar una solució) 
+-  total\_iterations (iteracions fins que s’ha trobat la solució) 
+-  solution\_error (error quadràtic de la postura per a la configuració solució $\left({\textrm{error}}_{\textrm{solution}} \left(q\right)={e\left(q\right)}^T \cdot e\left(q\right)\right)$ ) 
+
+Fes servir "tic" i "toc" per mesurar el temps computacional. 
+
+
+Fes servir el nom de funció següent per a la teva solució:
+
+-   ExtendedPseudoInverseAlgorithm(t\_desired, k, dt, tol, Imax) 
+
+Resol aquest exercici sense fer servir la funció: 
 
 -  inverseKinematics() 
 ```matlab
-function [q,total_time,total_iterations,solution_error] = ExtendedPseudoInverseAlgorithm(x_desired, k, dt, tol, Imax, dt)
+function [q,total_time,total_iterations,solution_error] = ExtendedPseudoInverseAlgorithm(t_desired, k, dt, tol, Imax)
 
 q=[]; 
 total_time = []; 
@@ -131,6 +137,4 @@ solution_error = [];
 end
 ```
 
-Analyze how your algorithm behaves when you change the tolerance, gain or timestep. 
-
-
+Analitza com es comporta el teu algorisme quan canvies la tolerància, el guany o el pas temporal. 

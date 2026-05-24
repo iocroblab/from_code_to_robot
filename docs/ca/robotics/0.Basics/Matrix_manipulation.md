@@ -1,21 +1,20 @@
-
 ```matlab
 clear all; 
 ```
-# Basic Matrix manipulation
+# Manipulació bàsica de matrius
 
-In this tutorial we will explain some of the basics of working with matrices in matlab. 
+En aquest tutorial explicarem alguns dels conceptes bàsics per treballar amb matrius a MATLAB. 
 
 
-Please enable "Output inline" on the right side of your scroll bar. 
+Activeu "Output inline" a la dreta de la barra de desplaçament. 
 
 
  ![image_0.png](Matrix_manipulation_media/image_0.png)
 
-# Create a Matrix
--  Create a matrix structure by using square brackets \[ \] 
--  Separate columns by a space or comma ,  
--  Separate rows by semicolon ; 
+# Crear una matriu
+-  Crea una estructura de matriu utilitzant claudàtors $begin:math:display$ $end:math:display$ 
+-  Separa les columnes amb un espai o una coma ,  
+-  Separa les files amb un punt i coma ; 
 ```matlab
 syms m11 m12 m13 m21 m22 m23 m31 m32 m33 real
 M = [m11, m12, m13 ; %row separated by semicolon
@@ -27,7 +26,7 @@ M =
   $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & m_{13} \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right) $$ 
  
 
-The functions eye() lets you create an identity matrix: 
+La funció eye() et permet crear una matriu identitat: 
 
 ```matlab
 IdentityMatrix = eye(3)
@@ -42,7 +41,7 @@ IdentityMatrix = 3x3
 ```
 
 
-To create a matrix of zeros or ones you can use the functions below. You can define the dimensions as (row,column):
+Per crear una matriu de zeros o uns, pots utilitzar les funcions següents. Pots definir les dimensions com (fila,columna):
 
 ```matlab
 OneMatrix = ones(2,4)
@@ -66,9 +65,9 @@ ZeroMatrix = 2x2
 
 ```
 
-# Transpose a Matrix
+# Transposar una matriu
 
-Transpose a matrix by extending it with an apostrophe '
+Transposa una matriu afegint-hi un apòstrof '
 
 ```matlab
 M_transposed = M'
@@ -78,7 +77,7 @@ M_transposed =
   $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{21}  & m_{31} \newline m_{12}  & m_{22}  & m_{32} \newline m_{13}  & m_{23}  & m_{33}  \end{array}\right) $$ 
  
 
-This can also be used to transform a row vector in a column vector. This can be done with a variable or with the array itself. 
+Això també es pot utilitzar per transformar un vector fila en un vector columna. Es pot fer amb una variable o amb l’array mateix. 
 
 ```matlab
 syms v1 v2 v3 real
@@ -104,9 +103,9 @@ V_row_2 =
 
   $$ \displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right) $$ 
  
-# Invert a Matrix
+# Invertir una matriu
 
-To invert a matrix we have a few options such as:
+Per invertir una matriu tenim diverses opcions, com ara:
 
 ```matlab
 Sample_Matrix = [1, 2, 3;
@@ -158,9 +157,9 @@ Sample_Matrix_inv_3 = 3x3
 
 ```
 
-## Invert a non square Matrix 
+## Invertir una matriu no quadrada 
 
-To invert a non square Matrix you can use the pseudo inverse:
+Per invertir una matriu no quadrada pots utilitzar la pseudoinversa:
 
  $$ A^{\dagger} ={\left(A^T \cdot A\right)}^{-1} \cdot A^T $$ 
 ```matlab
@@ -197,9 +196,9 @@ Sample_Matrix_non_square_inverse_2 = 2x3
 
 ```
 
-# Access Matrix Elements 
+# Accedir als elements d’una matriu 
 
-To access a specific elements of a matrix you can include (row,column) as an extension of the variable: 
+Per accedir a un element específic d’una matriu, pots incloure (fila,columna) com a extensió de la variable: 
 
 ```matlab
 M(1,1)
@@ -208,7 +207,7 @@ ans =
  $\displaystyle m_{11} $
  
 
-You can also access sections of your matrix if you define a region as (start\_row : end\_row, start\_column : end\_column)
+També pots accedir a seccions de la matriu si defineixes una regió com (fila\_inicial : fila\_final, columna\_inicial : columna\_final)
 
 ```matlab
 M(1:2,1:2)
@@ -218,7 +217,7 @@ ans =
   $$ \displaystyle \left(\begin{array}{cc} m_{11}  & m_{12} \newline m_{21}  & m_{22}  \end{array}\right) $$ 
  
 
-With this Notation we can also write into specific elements of the matrix and override them:
+Amb aquesta notació també podem escriure en elements específics de la matriu i sobreescriure’ls:
 
 ```matlab
 M(1:3, 3)=V_row
@@ -235,9 +234,9 @@ M =
 
   $$ \displaystyle \left(\begin{array}{ccc} 1 & 0 & v_1 \newline 0 & 1 & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right) $$ 
  
-# Combining Matrices 
+# Combinar matrius 
 
-To combine two 2D matrices into one Matrix we can use the cat(Dimension, Matrix\_1, ..., Matrix\_n) function:
+Per combinar dues matrius 2D en una sola matriu, podem utilitzar la funció cat(Dimensió, Matriu\_1, ..., Matriu\_n):
 
 ```matlab
 Matrix_1 = ones(3)
@@ -337,9 +336,9 @@ Matrix_combined_4(:,:,3) =
 
 ```
 
-# Mathematical Operations with Matrices
+# Operacions matemàtiques amb matrius
 
-To add two matrices of the same size: 
+Per sumar dues matrius de la mateixa mida: 
 
 ```matlab
 Matrix_4 = [1, 2, 3;
@@ -368,7 +367,7 @@ Matrix_added = 3x3
 ```
 
 
-To subtract matrices of the same size: 
+Per restar matrius de la mateixa mida: 
 
 ```matlab
 Matrix_subtracted = Matrix_4 - Matrix_1
@@ -383,7 +382,7 @@ Matrix_subtracted = 3x3
 ```
 
 
-To multiply two matrices: 
+Per multiplicar dues matrius: 
 
 ```matlab
 Matrix_multiply =  Matrix_2 * Matrix_4
@@ -398,11 +397,11 @@ Matrix_multiply = 3x3
 ```
 
 
-To have element\-wise operations like
+Per tenir operacions element a element com
 
  $$ \left\lbrack \begin{array}{cc} \textrm{m11} & \textrm{m12}\newline \textrm{m21} & \textrm{m22} \end{array}\right\rbrack =\left\lbrack \begin{array}{cc} \textrm{a11}\cdot \;\textrm{b11} & \textrm{a12}\cdot \textrm{b12}\newline \textrm{a21}\cdot \textrm{b21} & \textrm{a22}\cdot \textrm{b22} \end{array}\right\rbrack =\left\lbrack \begin{array}{cc} \textrm{a11} & \textrm{a12}\newline \textrm{a21} & \textrm{a22} \end{array}\right\rbrack \ldotp \times \left\lbrack \begin{array}{cc} \textrm{b11} & \textrm{b12}\newline \textrm{b21} & \textrm{b22} \end{array}\right\rbrack $$ 
 
-we can add a . in front of the operator: 
+podem afegir un . davant de l’operador: 
 
 ```matlab
 Matrix_element_multiply =  Matrix_2 .* Matrix_4
@@ -440,10 +439,10 @@ Matrix_element_squared = 3x3
 
 ```
 
-# Other useful Functions 
+# Altres funcions útils 
 ### Dimensions
 
-To get the dimensions of a Matrix you can use the size() function: 
+Per obtenir les dimensions d’una matriu pots utilitzar la funció size(): 
 
 ```matlab
 [rows, columns, dimensions] = size(Matrix_combined_4)
@@ -456,7 +455,7 @@ dimensions = 3
 ```
 
 
-if you are only interested in some of the dimensions: 
+si només t’interessen algunes de les dimensions: 
 
 ```matlab
 [rows, ~, ~] = size(Matrix_4)
@@ -466,9 +465,9 @@ if you are only interested in some of the dimensions:
 rows = 3
 ```
 
-### Summing of Matrix elements
+### Suma d’elements d’una matriu
 
-You can sum matrix column elements by using the sum() function: 
+Pots sumar els elements de les columnes d’una matriu utilitzant la funció sum(): 
 
 ```matlab
 Matrix_column_sum = sum(Matrix_4)
@@ -481,7 +480,7 @@ Matrix_column_sum = 1x3
 ```
 
 
-you can add all the elements of a Matrix to each other by giving the option input "all":
+pots sumar tots els elements d’una matriu entre ells donant l’input opcional "all":
 
 ```matlab
 Matrix_total_sum = sum(Matrix_4,"all")
@@ -491,9 +490,9 @@ Matrix_total_sum = sum(Matrix_4,"all")
 Matrix_total_sum = 18
 ```
 
-### Maximum/Minimum
+### Màxim/Mínim
 
-You can extract the maximum or minimum value of each column by using the max() or min() function 
+Pots extreure el valor màxim o mínim de cada columna utilitzant la funció max() o min() 
 
 ```matlab
 Max_column = max(Matrix_4)
@@ -509,7 +508,7 @@ Max_column = 1x3
 Min_column = min(Matrix_4);
 ```
 
-To get the maximum or minimum of the entire matrix you can give the optional input \[\] and "all"
+Per obtenir el màxim o el mínim de tota la matriu, pots donar l’input opcional $begin:math:display$$end:math:display$ i "all"
 
 ```matlab
 MaxAll = max(Matrix_4, [], "all")
@@ -527,12 +526,12 @@ MinAll = min(Matrix_4, [], "all")
 MinAll = 1
 ```
 
-### Rank
+### Rang
 
-Using the rank() function you can extract the rank of you matrix, which is defined as the number of linearly independent columns (or rows) in that matrix. The rank provides insight into the dimensionality of the column space of the matrix.
+Utilitzant la funció rank() pots extreure el rang de la teva matriu, que es defineix com el nombre de columnes (o files) linealment independents en aquella matriu. El rang proporciona informació sobre la dimensionalitat de l’espai de columnes de la matriu.
 
 
-For an identity matrix the rank is the same as its rows/columns. The Identity matrix is "full rank". 
+Per a una matriu identitat, el rang és el mateix que el nombre de files/columnes. La matriu identitat és de "rang complet". 
 
 ```matlab
 IdentityRank = rank(eye(4))
@@ -543,7 +542,7 @@ IdentityRank = 4
 ```
 
 
-However for the Matrix 4, which contains the same row multiple times the rank is only 1. 
+Tanmateix, per a la Matriu 4, que conté la mateixa fila diverses vegades, el rang és només 1. 
 
 ```matlab
 MatrixRank = rank(Matrix_4)
@@ -552,5 +551,3 @@ MatrixRank = rank(Matrix_4)
 ```matlabTextOutput
 MatrixRank = 1
 ```
-
-

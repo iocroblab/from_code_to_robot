@@ -1,35 +1,34 @@
-
 ```matlab
 clear all; 
 ```
 # Symbolic Math Toolbox
 
-This tutorial will utilize the symbolic math toolbox. This short tutorial will explain some of the basic functionalities that will be used in future tutorials.
+Aquest tutorial utilitzarà la Symbolic Math Toolbox. Aquest breu tutorial explicarà algunes de les funcionalitats bàsiques que s’utilitzaran en tutorials futurs.
 
 
-The Symbolic Math Toolbox is a powerful tool for calculations, as it lets us use variables instead of numbers. This can be useful to reuse complex matrices or equations and substitute values when needed. 
+La Symbolic Math Toolbox és una eina potent per fer càlculs, ja que ens permet utilitzar variables en lloc de nombres. Això pot ser útil per reutilitzar matrius o equacions complexes i substituir valors quan sigui necessari. 
 
 
-Please enable "Output inline" on the right side of your scroll bar. 
+Activeu "Output inline" a la dreta de la barra de desplaçament. 
 
 
  ![image_0.png](Symbolic_Math_toolbox_media/image_0.png)
 
-# Create a Symbolic Variable 
+# Crear una variable simbòlica 
 
-to create a symbolic variable you can use the syms command followed by your desired variables. 
+Per crear una variable simbòlica, pots utilitzar l’ordre syms seguida de les variables desitjades. 
 
 ```matlab
 syms var
 ```
 
-If you only work with real numbers, as will be the case for this tutorial, extend the syms with a real to reduce symbolic computations for imaginary numbers. 
+Si només treballes amb nombres reals, com serà el cas en aquest tutorial, afegeix real a syms per reduir els càlculs simbòlics amb nombres imaginaris. 
 
 ```matlab
 syms var real
 ```
 
-You can create multiple variables at once, if you extend it with a number, it will be shown as an indices on display
+Pots crear múltiples variables alhora; si hi afegeixes un número, es mostrarà com un índex en la visualització.
 
 ```matlab
 syms var1 var2 var3 real real
@@ -40,7 +39,7 @@ MyVars =
   $$ \displaystyle \left(\begin{array}{ccc} {\textrm{var}}_1  & {\textrm{var}}_2  & {\textrm{var}}_3  \end{array}\right) $$ 
  
 
-When spelling out greek letters as variables, they be converted into their symbols on display: 
+Quan escrius lletres gregues com a variables, es converteixen en els seus símbols en la visualització: 
 
 ```matlab
 syms alpha beta gamma Delta delta 
@@ -50,9 +49,9 @@ MyVars =
 
   $$ \displaystyle \left(\begin{array}{ccccc} \alpha  & \beta  & \gamma  & \Delta  & \delta  \end{array}\right) $$ 
  
-# Substituting variables
+# Substituir variables
 
-using the subs() function we can substitute symbolic variables for values, making it easy to reuse e.g. equations :
+Utilitzant la funció subs(), podem substituir variables simbòliques per valors, fent que sigui fàcil reutilitzar, per exemple, equacions:
 
 ```matlab
 syms alpha beta x y z real 
@@ -71,7 +70,7 @@ Value2 =
  $\displaystyle 7$
  
 
-We can combine functions like: 
+Podem combinar funcions com: 
 
 ```matlab
 Equation3 = Equation1 + Equation2
@@ -94,7 +93,7 @@ Equation5 =
  $\displaystyle \alpha^2 \,{\left(2\,\alpha +\beta \right)}$
  
 
-You can also substitute vectors for variables resulting in a vector output where each row relates to the corresponding input row. 
+També pots substituir vectors per variables, obtenint una sortida vectorial en què cada fila correspon a la fila d’entrada corresponent. 
 
 ```matlab
 timevec= linspace(0,10,5)' %this creates an equally spaced row vector from 0 to 10 in 5 steps. 
@@ -117,12 +116,12 @@ EquationVector =
 
   $$ \displaystyle \left(\begin{array}{c} 0\newline \frac{25\,y}{4}+\frac{125}{4}\newline 25\,y+250\newline \frac{225\,y}{4}+\frac{3375}{4}\newline 100\,y+2000 \end{array}\right) $$ 
  
-# Converting symbolic variables
+# Convertir variables simbòliques
 
-Sometimes you get error messages when attempting to combining numerical and symbolic variables. Avoid this by converting one of them:
+De vegades apareixen missatges d’error quan s’intenta combinar variables numèriques i simbòliques. Evita-ho convertint-ne una:
 
 
-After substituting the Workspace variable is still considered a symbolic variable. Even if your new variable only contains numbers, MATLAB will consider them a symbolic variable, which may lead to difficulties. You can convert it to a numeric by: 
+Després de substituir, la variable del Workspace encara es considera una variable simbòlica. Encara que la nova variable només contingui nombres, MATLAB la considerarà una variable simbòlica, cosa que pot causar dificultats. La pots convertir a numèrica així: 
 
 ```matlab
 ValueDouble = double(Value2)
@@ -133,7 +132,7 @@ ValueDouble = 7
 ```
 
 
-If you try to insert symbolic variables into numeric variables you need to convert the numeric matrix into a symbolic matrix: 
+Si intentes inserir variables simbòliques dins de variables numèriques, cal convertir la matriu numèrica en una matriu simbòlica: 
 
 ```matlab
 Matrix_1 = ones(3)
@@ -171,13 +170,13 @@ Matrix_combined =
 
   $$ \displaystyle \left(\begin{array}{ccc} \alpha  & \beta  & 1\newline \gamma  & \delta  & 1\newline 1 & 1 & 1 \end{array}\right) $$ 
  
-# Working with Symbolic Variables 
+# Treballar amb variables simbòliques 
 
-The Symbolic Math Toolbox gives us some powerful tools when doing calculus. 
+La Symbolic Math Toolbox ens dona eines potents per fer càlcul diferencial. 
 
-## Differentiating with Symbolic Variables 
+## Derivar amb variables simbòliques 
 
-We can differentiate an expression like: 
+Podem derivar una expressió com: 
 
 ```matlab
 Equation = x^2 + x * y^2 + y^3 + 5
@@ -193,7 +192,7 @@ diff_Eq1 =
  $\displaystyle y^2 +2\,x$
  
 
-You can also differentiate w.r.t. multiple variables at once: 
+També pots derivar respecte de múltiples variables alhora: 
 
 ```matlab
 diff_Eq2 = diff(Equation, x, y)
@@ -216,7 +215,7 @@ diff_Eq4 =
  $\displaystyle 2\,x+6\,y$
  
 
-This can also be used in a matrix, where each element 
+Això també es pot utilitzar en una matriu, on cada element 
 
 ```matlab
 MatrixEquation = [x^2,      x*y,       x*y*z; 
@@ -251,9 +250,9 @@ diff_Matrix3 =
 
   $$ \displaystyle \left(\begin{array}{ccc} 0 & 0 & 1\newline 0 & 0 & 0\newline 1 & 0 & 0 \end{array}\right) $$ 
  
-## Rewriting Equations
+## Reescriure equacions
 
-We can rewrite expressions using the symbolic toolbox: 
+Podem reescriure expressions utilitzant la toolbox simbòlica: 
 
 ```matlab
 Eq = (x + 1) * (x + y)
@@ -262,7 +261,7 @@ Eq =
  $\displaystyle {\left(x+y\right)}\,{\left(x+1\right)}$
  
 
-The collect() function will return an equation where all expressions are pooled based on the desired variable and its identical powers 
+La funció collect() retorna una equació on totes les expressions s’agrupen segons la variable desitjada i les seves potències idèntiques. 
 
 ```matlab
 Eq_collect_x = collect(Eq, x)
@@ -271,7 +270,7 @@ Eq_collect_x =
  $\displaystyle x^2 +{\left(y+1\right)}\,x+y$
  
 
-The simplify() function lets us factorize an expression and applying cancellation rules
+La funció simplify() ens permet factoritzar una expressió i aplicar regles de cancel·lació.
 
 ```matlab
 Simple_Eq = simplify(Eq_collect_x)
@@ -279,9 +278,9 @@ Simple_Eq = simplify(Eq_collect_x)
 Simple_Eq = 
  $\displaystyle {\left(x+y\right)}\,{\left(x+1\right)}$
  
-## Solving Equations
+## Resoldre equacions
 
-The symbolic toolbox also allows us to solve for variables: 
+La toolbox simbòlica també ens permet resoldre variables: 
 
 ```matlab
 syms a b real
@@ -310,7 +309,7 @@ solutions = struct with fields:
 ```
 
 
-We can also let it solve for a variable that depends on others: 
+També podem fer que resolgui una variable que depèn d’altres: 
 
 ```matlab
 parameter_solution_a = solve(Eq1, a)
@@ -318,4 +317,3 @@ parameter_solution_a = solve(Eq1, a)
 parameter_solution_a = 
  $\displaystyle -\frac{b}{5}$
  
-

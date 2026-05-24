@@ -1,34 +1,33 @@
+# Exercici 5.2 \- Control d’esforç del manipulador de tres enllaços fent servir control PD i extensions
 
-# Exercise 5.2 \- Threelink effort control using PD control and extenstions
+En aquest exercici faràs servir un esquema de control PD per controlar el manipulador de tres enllaços en simulació fent servir Simulink. 
 
-In this exercise you will use a PD to control scheme the Threelink manipulator in simulation using Simulink. 
-
-# Start the Simulation
+# Inicia la simulació
 ```matlab
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model','threelink', 'Docker', false);
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
-Remember that you can slow down the simulation as: 
+Recorda que pots alentir la simulació així: 
 
 
 SetSimulationSpeed( SpeedFactor, 'docker', false)
 
-# Parameters
+# Paràmetres
 
-Setup the tau limit as: 
+Configura el límit de parell com: 
 
  $$ {\textrm{tau}}_{\lim } =\left\lbrack \begin{array}{c} 120\newline 120\newline 60 \end{array}\right\rbrack \left\lbrack \textrm{Nm}\right\rbrack $$ 
 
-and the desired configuration (both speed and position)
+i la configuració desitjada (tant velocitat com posició)
 
 
-try the configurations 
+prova les configuracions 
 
  $$ q\in \left\lbrace \left\lbrack \begin{array}{c} -\frac{\pi }{3}\newline \frac{\pi }{3}\newline \frac{\pi }{10} \end{array}\right\rbrack ,\left\lbrack \begin{array}{c} -\pi \;\newline \frac{\pi }{5}\newline \frac{\pi }{6}\; \end{array}\right\rbrack ,\left\lbrack \begin{array}{c} \frac{\pi }{8}\newline -\frac{\textrm{pi}}{2}\newline \frac{\textrm{pi}}{3} \end{array}\right\rbrack \right\rbrace $$ 
 
-store them as: 
+desa-les com: 
 
 -  q\_desired\_1 
 -  q\_desired\_2 
@@ -42,7 +41,7 @@ q_desired_3 = [pi/8,-pi/2,pi/3]';
 qd_desired = [0,0,0]'; 
 ```
 
-to visualize the target transforms in Rviz:
+per visualitzar les transformacions objectiu a Rviz:
 
 ```matlab
 load("5.Control/Resources/targetTransform_threelink.mat");
@@ -50,7 +49,7 @@ StaticFrameBroadcaster(targetTransform_threelink_1, 'target1');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target1
+Transformació estàtica publicada: base_link → target1
 ```
 
 ```matlab
@@ -58,7 +57,7 @@ StaticFrameBroadcaster(targetTransform_threelink_2, 'target2');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target2
+Transformació estàtica publicada: base_link → target2
 ```
 
 ```matlab
@@ -66,11 +65,11 @@ StaticFrameBroadcaster(targetTransform_threelink_3, 'target3');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target3
+Transformació estàtica publicada: base_link → target3
 ```
 
 
-To try any other configuration you can: 
+Per provar qualsevol altra configuració pots fer:
 
 ```matlab
 syms q1 q2 q3 real 
@@ -79,45 +78,45 @@ DH =    [3/10, pi/2, 1/5, q1;
          1/2,    0,   0,  q3]; 
 T03 = dh2tf(DH); 
 
-q_desired_3 = [pi/8,-pi/2,pi/3]'; % insert your configuration here
+q_desired_3 = [pi/8,-pi/2,pi/3]'; % insereix aquí la teva configuració
 targetTransform = double(subs(T03, [q1,q2,q3], q_desired_3')); 
 StaticFrameBroadcaster(targetTransform, 'target3');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → Target_frame
+Transformació estàtica publicada: base_link → Target_frame
 ```
 
-# Task 1 PD Control scheme
-## Task 1.1 \- Gain Selection
+# Tasca 1 Esquema de control PD
+## Tasca 1.1 \- Selecció de guanys
 
-The PD control scheme does not cancel the non linearities as the inverse dynamic control scheme from Exercise 4.2 and 5.1. While the inverse dynamic scheme scales the selected gains with the inertia matrix, this is not the case here. 
-
-
-To have a starting point for your gain tuning, use the gains computed in Exercise 4.2 and scale them in the following way: 
+L’esquema de control PD no cancel·la les no-linealitats com l’esquema de control per dinàmica inversa dels Exercicis 4.2 i 5.1. Mentre que l’esquema de dinàmica inversa escala els guanys seleccionats amb la matriu d’inèrcia, aquí no és així. 
 
 
-estimate the maximum values of the diagonal terms of the Inertia matrix B. 
+Per tenir un punt de partida per ajustar els guanys, fes servir els guanys calculats a l’Exercici 4.2 i escala’ls de la manera següent: 
 
 
-To estimate it without using an optimization algorithm, substitute all sin/cos functions with $\pm 1$ so that the resulting value will be maximized. 
+estima els valors màxims dels termes diagonals de la matriu d’inèrcia B. 
 
-### Example:
+
+Per estimar-ho sense fer servir un algorisme d’optimització, substitueix totes les funcions sin/cos per $\pm 1$ de manera que el valor resultant sigui maximitzat. 
+
+### Exemple:
 ### $$ f\left(x_1 ,x_2 \right)=5\cdot \sin \left(x_1 \right)-2\cdot \cos \left(x_2 \right)+5\cdot \sin \left(\frac{x_1 }{x_2 }\right) $$
 ### $$ \max \;\hat{\;f} \left(x_1 ,x_2 \right)=5\cdot 1-2\cdot -1+5\cdot 1=12 $$
 
-Then multiply your previous gains with this estimation as:
+Aleshores multiplica els teus guanys anteriors per aquesta estimació com:
 
  $$ {\textrm{Kp}}_{\textrm{PD}} =\max \hat{\;B} \left(q_1 ,q_2 ,q_3 \right)*{\textrm{Kp}}_{\textrm{inverseDynamic}} $$ 
 
-and
+i
 
  $$ {\textrm{Kd}}_{\textrm{PD}} =\max \hat{\;B} \left(q_1 ,q_2 ,q_3 \right)*{\textrm{Kd}}_{\textrm{inverseDynamic}} $$ 
 
-(you will be able to scale the gains during simulation) 
+(podràs escalar els guanys durant la simulació) 
 
 
-Use the symbolic Inertia matrix from Exercise 4.1 to compute your gains here: 
+Fes servir la matriu d’inèrcia simbòlica de l’Exercici 4.1 per calcular aquí els teus guanys: 
 
 
 
@@ -129,44 +128,44 @@ w_i = 1x3
 
 # Dashboard
 
-In the Simulink file you will find the dashboard section that allows you to switch between the configurations, see the current torque output and scale the Kp and Kd matrix during simulation. 
+Al fitxer de Simulink trobaràs la secció dashboard que et permet canviar entre les configuracions, veure la sortida de parell actual i escalar les matrius Kp i Kd durant la simulació. 
 
-### Configuration Selector 
+### Selector de configuració 
 
-Check one of these boxes to select the desired configuration. 
+Marca una d’aquestes caselles per seleccionar la configuració desitjada. 
 
 
 ![image_0.png](Exercise-5-2_media/image_0.png)
 
 
-this selection block is linked to: 
+aquest bloc de selecció està enllaçat amb: 
 
 
 ![image_1.png](Exercise-5-2_media/image_1.png)
 
-### Scale Kd and Kp
+### Escala Kd i Kp
 
-By using the sliders you can alter the gain value of their corresponding K\_scale blocks: 
+Fent servir els controls lliscants pots modificar el valor de guany dels seus blocs K\_scale corresponents: 
 
 
 ![image_2.png](Exercise-5-2_media/image_2.png)
 
-### View Torque Trajectory
+### Visualitza la trajectòria de parell
 
-The Dashboard scope allows you to see the current torques live during simulation (like a scope). 
+El scope del Dashboard et permet veure els parells actuals en directe durant la simulació (com un scope). 
 
 
 ![image_3.png](Exercise-5-2_media/image_3.png)
 
-## Task 1.2
+## Tasca 1.2
 
-Setup a PD control scheme. Open the file Exercise\_5\_2\_1.slx and setup the plant. 
-
-
-Analyze the behavior and see if the manipulator reaches its configuration. 
+Configura un esquema de control PD. Obre el fitxer Exercise\_5\_2\_1.slx i configura la planta. 
 
 
-you can load the simulation results into matlab with: 
+Analitza el comportament i comprova si el manipulador arriba a la seva configuració. 
+
+
+pots carregar els resultats de la simulació a matlab amb: 
 
 ```matlab
 q_data_1 = out.position; 
@@ -175,101 +174,99 @@ tau_data_1 = out.tau;
 t_data_1 = out.tout; 
 ```
 
-Plot your results in matlab. 
+Representa gràficament els teus resultats a matlab. 
 
 
-# Task 2 PD + Gravity Compensation
+# Tasca 2 PD + compensació de gravetat
 
-To reduce the steady state error we can improve the model by introducing the gravity compensation. 
+Per reduir l’error en règim estacionari podem millorar el model introduint la compensació de gravetat. 
 
-## Task 2.1 Gravity term
+## Tasca 2.1 Terme de gravetat
 
-convert your symbolic gravity matrix from Exercise 4.1 into a function as you did in Exercise 5.1 (or use the existing file). 
+converteix la teva matriu simbòlica de gravetat de l’Exercici 4.1 en una funció tal com has fet a l’Exercici 5.1 (o fes servir el fitxer existent). 
 
-## Task 2.2 Update the plant
+## Tasca 2.2 Actualitza la planta
 
-Open the file Exercise\_5\_2\_2.slx and insert your plant from Task 1. Now add a MatlabFunction block and use the gravity matrix function. 
+Obre el fitxer Exercise\_5\_2\_2.slx i insereix la teva planta de la Tasca 1. Ara afegeix un bloc MatlabFunction i fes servir la funció de la matriu de gravetat. 
 
 
-The resulting control scheme should be (before applying saturation) 
+L’esquema de control resultant ha de ser (abans d’aplicar la saturació) 
 
  $$ \textrm{tau}={\textrm{Kp}}_{\textrm{PD}} \cdot e+{\textrm{Kd}}_{\textrm{PD}} \cdot \dot{\;e} +G\left(q\right) $$ 
 
-Analyze the behavior of this improved control scheme. 
+Analitza el comportament d’aquest esquema de control millorat. 
 
 
-# Task 3 Integral Term 
+# Tasca 3 Terme integral 
 
-This scheme works well when you only care about the empty manipulator or the weight of the payload is neglectable. If this is not the case we can improve the behavior by introducing an integration term that grows whenever the robot is close to the configuration. 
+Aquest esquema funciona bé quan només t’importa el manipulador buit o quan el pes de la càrrega útil és negligible. Si aquest no és el cas, podem millorar el comportament introduint un terme d’integració que creixi sempre que el robot sigui a prop de la configuració. 
 
-## Integrator Gain Ki 
+## Guany de l’integrador Ki 
 
-Start by defining the Ki gain as: 
+Comença definint el guany Ki com: 
 
  $$ K_i =\left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 1 & 0\newline 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-You can then scale it during simulation using the designated slider on the dashboard. 
+Després el pots escalar durant la simulació fent servir el control lliscant designat al dashboard. 
 
 
-## Anti Windup
+## Anti-windup
 
-It is important that the integral error term does not grow when the displacement is very large. One way of implementing an anti windup logic is using a matlab function block. 
-
-
-Write a function that takes the joint velocities and the position error as an input and output an integral error increment vector. 
+És important que el terme d’error integral no creixi quan el desplaçament és molt gran. Una manera d’implementar una lògica anti-windup és fent servir un bloc de funció matlab. 
 
 
-The output error vector should only contain non zero values in indices that have low joint velocity (The joints have reached their torque based on the non integral terms). Other values should be 0. 
+Escriu una funció que prengui les velocitats articulars i l’error de posició com a entrada i retorni un vector d’increment d’error integral. 
 
-## Integrator Block
 
-Use the discrete\-time integrator block. 
+El vector d’error de sortida només hauria de contenir valors no nuls als índexs que tinguin una velocitat articular baixa (les articulacions han assolit el seu parell basant-se en els termes no integrals). Els altres valors han de ser 0. 
+
+## Bloc integrador
+
+Fes servir el bloc integrador de temps discret. 
 
 
 ![image_4.png](Exercise-5-2_media/image_4.png)
 
 
-Select: 
+Selecciona: 
 
--  'Integration: Trapezoidal' as the Integrator method 
--  Set Gain value to 1.0  
--  'either' as External reset 
+-  'Integration: Trapezoidal' com a mètode de l’integrador 
+-  Defineix el valor de Gain a 1.0  
+-  'either' com a External reset 
 
-You have to reset the Integrator block when changing the reference configuration. 
+Has de reiniciar el bloc integrador quan canviïs la configuració de referència. 
 
 
-You can use a Detect Change block:
+Pots fer servir un bloc Detect Change:
 
 
 ![image_5.png](Exercise-5-2_media/image_5.png)
 
 
-as an input you can use the Selector block from from the joint configuration selector. Thus whenever you change the goal configuration, you reset the integral. 
+com a entrada pots fer servir el bloc Selector del selector de configuració articular. Així, sempre que canviïs la configuració objectiu, reinicies la integral. 
 
 
 ![image_6.png](Exercise-5-2_media/image_6.png)
 
-## Add a payload
+## Afegeix una càrrega útil
 
-You can add a payload to the endeffector by flipping the switch to Attach. 
+Pots afegir una càrrega útil a l’efector final activant l’interruptor Attach. 
 
 
-You can define the weight of the payload in grams.
+Pots definir el pes de la càrrega útil en grams.
 
 
  ![image_7.png](Exercise-5-2_media/image_7.png)
 
 
-To attach a new payload first detach the old one, change the weight and attach it again. 
+Per adjuntar una nova càrrega útil, primer desadjunta l’antiga, canvia el pes i torna-la a adjuntar. 
 
 
-When attaching a payload, make sure your endeffector is not moving, otherwise the payload may have an offset (not visible in Rviz). 
+Quan adjuntis una càrrega útil, assegura’t que l’efector final no s’estigui movent; si no, la càrrega útil pot tenir un desplaçament (no visible a Rviz). 
 
-## Visualize the error integral 
+## Visualitza l'error integral
 
-Connect your integral error to the subsystem Error integral to view it on the dashboard
+Connecta el teu error integral al subsistema Error integral per veure’l al dashboard
 
 
 ![image_8.png](Exercise-5-2_media/image_8.png)
-
-

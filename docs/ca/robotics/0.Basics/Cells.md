@@ -1,26 +1,24 @@
-
-
 clear all;
 
-# Cell Arrays in MATLAB
+# Cell Arrays a MATLAB
 
-In this tutorial we will explain what MATLAB cell arrays are and how to work with them.
+En aquest tutorial explicarem què són els cell arrays de MATLAB i com treballar-hi.
 
 
-Please enable "Output inline" on the right side of your scroll bar.
+Activeu "Output inline" a la dreta de la barra de desplaçament.
 
 
 ![image_0.png](Cells_media/image_0.png)
 
-# Create a Cell Array
+# Crear un Cell Array
 
-A cell array is a data type that can hold different types or sizes of data in each cell.
-
-
-Use curly braces { } to define cells, separating entries by commas or spaces, and rows by semicolons.
+Un cell array és un tipus de dada que pot contenir diferents tipus o mides de dades a cada cel·la.
 
 
- Define a 1×3 cell array
+Utilitza claus { } per definir les cel·les, separant les entrades amb comes o espais, i les files amb punts i coma.
+
+
+ Defineix un cell array 1×3
 
 ```matlab
 C = {'text', 42, [1,2,3]}
@@ -33,7 +31,7 @@ C = {'text', 42, [1,2,3]}
 
 
 
-Define a 2×2 cell array
+Defineix un cell array 2×2
 
 ```matlab
 C2 = { 'pi',    pi; ...
@@ -47,12 +45,12 @@ C2 = { 'pi',    pi; ...
 |2|'matrix'|[1,2;3,4]|
 
 
-# Accessing Cell Elements
+# Accedir als elements d’un Cell Array
 
-Use parentheses ( ) to extract a cell (returns a cell), and curly braces { } to extract its contents.
+Utilitza parèntesis ( ) per extreure una cel·la (retorna una cel·la), i claus { } per extreure’n el contingut.
 
 
-Extract a 1×1 cell
+Extreu una cel·la 1×1
 
 ```matlab
 cell1 = C(2)
@@ -65,7 +63,7 @@ cell1 = 1x1 cell array
 ```
 
 
-Extract the content (numeric 42)
+Extreu el contingut (numèric 42)
 
 ```matlab
 value42 = C{2}
@@ -76,7 +74,7 @@ value42 = 42
 ```
 
 
-Access part of the matrix inside cell
+Accedeix a una part de la matriu dins la cel·la
 
 
 ```matlab
@@ -87,12 +85,12 @@ subval = C2{2,2}(1,2)
 subval = 2
 ```
 
-# Modifying Cell Elements
+# Modificar elements d’un Cell Array
 
-Assign into cells with curly braces { } to overwrite contents, or with parentheses ( ) to overwrite cell itself.
+Assigna dins les cel·les amb claus { } per sobreescriure’n el contingut, o amb parèntesis ( ) per sobreescriure la cel·la sencera.
 
 
-Change the second cell content to a string
+Canvia el contingut de la segona cel·la a un string
 
 ```matlab
 C{2} = 'answer'
@@ -105,7 +103,7 @@ C{2} = 'answer'
 
 
 
-Replace entire cell with another cell
+Substitueix la cel·la sencera per una altra cel·la
 
 ```matlab
 C(3) = {ones(3)}
@@ -118,7 +116,7 @@ C(3) = {ones(3)}
 
 
 
-Add a new cell at the end
+Afegeix una cel·la nova al final
 
 ```matlab
 C{4} = @sin
@@ -130,12 +128,12 @@ C{4} = @sin
 |1|'text'|'answer'|[1,1,1;1,1,1;1,1,1]|@sin|
 
 
-# Nested Cell Arrays
+# Cell Arrays imbricats
 
-Cells can contain other cell arrays for hierarchical storage.
+Les cel·les poden contenir altres cell arrays per a emmagatzematge jeràrquic.
 
 
-Create nested cell
+Crea una cel·la imbricada
 
 ```matlab
 Cnested = { 'level1', { 'level2', { 100, 200 } } }
@@ -148,7 +146,7 @@ Cnested = { 'level1', { 'level2', { 100, 200 } } }
 
 
 
-Access deeply nested value 200
+Accedeix al valor imbricat 200
 
 ```matlab
 deep200 = Cnested{2}{2}{2}
@@ -158,12 +156,12 @@ deep200 = Cnested{2}{2}{2}
 deep200 = 200
 ```
 
-# Conversion
+# Conversió
 
-You can convert between numeric arrays and cells when dimensions match.
+Pots convertir entre arrays numèrics i cel·les quan les dimensions coincideixen.
 
 
-Numeric array
+Array numèric
 
 ```matlab
 A = [10, 20;
@@ -178,7 +176,7 @@ A = 2x2
 ```
 
 
- Convert to cell array
+ Converteix a cell array
 
 ```matlab
 Acell = num2cell(A)
@@ -192,7 +190,7 @@ Acell = num2cell(A)
 
 
 
-Convert back to numeric (if all cells contain scalars)
+Converteix de nou a numèric (si totes les cel·les contenen escalars)
 
 ```matlab
 Anum = cell2mat(Acell)
@@ -204,5 +202,3 @@ Anum = 2x2
     30    40
 
 ```
-
-

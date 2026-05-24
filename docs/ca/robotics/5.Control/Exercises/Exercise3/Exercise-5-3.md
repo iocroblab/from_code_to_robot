@@ -1,110 +1,107 @@
+# Exercici 5.3 \- Control d’esforç d’un UR fent servir Robotic System Toolbox
 
-# Exercise 5.3 \- UR effort control using Robotic System Toolbox
+En aquest exercici controlaràs un manipulador Universal Robots fent servir Simulink. 
 
-In this exercise you will control a Universal Robots manipulator using Simulink. 
-
-# Start the Simulation
+# Inicia la simulació
 ```matlab
 urmodel = 'ur3e'
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model',urmodel, 'Docker', false);
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
-Remember that you can slow down the simulation as: 
+Recorda que pots alentir la simulació així: 
 
 
 SetSimulationSpeed( SpeedFactor, 'docker', false)
 
-# Load the Robot
+# Carrega el robot
 
-import your Universal robot of choice using urdf files and set gravity in \-z direction. 
-
-
-# Parameters
-
-Setup your parameters as in Exercise 4.2.
+importa el robot Universal de la teva elecció fent servir fitxers urdf i defineix la gravetat en direcció \-z. 
 
 
-Set: 
+# Paràmetres
 
--  Kp (can be scale during simulation) 
--  Kd (can be scale during simulation) 
--  taulim according to your robot 
-
-# Configurations 
-
-Try different configurations
+Configura els teus paràmetres com a l’Exercici 4.2.
 
 
-store them as: 
+Defineix: 
+
+-  Kp (es pot escalar durant la simulació) 
+-  Kd (es pot escalar durant la simulació) 
+-  taulim segons el teu robot 
+
+# Configuracions 
+
+Prova diferents configuracions
+
+
+desa-les com: 
 
 -  q\_desired\_1 
 -  q\_desired\_2 
 -  q\_desired\_3 
 -  qd\_desired 
-# Visualization
+# Visualització
 
-compute the transform of the desired configurations and visualize it in rviz. 
+calcula la transformació de les configuracions desitjades i visualitza-la a rviz. 
 
 
 # Dashboard
 
-In the Simulink file you will find the dashboard section that allows you to switch between the configurations, see the current torque output and scale the Kp and Kd matrix during simulation. 
+Al fitxer de Simulink trobaràs la secció dashboard que et permet canviar entre les configuracions, veure la sortida de parell actual i escalar les matrius Kp i Kd durant la simulació. 
 
-### Configuration Selector 
+### Selector de configuració 
 
-Check one of these boxes to select the desired configuration. 
+Marca una d’aquestes caselles per seleccionar la configuració desitjada. 
 
 
 ![image_0.png](Exercise-5-3_media/image_0.png)
 
 
-this selection block is linked to: 
+aquest bloc de selecció està enllaçat amb: 
 
 
 ![image_1.png](Exercise-5-3_media/image_1.png)
 
-### Scale Kd and Kp
+### Escala Kd i Kp
 
-By using the sliders you can alter the gain value of their corresponding K\_scale blocks: 
+Fent servir els controls lliscants pots modificar el valor de guany dels seus blocs K\_scale corresponents: 
 
 
 ![image_2.png](Exercise-5-3_media/image_2.png)
 
-### View Torque Trajectory
+### Visualitza la trajectòria de parell
 
-The Dashboard scope allows you to see the current torques live during simulation (like a scope). 
+El scope del Dashboard et permet veure els parells actuals en directe durant la simulació (com un scope). 
 
 
 ![image_3.png](Exercise-5-3_media/image_3.png)
 
-# Task 1 
+# Tasca 1 
 
-Open the file Exercise\_5\_3\_1.slx and complete the control scheme the missing blocks from the Robotic System toolbox. 
+Obre el fitxer Exercise\_5\_3\_1.slx i completa l’esquema de control amb els blocs que falten del Robotic System Toolbox. 
 
 
-Use the following blocks: 
+Fes servir els blocs següents: 
 
 
 ![image_4.png](Exercise-5-3_media/image_4.png)
 
 
-specify: 
+especifica: 
 
--  'robot' as Rigid body tree 
-# Task 2
+-  'robot' com a Rigid body tree 
+# Tasca 2
 
-Open the file Exercise\_5\_3\_2.slx and complete the control scheme using the following block: 
+Obre el fitxer Exercise\_5\_3\_2.slx i completa l’esquema de control fent servir el bloc següent: 
 
 
 ![image_5.png](Exercise-5-3_media/image_5.png)
 
 
-specify: 
+especifica: 
 
--  'robot' as Rigid body tree 
+-  'robot' com a Rigid body tree 
 
-The inputs are identical to those explained in Tutorial 4 for the function "inverseDynamics()".
-
-
+Les entrades són idèntiques a les explicades al Tutorial 4 per a la funció "inverseDynamics()".

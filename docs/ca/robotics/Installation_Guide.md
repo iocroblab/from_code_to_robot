@@ -1,166 +1,165 @@
+# Guia d’instal·lació
 
-# Installation Guide
-
-This tutorial provides a **reproducible ROS 2 Jazzy environment** compatible with MATLAB R2025.
+Aquest tutorial proporciona un **entorn ROS 2 Jazzy reproduïble** compatible amb MATLAB R2025.
 
 
-It supports:
+Admet:
 
--  Docker\-based environments (recommended) 
--  Native Ubuntu installation (advanced users) 
-# MATLAB Requirements
-# Supported Versions
+-  Entorns basats en Docker (recomanat) 
+-  Instal·lació nativa a Ubuntu (usuaris avançats) 
+# Requisits de MATLAB
+# Versions admeses
 -  MATLAB R2025a 
 -  MATLAB R2025b 
-# Required Toolboxes
+# Toolboxes requerits
 -  Simulink 
 -  ROS Toolbox 
 -  Robotics System Toolbox 
 -  Symbolic Math Toolbox 
 -  Universal Robots Support Package 
-# Supported Environments
+# Entorns admesos
 
-You can run this tutorial using:
+Pots executar aquest tutorial fent servir:
 
 -  Windows 11 + WSL2 + Docker 
 -  Ubuntu 24 + Docker 
--  Ubuntu 24 Native (no Docker) 
-# Installation Using the Script
+-  Ubuntu 24 natiu (sense Docker) 
+# Instal·lació fent servir l’script
 
-All environments use:
+Tots els entorns fan servir:
 
 
 bash install.sh <mode>
 
-## Script Modes Overview
-| **Mode**  | **Installs Docker**  | **Installs ROS**  | **Builds Workspace**  | **Use Case**   |
+## Visió general dels modes de l’script
+| **Mode**  | **Instal·la Docker**  | **Instal·la ROS**  | **Construeix el workspace**  | **Cas d’ús**   |
 | :-- | :-- | :-- | :-- | :-- |
-| fulldocker  | ✅ Yes  | Inside container  | ✅ Yes  | Fresh machine   |
-| docker  | ❌ No  | Inside container  | ✅ Yes  | Docker already installed   |
-| fullnative  | ❌ No  | ✅ Yes  | ✅ Yes  | Native Ubuntu   |
-| native  | ❌ No  | ❌ No  | ✅ Yes  | ROS already installed   |
+| fulldocker  | ✅ Sí  | Dins del contenidor  | ✅ Sí  | Màquina nova   |
+| docker  | ❌ No  | Dins del contenidor  | ✅ Sí  | Docker ja instal·lat   |
+| fullnative  | ❌ No  | ✅ Sí  | ✅ Sí  | Ubuntu natiu   |
+| native  | ❌ No  | ❌ No  | ✅ Sí  | ROS ja instal·lat   |
 
-## Docker Installation (Recommended)
+## Instal·lació amb Docker (recomanada)
 
-Docker provides:
+Docker proporciona:
 
--  Reproducibility 
--  MATLAB integration 
--  Easy setup 
+-  Reproduïbilitat 
+-  Integració amb MATLAB 
+-  Configuració senzilla 
 # Windows 11 + WSL2 + Docker
-# 1. Install WSL2
+# 1. Instal·la WSL2
 
-Install Ubuntu 24:
+Instal·la Ubuntu 24:
 
 
 [https://learn.microsoft.com/en\-us/windows/wsl/install](https://learn.microsoft.com/en-us/windows/wsl/install)
 
-# 2. Install Using Script
+# 2. Instal·la-ho fent servir l’script
 
-Inside WSL:
+Dins de WSL:
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash install.sh fulldocker`
 
-This will:
+Això farà:
 
--  Install Docker Engine 
--  Build the tutorial Docker image 
--  Create the container named FCTR\-container 
-# If Docker is already installed in WSL 
+-  Instal·lar Docker Engine 
+-  Construir la imatge Docker del tutorial 
+-  Crear el contenidor anomenat FCTR\-container 
+# Si Docker ja està instal·lat a WSL 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash install.sh docker`
 
-This will:
+Això farà:
 
--  Build the tutorial Docker image 
--  Create the preconfigured container 
-# Docker Container Behavior
+-  Construir la imatge Docker del tutorial 
+-  Crear el contenidor preconfigurat 
+# Comportament del contenidor Docker
 
-The installer:
+L’instal·lador:
 
--  Builds the image 
--  Creates a named container 
--  Leaves it **stopped** 
+-  Construeix la imatge 
+-  Crea un contenidor amb nom 
+-  El deixa **aturat** 
 
-MATLAB will:
+MATLAB:
 
--  Start the container 
--  Attach to it 
--  Manage lifecycle automatically 
-# Custom Docker Options
+-  Iniciarà el contenidor 
+-  S’hi connectarà 
+-  Gestionarà automàticament el cicle de vida 
+# Opcions Docker personalitzades
 
-If using a custom container name:
+Si fas servir un nom de contenidor personalitzat:
 
 
 StartTutorialApplication('Rviz','model','ur3','DockerName','YourContainerName');
 
 
-If workspace location differs:
+Si la ubicació del workspace és diferent:
 
 
 StartTutorialApplication('Rviz','model','ur3','Workspace','path/to/workspace');
 
 # Ubuntu 24 + Docker
-# If Docker is NOT installed yet (recommended path)
+# Si Docker ENCARA NO està instal·lat (camí recomanat)
 
-Install everything via script:
+Instal·la-ho tot mitjançant l’script:
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash` `install.sh fulldocker`
-# If Docker is already installed
+# Si Docker ja està instal·lat
 
-To install Docker manually follow: 
+Per instal·lar Docker manualment segueix: 
 
 
 [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
 
-Then run:
+Després executa:
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash` `install.sh docker`
 
-This will:
+Això farà:
 
--  Build your **custom** tutorial Docker image 
--  Create container **`FCTR-container`** (stopped) 
-# Manually install docker (no script)
+-  Construir la teva imatge Docker **personalitzada** del tutorial 
+-  Crear el contenidor **`FCTR-container`** (aturat) 
+# Instal·la Docker manualment (sense script)
 
- **Step 1 —  Install docker** 
+ **Pas 1 — Instal·la Docker** 
 
 
-To install Docker manually follow: 
+Per instal·lar Docker manualment segueix: 
 
 
 [https://docs.docker.com/engine/install/ubuntu/](https://docs.docker.com/engine/install/ubuntu/)
 
 
-**Step 2 — Clone the Tutorial Repository**
+**Pas 2 — Clona el repositori del tutorial**
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack`
-# Step 3 — Build the Tutorial Docker Image
+# Pas 3 — Construeix la imatge Docker del tutorial
 
-Navigate to the Docker folder (location may vary slightly depending on repo structure):
+Navega a la carpeta Docker (la ubicació pot variar lleugerament segons l’estructura del repositori):
 
 
  `docker build` `-t` `from-code-to-robot-tutorial-docker docker` 
 
 
-This builds the **custom tutorial image** containing:
+Això construeix la **imatge personalitzada del tutorial** que conté:
 
 -  ROS 2 Jazzy 
 -  Gazebo / ros\_gz 
--  ros2\_control stack 
--  Tutorial workspace 
-# Step 4 — Create the Tutorial Container
+-  stack ros2\_control 
+-  Workspace del tutorial 
+# Pas 4 — Crea el contenidor del tutorial
 
-Create the container manually:
+Crea el contenidor manualment:
 
 
  `xhost` `+``local:docker`
@@ -193,19 +192,19 @@ Create the container manually:
  `bash` `-lc` `"trap : TERM INT; sleep infinity & wait"`
 
 
-This creates a **stopped container** named:
+Això crea un **contenidor aturat** anomenat:
 
 
 `FCTR-container`
 
 
-The container:
+El contenidor:
 
--  Is not running yet 
--  Will be started automatically by MATLAB 
-# Test in MATLAB (Ubuntu MATLAB)
+-  Encara no està en execució 
+-  MATLAB l’iniciarà automàticament 
+# Prova a MATLAB (MATLAB a Ubuntu)
 
-Add the `robotics` folder and subfolders to path, then run:
+Afegeix la carpeta `robotics` i les seves subcarpetes al path, i després executa:
 
 
 `StartTutorialApplication('Rviz','model','ur5e');`
@@ -223,72 +222,72 @@ Add the `robotics` folder and subfolders to path, then run:
 `StopTutorialApplications();`
 
 
-**Extra Docker info**
+**Informació extra de Docker**
 
 
-If your container name differs:
+Si el nom del teu contenidor és diferent:
 
 
 `StartTutorialApplication('Rviz','model','ur3','DockerName','YourContainerName');`
 
 
-If your workspace path differs:
+Si el path del teu workspace és diferent:
 
 
 `StartTutorialApplication('Rviz','model','ur3','Workspace','path/to/workspace');`
 
-# Native Ubuntu Installation (No Docker)
+# Instal·lació nativa a Ubuntu (sense Docker)
 
-Native installation gives:
+La instal·lació nativa ofereix:
 
--  Higher performance 
--  Lower latency 
--  Better hardware access 
-# Option 1 — Automatic Native Install (With ROS installation)
+-  Més rendiment 
+-  Menor latència 
+-  Millor accés al maquinari 
+# Opció 1 — Instal·lació nativa automàtica (amb instal·lació de ROS)
 
-Installs ROS + dependencies + workspace.
+Instal·la ROS + dependències + workspace.
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash install.sh fullnative`
 
-Installs:
+Instal·la:
 
 -  ROS 2 Jazzy Desktop 
 -  Gazebo + ros_gz 
--  ros2_control stack 
--  DDS middleware 
--  Workspace dependencies 
--  Full build 
-# Option 2 — Workspace Only (ROS already installed)
+-  stack ros2_control 
+-  middleware DDS 
+-  dependències del workspace 
+-  compilació completa 
+# Opció 2 — Només workspace (ROS ja instal·lat)
 
-Use this if ROS 2 Jazzy is already installed.
+Fes servir això si ROS 2 Jazzy ja està instal·lat.
 
 1.  `git clone -b docker https://github.com/iocroblab/from_code_to_robot_ros2_stack.git`
 2. `cd from_code_to_robot_ros2_stack/scripts`
 3. `bash install.sh native`
 
-This will:
+Això farà:
 
--  Clone workspace 
--  Import repositories 
--  Run rosdep 
--  Build with colcon 
-# Option 3 — Manual Native Workspace Setup (No Script)
+-  Clonar el workspace 
+-  Importar repositoris 
+-  Executar rosdep 
+-  Compilar amb colcon 
+# Opció 3 — Configuració manual del workspace natiu (sense script)
 
-For advanced users who prefer manual setup.
-
-
-**1. Install ROS 2 Jazzy**
+Per a usuaris avançats que prefereixen la configuració manual.
 
 
-Follow official guide:
+**1. Instal·la ROS 2 Jazzy**
+
+
+Segueix la guia oficial:
 
 
 [https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html](https://docs.ros.org/en/jazzy/Installation/Ubuntu-Install-Debians.html)
 
 
-**2. Install Required Tools**
+**2. Instal·la les eines requerides**
 
 1.  `sudo apt update`
 2. `sudo apt install -y \\`
@@ -304,7 +303,7 @@ Follow official guide:
 12. `python3-argcomplete \\`
 13. `wget curl`
 
- **3.Install ROS packages** 
+ **3. Instal·la els paquets de ROS** 
 
 1.  sudo apt install -y \\
 2. ros-jazzy-desktop \\
@@ -317,10 +316,10 @@ Follow official guide:
 9. ros-jazzy-rmw-cyclonedds-cpp \\
 10. ros-jazzy-rmw-fastrtps-dynamic-cpp \\
 11. ros-dev-tools
-### **Initialize rosdep:**
+### **Inicialitza rosdep:**
 1.  `sudo rosdep init`
 2. `rosdep update`
-# 4. Create Workspace
+# 4. Crea el workspace
 1.  mkdir -p ~/fctr_ws/src
 2. cd ~/fctr_ws/src
 3. git clone -b jazzy [https://github.com/iocroblab/from_code_to_robot_ros2_stack.git](https://github.com/iocroblab/from_code_to_robot_ros2_stack.git)
@@ -328,14 +327,14 @@ Follow official guide:
 5. cd ..
 6. `mkdir` `-p` `src/modified-repositories`
 7. `vcs` `import` `src/modified-repositories` `<` `src/from_code_to_robot_ros2_stack/stack.repos`
-# 5. Build Workspace
+# 5. Compila el workspace
 1.  source /opt/ros/jazzy/setup.bash
 2. `rosdep` `update`
 3. `rosdep` `install` `--ignore-src` `--from-paths` `src` `-y`
 4. `colcon` `build` `--symlink-install` `--cmake-args` `-DCMAKE_BUILD_TYPE=Release`
-# Using Native Mode in MATLAB
+# Ús del mode natiu a MATLAB
 
-When using native Ubuntu:
+Quan facis servir Ubuntu natiu:
 
 
 StartTutorialApplication('Rviz','model','ur5e','Docker',false);
@@ -352,28 +351,26 @@ StartTutorialApplication('Simulation','model','ur3e','controller','effort','Dock
 
 StopTutorialApplications('Docker',false);
 
-# Troubleshooting
-### ROS not found
+# Resolució de problemes
+### ROS no trobat
 
-run and try again: 
+executa-ho i torna-ho a provar: 
 
 1.  source /opt/ros/jazzy/setup.bash
-### **rosdep errors**
+### **errors de rosdep**
 1.  sudo rosdep init
 2. rosdep update
 
-**Docker permission errors**
+**Errors de permisos de Docker**
 
 1.  sudo usermod -aG docker \$USER
 
-Then log out and back in.**Recommended Setup**
+Després tanca sessió i torna a iniciar-la.**Configuració recomanada**
 
-| **Use Case**  | **Recommended Mode**   |
+| **Cas d’ús**  | **Mode recomanat**   |
 | :-- | :-- |
-| Students / teaching  | Docker   |
-| MATLAB workflows  | Docker   |
-| Real robots  | Native   |
-| Performance simulation  | Native   |
-| Development  | Native   |
-
-
+| Estudiants / docència  | Docker   |
+| Fluxos de treball amb MATLAB  | Docker   |
+| Robots reals  | Natiu   |
+| Simulació de rendiment  | Natiu   |
+| Desenvolupament  | Natiu   |

@@ -1,29 +1,28 @@
+# Cinemàtica directa
 
-# Forward Kinematic
+Una capacitat fonamental que permet als robots interactuar de manera fiable amb el seu entorn és la capacitat de calcular on serà cada part del mecanisme, donat un conjunt d’entrades articulars. Aquest procés, conegut com a **cinemàtica directa**, sustenta tot, des de la visualització bàsica del moviment fins a la planificació avançada de trajectòries. En aquest tutorial, explorarem el marc matemàtic i les estratègies pràctiques d’implementació que et permeten determinar la postura d’un efector final (posició i orientació) en l’espai, donada la configuració de les seves articulacions.
 
-A foundation capability enabling robots to interact reliably with their environment is the ability to compute where each part of the mechanism will be, given a set of joint inputs. This process, known as **forward kinematics**, underpins everything from basic motion visualization to advanced trajectory planning. In this tutorial, we'll explore the mathematical framework and practical implementation strategies that allow you to determine an end\-effector's pose (position and orientation) in space, given the configuration of its joints.
+# Problema
 
-# Problem
-
-At its core, forward kinematics is the problem of mapping **joint space**, the vector of actuator or joint variables, to **Cartesian space**, the spatial pose of a robot's link or end\-effector.
+En essència, la cinemàtica directa és el problema de mapar **l’espai articular**, el vector de variables dels actuadors o de les articulacions, a **l’espai cartesià**, la postura espacial de l’enllaç o de l’efector final d’un robot.
 
 
-This is achieved by using the DH parameters to compute a homogeneous transform matrix that is dependent on a joint state. Recall that a homogeneous transform is defined as: 
+Això s’aconsegueix fent servir els paràmetres DH per calcular una matriu de transformació homogènia que depèn d’un estat articular. Recorda que una transformació homogènia es defineix com: 
 
  $$ T=\left\lbrack \begin{array}{ccccc}  &  &  & | & \newline  & R\in {\mathbb{R}}^{3\textrm{x3}}  &  & | & t\in {\mathbb{R}}^{3\textrm{x1}} \newline  &  &  & | & \newline -- & -- & -- & + & --\newline 0 & 0 & 0 & | & 1 \end{array}\right\rbrack =\left\lbrack \begin{array}{cccc} r_{11}  & r_{12}  & r_{13}  & \Delta \;x\newline r_{21}  & r_{22}  & r_{23}  & \Delta \;y\newline r_{13}  & r_{32}  & r_{33}  & \Delta \;z\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-The goal is to compute a transformation matrix that is only depending on the actuator variable q: 
+L’objectiu és calcular una matriu de transformació que només depengui de la variable de l’actuador q: 
 
  $$ T\left(q\right)=\left\lbrack \begin{array}{ccccc}  &  &  & | & \newline  & R\left(q\right) &  & | & t\left(q\right)\newline  &  &  & | & \newline -- & -- & -- & + & --\newline 0 & 0 & 0 & | & 1 \end{array}\right\rbrack $$ 
 
-These transformation matrices define the translation and rotation from two consecutive joints. Concatenating them lets us compute the pose of a series of links up to the end\-effector. 
+Aquestes matrius de transformació defineixen la translació i la rotació entre dues articulacions consecutives. Concatenar-les ens permet calcular la postura d’una sèrie d’enllaços fins a l’efector final. 
 
 
-Consider the Universal Robots UR3. Since all joints are revolute, the joint variables q\_i are assigned to the theta parameter in the DH table below:
+Considera l’Universal Robots UR3. Com que totes les articulacions són rotatives, les variables articulars q\_i s’assignen al paràmetre theta de la taula DH següent:
 
 ```matlab
 syms q1 q2 q3 q4 q5 q6 real
-DH=[ %by Universal Robots (website)
+DH=[ %per Universal Robots (lloc web)
    %a       alpha       d       theta
    0        pi/2        0.1519  q1;
    -0.24365 0           0       q2;
@@ -34,34 +33,34 @@ DH=[ %by Universal Robots (website)
     ];
 ```
 
-Using the Symbolic Math Toolbox we can transform these DH parameters into a homogeneous transform matrix depending on the jointstate q. 
+Fent servir el Symbolic Math Toolbox podem transformar aquests paràmetres DH en una matriu de transformació homogènia que depèn de l’estat articular q. 
 
 # Symbolic Math Toolbox
 
-To model the Robot using the Symbolic Math Toolbox, we need to define Transform matrices using symbolic variables. We can later substitute with real values to compute the Cartesian pose of a series of links. 
+Per modelar el robot fent servir el Symbolic Math Toolbox, hem de definir matrius de transformació amb variables simbòliques. Més endavant podem substituir-les per valors reals per calcular la postura cartesiana d’una sèrie d’enllaços. 
 
-## DH to Homogeneous Transform
+## De DH a transformació homogènia
 
-Lets understand how to construct a homogeneous transform matrix from the DH parameters. 
+Entenguem com construir una matriu de transformació homogènia a partir dels paràmetres DH. 
 
 
-Remind that the DH parameters describe the kinematics of a robot's manipulator by defining the relative position and orientation of each adjacent link. They are summarized by four parameters:
+Recorda que els paràmetres DH descriuen la cinemàtica del manipulador d’un robot definint la posició i l’orientació relatives de cada enllaç adjacent. Es resumeixen en quatre paràmetres:
 
--           **θ** (theta) → Joint angle (rotation around z\_i\-1 to go from x\_i\-1 to x\_i) → used for **revolute joints**. 
--          **d** → distance along the z\_i\-1 between x\_i\-1 and x\_i → used for **prismatic joints**. 
--          **a** → distance along the x\_i between z\_i\-1 and z\_i 
--           **α** (alpha) → angle between z\_i\-1 and z\_i from x\_i 
+-           **θ** (theta) → angle articular (rotació al voltant de z\_i\-1 per passar de x\_i\-1 a x\_i) → s’utilitza per a **articulacions rotatives**. 
+-          **d** → distància al llarg de z\_i\-1 entre x\_i\-1 i x\_i → s’utilitza per a **articulacions prismàtiques**. 
+-          **a** → distància al llarg de x\_i entre z\_i\-1 i z\_i 
+-           **α** (alpha) → angle entre z\_i\-1 i z\_i des de x\_i 
 
-Basically, the DH modeling transformation involves two translations and two rotations, performed in the following order: 
+Bàsicament, la transformació de modelatge DH implica dues translacions i dues rotacions, realitzades en l’ordre següent: 
 
-1.  **Rotation around Z**, aligning the common normals (X\-axis) using theta (using DH parameter $\theta \;$, for revolute joints this is the input q).
-2. **Translation along the Z\-axis**, placing the origins in the same point. (using DH parameter d, for prismatic joints this will be input q)
-3. **Translation along the X\-axis**, placing the origins in the same Y\-Z plane (using DH parameter a).
-4. **Rotation around X\-axis**, aligning both Z\-axis. (using DH parameter $\alpha$ )
+1.  **Rotació al voltant de Z**, alineant les normals comunes (eix X) fent servir theta (fent servir el paràmetre DH $\theta \;$, per a articulacions rotatives aquesta és l’entrada q).
+2. **Translació al llarg de l’eix Z**, col·locant els orígens en el mateix punt. (fent servir el paràmetre DH d; per a articulacions prismàtiques aquesta serà l’entrada q)
+3. **Translació al llarg de l’eix X**, col·locant els orígens en el mateix pla Y\-Z (fent servir el paràmetre DH a).
+4. **Rotació al voltant de l’eix X**, alineant tots dos eixos Z. (fent servir el paràmetre DH $\alpha$ )
 ```matlab
-syms alpha theta a d real %setup symbolic variables and define them as real 
+syms alpha theta a d real %configura variables simbòliques i defineix-les com a reals 
 
-FirstRotation=trotz(theta) %create a homogeneous transformation matrix -->Rotate around z axis
+FirstRotation=trotz(theta) %crea una matriu de transformació homogènia -->Gira al voltant de l’eix z
 ```
 FirstRotation = 
 
@@ -69,7 +68,7 @@ FirstRotation =
  
 
 ```matlab
-FirstTranslation=transl([a 0 0]) %create a homogeneous transformation matrix --> Move along x axis
+FirstTranslation=transl([a 0 0]) %crea una matriu de transformació homogènia --> Mou al llarg de l’eix x
 ```
 FirstTranslation = 
 
@@ -77,7 +76,7 @@ FirstTranslation =
  
 
 ```matlab
-SecondTranslation=transl([0 0 d]) %create a homogeneous transformation matrix --> move along z axis 
+SecondTranslation=transl([0 0 d]) %crea una matriu de transformació homogènia --> mou al llarg de l’eix z 
 ```
 SecondTranslation = 
 
@@ -85,17 +84,17 @@ SecondTranslation =
  
 
 ```matlab
-SecondRotation=trotx(alpha) %create a homogeneous transformation matrix -->rotate around x axis
+SecondRotation=trotx(alpha) %crea una matriu de transformació homogènia -->gira al voltant de l’eix x
 ```
 SecondRotation = 
 
   $$ \displaystyle \left(\begin{array}{cccc} 1 & 0 & 0 & 0\newline 0 & \cos \left(\alpha \right) & -\sin \left(\alpha \right) & 0\newline 0 & \sin \left(\alpha \right) & \cos \left(\alpha \right) & 0\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-Let us visualize what is happening with each of these transforms.
+Visualitzem què passa amb cadascuna d’aquestes transformacions.
 
 
-Consider this arbitrary set of DH parameters: 
+Considera aquest conjunt arbitrari de paràmetres DH: 
 
 ```matlab
           % a      alpha     d          theta
@@ -109,10 +108,10 @@ DHexample = 1x4
 ```
 
 
-See how each step is multiplied with the previous transformation: 
+Observa com cada pas es multiplica per la transformació anterior: 
 
 ```matlab
-                                % Input matrix      variable    value 
+                                % Matriu d’entrada      variable    valor 
 exampleFirstRotation =      subs(FirstRotation,     theta,      DHexample(4));
 exampleFirstTranslation =   subs(FirstTranslation,  a,          DHexample(1));
 exampleSecondTranslation =  subs(SecondTranslation, d,          DHexample(3));
@@ -135,7 +134,7 @@ end
 
 ![figure_0.png](Forward_Kinematics_media/figure_0.png)
 
-Following these steps will result in a homogeneous transformation matrix that concatenates all the DH parameters. We will call these transformation matrices $A_{\textrm{source}\;\textrm{link}\to \textrm{target}\;\textrm{link}}$. Using the Symbolic Toolbox we can setup a template as:
+Seguir aquests passos donarà com a resultat una matriu de transformació homogènia que concatena tots els paràmetres DH. Anomenarem aquestes matrius de transformació $A_{\textrm{enllaç}\;\textrm{origen}\to \textrm{enllaç}\;\textrm{destí}}$. Fent servir el Symbolic Toolbox podem configurar una plantilla com:
 
 ```matlab
 Ai=FirstRotation*FirstTranslation*SecondTranslation*SecondRotation
@@ -145,7 +144,7 @@ Ai =
   $$ \displaystyle \left(\begin{array}{cccc} \cos \left(\theta \right) & -\cos \left(\alpha \right)\,\sin \left(\theta \right) & \sin \left(\alpha \right)\,\sin \left(\theta \right) & a\,\cos \left(\theta \right)\newline \sin \left(\theta \right) & \cos \left(\alpha \right)\,\cos \left(\theta \right) & -\sin \left(\alpha \right)\,\cos \left(\theta \right) & a\,\sin \left(\theta \right)\newline 0 & \sin \left(\alpha \right) & \cos \left(\alpha \right) & d\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-or manually set it as:
+o configurar-la manualment com:
 
 ```matlab
 Ai_symbolic = [
@@ -160,10 +159,10 @@ Ai_symbolic =
   $$ \displaystyle \left(\begin{array}{cccc} \cos \left(\theta \right) & -\cos \left(\alpha \right)\,\sin \left(\theta \right) & \sin \left(\alpha \right)\,\sin \left(\theta \right) & a\,\cos \left(\theta \right)\newline \sin \left(\theta \right) & \cos \left(\alpha \right)\,\cos \left(\theta \right) & -\sin \left(\alpha \right)\,\cos \left(\theta \right) & a\,\sin \left(\theta \right)\newline 0 & \sin \left(\alpha \right) & \cos \left(\alpha \right) & d\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-Using this symbolic matrix lets us easily substitute different DH parameters to compute the transforms between two consecutive frames. 
+Fer servir aquesta matriu simbòlica ens permet substituir fàcilment diferents paràmetres DH per calcular les transformacions entre dos marcs consecutius. 
 
 
-For the UR3 the resulting matrices are: 
+Per a l’UR3, les matrius resultants són: 
 
 ```matlab
 A01 = subs(Ai_symbolic, [a alpha d theta], DH(1,:))
@@ -213,7 +212,7 @@ A56 =
   $$ \displaystyle \left(\begin{array}{cccc} \cos \left(q_6 \right) & -\sin \left(q_6 \right) & 0 & 0\newline \sin \left(q_6 \right) & \cos \left(q_6 \right) & 0 & 0\newline 0 & 0 & 1 & \frac{819}{10000}\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-Composing these Transforms lets us find more complex transforms between a series of frames. To get the transformation between frame 0 and frame 2 we can simply multiply A01 and A12: 
+Compondre aquestes transformacions ens permet trobar transformacions més complexes entre una sèrie de marcs. Per obtenir la transformació entre el marc 0 i el marc 2, simplement podem multiplicar A01 i A12: 
 
 ```matlab
 A02=A01*A12
@@ -223,7 +222,7 @@ A02 =
   $$ \displaystyle \left(\begin{array}{cccc} \cos \left(q_1 \right)\,\cos \left(q_2 \right) & -\cos \left(q_1 \right)\,\sin \left(q_2 \right) & \sin \left(q_1 \right) & -\frac{4873\,\cos \left(q_1 \right)\,\cos \left(q_2 \right)}{20000}\newline \cos \left(q_2 \right)\,\sin \left(q_1 \right) & -\sin \left(q_1 \right)\,\sin \left(q_2 \right) & -\cos \left(q_1 \right) & -\frac{4873\,\cos \left(q_2 \right)\,\sin \left(q_1 \right)}{20000}\newline \sin \left(q_2 \right) & \cos \left(q_2 \right) & 0 & \frac{1519}{10000}-\frac{4873\,\sin \left(q_2 \right)}{20000}\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-To find the position of frame 2 at the configuration \[0, 0\] we can substitute: 
+Per trobar la posició del marc 2 a la configuració $begin:math:display$0\, 0$end:math:display$, podem substituir: 
 
 ```matlab
 A02_configuration = subs(A02, [q1,q2], [0,0])
@@ -233,7 +232,7 @@ A02_configuration =
   $$ \displaystyle \left(\begin{array}{cccc} 1 & 0 & 0 & -\frac{4873}{20000}\newline 0 & 0 & -1 & 0\newline 0 & 1 & 0 & \frac{1519}{10000}\newline 0 & 0 & 0 & 1 \end{array}\right) $$ 
  
 
-You can view it as a decimal with n decimals as: 
+Pots veure-ho com un decimal amb n decimals així: 
 
 ```matlab
 n=4; 
@@ -244,7 +243,7 @@ A02_config_decimal =
   $$ \displaystyle \left(\begin{array}{cccc} 1.0 & 0 & 0 & -0.2436\newline 0 & 0 & -1.0 & 0\newline 0 & 1.0 & 0 & 0.1519\newline 0 & 0 & 0 & 1.0 \end{array}\right) $$ 
  
 
-Using this composition we can compute the end\-effector position when concatenating: 
+Fent servir aquesta composició podem calcular la posició de l’efector final concatenant: 
 
 ```matlab
 A06 = A01 * A12 * A23 * A34 * A45 * A56; 
@@ -256,21 +255,21 @@ A06_config =
  
 # Robotic System Toolbox
 
-Load a predefined robot or set it up yourself.
+Carrega un robot predefinit o configura’l tu mateix.
 
 ```matlab
 ur3=loadrobot("universalUR3", "DataFormat", "column");
 ```
 
-You can get the transformation matrix using the getTransform() function. 
+Pots obtenir la matriu de transformació fent servir la funció getTransform(). 
 
 
-Use it by giving the following inputs: 
+Fes-la servir donant les entrades següents: 
 
-1.  RigidBodyTree Structure (robot)
-2. Joint Configuration (depending on your data format it is a row/column vector or a structure)
-3. Target Link name
-4. Source Link name
+1.  estructura RigidBodyTree (robot)
+2. configuració articular (segons el teu format de dades, és un vector fila/columna o una estructura)
+3. nom de l’enllaç destí
+4. nom de l’enllaç origen
 ```matlab
 
 A06_RS_toolbox = getTransform(ur3, [0;0;0;0;0;0], "wrist_3_link", "base")
@@ -286,7 +285,7 @@ A06_RS_toolbox = 4x4
 ```
 
 
-We can visualize a configuration in MATLAB as
+Podem visualitzar una configuració a MATLAB com
 
 ```matlab
 figure; 
@@ -295,18 +294,10 @@ show(ur3,[0;0;0;0;0;0]);
 
 ![figure_1.png](Forward_Kinematics_media/figure_1.png)
 
-Or display it in ROS using the prebuild function JointStatesToRviz().
-
-
-To start Rviz: 
-
-```matlab
-StartTutorialApplication('Rviz','model','ur3e'); 
-%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
-%when using a native ROS workspace
-```
+O mostrar-la a ROS fent servir la funció preconstruïda (assegura’t d’haver-la inicialitzat): 
 
 ```matlab
 JointStatesToRviz([0;0;0;0;0;0],'ur3');
 ```
 
+Recorda que primer has d’inicialitzar el robot fent servir StartTutorialApplication().

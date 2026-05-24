@@ -1,103 +1,101 @@
-
 ```matlab
 clear all
 ```
-# Exercise 3.3 \- Velocity Teleoperation
+# Exercici 3.3 \- Teleoperació per velocitat
 
-In this exercise you will write a code to teleoperate a universal robot of your choice. 
-
-
-When using a teleoperation interface, you will use your keyboard to control a simulated robot. 
-
-# Task: 
-
-Write a code that maps the desired cartesian velocity to the joint space and sends the joint speeds to the simulation environment. The cartesian velocity to be controlled is either w.r.t. the Base frame or the EndEffector frame. 
-
-# Tools: 
-
-You can use predefined functions to retrieve information from the simulation environment. 
-
--  GetJointStates() returns a vector containing the current configuration as $\vec{q} \in {\mathbb{R}}^{6\textrm{x1}}$ 
--  GetTeleoperation() returns a vector containing the cartesian velocity as $\vec{v} =\left\lbrack \begin{array}{c} \dot{x} \newline \dot{y} \newline \dot{z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$ and  
-
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; a string containing the current reference frame as $\textrm{Mode}\in \left\lbrack \textrm{"Base"},\textrm{"EndEffector"}\right\rbrack$ 
-
--  SendJointSpeeds(q\_dot) will publish the computed joint velocities to the simulation environment 
-# Implementation Tips: 
--  You may choose to model the robot using the Robotic System Toolbox or the Symbolic Toolbox.  
--  Use the function waitfor(time) to implement a delay between broadcasting, start with a frequency of 50 Hz.  
-### Hints: 
--  Remember that the Robotic System Toolbox returns the Jacobian as $J=\left\lbrack \begin{array}{c} J_{\Theta \;} \newline J_p  \end{array}\right\rbrack$ 
--  If norm(q\_dot) > 1 you should normalize the velocities as $q_{\textrm{dot},\textrm{norm}} =\frac{q_{\textrm{dot}} }{\textrm{norm}\left(q_{\textrm{dot}} \right)}$ this allows you to better analyze the behaviour near singularities.  
--  Depending on your computers processing power you may be able to plot the manipulability ellipsoid by calling JointStatesToRviz(q, ur\_model, \[ \], 'Ellipsoid', true, 'SendJointStates', false) with the current configuration. If you are using a windows operating system with the docker, this may get slow. You can try to decrease the resolution of the ellipsoid with JointStatesToRviz(q, ur\_model, \[ \], 'Ellipsoid', true, 'EllipsoidResolution', 15, 'SendJointStates', false) or only broadcast it every n steps.  
-# Teleoperation Interface
-
-The teleoperation program gives the following input options: 
+En aquest exercici escriuràs un codi per teleoperar un robot universal de la teva elecció. 
 
 
-Desired Velocity (linear or angular) controller by keys W\-A\-S\-D\-SPACE\-CTRL, see the terminal for more information)
+Quan facis servir una interfície de teleoperació, utilitzaràs el teclat per controlar un robot simulat. 
 
--  W for ${\dot{x} }^+ \;\textrm{or}\;\omega_x^+$ 
--  S for ${\dot{x} }^- \;\textrm{or}\;\omega_x^-$ 
--  D for ${\dot{y} }^+ \;\textrm{or}\;\omega_y^+$ 
--  A for ${\dot{y} }^- \;\textrm{or}\;\omega_y^-$ 
--  SPACE for ${\dot{z} }^+ \;\textrm{or}\;\omega_z^+$ 
--  CTRL (Control) for  ${\dot{z} }^- \;\textrm{or}\;\omega_z^-$ 
+# Tasca: 
 
-You can toggle between angular or linear velocity by pressing: 
+Escriu un codi que mapi la velocitat cartesiana desitjada a l’espai articular i enviï les velocitats articulars a l’entorn de simulació. La velocitat cartesiana que s’ha de controlar és respecte del marc Base o del marc EndEffector. 
+
+# Eines: 
+
+Pots fer servir funcions predefinides per recuperar informació de l’entorn de simulació. 
+
+-  GetJointStates() retorna un vector que conté la configuració actual com $\vec{q} \in {\mathbb{R}}^{6\textrm{x1}}$ 
+-  GetTeleoperation() retorna un vector que conté la velocitat cartesiana com $\vec{v} =\left\lbrack \begin{array}{c} \dot{x} \newline \dot{y} \newline \dot{z} \newline \omega_x \newline \omega_y \newline \omega_z  \end{array}\right\rbrack$ i  
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; una cadena que conté el marc de referència actual com $\textrm{Mode}\in \left\lbrack \textrm{"Base"},\textrm{"EndEffector"}\right\rbrack$ 
+
+-  SendJointSpeeds(q\_dot) publicarà les velocitats articulars calculades a l’entorn de simulació 
+# Consells d’implementació: 
+-  Pots triar modelar el robot fent servir el Robotic System Toolbox o el Symbolic Toolbox.  
+-  Fes servir la funció waitfor(time) per implementar un retard entre emissions; comença amb una freqüència de 50 Hz.  
+### Pistes: 
+-  Recorda que el Robotic System Toolbox retorna el jacobià com $J=\left\lbrack \begin{array}{c} J_{\Theta \;} \newline J_p  \end{array}\right\rbrack$ 
+-  Si norm(q\_dot) > 1 hauries de normalitzar les velocitats com $q_{\textrm{dot},\textrm{norm}} =\frac{q_{\textrm{dot}} }{\textrm{norm}\left(q_{\textrm{dot}} \right)}$; això et permet analitzar millor el comportament prop de singularitats.  
+-  Depenent de la potència de processament del teu ordinador, potser podràs representar l’el·lipsoide de manipulabilitat cridant JointStatesToRviz(q, ur\_model, $begin:math:display$ $end:math:display$, 'Ellipsoid', true, 'SendJointStates', false) amb la configuració actual. Si fas servir un sistema operatiu Windows amb Docker, això pot anar lent. Pots provar de disminuir la resolució de l’el·lipsoide amb JointStatesToRviz(q, ur\_model, $begin:math:display$ $end:math:display$, 'Ellipsoid', true, 'EllipsoidResolution', 15, 'SendJointStates', false) o emetre’l només cada n passos.  
+# Interfície de teleoperació
+
+El programa de teleoperació dona les opcions d’entrada següents: 
+
+
+Velocitat desitjada (lineal o angular) controlada per les tecles W\-A\-S\-D\-SPACE\-CTRL; consulta el terminal per a més informació)
+
+-  W per a ${\dot{x} }^+ \;\textrm{o}\;\omega_x^+$ 
+-  S per a ${\dot{x} }^- \;\textrm{o}\;\omega_x^-$ 
+-  D per a ${\dot{y} }^+ \;\textrm{o}\;\omega_y^+$ 
+-  A per a ${\dot{y} }^- \;\textrm{o}\;\omega_y^-$ 
+-  SPACE per a ${\dot{z} }^+ \;\textrm{o}\;\omega_z^+$ 
+-  CTRL (Control) per a  ${\dot{z} }^- \;\textrm{o}\;\omega_z^-$ 
+
+Pots alternar entre velocitat angular o lineal prement: 
 
 -  TAB  
 
-You can toggle the reference frame from "Base" to "EndEffector" by pressing: 
+Pots alternar el marc de referència de "Base" a "EndEffector" prement: 
 
 -  M 
 
-You can double the speed command by holding: 
+Pots duplicar la comanda de velocitat mantenint premut: 
 
 -  SHIFT 
 
-To stop the program press: 
+Per aturar el programa prem: 
 
--  q or ESC 
+-  q o ESC 
 
-You can see the controls in the terminal: 
+Pots veure els controls al terminal: 
 
 
 ![image_0.png](Exercise-3-3_media/image_0.png)
 
-# Start Applications: 
+# Inicia les aplicacions: 
 
-To start the required programs and simulations execute (once): 
+Per iniciar els programes i simulacions necessaris, executa-ho (una vegada): 
 
 ```matlab
 % StartTutorialApplication('Simulation', 'Controller','Speed','model','ur5e'); 
 % StartTutorialApplication('Teleoperation');
 ```
 
-If you run this on a native ubuntu system (no docker): 
+Si ho executes en un sistema Ubuntu natiu (sense Docker): 
 
 ```matlab
 StartTutorialApplication('Simulation', 'Controller', 'Speed', 'Docker',false,'model','ur5e'); 
 StartTutorialApplication('Teleoperation', 'Docker', false);
 ```
 
-To see the path of the end\-effector you can run: 
+Per veure la trajectòria de l’efector final pots executar: 
 
 ```matlab
 % StartTutorialApplication('Trajectory'); 
-% If you use ROS on a native Ubuntu system use: 
+% Si fas servir ROS en un sistema Ubuntu natiu, fes servir: 
 StartTutorialApplication('Trajectory', 'Docker', false);
 ```
-# Code here: 
+# Codi aquí: 
 ```matlab
-%%add your setup code here: 
+%%afegeix aquí el teu codi de configuració: 
 
 while true
-    try %%try helps to avoid the code crashing when starting it before the programs are running
-        %%add your loop code here: 
+    try %%try ajuda a evitar que el codi falli quan s’inicia abans que els programes estiguin en execució
+        %%afegeix aquí el teu codi del bucle: 
 
 
     end
 end
 ```
-

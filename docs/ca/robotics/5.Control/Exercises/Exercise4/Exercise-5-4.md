@@ -1,77 +1,76 @@
+# Exercici 5.4 \- Universal Robots en l’espai de tasca fent servir control de velocitat
 
-# Exercise 5.4 \- Universal Robots in task space using velocity control
-
-So far all control implementation have been made in joint space.
+Fins ara totes les implementacions de control s’han fet en l’espai articular.
 
 
-In this exercise you will setup a velocity controller operating in task space. 
+En aquest exercici configuraràs un controlador de velocitat que opera en l’espai de tasca. 
 
-# Load the Robot
+# Carrega el robot
 
-Select a UR of your choice and load it either via the urdf files or from the robotic system toolbox. 
+Selecciona un UR de la teva elecció i carrega’l ja sigui mitjançant els fitxers urdf o des del Robotic System Toolbox. 
 
 ```matlab
 urmodel = 'universalUR3e';
 robot = loadrobot(robotmodel, DataFormat="column"); 
 ```
-# Start the Simulation
+# Inicia la simulació
 
-Don't forget to select the same robot as the model. 
+No oblidis seleccionar el mateix robot com a model. 
 
 ```matlab
 StartTutorialApplication('simulation','model', urmodel, 'controller','velocity', 'docker',false)
 StartTutorialApplication('safety_nodes', 'docker',false)
-StartTutorialApplication('trajectory','docker',false) %sends a 0 torque when no other command has been sent
+StartTutorialApplication('trajectory','docker',false) %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
-Remember that you can slow down the simulation as: 
+Recorda que pots alentir la simulació així: 
 
 
 SetSimulationSpeed( SpeedFactor, 'docker', false)
 
-# Joint Limits
+# Límits articulars
 
-Setup the velocity limit as: 
+Configura el límit de velocitat com: 
 
  $$ {\dot{\;q} }_{\lim } =\left\lbrack \begin{array}{c} 0\ldotp 7\newline 0\ldotp 7\newline 0\ldotp 7\newline 0\ldotp 7\newline 0\ldotp 7\newline 0\ldotp 7 \end{array}\right\rbrack \left\lbrack \frac{\textrm{rad}}{s}\right\rbrack $$ 
-# Goal Configurations
+# Configuracions objectiu
 
-Try different configuration and convert it into a homogeneous transform matrix. Use configurations that do not result in a singularity. 
+Prova diferents configuracions i converteix-les en una matriu de transformació homogènia. Fes servir configuracions que no donin lloc a una singularitat. 
 
 
-Store them as: 
+Desa-les com: 
 
 -  T\_desired\_1 
 -  T\_desired\_2 
 -  T\_desired\_3 
 
-Using joint configurations and the forward kinematics ensures the resulting transforms are reachable by the robot.
+Fer servir configuracions articulars i la cinemàtica directa garanteix que les transformacions resultants siguin assolibles pel robot.
 
  $$ T_{\textrm{desired},i} \left(q_{\textrm{config},i} \right)=\textrm{forward}_\textrm{kinematics}\left(q_{\textrm{config},i} \right) $$ 
 
-or using the Robotic System Toolbox function as
+o fent servir la funció del Robotic System Toolbox com
 
 
  $T_{\textrm{desired},i}$ = getTransform(robot, config\_i, "tool0", "base\_link");
 
 
-However you can also try other transform matrices. You can build them by using the transl() and trotm(angle, 'axis') functions. 
+Tanmateix, també pots provar altres matrius de transformació. Les pots construir fent servir les funcions transl() i trotm(angle, 'axis'). 
 
 
 
-visualize the configurations in rviz: 
+visualitza les configuracions a rviz: 
 
 
 
 ```matlabTextOutput
-Published static transform: base_link → target_1
-Published static transform: base_link → target_2
-Published static transform: base_link → target_3
+Transformació estàtica publicada: base_link → target_1
+Transformació estàtica publicada: base_link → target_2
+Transformació estàtica publicada: base_link → target_3
 ```
 
-### Singular Configurations
+### Configuracions singulars
 
-Below we will setup some singular configurations. 
+A continuació configurarem algunes configuracions singulars. 
 
 ```matlab
 singular_configuration1 = [0,-pi/2,0,-pi/2,0,0]'; 
@@ -80,7 +79,7 @@ StaticFrameBroadcaster(Singular_1, 'singular_1');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → singular_1
+Transformació estàtica publicada: base_link → singular_1
 ```
 
 ```matlab
@@ -91,116 +90,116 @@ StaticFrameBroadcaster(Singular_2, 'singular_2');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → singular_2
+Transformació estàtica publicada: base_link → singular_2
 ```
 
-# Error computation
+# Càlcul de l’error
 
-This controller operates in **task space**, meaning that errors are computed directly from the desired and current **homogeneous transformation matrices**.
+Aquest controlador opera en **l’espai de tasca**, és a dir, els errors es calculen directament a partir de les **matrius de transformació homogènia** desitjada i actual.
 
 
-Let
+Sigui
 
  $$ T_{\textrm{desired}} =\left\lbrack \begin{array}{cc} R_{\textrm{desired}}  & t_{\textrm{desired}} \newline 0 & 1 \end{array}\right\rbrack $$ 
 
  $$ T_{\textrm{current}} \left(q\right)=\left\lbrack \begin{array}{cc} R_{\textrm{current}}  & t_{\textrm{current}} \newline 0 & 1 \end{array}\right\rbrack $$ 
 
-with the rotation matrix $R_i \in \mathbb{R}{\;}^{3\textrm{x3}} \;$ and the position vector $t_i \in {\mathbb{R}}^{3\textrm{x1}}$ 
+amb la matriu de rotació $R_i \in \mathbb{R}{\;}^{3\textrm{x3}} \;$ i el vector de posició $t_i \in {\mathbb{R}}^{3\textrm{x1}}$ 
 
-## Position Error (task space)
+## Error de posició (espai de tasca)
 
-the position error computation is straight forward: 
+el càlcul de l’error de posició és directe: 
 
  $$ e_{\textrm{pos}} =t_{\textrm{desired}} -t_{\textrm{current}} $$ 
-## Orientation Error (task space)
+## Error d’orientació (espai de tasca)
 
-The orientation error is **not** as straightforward.
-
-
-Euler angle representations are unsuitable because they suffer from **gimbal lock** and discontinuities.
+L’error d’orientació **no** és tan directe.
 
 
-To compute a **singularity\-free** orientation error, the rotation matrices are first converted to **unit quaternions**.
+Les representacions amb angles d’Euler no són adequades perquè pateixen **bloqueig de gimbal** i discontinuïtats.
 
 
-The error quaternion is computed as a quaternion product: 
+Per calcular un error d’orientació **lliure de singularitats**, les matrius de rotació es converteixen primer en **quaternions unitaris**.
+
+
+El quaternion d’error es calcula com un producte de quaternions: 
 
  $$ q_{\textrm{error}} =q_{\textrm{desired}} \otimes q_{\textrm{current}}^{-1} $$ 
 
-Note that the operand $\otimes$ is not a normal multiplication. 
+Tingues en compte que l’operand $\otimes$ no és una multiplicació normal. 
 
 ### Quaternions
 
-Remember a unit quaternion is made up of 4 values: 
+Recorda que un quaternion unitari està format per 4 valors: 
 
  $$ q=\left\lbrack \begin{array}{c} w\newline v \end{array}\right\rbrack =\left\lbrack \begin{array}{c} w\newline x\newline y\newline z \end{array}\right\rbrack $$ 
 
-where
+on
 
--  w is the scalar part 
--  v the vector part  
--  and $||q||=1$ 
+-  w és la part escalar 
+-  v la part vectorial  
+-  i $||q||=1$ 
 
-The conjugate of a quaternion can be build as: 
+El conjugat d’un quaternion es pot construir com: 
 
  $$ q^{-1} =\left\lbrack \begin{array}{c} w\newline -v \end{array}\right\rbrack $$ 
-## Quaternion Error
+## Error de quaternion
 
-Compute the orientation error as follows. 
-
-
-let 
+Calcula l’error d’orientació de la manera següent. 
 
 
- $q_{\textrm{desired}} =\left\lbrack \begin{array}{c} w_d \newline v_d  \end{array}\right\rbrack$ and $q_{\textrm{current}}^{-1} =\left\lbrack \begin{array}{c} w_{\textrm{current}} \newline -v_{\textrm{current}}  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} w_c \newline v_c  \end{array}\right\rbrack$ 
+sigui 
 
 
-compute the error quaternion as: 
+ $q_{\textrm{desired}} =\left\lbrack \begin{array}{c} w_d \newline v_d  \end{array}\right\rbrack$ i $q_{\textrm{current}}^{-1} =\left\lbrack \begin{array}{c} w_{\textrm{current}} \newline -v_{\textrm{current}}  \end{array}\right\rbrack =\left\lbrack \begin{array}{c} w_c \newline v_c  \end{array}\right\rbrack$ 
+
+
+calcula el quaternion d’error com: 
 
  $$ q_{\textrm{error}} =\left\lbrack \begin{array}{c} w_e \newline v_e  \end{array}\right\rbrack $$ 
 
-with 
+amb 
 
  $$ w_e =w_d \cdot w_c -v_d^T \cdot v_c $$ 
 
-and
+i
 
  $$ v_e =w_d \cdot v_c +w_c \cdot v_d +v_d \times v_c $$ 
 
-(The operand $\times$ is a cross product)
+(L’operand $\times$ és un producte vectorial)
 
 
-A quaternion q and \-q represent the same orientation. 
+Un quaternion q i \-q representen la mateixa orientació. 
 
 
-To ensure that we use the shortest rotation to align the orientations, you must set the error quaternion as: 
+Per garantir que fem servir la rotació més curta per alinear les orientacions, has de definir el quaternion d’error com: 
 
- $ $ \left\lbrace \begin{array}{ll} q_e =\left\lbrack \begin{array}{c} w_e \newline v_e  \end{array}\right\rbrack  & \textrm{if}\;w_e >0\\
-q_e =\left\lbrack \begin{array}{c} -w_e \newline -v_e  \end{array}\right\rbrack  & \textrm{if}\;w_e <0
+ $ $ \left\lbrace \begin{array}{ll} q_e =\left\lbrack \begin{array}{c} w_e \newline v_e  \end{array}\right\rbrack  & \textrm{si}\;w_e >0\\
+q_e =\left\lbrack \begin{array}{c} -w_e \newline -v_e  \end{array}\right\rbrack  & \textrm{si}\;w_e <0
 \end{array}\right. $ $ 
 
-### Compute error vector $e_{\textrm{ori}}$ 
+### Calcula el vector d’error $e_{\textrm{ori}}$ 
 
-let 
+sigui 
 
  $$ \textrm{nv}=||v_e || $$ 
 
-then you can compute the angle $\theta$ as: 
+aleshores pots calcular l’angle $\theta$ com: 
 
  $$ \theta =2\cdot \textrm{atan2}\left(\textrm{nv},w_e \right) $$ 
 
-finally compute $e_{\textrm{ori}}$ depending on the angle as: 
+finalment calcula $e_{\textrm{ori}}$ depenent de l’angle com: 
 
- $ $ \left\lbrace \begin{array}{ll} e_{\textrm{ori}} =\left\lbrack \begin{array}{c} 0\newline 0\newline 0 \end{array}\right\rbrack  & \textrm{if}\;\theta <{10}^{-10} \\
-e_{\textrm{ori}} =\theta \cdot \frac{v_e }{||v_e ||}=\theta \cdot \frac{v_e }{\textrm{nv}} & \textrm{if}\;\theta >{10}^{-10} 
+ $ $ \left\lbrace \begin{array}{ll} e_{\textrm{ori}} =\left\lbrack \begin{array}{c} 0\newline 0\newline 0 \end{array}\right\rbrack  & \textrm{si}\;\theta <{10}^{-10} \\
+e_{\textrm{ori}} =\theta \cdot \frac{v_e }{||v_e ||}=\theta \cdot \frac{v_e }{\textrm{nv}} & \textrm{si}\;\theta >{10}^{-10} 
 \end{array}\right. $ $ 
 
-## Weighted Error
+## Error ponderat
 
-As the manipulability of the position is generally smaller than the manipulability of the orientation, we have to apply a weights to the error to account for this. 
+Com que la manipulabilitat de la posició generalment és més petita que la manipulabilitat de l’orientació, hem d’aplicar pesos a l’error per tenir-ho en compte. 
 
 
-Initialize with these weights and update them if you have to:
+Inicialitza amb aquests pesos i actualitza’ls si cal:
 
  $ K_{\textrm{position}} = $ $ \left\lbrack \begin{array}{ccc} 1 & 0 & 0\newline 0 & 1 & 0\newline 0 & 0 & 1 \end{array}\right\rbrack $ 
 
@@ -210,143 +209,141 @@ Initialize with these weights and update them if you have to:
 
  $$ e_{\textrm{orientation}} =K_{\textrm{orientation}} \cdot e_{\textrm{ori}} $$ 
 
-Initialize your weights here
+Inicialitza aquí els teus pesos
 
 
 
-build the error with respect to your jacobian: 
+construeix l’error respecte del teu jacobià: 
 
- $ $ e=\left\lbrace \begin{array}{ll} \left\lbrack \begin{array}{c} e_{\textrm{position}} \newline e_{\textrm{orientation}}  \end{array}\right\rbrack  & \textrm{if}\;J=\left\lbrack \begin{array}{c} J_p \newline J_{\theta \;}  \end{array}\right\rbrack \;\\
-\left\lbrack \begin{array}{c} e_{\textrm{orientation}} \newline e_{\textrm{position}}  \end{array}\right\rbrack  & \textrm{if}\;J=\left\lbrack \begin{array}{c} J_{\theta \;} \newline J_p  \end{array}\right\rbrack \;
+ $ $ e=\left\lbrace \begin{array}{ll} \left\lbrack \begin{array}{c} e_{\textrm{position}} \newline e_{\textrm{orientation}}  \end{array}\right\rbrack  & \textrm{si}\;J=\left\lbrack \begin{array}{c} J_p \newline J_{\theta \;}  \end{array}\right\rbrack \;\\
+\left\lbrack \begin{array}{c} e_{\textrm{orientation}} \newline e_{\textrm{position}}  \end{array}\right\rbrack  & \textrm{si}\;J=\left\lbrack \begin{array}{c} J_{\theta \;} \newline J_p  \end{array}\right\rbrack \;
 \end{array}\right. $ $ 
-# Pseudoinverse Jacobian with least square damping
+# Pseudoinversa del jacobià amb amortiment de mínims quadrats
 
-We can improve the behavior of the robot near singularities by using a least square damping jacobian pseudo inverse.
+Podem millorar el comportament del robot prop de singularitats fent servir una pseudoinversa del jacobià amb amortiment de mínims quadrats.
 
 
-Compute it as follows: 
+Calcula-la de la manera següent: 
 
  $$ J_{\lambda \;}^{\dagger} =J^T \cdot {\left({J\cdot \;J}^T +2\cdot \lambda^2 \cdot I\right)}^{-1} $$ 
 # Dashboard
 
-Once you open the simulink file, you'll see a dashboard with multiple input and monitoring options. 
+Un cop obris el fitxer de Simulink, veuràs un dashboard amb múltiples opcions d’entrada i monitoratge. 
 
-## Transform selector
+## Selector de transformació
 
-Allows you to switch between your previously defined transformations.
+Et permet canviar entre les transformacions definides prèviament.
 
 
 ![image_0.png](Exercise-5-4_media/image_0.png)
 
 
- selecting a transform will switch the input from: 
+ seleccionar una transformació canviarà l’entrada de: 
 
 
 ![image_1.png](Exercise-5-4_media/image_1.png)
 
 
-make sure all Transformations are loaded in your workspace. 
+assegura’t que totes les transformacions estiguin carregades al teu espai de treball. 
 
-## Reset configuration
+## Reinicia la configuració
 
-Some required joint velocities may result in your robot joints reaching their limits ( $\pm 2\pi$ for all joints except the last wrist joint). You can flip the switch while in simulation to move all joints to 0. 
+Algunes velocitats articulars requerides poden fer que les articulacions del robot arribin als seus límits ( $\pm 2\pi$ per a totes les articulacions excepte l’última articulació del canell). Pots activar l’interruptor durant la simulació per moure totes les articulacions a 0. 
 
 
 ![image_2.png](Exercise-5-4_media/image_2.png)
 
-## Lambda selection 
+## Selecció de lambda 
 
-you can tune your lambda during simulation by using the slider.
+pots ajustar la teva lambda durant la simulació fent servir el control lliscant.
 
 
 ![image_3.png](Exercise-5-4_media/image_3.png)
 
 
-The slider value can be used in the constant block: 
+El valor del control lliscant es pot fer servir al bloc constant: 
 
 
 ![image_4.png](Exercise-5-4_media/image_4.png)
 
-## Monitoring States
+## Monitoratge d’estats
 
-You have two live plots showing your the joint configuration q and the joint velocities qd. 
+Tens dos gràfics en directe que et mostren la configuració articular q i les velocitats articulars qd. 
 
 
 ![image_5.png](Exercise-5-4_media/image_5.png)
 
-## Monitoring Manipulability
+## Monitoratge de manipulabilitat
 
-You have two gauges showing you the current manipulability index. Their limits are setup for a UR3e model. 
+Tens dos indicadors que et mostren l’índex de manipulabilitat actual. Els seus límits estan configurats per a un model UR3e. 
 
 
-If you use a larger model, you may have to adjust the limits. 
+Si fas servir un model més gran, potser hauràs d’ajustar els límits. 
 
 
 ![image_6.png](Exercise-5-4_media/image_6.png)
 
 
-The measurements are linked to the output of this matlab function block: 
+Les mesures estan enllaçades amb la sortida d’aquest bloc de funció matlab: 
 
 
 ![image_7.png](Exercise-5-4_media/image_7.png)
 
-# Simulink Blocks
+# Blocs de Simulink
 
-You can solve this exercise by using the following (new) Simulink Blocks. 
+Pots resoldre aquest exercici fent servir els blocs de Simulink següents (nous). 
 
 ## Get Jacobian (Robotic System Toolbox)
 
-select:
+selecciona:
 
--  'robot' as the robot  
--  'tool0' as the End Effector.  
+-  'robot' com a robot  
+-  'tool0' com a End Effector.  
 
 ![image_8.png](Exercise-5-4_media/image_8.png)
 
-### Inputs: 
+### Entrades: 
 
-Input a joint configuration obtained from the GetJointValues subsystem as $q\in \mathbb{R}{\;}^{6\textrm{x1}}$ 
+Introdueix una configuració articular obtinguda del subsistema GetJointValues com $q\in \mathbb{R}{\;}^{6\textrm{x1}}$ 
 
-### Outputs: 
+### Sortides: 
 
-The Jacobian as $J\left(q\right)=\left\lbrack \begin{array}{c} J_{\theta \;} \newline J_p  \end{array}\right\rbrack$ 
+El jacobià com $J\left(q\right)=\left\lbrack \begin{array}{c} J_{\theta \;} \newline J_p  \end{array}\right\rbrack$ 
 
 ## Get Transform (Robotic System Toolbox)
 
-specify: 
+especifica: 
 
--  'robot' as Ridged body tree  
--  'tool0' as the Source body 
--  'base\_link' as the Target body 
+-  'robot' com a Ridged body tree  
+-  'tool0' com a Source body 
+-  'base\_link' com a Target body 
 
 ![image_9.png](Exercise-5-4_media/image_9.png)
 
 ## Coordinate Transformation Conversion (Robotic System Toolbox)
 
-specify: 
+especifica: 
 
--  'Homogeneous Transformation' as Input Representation 
--  'Quaternion' as Output Representation 
--  check 'Show TrVec output port' 
+-  'Homogeneous Transformation' com a Input Representation 
+-  'Quaternion' com a Output Representation 
+-  marca 'Show TrVec output port' 
 
 ![image_10.png](Exercise-5-4_media/image_10.png)
 
-# Task
-## Control Scheme
+# Tasca
+## Esquema de control
 
-Setup the control scheme to control the robot using the velocity command. 
+Configura l’esquema de control per controlar el robot fent servir la comanda de velocitat. 
 
-## Matlab function blocks
+## Blocs de funció Matlab
 
-To complete the scheme you will have to write the following matlab function blocks: 
+Per completar l’esquema hauràs d’escriure els blocs de funció matlab següents: 
 
--  Pseudoinverse Jacobian with least square damping 
--  Error computation using quaternion orientation error 
--  Manipulability index computation (specific block already in place, see above)  
-## Analyze 
--  Analyze the behavior for different values of $\lambda$.  
--  When $\lambda =0$ there is no damping.  
--  Specifically analyze how it modifies the behavior near singular configurations.  
--  Analyze the behavior of different weights on rotation error and position error  
-
-
+-  Pseudoinversa del jacobià amb amortiment de mínims quadrats 
+-  Càlcul de l’error fent servir error d’orientació amb quaternions 
+-  Càlcul de l’índex de manipulabilitat (bloc específic ja col·locat, vegeu més amunt)  
+## Analitza 
+-  Analitza el comportament per a diferents valors de $\lambda$.  
+-  Quan $\lambda =0$ no hi ha amortiment.  
+-  Analitza específicament com modifica el comportament prop de configuracions singulars.  
+-  Analitza el comportament de diferents pesos sobre l’error de rotació i l’error de posició  

@@ -1,41 +1,40 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 1.1 \- Find the Transforms
+# Exercici 1.1 \- Trobar les transformacions
 
-In this exercise you will need to find transforms between coordinate frames. 
+En aquest exercici hauràs de trobar transformacions entre sistemes de coordenades. 
 
 
-Please store your solutions in the predefined variables!
+Guarda les teves solucions a les variables predefinides!
 
-# Task description:
+# Descripció de la tasca:
 
-given this set of Coordinate frames:
+Donat aquest conjunt de sistemes de coordenades:
 
 
 ![image_0.svg](Exercise-1-1_media/image_0.svg)
 
 
-Answer all the questions and store your solution in the correct variable
+Respon totes les preguntes i guarda la teva solució a la variable correcta.
 
-# Task 1
-1.  Find the homogeneous transforms between frames 1 and 2
-2. Find the homogeneous transforms between frames 2 and 3
-3. Find the homogeneous transforms between frames 3 and 4
+# Tasca 1
+1.  Troba les transformacions homogènies entre els sistemes 1 i 2
+2. Troba les transformacions homogènies entre els sistemes 2 i 3
+3. Troba les transformacions homogènies entre els sistemes 3 i 4
 
-Use the following variables  to store your solution:
+Utilitza les variables següents per guardar la teva solució:
 
--  T12 (homogeneous transform from frame 1 to frame 2) 
--  T23 (homogeneous transform from frame 2 to frame 3) 
--  T34 (homogeneous transform from frame 3 to frame 4) 
+-  T12 (transformació homogènia del sistema 1 al sistema 2) 
+-  T23 (transformació homogènia del sistema 2 al sistema 3) 
+-  T34 (transformació homogènia del sistema 3 al sistema 4) 
 ```matlab
 T12 = [];  
 T23 = []; 
 T34 = [];  
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
@@ -56,24 +55,23 @@ Checking Variable T23
 [OK] T23 correct
 
 Checking Variable T34
-[OK] T34 is of type double
 [OK] T34 correct
 ```
 
-# Task 2
-1.  Find the homogeneous transform between frame 1 and frame 4.
-2. Find the origin of frame 4 w.r.t. frame 1.
+# Tasca 2
+1.  Troba la transformació homogènia entre el sistema 1 i el sistema 4.
+2. Troba l’origen del sistema 4 respecte del sistema 1.
 
-Use the following variables to store your solution: 
+Utilitza les variables següents per guardar la teva solució: 
 
--  T14 (homogeneous transform from frame 1 to frame 4) 
--  origin14 (vector containing xyz coordinates) 
+-  T14 (transformació homogènia del sistema 1 al sistema 4) 
+-  origin14 (vector que conté les coordenades xyz) 
 ```matlab
 T14 = []; 
 origin14 = []; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
@@ -94,20 +92,20 @@ Checking Variable origin14
 [OK] origin14 correct
 ```
 
-# Task 3
-1.  Find the homogeneous transform from frame 4 to frame 1.
-2. Give the origin of frame 1 w.r.t. frame 4.
+# Tasca 3
+1.  Troba la transformació homogènia del sistema 4 al sistema 1.
+2. Dona l’origen del sistema 1 respecte del sistema 4.
 
-Use the following variables to store your solution: 
+Utilitza les variables següents per guardar la teva solució: 
 
--  T41 (homogeneous transform from frame 4 to frame 1) 
--  origin41 (vector containing xyz coordinates) 
+-  T41 (transformació homogènia del sistema 4 al sistema 1) 
+-  origin41 (vector que conté les coordenades xyz) 
 ```matlab
 T41 = []; 
 origin41 = []; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
@@ -126,39 +124,39 @@ Checking variable structure:
 Test 1: Checking Transform TB0
 ```
 
-# Task 4
+# Tasca 4
 
-Calibrate the Camera and find the location of the object w.r.t. the world frame. 
+Calibra la càmera i troba la ubicació de l’objecte respecte del sistema món. 
 
 
-Look at the following setup: 
+Observa la configuració següent: 
 
 
 ![image_1.svg](Exercise-1-1_media/image_1.svg)
 
 
-To calibrate the camera we want to locate it w.r.t. the world frame.
+Per calibrar la càmera, volem localitzar-la respecte del sistema món.
 
 
-You know that the relative position and orientation from the world frame to the calibration marker is:
+Saps que la posició i orientació relatives del sistema món al marcador de calibratge són:
 
  $$ T_{\textrm{WC}} =\left\lbrack \begin{array}{cccc} 0 & -1 & 0 & 0\ldotp 14\newline 1 & 0 & 0 & 0\ldotp 25\newline 0 & 0 & 1 & 0\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-From the camera image you can obtain the relative position between the camera and the calibration marker: 
+A partir de la imatge de la càmera, pots obtenir la posició relativa entre la càmera i el marcador de calibratge: 
 
  $$ T_{\textrm{CamC}} =\left\lbrack \begin{array}{cccc} 0\ldotp 9397 & -0\ldotp 2620 & 0\ldotp 2198 & -0\ldotp 3237\newline 1 & -0\ldotp 6428 & -0\ldotp 766 & 0\ldotp 4655\newline 0\ldotp 342 & 0\ldotp 7198 & -0\ldotp 604 & 0\ldotp 4507\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-From the camera image you can also obtain the relative position between the camera and the desired object: 
+A partir de la imatge de la càmera, també pots obtenir la posició relativa entre la càmera i l’objecte desitjat: 
 
  $$ T_{\textrm{CamO}} =\left\lbrack \begin{array}{cccc} 0\ldotp 9397 & -0\ldotp 2620 & 0\ldotp 2198 & -0\ldotp 0893\newline 1 & -0\ldotp 6428 & -0\ldotp 766 & 0\ldotp 4749\newline 0\ldotp 342 & 0\ldotp 7198 & -0\ldotp 604 & 0\ldotp 3916\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-1.  Find the Transform between the World and the Camera
-2. Find the transform between the World and the Object
+1.  Troba la transformació entre el món i la càmera
+2. Troba la transformació entre el món i l’objecte
 
-Use the following variables to store your solution: 
+Utilitza les variables següents per guardar la teva solució: 
 
--  TWCam (homogeneous transform from the world frame to camera frame) 
--  TWO (homogeneous transform from World to Object) 
+-  TWCam (transformació homogènia del sistema món al sistema càmera) 
+-  TWO (transformació homogènia del món a l’objecte) 
 ```matlab
 TWC = [
     0  -1   0   0.14;
@@ -183,10 +181,9 @@ TWCam = [];
 TWO = [];
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-1-4')
 ```
-

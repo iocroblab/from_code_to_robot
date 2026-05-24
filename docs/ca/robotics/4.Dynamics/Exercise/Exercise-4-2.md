@@ -1,133 +1,132 @@
+# Exercici 4.2 \- Control basat en esforç fent servir el model dinàmic 
 
-# Exercise 4.2 \- Effort\-Based Control using the Dynamic Model 
+En aquest exercici, implementaràs un **controlador PD en l’espai articular** amb **compensació de gravetat i dinàmica** per a un manipulador UR. L’objectiu és portar totes les articulacions del robot suaument cap a una configuració desitjada (`qd`) respectant els límits de parell articular.
 
-In this exercise, you will implement a **joint\-space PD controller** with **gravity and dynamic compensation** for a UR manipulator. The goal is to drive all joints of the robot smoothly toward a desired configuration (`qd`) while respecting joint torque limits.
+# Tasca
 
-# Task
-
-Your controller will operate in the **effort control mode**, meaning it will directly send **joint torques** to the simulated robot.
+El teu controlador operarà en el **mode de control d’esforç**, és a dir, enviarà directament **parells articulars** al robot simulat.
 
 
-At each control step, you will:
+A cada pas de control, hauràs de:
 
-1.  Read the current joint positions and velocities from the simulator.
-2. Compute the dynamic model of the robot (mass matrix, Coriolis/centrifugal terms, and gravity torques).
-3. Calculate the control torques using a PD law in the joint space.
-4. Apply **torque saturation** to stay within physical actuator limits.
-5. Send the computed torques back to the simulator.
-# Import the Robot
+1.  Llegir les posicions i velocitats articulars actuals del simulador.
+2. Calcular el model dinàmic del robot (matriu de masses, termes de Coriolis/centrífugs i parells de gravetat).
+3. Calcular els parells de control fent servir una llei PD en l’espai articular.
+4. Aplicar **saturació de parell** per mantenir-se dins dels límits físics dels actuadors.
+5. Enviar els parells calculats de nou al simulador.
+# Importa el robot
 
-Instead of using the standard library of MATLAB, for this exercise import the robot using the raw URDF file. 
+En lloc de fer servir la biblioteca estàndard de MATLAB, per a aquest exercici importa el robot fent servir el fitxer URDF en brut. 
 
--  importrobot(\["robotics/Resources/urdf/ur5e.urdf"\]); 
+-  importrobot($begin:math:display$\"robotics\/Resources\/urdf\/ur5e\.urdf\"$end:math:display$); 
 
-Hint: Remember to set the gravity and data structure. While you can define the data structure during import, the gravity needs to be defined later. 
+Pista: recorda configurar la gravetat i l’estructura de dades. Tot i que pots definir l’estructura de dades durant la importació, la gravetat s’ha de definir després. 
 
-# Functions to Interface the Simulation
+# Funcions per connectar amb la simulació
 
-Use the following helper functions to communicate with the simulator:
+Fes servir les funcions auxiliars següents per comunicar-te amb el simulador:
 
--   **`[q, q_dot, ~] = GetJointValues('All')`** Reads the current **joint positions** (`q`, in radians) and **joint velocities** (`q_dot`, in radians/second`) from the ROS network.Both are returned as 6×1 column vectors. 
--  **`SendJointTorques(tau\_sat)`**Sends a 6×1 vector of torques (in **Nm**) to the robot joints.The command must respect the robot’s torque limits. 
-# **Controller Structure**
+-   **`[q, q_dot, ~] = GetJointValues('All')`** Llegeix les **posicions articulars** actuals (`q`, en radians) i les **velocitats articulars** (`q_dot`, en radians/segon) de la xarxa ROS. Totes dues es retornen com a vectors columna 6×1. 
+-  **`SendJointTorques(tau\_sat)`** Envia un vector 6×1 de parells (en **Nm**) a les articulacions del robot. La comanda ha de respectar els límits de parell del robot. 
+# **Estructura del controlador**
 
-The implemented PD controller with dynamics compensation has the following general form:
+El controlador PD implementat amb compensació dinàmica té la forma general següent:
 
  $$ \tau =M\left(q\right)\cdot v+C\left(q,\dot{q} \right)\cdot \;\dot{q} +g\left(q\right) $$ 
 
-with the input v: 
+amb l’entrada v: 
 
  $$ v=\left(\textrm{Kp}\cdot e+\textrm{Kd}\cdot \dot{e} \right) $$ 
 
-and the errors: 
+i els errors: 
 
  $$ e=q_{\textrm{desired}} -q $$ 
 
- $\dot{e} =\dot{q_{\textrm{desired}} } -\dot{q}$ in our case $\dot{q_{\textrm{desired}} } =0$ 
+ $\dot{e} =\dot{q_{\textrm{desired}} } -\dot{q}$ en el nostre cas $\dot{q_{\textrm{desired}} } =0$ 
 
 
-and a gravity of $\left\lbrack \begin{array}{c} 0\newline 0\newline -9\ldotp 81 \end{array}\right\rbrack$ 
+i una gravetat de $\left\lbrack \begin{array}{c} 0\newline 0\newline -9\ldotp 81 \end{array}\right\rbrack$ 
 
-# Gain Design
+# Disseny dels guanys
 
-This scheme doesn't require high gains, as the non nonlinearities are canceled by the dynamic terms and the input is scaled by the inertia matrix. Start by defining the diagonal gain matrices using this approach: 
+Aquest esquema no requereix guanys alts, ja que les no-linealitats es cancel·len amb els termes dinàmics i l’entrada s’escala amb la matriu d’inèrcia. Comença definint les matrius diagonals de guanys fent servir aquest enfocament: 
 
  $$ {\textrm{Kp}}_i \;=\;\omega_i^2 $$ 
 
  $$ {\textrm{Kd}}_i \;=\;2\cdot \;\zeta \cdot \omega_{i\;} $$ 
 
-with 
+amb 
 
  $$ \zeta =0\ldotp 7 $$ 
 
-and
+i
 
  $$ \omega_i =\frac{4}{\;\zeta \cdot T_{s,i} } $$ 
 
-using $T_{s,i} \in \left\lbrack 0\ldotp 8,1\ldotp 5\right\rbrack$. Give a larger settling time to the joints with higher torque limits. 
+fent servir $T_{s,i} \in \left\lbrack 0\ldotp 8,1\ldotp 5\right\rbrack$. Dona un temps d’assentament més gran a les articulacions amb límits de parell més alts. 
 
-## Gain Tuning 
+## Ajust dels guanys 
 
-Analyze the behavior of Kp and Kd and their impact on the robot behavior. Gradually scale Kp and/or Kd to stabilize the robot in its home position $q=\left\lbrack 0,-\frac{\pi }{2},0,-\frac{\pi }{2},0,0\right\rbrack$ 
+Analitza el comportament de Kp i Kd i el seu impacte en el comportament del robot. Escala gradualment Kp i/o Kd per estabilitzar el robot en la seva posició home $q=\left\lbrack 0,-\frac{\pi }{2},0,-\frac{\pi }{2},0,0\right\rbrack$ 
 
-# Torque Saturation
+# Saturació de parell
 
-Real robots cannot produce infinite torque.
+Els robots reals no poden produir un parell infinit.
 
 
-To avoid unrealistic commands, you must apply **torque saturation**. 
+Per evitar comandes irreals, has d’aplicar **saturació de parell**. 
 
  $$ \tau_{\textrm{sat}} \le \tau_{\max } $$ 
 
-Use the figure below to construct the torque limit vector specific to your robot. 
+Fes servir la figura següent per construir el vector de límits de parell específic del teu robot. 
 
 
-(If you simulate a different robot, make sure to update the torque limits)
+(Si simules un robot diferent, assegura’t d’actualitzar els límits de parell)
 
 
 ![image_0.png](Exercise-4-2_media/image_0.png)
 
-# Timing
+# Temporització
 
-You can control the frequency of your controller using the functions: 
+Pots controlar la freqüència del teu controlador fent servir les funcions: 
 
 -  r = rateControl(frequency) 
 -  waitfor(r) 
-# Other properties: 
+# Altres propietats: 
 
-This controller needs to be fast. Try to achieve a frequency of 50 - 200 Hz for a stable simulation. If your hardware is not capable of this, you can reduce the simulation speed using the function:
+Aquest controlador ha de ser ràpid. Intenta assolir una freqüència de 50 - 200 Hz per a una simulació estable. Si el teu maquinari no és capaç d’això, pots reduir la velocitat de simulació fent servir la funció:
 
--  SetSimulationSpeed(Speedfactor) with Speedfactor $\in \left(\left\lbrack 0,1\right\rbrack \right)$ 
--  or SetSimulationSpeed(Speedfactor, 'docker',false) for native Ubuntu  
-# Optional Visualization: 
+-  SetSimulationSpeed(Speedfactor) amb Speedfactor $\in \left(\left\lbrack 0,1\right\rbrack \right)$ 
+-  o SetSimulationSpeed(Speedfactor, 'docker',false) per a Ubuntu natiu  
+# Visualització opcional: 
 
-You can store the joint states, speeds and torques and visualize them using the function: 
+Pots desar els estats articulars, les velocitats i els parells i visualitzar-los fent servir la funció: 
 
 -  plotTrajectory(qstorage, qdstorage, tau_storage) 
 
-Start the Simulation by running: 
+Inicia la simulació executant: 
 
 ```matlab
 %StartTutorialApplication('Simulation','Controller', 'Effort', 'Model','ur3e');
-%If you use ROS on a native Ubuntu system use: 
+%Si fas servir ROS en un sistema Ubuntu natiu, fes servir: 
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model','ur3e', 'Docker', false);
 ```
 
-To see the path of the end effector you can run: 
+Per veure la trajectòria de l’efector final pots executar: 
 
 ```matlab
 %StartTutorialApplication('Trajectory'); 
-%If you use ROS on a native Ubuntu system use: 
+%Si fas servir ROS en un sistema Ubuntu natiu, fes servir: 
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
-### Load the Robot and setup the gravity vector
+### Carrega el robot i configura el vector de gravetat
 ```matlab
 robot = []; 
 robot.Gravity = []; 
 
 ```
-### Setup your Parameters here
+### Configura aquí els teus paràmetres
 ```matlab
 tau_lim = [];
 Kp = []
@@ -135,12 +134,12 @@ Kd = [];
 q_desired = []; 
 qd_desired = []; 
 ```
-### Setup your control loop
+### Configura el teu bucle de control
 
-you can use tic and toc execute the while loop for a desired time. 
+pots fer servir tic i toc per executar el bucle while durant un temps desitjat. 
 
 
-check your hardware performance and see analyze your rate of publishing.  To do this, increment a counter each loop execution and after the loop has finished divide by the elapsed time. 
+comprova el rendiment del teu maquinari i analitza la teva taxa de publicació. Per fer-ho, incrementa un comptador a cada execució del bucle i, un cop el bucle hagi acabat, divideix pel temps transcorregut. 
 
 ```matlab
 
@@ -157,13 +156,13 @@ while toc(t0)<Execution_time
 end
 
 ```
-### Plot your trajectory 
+### Representa gràficament la teva trajectòria 
 ```matlab
 plotTrajectory(qstorage,qdstorage,tau_storage)
 ```
-# Try a different Model 
+# Prova un model diferent 
 
-Inspect the effects of an incorrect dynamics model by loading the ur3e robot into your MATLAB  workspace while simulating an ur5e model.
+Inspecciona els efectes d’un model dinàmic incorrecte carregant el robot ur3e al teu espai de treball de MATLAB mentre simules un model ur5e.
 
 ```matlab
 StopTutorialApplications('docker',false); 
@@ -173,7 +172,7 @@ clear SendJointTorques GetJointValues
 ```matlab
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model','ur5e', 'Docker', false);
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
 ```matlab
@@ -183,4 +182,3 @@ g = [0,0,-9.81]';
 robot.Gravity=g;
 
 ```
-

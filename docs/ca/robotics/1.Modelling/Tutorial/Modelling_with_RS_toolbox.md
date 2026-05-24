@@ -1,17 +1,16 @@
-
 ```matlab
 clear all 
 ```
-# Modelling with Robotic System Toolbox
+# Modelatge amb la Robotic System Toolbox
 
-This tutorial explains how to set up a robot in the Robotic System Toolbox. 
+Aquest tutorial explica com configurar un robot a la Robotic System Toolbox. 
 
 # General 
 
-The Robotic System Toolbox uses Structures to define the Robot manipulators. 
+La Robotic System Toolbox utilitza estructures per definir els manipuladors robòtics. 
 
 
-You can create a rigidBodyTree to fill it with your robot values. Define the DataFormat as column or row for dynamic calculations. 
+Pots crear un rigidBodyTree per omplir-lo amb els valors del teu robot. Defineix el DataFormat com a column o row per als càlculs dinàmics. 
 
 ```matlab
 robot = rigidBodyTree("DataFormat","column")
@@ -33,21 +32,21 @@ robot =
 ```
 
 
-We now need to fill this objects fields with the values corresponding to the robot.
+Ara hem d’omplir els camps d’aquest objecte amb els valors corresponents al robot.
 
-# Create a Robot
+# Crear un robot
 
-Let's consider a simple planar robot: 
+Considerem un robot planar simple: 
 
 
 ![image_0.svg](Modelling_with_RS_toolbox_media/image_0.svg)
 
 
-and its DH parameters:
+i els seus paràmetres DH:
 
 ||||||
 | :-: | :-: | :-: | :-: | :-: |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Eslabó  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0.30  | 0  | 0  | 0   |
 | 2  | 0.25  | pi/2  | 0  | 0   |
 
@@ -58,7 +57,7 @@ DH_1 = [0.3     0       0       0];
 DH_2 = [0.25    pi/2    0       0];
 ```
 
-additionally we have an translation and rotation from the base to the first joint. This can be represented by the following homogeneous transform matrix: 
+addicionalment, tenim una translació i una rotació de la base a la primera articulació. Això es pot representar amb la matriu de transformació homogènia següent: 
 
  $$ T_{\textrm{B0}} =\left\lbrack \begin{array}{cccc} 0 & 1 & 0 & 0\newline -1 & 0 & 0 & -0\ldotp 1\newline 0 & 0 & 1 & 0\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
@@ -70,14 +69,14 @@ TB0= [  0,  1,  0,  0;
         0,  0,  0,  1 ];
 ```
 
-first create empty body and joint cell arrays
+primer crea cell arrays buits de cossos i articulacions
 
 ```matlab
 bodies = cell(3,1);
 joints = cell(3,1);
 ```
 
-define the bodies as a rigidBody and assign a name to each body
+defineix els cossos com a rigidBody i assigna un nom a cada cos
 
 ```matlab
 bodies{1} = rigidBody('body_base');
@@ -85,7 +84,7 @@ bodies{2} = rigidBody('body_1');
 bodies{3} = rigidBody('body_2');
 ```
 
-define the joints as a rigidBodyJoint, set their name and define if it is a revolute, prismatic or fixed joint.
+defineix les articulacions com a rigidBodyJoint, estableix-ne el nom i defineix si són una articulació revolute, prismatic o fixed.
 
 ```matlab
 joints{1} = rigidBodyJoint('base_link', 'fixed');
@@ -93,16 +92,16 @@ joints{2} = rigidBodyJoint('joint_1', 'revolute');
 joints{3} = rigidBodyJoint('joint_2', 'revolute');
 ```
 
-If one a joint has a limit in terms of viable positions we can set the position limits. Lets consider the first revolute joint to be restricted by $\theta {\;}_{\textrm{Joint}\;1} \in \left\lbrack 0\;,\pi \right\rbrack$ 
+Si una articulació té un límit en termes de posicions viables, podem establir els límits de posició. Considerem que la primera articulació rotacional està restringida per $\theta {\;}_{\textrm{Joint}\;1} \in \left\lbrack 0\;,\pi \right\rbrack$ 
 
 ```matlab
 joints{2}.PositionLimits = [0 , pi];
 ```
 
-define the transforms for the joints. Add the parameter 'dh' to let the toolbox know you are feeding it data in DH format. You may also pass a homogeneous transform matrix. 
+defineix les transformacions per a les articulacions. Afegeix el paràmetre 'dh' perquè la toolbox sàpiga que li estàs introduint dades en format DH. També pots passar-hi una matriu de transformació homogènia. 
 
 
-For a revolute joint the system will automatically disregard the "theta" parameter, as theta is the joint action. For prismatic joints the "d" parameter will be disregarded as it is the joint action.
+Per a una articulació rotacional, el sistema ignorarà automàticament el paràmetre "theta", ja que theta és l’acció de l’articulació. Per a les articulacions prismàtiques, s’ignorarà el paràmetre "d", ja que és l’acció de l’articulació.
 
 ```matlab
 setFixedTransform(joints{1}, TB0);
@@ -110,7 +109,7 @@ setFixedTransform(joints{2}, DH_1, 'dh');
 setFixedTransform(joints{3}, DH_2, 'dh');
 ```
 
-add the joints to the bodies: 
+afegeix les articulacions als cossos: 
 
 ```matlab
 bodies{1}.Joint = joints{1};
@@ -118,47 +117,47 @@ bodies{2}.Joint = joints{2};
 bodies{3}.Joint = joints{3};
 ```
 
-finally, add the bodies to the robot structure. 
+finalment, afegeix els cossos a l’estructura del robot. 
 
 
-The first body is connected to the base. 
+El primer cos està connectat a la base. 
 
 ```matlab
 addBody(robot, bodies{1}, "base");
 ```
 
-The following bodies are connected to their predecessor.
+Els cossos següents estan connectats al seu predecessor.
 
 
-You can manually input their names:
+Pots introduir manualment els seus noms:
 
 ```matlab
 addBody(robot, bodies{2}, 'body_base')
 ```
 
- or access the previously defined names 
+ o accedir als noms definits prèviament 
 
 ```matlab
 addBody(robot, bodies{3}, bodies{2}.Name);
 ```
 
-To access and change values from the robot joints after adding the bodies to the robot, we can use structure and cell notation. To change the joint limits we can:
+Per accedir i canviar valors de les articulacions del robot després d’afegir els cossos al robot, podem utilitzar notació d’estructura i de cell. Per canviar els límits de l’articulació podem fer:
 
 ```matlab
 robot.Bodies{2}.Joint.PositionLimits = [-pi,pi/2];
 ```
 
-To add offsets for a joint state ("theta" for revolute or "d" for prismatic joints) you can define their home position. These values will be the default for showing the robot.
+Per afegir desplaçaments per a un estat d’articulació ("theta" per a articulacions rotacionals o "d" per a prismàtiques), pots definir-ne la posició inicial. Aquests valors seran els valors per defecte per mostrar el robot.
 
 
-For this sample robot we will use the "theta" parameter stored at the 4th position of our DH parameters
+Per a aquest robot d’exemple utilitzarem el paràmetre "theta" guardat a la 4a posició dels nostres paràmetres DH.
 
 ```matlab
 robot.Bodies{2}.Joint.HomePosition = DH_1(4);
 robot.Bodies{3}.Joint.HomePosition = DH_2(4);
 ```
 
-additionally we need to set the direction and magnitude of gravity w.r.t. the base frame:
+addicionalment, hem d’establir la direcció i la magnitud de la gravetat respecte del sistema de la base:
 
 ```matlab
 robot.Gravity = [0, 9.81, 0];  
@@ -177,9 +176,9 @@ Robot: (3 bodies)
 --------------------
 ```
 
-# Visualize the Robot Structure
+# Visualitzar l’estructura del robot
 
-To view the robot in MATLAB you can use the show() function, it will show the robot in its home configuration: 
+Per veure el robot a MATLAB pots utilitzar la funció show(); mostrarà el robot en la seva configuració inicial: 
 
 ```matlab
 show(robot)
@@ -204,30 +203,23 @@ ans =
 ```
 
 
-To view the robot in another configuration: 
+Per veure el robot en una altra configuració: 
 
 ```matlab
 myconfig_2 = [0;-pi/2];  %column vector because we defined the robot as: robot = rigidBodyTree("DataFormat","column")
 show(robot, myconfig_2) %we only have two joints
-```
-# Visualize in Rviz
 
-In this tutorial can use the ROS2 visualization tool Rviz. Once  **Rviz is running** you can send it a desired configuration like: 
-
-
-you can specify the robot with the extension 'ur5e' ( default is ur3e). 
-
-
-To start Rviz: 
-
-```matlab
-StartTutorialApplication('Rviz','model','ur3e'); 
-%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
-%when using a native ROS workspace
-```
-
-```matlab
+%This configuration is the one needed for the JointStatesToRviz
 myconfig = [0,-pi/2,0,-pi/2,0,0]; 
+
+```
+# Visualitzar a Rviz
+
+En aquest tutorial pots utilitzar l’eina de visualització de ROS2 Rviz. Un cop **Rviz està en execució**, pots enviar-li una configuració desitjada com: 
+
+
+pots especificar el robot amb l’extensió 'ur5e' (per defecte és ur3e). 
+
+```matlab
 JointStatesToRviz(myconfig, 'ur5e'); 
 ```
-

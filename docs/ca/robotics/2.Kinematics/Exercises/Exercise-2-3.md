@@ -1,28 +1,27 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 2.3 \- Inverse Kinematic Anthropomorphic arm with Spherical Wrist
+# Exercici 2.3 \- Cinemàtica inversa d’un braç antropomòrfic amb canell esfèric
 
-In this Exercise you will compute the inverse kinematic of an anthropomorphic arm with a spherical wrist
-
-
-Please store your solutions in the predefined variables!
-
-# Task description:
-
-below you will see a model of an Anthropomorphic arm with a spherical wrist. 
+En aquest exercici calcularàs la cinemàtica inversa d’un braç antropomòrfic amb un canell esfèric
 
 
-Consider the following set of DH parameters: 
+Si us plau, desa les teves solucions a les variables predefinides!
+
+# Descripció de la tasca:
+
+a continuació veuràs un model d’un braç antropomòrfic amb un canell esfèric. 
+
+
+Considera el conjunt següent de paràmetres DH: 
 
 ||||||
 | :-: | :-- | :-: | :-: | :-- |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0  | pi/2  | 0  | $\displaystyle \theta_1$   |
 | 2  | 0.3  | 0  | 0  | $\displaystyle \theta_2$   |
-| 3  |   0  | pi/2  | 0  | $\displaystyle \theta_3$   |
-| 4  | 0  | \-pi/2  | 0.4  | $\displaystyle \theta_4$   |
+| 3  |   0.2  | pi/2  | 0  | $\displaystyle \theta_3$   |
+| 4  | 0  | \-pi/2  | 0.2  | $\displaystyle \theta_4$   |
 | 5  | 0  | pi/2  | 0  | $\displaystyle \theta_5$   |
 | 6  | 0  | 0  | 0.15  | $\displaystyle \theta_6$   |
 
@@ -30,109 +29,101 @@ Consider the following set of DH parameters:
 ![image_0.svg](Exercise-2-3_media/image_0.svg)
 
 
-In the case of this manipulator with a spherical wrist, the solution is decoupled between position and orientation, i.e. the three joints of the arm are used to position the end\-effector, and the three joints are used to fix its orientation.
+En el cas d’aquest manipulador amb un canell esfèric, la solució es desacobla entre posició i orientació, és a dir, les tres articulacions del braç s’utilitzen per posicionar l’efector final, i les tres articulacions s’utilitzen per fixar-ne l’orientació.
 
 
-Given the end\-effector position $p_{\textrm{ee}}$ and orientation $R_{\textrm{ee}}$, the following steps should be followed:
+Donades la posició de l’efector final $p_{\textrm{ee}}$ i l’orientació $R_{\textrm{ee}}$, s’han de seguir els passos següents:
 
-1.  Compute the wrist position $p_w =p_{\textrm{ee}} -d_6 \cdot z_6$
-2. Solve inverse kinematics for the Anthropomorphic Arm: $\theta_3 ,\theta_2 ,\theta_1$
-3. Compute $R_3^0 \left(\theta_1 ,\theta_2 ,\theta_3 \right)$
-4. Compute $R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)={R_3^0 }^T \cdot R_{\textrm{ee}}$
-5. Solve inverse kinematics for Spherical Wrist: $\theta_4 ,\theta_5 ,\theta_6$
+1.  Calcula la posició del canell $p_w =p_{\textrm{ee}} -d_6 \cdot z_6$
+2. Resol la cinemàtica inversa per al braç antropomòrfic: $\theta_3 ,\theta_2 ,\theta_1$
+3. Calcula $R_3^0 \left(\theta_1 ,\theta_2 ,\theta_3 \right)$
+4. Calcula $R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)={R_3^0 }^T \cdot R_{\textrm{ee}}$
+5. Resol la cinemàtica inversa per al canell esfèric: $\theta_4 ,\theta_5 ,\theta_6$
 
-The four solutions of the IK of the arm combined with the two solution of the wrist result in a total of eight solutions.
+Les quatre solucions de la IK del braç combinades amb les dues solucions del canell donen com a resultat un total de vuit solucions.
 
 
-Reach the following pose: 
+Arriba a la postura següent: 
 
  $$ T_{\textrm{desired}} =\left\lbrack \begin{array}{cccc} 0\ldotp 5 & 0 & 0\ldotp 866 & 0\ldotp 25\newline 0\ldotp 866 & 0 & -0\ldotp 5 & 0\ldotp 1\newline 0 & 1 & 0 & 0\ldotp 35\newline 0 & 0 & 0 & 1 \end{array}\right\rbrack $$ 
 
-Answer all the questions and store your solution in the correct variable
+Respon totes les preguntes i desa la teva solució a la variable correcta
 
 ```matlab
 syms q1 q2 q3 q4 q5 q6 real 
-% DH Parameters Table
+% Taula de paràmetres DH
         % a      alpha      d       theta
-DH = [    0,     pi/2,     0,       q1;    % Link 1
-          0.3,   0,        0,       q2;    % Link 2
-          0,     pi/2,     0,       q3+pi/2;    % Link 3
-          0,     -pi/2,    0.4,     q4;    % Link 4
-          0,     pi/2,     0,       q5;    % Link 5
-          0,     0,        0.15,    q6];   % Link 6
+DH = [    0,     pi/2,     0,       q1;    % Enllaç 1
+          0.3,   0,        0,       q2;    % Enllaç 2
+          0.2,   pi/2,     0,       q3;    % Enllaç 3
+          0,     -pi/2,    0.2,     q4;    % Enllaç 4
+          0,     pi/2,     0,       q5;    % Enllaç 5
+          0,     0,        0.15,    q6];   % Enllaç 6
 
 Tdesired = [0.5,      0,     0.866, 0.25;
             0.866,    0,    -0.5,  0.1;
             0,        1,     0,    0.35;
             0,        0,     0,    1];
 ```
-# Task 1
-1.  Compute the wrist position $p_w =p_{\textrm{ee}} -d_6 \cdot z_6$
-2. Solve inverse kinematics for the Anthropomorphic Arm: $\theta_3 ,\theta_2 ,\theta_1$
+# Tasca 1
+1.  Calcula la posició del canell $p_w =p_{\textrm{ee}} -d_6 \cdot z_6$
+2. Resol la cinemàtica inversa per al braç antropomòrfic: $\theta_3 ,\theta_2 ,\theta_1$
 
-Use the following variables  to store your solution:
+Fes servir les variables següents per desar la teva solució:
 
--  pee (end\-effector position) 
--  pw (the wrist position) 
--  anthro\_solutions (inverse kinematic solution where each row is a solution) 
+-  pee (posició de l’efector final) 
+-  pw (la posició del canell) 
+-  anthro\_solutions (solució de cinemàtica inversa on cada fila és una solució) 
 ```matlab
 pee = [];
 pw = [];
 anthro_solutions = []; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-3-1')
 ```
-# Task 2
-1.  Compute $R_3^0 \left(\theta_1 ,\theta_2 ,\theta_3 \right)$
-2. Compute $R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)={R_3^0 }^T \cdot R_{\textrm{ee}}$
+# Tasca 2
+1.  Calcula $R_3^0 \left(\theta_1 ,\theta_2 ,\theta_3 \right)$
+2. Calcula $R_6^3 \left(\theta_4 ,\theta_5 ,\theta_6 \right)={R_3^0 }^T \cdot R_{\textrm{ee}}$
 
- *hint: the rotation R03 and R36 changes for each anthropomorpic arm solution.* 
+Fes servir les variables següents per desar la teva solució:
 
-
-Use the following variables to store your solution:
-
--  Ree (Rotation of the end\-effector) 
--  R03 (Rotation from frame 0 to frame 3 as a 3D matrix) 
--  R36 (Rotation from frame 3 to frame 6 as a 3D matrix) 
-
-*hint: you can use cat(3,Mat1,Mat2,Mat3,Mat4) to obtain a 3D array.*
-
+-  Ree (rotació de l’efector final) 
+-  R03 (rotació del marc 0 al marc 3) 
+-  R36 (rotació del marc 3 al marc 6) 
 ```matlab
 Ree = []; 
 R03 = []; 
 R36 = [];
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-3-2')
 
 ```
-# Task 3
-1.  Solve the inverse kinematics for Spherical Wrist: $\theta_4 ,\theta_5 ,\theta_6$
+# Tasca 3
+1.  Resol la cinemàtica inversa per al canell esfèric: $\theta_4 ,\theta_5 ,\theta_6$
 
-Use the following variables  to store your solution:
+Fes servir les variables següents per desar la teva solució:
 
--  solutions (complete inverse kinematic solution for the anthropomorphic arm with spherical wrist, where each row represents a unique solution) 
-
-*hint: You must compute two spherical wrist soluitions for each corresponding anthropomorpic arm solution.*
-
+-  spherical\_solutions (solució de cinemàtica inversa on cada fila és una solució)  
+-  solutions (solució completa de cinemàtica inversa per al braç antropomòrfic amb canell esfèric, on cada fila representa una solució única) 
 ```matlab
+spherical_solutions = [];
 solutions = [];
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-3-3')
 
 ```
-

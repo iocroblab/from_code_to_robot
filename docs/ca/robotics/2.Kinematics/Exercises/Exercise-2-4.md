@@ -1,45 +1,44 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 2.4 \- Joint Space Trajectory Planning
+# Exercici 2.4 \- Planificació de trajectòries en l’espai articular
 
-In this exercise you will develop functions to compute joint trajectories. 
-
-
-Please store your solutions in the predefined variables!
-
-# Task description:
-
-Follow the tasks and setup the required functions for different trajectory computations. 
+En aquest exercici desenvoluparàs funcions per calcular trajectòries articulars. 
 
 
-Answer all the questions and store your solution in the correct variable
+Si us plau, desa les teves solucions a les variables predefinides!
 
-# Task 1
+# Descripció de la tasca:
 
-Write a function that computes a quintic joint trajectory for a single joint. This function takes four inputs: 
-
-1.  initial joint state (q0)
-2. target joint state (qf)
-3. time to reach pose (t)
-4. Intermediate joint states (N)
-5. initial velocity (v0)
-6. velocity at target joint state (vf)
-7. initial acceleration (a0)
-8. acceleration at target joint state (af)
-
-and returns the joint trajectory as a where each row corresponds to a joint configuration, the joint speed trajectory, the joint acceleration trajectory and a vector containing the time at each trajectory entry. 
+Segueix les tasques i configura les funcions requerides per a diferents càlculs de trajectòries. 
 
 
-Assume that both, the velocity and acceleration at the start and end of the trajectory are 0. 
+Respon totes les preguntes i desa la teva solució a la variable correcta
+
+# Tasca 1
+
+Escriu una funció que calculi una trajectòria articular quíntica per a una sola articulació. Aquesta funció pren quatre entrades: 
+
+1.  estat articular inicial (q0)
+2. estat articular objectiu (qf)
+3. temps per arribar a la postura (t)
+4. estats articulars intermedis (N)
+5. velocitat inicial (v0)
+6. velocitat a l’estat articular objectiu (vf)
+7. acceleració inicial (a0)
+8. acceleració a l’estat articular objectiu (af)
+
+i retorna la trajectòria articular com una on cada fila correspon a una configuració articular, la trajectòria de velocitat articular, la trajectòria d’acceleració articular i un vector que conté el temps a cada entrada de la trajectòria. 
 
 
-Use the following function name for your solution:
+Assumeix que tant la velocitat com l’acceleració a l’inici i al final de la trajectòria són 0. 
+
+
+Fes servir el nom de funció següent per a la teva solució:
 
 -  SingleQuinticTrajectory(q0, qf, T, N, v0, vf, a0, af) 
 
-Solve this exercise without using the functions: 
+Resol aquest exercici sense fer servir les funcions: 
 
 -  quinticpolytraj() 
 ```matlab
@@ -48,14 +47,14 @@ function [q_trajectory, qd_trajectory, qdd_trajectory, timevec] = SingleQuinticT
 end
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-4-1')
 ```
 
-You can plot your trajectory: 
+Pots representar gràficament la teva trajectòria: 
 
 ```matlab
  
@@ -70,16 +69,16 @@ N = 100;
 [q_trajectory, qd_trajectory, qdd_trajectory, timevec] = SingleQuinticTrajectory(q0,qf,T,N,v0,vf,a0,af);
 plotTrajectory(q_trajectory, qd_trajectory, qdd_trajectory, timevec)
 ```
-# Task 2
+# Tasca 2
 
-Write a function that takes two joint configurations and computes the quintic trajectory for each joint. You may use your previously defined function
+Escriu una funció que prengui dues configuracions articulars i calculi la trajectòria quíntica per a cada articulació. Pots fer servir la funció definida prèviament
 
 
-Use the following variables  to store your solution:
+Fes servir les variables següents per desar la teva solució:
 
 -  QuinticConfigurationTrajectory(q0, qt, t, N) 
 
-Solve this exercise without using the functions: 
+Resol aquest exercici sense fer servir les funcions: 
 
 -  quinticpolytraj() 
 ```matlab
@@ -88,7 +87,7 @@ function q_config_trajectory = QuinticConfigurationTrajectory(q0,qt,t,N)
 end
 ```
 
-You can view your trajectory in Rviz: 
+Pots visualitzar la teva trajectòria a Rviz: 
 
 ```matlab
  
@@ -106,28 +105,28 @@ JointStatesToRviz(q_trajectory, [], T);
 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-4-2')
 ```
 
-Notice that you now have a different restriction compared to the tutorial. Thus your function should determine the required constant acceleration. 
+Observa que ara tens una restricció diferent en comparació amb el tutorial. Per tant, la teva funció ha de determinar l’acceleració constant requerida. 
 
 
-The function should have four outputs: 
+La funció ha de tenir quatre sortides: 
 
-1.  joint state trajectory q
-2. joint speed trajectory qd
-3. joint acceleration trajectory qdd
-4. time vector timevec
+1.  trajectòria d’estat articular q
+2. trajectòria de velocitat articular qd
+3. trajectòria d’acceleració articular qdd
+4. vector de temps timevec
 
-Use the following function name for your solution:
+Fes servir el nom de funció següent per a la teva solució:
 
 -  SingleTrapezoidalTrajectory(q0, qt, T, N, vc) 
 
-Solve this exercise without using the functions: 
+Resol aquest exercici sense fer servir les funcions: 
 
 -  solve() 
 -  trapveltraj() 
@@ -137,41 +136,41 @@ function [q, qd, qdd, timevec] = SingleTrapezoidalTrajectory(q0, qt, T, N, vc)
 end
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-4-3')
 ```
-# Task 4
+# Tasca 4
 
-Extend your function from Task 3. This function takes six inputs: 
+Amplia la funció de la Tasca 3. Aquesta funció pren sis entrades: 
 
-1.  initial joint state (q0)
-2. target joint state (qt)
-3. time to reach pose (t)
-4. number of steps to reach pose (N)
-5. cruise velocity (vc)
-6. maximum acceleration (amax)
+1.  estat articular inicial (q0)
+2. estat articular objectiu (qt)
+3. temps per arribar a la postura (t)
+4. nombre de passos per arribar a la postura (N)
+5. velocitat de creuer (vc)
+6. acceleració màxima (amax)
 
-This function should check whether or not the computed joint trajectory results in an acceleration that is larger than a maximum allowed acceleration. If this is the case, the function should increase the time to reach the pose in increments of 0.1s until the resulting acceleration is within the limits. 
-
-
-You may use your function from Task 3
+Aquesta funció ha de comprovar si la trajectòria articular calculada dona com a resultat una acceleració més gran que l’acceleració màxima permesa. Si aquest és el cas, la funció ha d’augmentar el temps per arribar a la postura en increments de 0.1 s fins que l’acceleració resultant estigui dins dels límits. 
 
 
-Use the following function name for your solution:
+Pots fer servir la funció de la Tasca 3
+
+
+Fes servir el nom de funció següent per a la teva solució:
 
 -  LimitedTrapezoidalTrajectory(q0, qt, t, N, vc, amax) 
 
-The function should have four outputs: 
+La funció ha de tenir quatre sortides: 
 
-1.  joint state trajectory q
-2. joint speed trajectory qd
-3. joint acceleration trajectory qdd
-4. time vector
+1.  trajectòria d’estat articular q
+2. trajectòria de velocitat articular qd
+3. trajectòria d’acceleració articular qdd
+4. vector de temps
 
-Solve this exercise without using the functions: 
+Resol aquest exercici sense fer servir les funcions: 
 
 -  solve() 
 -  trapveltraj() 
@@ -181,10 +180,9 @@ function [q, qd, qdd, timevec] = LimitTrapezoidalTrajectory(q0,qt,t,N,vc,amax)
 end
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la teva feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('2-4-4')
 ```
-

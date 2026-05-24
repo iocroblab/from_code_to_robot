@@ -1,65 +1,64 @@
+# Reinforcement Learning per a la planificació de tasques
 
-# Reinforcement Learning for task planning
-
-**Reinforcement Learning** is a machine learning paradigm where an **agent** learns by interacting with an **environment**, receiving **rewards** (feedback) based on the consequences of its actions.
-
-
-In reinforcement learning, the environment is typically modeled as a **Markov Decision Process (MDP)**. This means that the probability of transitioning to the next state depends only on the current state and action, not on the full history of past states. This is known as the **Markov property**, and it implies that the current state contains all the necessary information for optimal decision\-making, **simplifying the computation**.
+El **Reinforcement Learning** (Aprenentatge per Reforç) és un paradigma d'aprenentatge automàtic on un **agent** aprèn interactuant amb un **entorn**, rebent **recompenses** (feedback) basades en les conseqüències de les seves accions.
 
 
-At each time step $t$ , the agent:
-
--  Observes a state $s_t$  
--  Chooses an action $a_t$ 
--  Receives a reward $r_{t+1}$ 
--  Transitions to a new state $s_{t+1}$ 
-
-The goal is to learn a  **policy** $\pi \left(a|s\right)$  that maximizes the **cumulative future rewards**.
+En el Reinforcement Learning, l'entorn es modela normalment com un **Procés de Decisió de Markov (MDP)**. Això significa que la probabilitat de transició al següent estat depèn només de l'estat i l'acció actuals, no pas de tot l'historial d'estats passats. Aquest concepte es coneix com la **propietat de Markov**, i implica que l'estat actual conté tota la informació necessària per a la presa de decisions òptima, **simplificant-ne el càlcul**.
 
 
-The training process involves the agent exploring the environment by trying different actions and observing the outcomes. Using this experience, the agent updates its policy to favor actions that lead to higher rewards. This is often done through algorithms that estimate the expected return of actions, such as Q\-learning or policy gradient methods.
+En cada interval de temps $t$ , l'agent:
+
+-  Observa un estat $s_t$  
+-  Tria una acció $a_t$ 
+-  Rep una recompensa $r_{t+1}$ 
+-  Transita cap a un nou estat $s_{t+1}$ 
+
+L'objectiu és aprendre una **política** $\pi \left(a|s\right)$  que maximitzi les **recompenses futures acumulades**.
 
 
-To succeed, an agent must balance the tradeoff between **exploration** —trying unfamiliar actions to discover their effects—and **exploitation** —choosing actions known to yield high reward.
+El procés d'entrenament consisteix en què l'agent explori l'entorn provant diferents accions i observant-ne els resultats. A partir d'aquesta experiència, l'agent actualitza la seva política per afavorir les accions que condueixen a recompenses més altes. Sovint, això es fa mitjançant algorismes que estimen el retorn esperat de les accions, com ara el Q-learning o els mètodes de policy gradient.
 
 
- **Why Use Reinforcement Learning for Task Planning in** ***Pick and Place*****?**
+Per tenir èxit, un agent ha de trobar un equilibri entre l'**exploració** —provar accions desconegudes per descobrir-ne els efectes— i l'**explotació** —triar aquelles accions que se sap que generen una gran recompensa.
 
 
-In robotic tasks like *pick and place*, the robot needs to make decisions step by step to move an object from one location to another. It may have to avoid obstacles, act precisely, and adapt to changing conditions in the environment. Reinforcement learning (RL) offers several advantages for this kind of task planning:
-
-1.   **It can handle noise in sensors or actions:** In a real\-world environment, cameras may produce inaccurate images, detections might be noisy, and the robotic arm might not execute actions exactly as intended. Reinforcement learning allows the robot to learn how to act effectively even when its observations or actions are imperfect.
-2. **It can adapt efficiently to failures:** If the robot tries to grasp an object and fails, or if the object slips and falls, a traditional planner might need to recompute a full new plan. In contrast, an agent trained with reinforcement learning follows a learned policy that allows it to respond dynamically and take another action without re\-planning from scratch.
-3. **It is well suited for stochastic environments:** In robotics, actions are often not deterministic: moving the arm to a certain position may result in different outcomes depending on the environment (e.g., if other objects are moving, or if external forces are present). RL is specifically designed to learn in environments where actions do not always produce the same result.
-4. **It makes step\-by\-step decisions and is efficient at execution time:** Once trained, the agent does not need to compute a complete plan at every step. It simply observes the current state and chooses the best action according to its policy. This allows the robot to act quickly and efficiently in real time, without heavy computation during execution.
-
-**Lesson Goal**
+ **Per què fer servir el Reinforcement Learning per a la planificació de tasques en** ***Pick and Place*****?**
 
 
-In this lesson, the student will implement the core components of the `PickPlaceDiscreteEnv` environment, which simulates a robotic arm tasked with moving objects to target positions along a discrete one\-dimensional grid.
+En tasques robòtiques com ara *pick and place* (agafar i col·locar), el robot ha de prendre decisions pas a pas per moure un objecte d'una ubicació a una altra. Pot ser que hagi d'esquivar obstacles, actuar de manera precisa i adaptar-se als canvis de l'entorn. El Reinforcement Learning (RL) ofereix diversos avantatges per a aquest tipus de planificació de tasques:
+
+1. **Pot gestionar soroll en els sensors o en les accions:** En un entorn del món real, les càmeres poden produir imatges inexactes, les deteccions poden tenir soroll, i el braç robòtic pot no executar les accions exactament tal com es preveia. El Reinforcement Learning permet al robot aprendre a actuar de manera efectiva fins i tot quan les seves observacions o accions són imperfectes.
+2. **Es pot adaptar de manera eficient a les errades:** Si el robot intenta agafar un objecte i falla, o si l'objecte rellisca i cau, un planificador tradicional pot necessitar recalcular un pla complet de nou. En canvi, un agent entrenat amb Reinforcement Learning segueix una política apresa que li permet respondre dinàmicament i prendre una acció alternativa sense haver de planificar des de zero.
+3. **Està ben adaptat als entorns estocàstics:** En la robòtica, les accions sovint no són deterministes: moure el braç cap a una certa posició pot donar resultats diferents depenent de l'entorn (p. ex., si altres objectes s'estan movent, o si hi ha forces externes). El RL està dissenyat específicament per aprendre en entorns on les accions no produeixen sempre el mateix resultat.
+4. **Pren decisions pas a pas i és eficient durant el temps d'execució:** Un cop entrenat, l'agent no necessita calcular un pla complet a cada pas. Simplement observa l'estat actual i escull la millor acció segons la seva política. Això permet que el robot actuï ràpidament i de manera eficient en temps real, sense càlculs feixucs durant l'execució.
+
+**Objectiu de la lliçó**
 
 
-The agent will be trained using the **DQN algorithm**, and later enhanced with **Hindsight Experience Replay (HER)** to improve learning in sparse\-reward scenarios.
-
-# Installation
-
-**Install Reinforcement Learning Toolbox**
+En aquesta lliçó, l'estudiant implementarà els components principals de l'entorn `PickPlaceDiscreteEnv`, que simula un braç robòtic encarregat de moure objectes cap a posicions objectiu al llarg d'una quadrícula unidimensional i discreta.
 
 
-To complete this lesson, you need the **Reinforcement Learning Toolbox**™.
+L'agent s'entrenarà fent servir l'**algorisme DQN**, i més endavant millorat amb **Hindsight Experience Replay (HER)** per millorar l'aprenentatge en escenaris de recompensa escassa (sparse-reward).
+
+# Instal·lació
+
+**Instal·lar el Reinforcement Learning Toolbox**
 
 
-If you haven't installed it yet, follow these steps:
-
-1.  Open MATLAB.
-2. Go to the **Home** tab.
-3. Click on **Add\-Ons > Get Add\-Ons**.
-4. Search for **"Reinforcement Learning Toolbox**™**"** and click **Install**.
-
-**Verify Installation in Code**
+Per completar aquesta lliçó, necessites el **Reinforcement Learning Toolbox**™.
 
 
-You can run the following code to check whether the toolbox is installed:
+Si encara no l'has instal·lat, segueix aquests passos:
+
+1. Obre MATLAB.
+2. Vés a la pestanya **Home**.
+3. Clica a **Add-Ons > Get Add-Ons**.
+4. Cerca **"Reinforcement Learning Toolbox**™**"** i clica **Install**.
+
+**Verificar la instal·lació des del codi**
+
+
+Pots executar el següent codi per comprovar si el toolbox està instal·lat:
 
 ```matlab
 toolboxTable = matlab.addons.installedAddons;
@@ -76,99 +75,99 @@ end
 ```
 
 
-# Creating an environment
-## Exercise 1 \- Initializing the Environment State:
+# Creació d'un entorn
+## Exercici 1 - Inicialització de l'estat de l'entorn:
 
-In this first exercise, you will implement a function that resets the environment state and returns an initial observation.
-
-
-The state of our environment is composed of **four elements**, which represent what the reinforcement learning agent "sees" at each time step:
+En aquest primer exercici, implementaràs una funció que reinicia (reset) l'estat de l'entorn i retorna una observació inicial.
 
 
- **1.** **`this.arm_pos`** **— Robot Arm Position** 
+L'estat del nostre entorn està compost per **quatre elements**, que representen el que l'agent de Reinforcement Learning "veu" en cada interval de temps:
 
 
-Indicates the current position of the robotic arm.
+ **1.** **`this.arm_pos`** **— Posició del braç robòtic** 
 
 
-Its value is an integer between `1` and `num_locations`.
+Indica la posició actual del braç robòtic.
 
 
-At the beginning of each episode, this value is randomly selected from that range.
+El seu valor és un enter entre `1` i `num_locations`.
 
 
- **2.** **`this.arm_state`** **— Arm Holding State** 
+A l'inici de cada episodi, aquest valor se selecciona de manera aleatòria en aquell rang.
 
 
-Indicates whether the robot arm is holding an object.
+ **2.** **`this.arm_state`** **— Estat de subjecció del braç** 
 
 
-Its value ranges from `0` to `num_objects`:
-
--  `0` means the arm is empty. 
--  `1` means it is holding **object 1**, 
--  `2` means it is holding **object 2**, and so on.The arm always starts empty, so the default value is `0`. 
-
- **3.** **`this.objects_pos`** **— Current Object Positions** 
+Indica si el braç del robot està subjectant o no algun objecte.
 
 
-An array that indicates the current position of each object.
+El seu valor pren valors entre `0` i `num_objects`:
 
--  `objects_pos(1)` is the position of **object 1**, 
--  `objects_pos(2)` is the position of **object 2**, and so on. 
+-  `0` vol dir que el braç està buit. 
+-  `1` vol dir que està subjectant l'**objecte 1**, 
+-  `2` vol dir que està subjectant l'**objecte 2**, i així successivament. El braç sempre comença buit, de manera que el valor per defecte és `0`. 
 
-These positions are assigned randomly at the beginning, but **must meet two conditions**:
-
--  No two objects can be placed at the same location. 
--  No object can start in the same location as the robot arm. 
-
- **4.** **`this.target_pos`** **— Target Positions for the Objects** 
+ **3.** **`this.objects_pos`** **— Posicions actuals dels objectes** 
 
 
-An array that indicates the **goal position** for each object:
+Un array que indica la posició actual de cada objecte.
 
--  `target_pos(1)` is the goal for **object 1**, 
--  `target_pos(2)` is the goal for **object 2**, and so on. 
+-  `objects_pos(1)` és la posició de l'**objecte 1**, 
+-  `objects_pos(2)` és la posició de l'**objecte 2**, i així successivament. 
 
-These target positions are also random but must satisfy:
+Aquestes posicions s'assignen de forma aleatòria al principi, però **han de complir dues condicions**:
 
--  No two objects can share the same goal location. 
--  An object’s target position cannot be the same as its **initial** position. 
+-  Dos objectes no poden estar a la mateixa ubicació. 
+-  Un objecte no ha de poder començar a la mateixa ubicació que el braç robòtic. 
 
-**Task**
-
-
-Your goal is to write the logic that generates the initial state for these four variables (`arm_pos`, `arm_state`, `objects_pos`, and `target_pos`) following the constraints described above.
+ **4.** **`this.target_pos`** **— Posicions objectiu de cada objecte** 
 
 
-This initial state will be returned by the `reset()` function of the environment.
+Un array que indica la **posició objectiu** de cada objecte:
+
+-  `target_pos(1)` és l'objectiu de l'**objecte 1**, 
+-  `target_pos(2)` és l'objectiu de l'**objecte 2**, i així successivament. 
+
+Aquestes posicions objectiu també són aleatòries però han de satisfer que:
+
+-  Dos objectes no poden compartir la mateixa posició objectiu.
+-  La posició objectiu d'un objecte no pot ser la mateixa que la seva posició **inicial**. 
+
+**Tasca**
 
 
-**Hints**
+El teu objectiu és escriure la lògica que genera l'estat inicial per a aquestes quatre variables (`arm_pos`, `arm_state`, `objects_pos` i `target_pos`) seguint les restriccions descrites prèviament.
 
 
-You may find the following MATLAB functions useful for implementing this exercise:
+Aquest estat inicial serà el que retornarà la funció `reset()` de l'entorn.
 
--  `randi` – to generate random integers within a range. 
--  `randperm` – to generate random permutations. 
--  `setdiff` – to remove specific values from a set . 
+
+**Pistes**
+
+
+Pots trobar útils les següents funcions de MATLAB per implementar aquest exercici:
+
+-  `randi` – per generar enters aleatoris dins d'un rang. 
+-  `randperm` – per generar permutacions aleatòries. 
+-  `setdiff` – per eliminar valors específics d'un conjunt. 
 
 ```matlab
- %Reset environment to initial state and output initial observation
+ % Reinicia l'entorn a l'estat inicial i retorna l'observació inicial
  function [this, InitialObservation] = resetFunc(this)
 
-    % Randomize initial arm position (1-based indexing)
+    % Aleatoritza la posició inicial del braç (índex basat en 1)
 
-    % Generate valid positions for objects (excluding arm position)
+    % Genera posicions vàlides per als objectes (excloent la posició del braç)
 
-    % Ensure enough valid positions for all objects
+    % Assegura't de tenir prou posicions vàlides per a tots els objectes
    
 
-    % Generate target positions (each different from its corresponding object position)
+    % Genera posicions objectiu (cada una diferent de la posició del seu objecte corresponent)
     this.target_pos = zeros(this.num_objects, 1);
-    assigned_targets = [];  % Keep track of already assigned targets to avoid repetitions
+    assigned_targets = [];  % Fes un seguiment dels objectius ja assignats per evitar repeticions
 
-    % Build initial observation vector
+    % Construeix el vector d'observació inicial
     InitialObservation = [this.arm_pos;this.arm_state;this.objects_pos; this.target_pos];
     this.State = InitialObservation;
 
@@ -176,22 +175,22 @@ end
 ```
 
 ```matlab
-% Reset environment to initial state and output initial observation
+% Reinicia l'entorn a l'estat inicial i retorna l'observació inicial
 function [this, InitialObservation] = resetFuncSolution(this)
-    this.arm_state = 0; % 0 = empty, >0 = holding object
+    this.arm_state = 0; % 0 = buit, >0 = subjectant objecte
 
-    % Randomize initial arm position (1-based indexing)
+    % Aleatoritza la posició inicial del braç (índex basat en 1)
     this.arm_pos = randi([1,this.num_locations]);
 
-    % Generate valid positions for objects (excluding arm position)
+    % Genera posicions vàlides per als objectes (excloent la posició del braç)
     valid_positions = setdiff(1:this.num_locations, this.arm_pos);
 
-     % Initialize map of objects (all locations empty)
+     % Inicialitza el mapa d'objectes (totes les ubicacions buides)
      this.map_objects = zeros(this.num_locations, 1);
 
-    % Ensure enough valid positions for all objects
+    % Assegura't de tenir prou posicions vàlides per a tots els objectes
     if length(valid_positions) >= this.num_objects
-        % Select random positions for objects (no overlap, not at arm)
+        % Selecciona posicions aleatòries per als objectes (sense superposicions, i on no hi ha el braç)
         selected_indices = randperm(length(valid_positions), this.num_objects);
         this.objects_pos = valid_positions(selected_indices)';
         for i = 1:this.num_objects
@@ -201,28 +200,28 @@ function [this, InitialObservation] = resetFuncSolution(this)
         error('Not enough valid positions for objects');
     end
 
-    % Generate target positions (each different from its corresponding object position)
+    % Genera posicions objectiu (cada una diferent de la posició del seu objecte corresponent)
     this.target_pos = zeros(this.num_objects, 1);
-    assigned_targets = [];  % Keep track of already assigned targets to avoid repetitions
+    assigned_targets = [];  % Fes un seguiment dels objectius ja assignats per evitar repeticions
 
     for i = 1:this.num_objects
-        % Valid target positions exclude the current object position and already assigned targets
+        % Les posicions objectiu vàlides exclouen la posició actual de l'objecte i els objectius ja assignats
         valid_targets = setdiff(1:this.num_locations, [this.objects_pos(i), assigned_targets]);
-        % Select random target from valid positions
+        % Selecciona un objectiu aleatori de les posicions vàlides
         selected_index = randperm(length(valid_targets), 1);
         this.target_pos(i) = valid_targets(selected_index);
-        % Add this target to assigned targets
+        % Afegeix aquest objectiu als objectius assignats
         assigned_targets = [assigned_targets, this.target_pos(i)];
     end
 
-    % Build initial observation vector
+    % Construeix el vector d'observació inicial
     InitialObservation = [this.arm_pos;this.arm_state;this.objects_pos; this.target_pos];
     this.State = InitialObservation;
 
 end
 ```
 
-### Testing Reset Function
+### Provant la funció Reset
 ```matlab
 test = tests.TestResetFuncPickPlaceEnv;
 test.ResetFuncHandle = @resetFuncSolution;
@@ -236,91 +235,91 @@ Done tests.TestResetFuncPickPlaceEnv
 __________
 ```
 
-## **Exercise 2 – Implementing the Step Function:**
+## **Exercici 2 – Implementació de la funció Step:**
 
-In this exercise, you will implement the **step function** for the environment, which defines how the environment transitions from one state to another in response to an action taken by the agent.
-
-
-The agent interacts with the environment using discrete actions:
+En aquest exercici, implementaràs la funció de pas (**step function**) per a l'entorn, que defineix la manera com l'entorn transita d'un estat a un altre en resposta a l'acció presa per l'agent.
 
 
- **Action 1: Pick** 
+L'agent interactua amb l'entorn mitjançant accions discretes:
 
 
-The robot arm attempts to pick up an object at its current position.
+ **Acció 1: Pick (Agafar)** 
 
 
-This action is only valid if:
-
--  The arm is empty. 
--  There is an object at the arm’s position. 
-
-**Action 2: Place**
+El braç robòtic intenta agafar un objecte de la seva posició actual.
 
 
-The robot arm attempts to place the currently held object at its current position.
+Aquesta acció només és vàlida si:
+
+-  El braç està buit. 
+-  Hi ha un objecte a la posició actual del braç. 
+
+**Acció 2: Place (Col·locar)**
 
 
-This action is only valid if:
-
--  The arm is holding an object. 
--  The target position is empty. 
-
-**Actions 3 and above: Move to Location**
+El braç robòtic intenta col·locar l'objecte que subjecta actualment a la seva posició actual.
 
 
-The robot arm moves to a new location.
+Aquesta acció només és vàlida si:
+
+-  El braç està subjectant un objecte. 
+-  La posició objectiu està buida. 
+
+**Accions 3 i superiors: Moure's a una Ubicació**
 
 
-These actions map to moving the arm to a specific location. However, since actions `1` and `2` are already reserved for **pick** and **place**, the location index must be derived by subtracting an offset of `2` from the action value.
-
--  For example: 
--  `Action 3` → move to `location 1` 
--  `Action 4` → move to `location 2` 
--  `Action 5` → move to `location 3` 
-
-**Task**
+El braç robòtic es desplaça cap a una nova ubicació.
 
 
-Your goal is to write the logic of the `step()` function that performs the following:
+Aquestes accions s'associen amb moure el braç cap a una ubicació concreta. De tota manera, com que les accions `1` i `2` ja estan reservades per al **pick** i **place**, l'índex d'ubicació s'ha de derivar restant-ne `2` del valor de l'acció.
 
--  Executes the action specified by the input `Action` 
--  Updates the internal state of the environment accordingly 
--  Returns the new state 
+-  Per exemple: 
+-  `Acció 3` → mou-te a `location 1` 
+-  `Acció 4` → mou-te a `location 2` 
+-  `Acció 5` → mou-te a `location 3` 
 
-**Hints**
+**Tasca**
 
--  Use  "`Action - 2"` to compute the target location index for movement actions. 
+
+El teu objectiu és escriure la lògica de la funció `step()` que dugui a terme el següent:
+
+-  Executar l'acció especificada pel paràmetre d'entrada `Action`. 
+-  Actualitzar adequadament l'estat intern de l'entorn. 
+-  Retornar el nou estat. 
+
+**Pistes**
+
+-  Fes servir "`Action - 2"` per calcular l'índex de la posició objectiu per a les accions de moviment. 
 ```matlab
 function [this, Observation, Reward, IsDone, Info] = stepFucntion(this, Action)
 
-    % Handle pick action
+    % Gestiona l'acció Pick
     if Action == 1 
        
-    % Handle place action
+    % Gestiona l'acció Place
     elseif Action == 2
 
-     % Handle move to location action
+     % Gestiona l'acció de moure a ubicació
     elseif Action > 2 
        
 
     end
 
 
-    % Build new observation vector
+    % Construeix el nou vector d'observació
     Observation = [this.arm_pos;this.arm_state;this.objects_pos; this.target_pos];
 
-    % Compute reward using external reward function
+    % Calcula la recompensa fent servir la funció de recompensa externa
     Reward = RewardFunc({this.State}, {Action}, {Observation});
-    % Store the current reward for visualization
+    % Guarda la recompensa actual per a la visualització
     this.CurrentReward = Reward;
-    % Check if episode is done using external function
+    % Comprova si l'episodi ha acabat fent servir la funció externa
     IsDone = IsDoneFunc({this.State}, {Action}, {Observation});
-    % Update system states
+    % Actualitza els estats del sistema
     this.State = Observation;
     Info = [];
 
-    % Update internal done flag
+    % Actualitza la flag interna done
     this.IsDone = IsDone;
     
 end
@@ -329,62 +328,62 @@ end
 ```matlab
 function [this, Observation, Reward, IsDone, Info] = stepFuncSolution(this, Action)
 
-    % Handle pick action
+    % Gestiona l'acció Pick
     if Action == 1 % pick
-        % Arm must be empty and there must be an object at the arm's position
+        % El braç ha d'estar buit i hi ha d'haver un objecte a la posició del braç
         if this.arm_state == 0 && this.map_objects(this.arm_pos) > 0
             obj_index = this.map_objects(this.arm_pos);
-            % Pick up the object
+            % Agafa l'objecte
             this.arm_state = obj_index;
             this.map_objects(this.arm_pos) = 0;
-            this.objects_pos(obj_index) = 0; % 0 means object is being carried
+            this.objects_pos(obj_index) = 0; % 0 significa que l'objecte està sent transportat
         end
 
-        % Handle place action
+        % Gestiona l'acció Place
     elseif Action == 2 % place
-        % Arm must be holding an object and the location must be empty
+        % El braç ha d'estar subjectant un objecte i la ubicació ha d'estar buida
         if this.arm_state > 0 && this.map_objects(this.arm_pos) == 0
             obj_index = this.arm_state;
             new_obj_pos = this.arm_pos;
             current_target_pos = this.target_pos(obj_index);
-            % Place the object at the current arm position
+            % Col·loca l'objecte a la posició actual del braç
             this.map_objects(new_obj_pos) = obj_index;
             this.objects_pos(obj_index) = new_obj_pos;
-            this.arm_state = 0; % Arm is now empty
+            this.arm_state = 0; % El braç ara està buit
         end
 
-        % Handle move to location action
+        % Gestiona l'acció de moure a ubicació
     elseif Action > 2 % move to location
         is_holding_obj = this.arm_state > 0;
         obj_index = this.arm_state;
 
-        new_location = Action - 2; % Actions 3,4,5,... map to locations 1,2,3,...
-        % Move the arm to the new location
+        new_location = Action - 2; % Les accions 3,4,5,... s'assignen a les ubicacions 1,2,3,...
+        % Mou el braç a la nova ubicació
         this.arm_pos = new_location;
 
     end
 
-    % Build new observation vector
+    % Construeix el nou vector d'observació
     Observation = [this.arm_pos;this.arm_state;this.objects_pos; this.target_pos];
 
-    % Compute reward using external reward function
+    % Calcula la recompensa fent servir la funció de recompensa externa
     Reward = RewardFunc({this.State}, {Action}, {Observation});
-    % Store the current reward for visualization
+    % Guarda la recompensa actual per a la visualització
     this.CurrentReward = Reward;
-    % Check if episode is done using external function
+    % Comprova si l'episodi ha acabat fent servir la funció externa
     IsDone = IsDoneFunc({this.State}, {Action}, {Observation});
-    % Update system states
+    % Actualitza els estats del sistema
     this.State = Observation;
     Info = [];
 
-    % Update internal done flag
+    % Actualitza la flag interna done
     this.IsDone = IsDone;
 
     
 end
 ```
 
-### Testing Step Function
+### Provant la funció Step
 ```matlab
 test = tests.TestStepFuncPickPlaceEnv;
 test.StepFuncHandle = @stepFuncSolution;
@@ -398,26 +397,26 @@ Done tests.TestStepFuncPickPlaceEnv
 __________
 ```
 
-## **Exercise 3 – Implementing the IsDone Function:**
+## **Exercici 3 – Implementació de la funció IsDone:**
 
-In this **short** exercise (only one line of code), you will implement a function that checks whether the task has been successfully completed. This function will be called at every time step and should return `true` if the goal has been achieved, and `false` otherwise.
-
-
-This logic is useful for signaling the end of an episode in reinforcement learning.
+En aquest exercici **curt** (tan sols una línia de codi), implementaràs una funció que verifica si la tasca ha estat completada satisfactòriament. Aquesta funció serà cridada un cop en cada interval de temps, i ha de retornar `true` si l'objectiu s'ha aconseguit, i `false` si en cas contrari.
 
 
-In this task, we assume there is **only one object** in the environment.
+Aquesta lògica és particularment útil per assenyalar el final de l'episodi d'aprenentatge en el Reinforcement Learning.
 
 
-**Hint**
+En aquesta tasca, assumirem que només hi ha **un únic objecte** en l'entorn.
 
 
-You can access the state values using `NextState{1}`. For example, to access the first value, use `NextState{1}(1)`.
+**Pista**
+
+
+Pots accedir al valor de l'estat fent servir `NextState{1}`. Per exemple, per accedir al primer valor, pots fer servir `NextState{1}(1)`.
 
 
 ```matlab
 function isdone = IsDoneFunc(State, Action, NextState)
-    %isdone = .... you only need to complete this line
+    % isdone = .... només necessites completar aquesta línia
     isdone = IsDoneFuncSolution(State, Action, NextState);
 end
 
@@ -429,7 +428,7 @@ function isdone = IsDoneFuncSolution(State, Action, NextState)
 end
 ```
 
-### Testing IsDone Function
+### Provant la funció IsDone
 ```matlab
 test = tests.TestIsDoneFuncPickPlaceEnv;
 test.IsDoneFuncHandle = @IsDoneFuncSolution;
@@ -443,117 +442,117 @@ Done tests.TestIsDoneFuncPickPlaceEnv
 __________
 ```
 
-## Understanding Reward Function
+## Entenent la funció de Recompensa
 
-The reward function is designed to guide the learning agent step by step toward completing the task, while penalizing unproductive or invalid actions. It provides both **positive feedback for progress** and **penalties for mistakes**, effectively shaping the agent's behavior over time.
-
-
-At the beginning of each step, the agent receives a **penalty of \-2 for each object that is not yet in its target position**. This encourages the agent to reduce the number of misplaced objects as quickly as possible.
+La funció de recompensa està dissenyada per guiar l'agent d'aprenentatge pas a pas cap a la finalització de la tasca, penalitzant alhora les accions improductives o invàlides. Proporciona tant **reforç positiu pel progrés** com **penalitzacions per als errors**, modelant de manera efectiva el comportament de l'agent al llarg del temps.
 
 
-To incentivize progress, small positive rewards are added for every subgoal achieved:
-
--  **+0.5** for moving the arm toward an object that is not in its goal location. 
--  **+1** for picking up such an object (provided it is not already correctly placed). 
--  **+1.5** for moving the object toward its goal location. 
--  **Final reward of +2** is granted when the task is fully completed (i.e., all objects are in their target locations). 
-
-**Penalties for Invalid Actions**
+Al començament de cada pas, l'agent rep una **penalització de -2 per cada objecte que encara no es troba en la seva posició objectiu**. Això fomenta que l'agent redueixi el nombre d'objectes mal col·locats el més ràpidament possible.
 
 
-To discourage poor behavior, the agent is penalized:
+Per incentivar l'avenç, s'afegeixen petites recompenses positives per cada subobjectiu assolit:
 
--  **−5** for invalid actions such as: 
--  Trying to pick an object when there’s none. 
--  Trying to pick when already holding something. 
--  Trying to place an object where another one already exists. 
--  **−0.01** for inefficient or redundant movements, such as moving to the same location. 
+-  **+0.5** per moure el braç cap a un objecte que no es troba a la seva posició objectiu. 
+-  **+1** per agafar un d'aquests objectes (sempre i quan no estigui ja col·locat correctament). 
+-  **+1.5** per moure l'objecte cap a la seva posició objectiu. 
+-  **Recompensa final de +2** s'atorga quan la tasca s'ha completat totalment (és a dir, tots els objectes estan a les seves posicions objectiu). 
 
-**Overall Purpose**
+**Penalitzacions per Accions Invàlides**
 
 
-The goal of this reward function is to serve as a kind of **heuristic distance to the goal**. By providing intermediate rewards and penalties, it helps the reinforcement learning agent understand **which actions bring it closer to the objective**, and which ones are wasteful or harmful. This structured feedback is essential for effective learning in complex environments.
+Per desincentivar els mals comportaments, l'agent és penalitzat:
+
+-  **−5** per accions invàlides com ara: 
+-  Intentar agafar un objecte quan no n'hi ha cap. 
+-  Intentar agafar quan ja està subjectant alguna cosa. 
+-  Intentar col·locar un objecte on ja n'hi ha un altre. 
+-  **−0.01** per moviments ineficients o redundants, com ara moure's cap a la mateixa ubicació on ja es troba. 
+
+**Propòsit General**
+
+
+L'objectiu d'aquesta funció de recompensa és servir com una mena de **distància heurística cap a l'objectiu**. Proporcionant recompenses intermèdies i penalitzacions, ajuda a l'agent de Reinforcement Learning a entendre **quines accions l'apropen cap a l'objectiu**, i quines accions són inútils o perjudicials. Aquest retorn estructurat és essencial per a un aprenentatge efectiu en entorns complexos.
 
 ```matlab
 function reward = RewardFunc(State, Action, NextState)
 
-    % Check if the task has been completed
+    % Comprova si la tasca s'ha completat
     isdone = IsDoneFunc(State, Action, NextState);
     
     if isdone
-        % If the task is done, give a high positive reward
+        % Si la tasca està completada, dona una recompensa alta positiva
         reward = 2;
     else
-        % Start from zero reward and adjust based on the action
+        % Comença des de la recompensa zero i ajusta segons l'acció
         reward = 0;
         
-        % Extract current state information
-        arm_pos = State{1}(1);            % Current position of the robotic arm
-        arm_state = State{1}(2);          % Whether the arm is holding an object
-        objects_pos = State{1}(3);      % Current positions of the two objects
-        target_pos = State{1}(4);       % Target positions of the two objects
+        % Extreu la informació de l'estat actual
+        arm_pos = State{1}(1);            % Posició actual del braç robòtic
+        arm_state = State{1}(2);          % Si el braç subjecta un objecte
+        objects_pos = State{1}(3);      % Posicions actuals dels dos objectes
+        target_pos = State{1}(4);       % Posicions objectiu dels dos objectes
         
-        Action = Action{1};               % Extract the scalar action value
+        Action = Action{1};               % Extreu el valor escalar de l'acció
 
-        % Action 1: Pick an object
+        % Acció 1: Agafar un objecte
         if Action == 1
-            % Check if there is an object at the arm's position
+            % Comprova si hi ha un objecte a la posició del braç
             [hasObject, idx] = hasObjectAtPosition(objects_pos, arm_pos);
 
-            % Valid pick: arm is empty and there's an object to pick
+            % Pick vàlid: el braç està buit i hi ha un objecte per agafar
             if arm_state == 0 && hasObject
-                % Positive reward if the object is not already at its target
+                % Recompensa positiva si l'objecte encara no és al seu objectiu
                 if target_pos(idx) ~= arm_pos 
                     reward = reward + 1;
                 else
-                    % Penalty for picking an object that is already in its goal location
+                    % Penalització per agafar un objecte que ja és a la seva posició objectiu
                     reward = reward - 5;
                 end
             else
-                % Invalid pick (either arm is not empty or no object present)
+                % Pick invàlid (o bé el braç no està buit o no hi ha objecte present)
                 reward = reward - 5;
             end
 
-        % Action 2: Place an object
+        % Acció 2: Col·locar un objecte
         elseif Action == 2
             [hasObject, idx] = hasObjectAtPosition(objects_pos, arm_pos);
             
-            % Valid place: arm is holding an object and location is empty
+            % Place vàlid: el braç subjecta un objecte i la ubicació està buida
             if arm_state > 0 && ~hasObject
-                obj_index = arm_state;  % Object being held
-                % No extra reward added here, reward handled below if state becomes "done"
+                obj_index = arm_state;  % Objecte que s'està subjectant
+                % No s'afegeix cap recompensa extra aquí, la recompensa es gestiona a sota si l'estat esdevé "done"
             else
-                % Invalid place (trying to place on an occupied position or while arm is empty)
+                % Place invàlid (intent de col·locar a una posició ocupada o mentre el braç està buit)
                 reward = reward - 5;
             end
 
-        % Action > 2: Move the arm to another location
+        % Acció > 2: Moure el braç a una altra ubicació
         elseif Action > 2
             is_holding_obj = arm_state > 0;
             obj_index = arm_state;
-            new_location = Action - 2;  % Convert action number to location index
+            new_location = Action - 2;  % Converteix el número d'acció a índex de la ubicació
 
             [hasObject, idx] = hasObjectAtPosition(objects_pos, new_location);
 
             if arm_pos == new_location
-                % Penalize unnecessary movement to the current position
+                % Penalitza moviments innecessaris a la posició actual
                 reward = reward - 0.01;
 
             elseif is_holding_obj && new_location == target_pos(obj_index)
-                % Reward for moving directly toward the goal with the object
+                % Recompensa per moure's directament a l'objectiu amb l'objecte
                 reward = reward + 1.5;
 
             elseif ~is_holding_obj && hasObject && target_pos(idx) ~= new_location
-                % Reward for moving toward an object that needs to be picked
+                % Recompensa per moure's cap a un objecte que necessita ser agafat
                 reward = reward + 0.5;
 
             else
-                % Slight penalty for other types of movement
+                % Petita penalització per a altres tipus de moviment
                 reward = reward - 0.01;
             end
         end
 
-        % Final penalty for any objects that are not at their target positions
+        % Penalització final per qualsevol objecte que no sigui a la seva posició objectiu
         objects_pos = NextState{1}(3);
         target_pos = NextState{1}(4);
 
@@ -566,13 +565,13 @@ function reward = RewardFunc(State, Action, NextState)
 end
 
 function [hasObject, idx] = hasObjectAtPosition(objects_pos, position)
-    % Check if there's any object at the specified position
-    % objects_pos: array containing object positions [obj1_pos, obj2_pos, ...]
-    % position: position to check
-    % Returns: hasObject (true if there's an object at the position, false otherwise)
-    %          idx (index of the object if found, -1 otherwise)
+    % Comprova si hi ha cap objecte a la posició especificada
+    % objects_pos: array que conté les posicions dels objectes [obj1_pos, obj2_pos, ...]
+    % position: posició a comprovar
+    % Retorna: hasObject (true si hi ha un objecte a la posició, fals en altre cas)
+    %          idx (índex de l'objecte si es troba, -1 en altre cas)
 
-    idx = find(objects_pos == position, 1); % Encuentra el primer índice
+    idx = find(objects_pos == position, 1); % Troba el primer índex
     if ~isempty(idx)
         hasObject = true;
     else
@@ -582,25 +581,25 @@ function [hasObject, idx] = hasObjectAtPosition(objects_pos, position)
 end
 ```
 
-# Training a model
+# Entrenar un model
 
-**Fix Random Number Stream for Reproducibility**
-
-
-The example code might involve computation of random numbers at various stages. Fixing the random number stream at the beginning of various sections in the example code preserves the random number sequence in the section every time you run it, and increases the likelihood of reproducing the results. For more information, see [Results Reproducibility](https://es.mathworks.com/help/reinforcement-learning/ug/train-reinforcement-learning-agents.html#mw_cfb4600e-9d19-4e4e-89c8-2749894fee3a).
+**Fixar la Secuència de Nombres Aleatoris per a la Reproduïbilitat**
 
 
-Fix the random number stream with seed `0` and random number algorithm Mersenne Twister. For more information on controlling the seed used for random number generation, see [`rng`](https://es.mathworks.com/help/matlab/ref/rng.html).
+El codi de l'exemple pot involucrar el càlcul de nombres aleatoris en diverses fases. Fixar el flux de nombres aleatoris al principi de diverses seccions del codi de l'exemple preserva la seqüència de nombres aleatoris cada vegada que l'executes, i augmenta la probabilitat de reproduir-ne correctament els resultats. Per a més informació, consulta [Results Reproducibility](https://es.mathworks.com/help/reinforcement-learning/ug/train-reinforcement-learning-agents.html#mw_cfb4600e-9d19-4e4e-89c8-2749894fee3a).
+
+
+Fixa la font de nombres aleatoris amb la llavor `0` i l'algorisme de generació aleatòria Mersenne Twister. Per obtenir més informació sobre com controlar la llavor utilitzada per a la generació de nombres aleatoris, vés a [`rng`](https://es.mathworks.com/help/matlab/ref/rng.html).
 
 ```matlab
 previousRngState = rng(0,"twister");
 ```
 
 
-**Creating an instance of the environment**
+**Creació d'una instància de l'entorn**
 
 
-This line creates an instance of a custom pick\-and\-place environment.
+Aquesta línia crea una instància d'un entorn personalitzat de pick-and-place.
 
 ```matlab
 env_pick_place = PickPlaceDiscreteEnv2(1, 3, @stepFuncSolution, @resetFuncSolution);
@@ -609,13 +608,13 @@ env_pick_place = PickPlaceDiscreteEnv2(1, 3, @stepFuncSolution, @resetFuncSoluti
 ![figure_0.png](PickPlaceRL_media/figure_0.png)
 
 
-**Creating a DQN Agent**
+**Creant un Agent DQN**
 
 
-Here, we define the agent that will learn to interact with the environment.
+Aquí definirem l'agent que aprendrà a interactuar amb l'entorn.
 
--  `obsInfo` and `actInfo` provide the structure of the observation and action spaces, respectively. 
--  `rlDQNAgent` creates a Deep Q\-Network (DQN) agent, which approximates the optimal Q\-value function using a neural network. 
+-  `obsInfo` i `actInfo` proveeixen l'estructura dels espais d'observació i d'accions, respectivament. 
+-  `rlDQNAgent` crea un agent Deep Q-Network (DQN), el qual aproxima la funció òptima del Q-value a través de l'ús d'una xarxa neuronal. 
 ```matlab
 obsInfo = getObservationInfo(env_pick_place);
 actInfo = getActionInfo(env_pick_place);
@@ -623,15 +622,15 @@ dqnAgent = rlDQNAgent(obsInfo,actInfo);
 ```
 
 
-**Configuring Agent Parameters**
+**Configuració dels Paràmetres de l'Agent**
 
 
-These settings control the behavior and learning dynamics of the agent:
+Aquests paràmetres controlen el comportament i les dinàmiques d'aprenentatge de l'agent:
 
--  **Epsilon\-greedy exploration**: Starts with full exploration (`Epsilon = 1.0`) and gradually reduces it to encourage exploitation as learning progresses. 
--  **Mini\-batch size**: Number of experiences sampled from the replay buffer during each training step. 
--  **Learning rate**: Controls how quickly the critic network updates. 
--  **Gradient threshold**: Prevents exploding gradients during training by setting a limit on the magnitude. 
+-  **Exploració Epsilon-greedy (Epsilon-greedy exploration)**: Comença amb exploració total (`Epsilon = 1.0`) i de mica en mica es redueix per poder afavorir l'explotació a mesura que avança l'aprenentatge. 
+-  **Mida de l'entrenament en lots (Mini-batch size)**: Nombre d'experiències extretes de la capa de reproducció durant cada pas de l'entrenament. 
+-  **Taxa d'aprenentatge (Learning rate)**: Controla amb quina rapidesa la xarxa s'actualitza. 
+-  **Límit de gradient (Gradient threshold)**: Prevé l'explosió de gradients durant l'entrenament establint un límit de magnitud. 
 ```matlab
 dqnAgent.AgentOptions.EpsilonGreedyExploration.Epsilon = 1.0;
 dqnAgent.AgentOptions.EpsilonGreedyExploration.EpsilonMin = 0.01;
@@ -642,13 +641,13 @@ dqnAgent.AgentOptions.CriticOptimizerOptions.GradientThreshold = 10;
 ```
 
 
-**Configuring Training Parameters**
+**Configuració dels Paràmetres d'Entrenament**
 
 
-These options define how the training will be carried out:
+Aquestes opcions defineixen la manera com es realitzarà l'entrenament:
 
--  The agent will be trained for up to 100 episodes, each lasting at most 29 steps. 
--  Training will automatically stop early if the average score exceeds 1.9. 
+-  L'agent serà entrenat com a màxim 100 episodis, cadascun d'ells durant fins a 29 passos. 
+-  L'entrenament finalitzarà immediatament si la puntuació mitjana supera 1.9. 
 ```matlab
 maxEpisodes = 100;
 maxStepsPerEpisode = 20;
@@ -663,9 +662,9 @@ trainOpts = rlTrainingOptions(...
 ```
 
 
-An evaluation policy is added to periodically test the agent’s performance in a deterministic way:
+S'afegeix una política d'avaluació per testejar periòdicament el rendiment de l'agent de manera determinista:
 
--  Every 50 episodes, the agent is evaluated over 10 episodes using fixed random seeds. 
+-  Cada 50 episodis, l'agent s'avalua en 10 episodis fent servir valors aleatoris com a llavors estables. 
 ```matlab
 evaluator = rlEvaluator( ...
     EvaluationFrequency=50, ...
@@ -673,7 +672,7 @@ evaluator = rlEvaluator( ...
     RandomSeeds=101:110);
 ```
 
-**Starting training**
+**Inici d'Entrenament**
 
 ```matlab
 trainingStats = train(dqnAgent, env_pick_place, trainOpts, Evaluator=evaluator);
@@ -682,7 +681,7 @@ trainingStats = train(dqnAgent, env_pick_place, trainOpts, Evaluator=evaluator);
 ![figure_1.png](PickPlaceRL_media/figure_1.png)
 
 
-**Visualize the trained agent interacting with the environment**
+**Visualitza l'agent ja entrenat interactuant amb l'entorn**
 
 ```matlab
  
@@ -753,36 +752,36 @@ ans = struct with fields:
 ![figure_2.png](PickPlaceRL_media/figure_2.png)
 
 
-**Saving the model**
+**Guardant el model**
 
 ```matlab
 save('dqn_1_object.mat', 'dqnAgent');
 ```
 
 
-**Loading the model**
+**Carregant el model**
 
 ```matlab
 load('dqn_1_object.mat', 'dqnAgent');
 ```
-# Using HER to train a model
+# Fent servir HER per entrenar un model
 
-In reinforcement learning (RL), *sparse reward settings* present a major challenge. In these environments, agents receive non\-zero rewards only when they achieve very specific goal states. This means that during training, the agent may perform many actions without receiving any meaningful feedback, making it difficult to learn effective policies.
-
-
-**Hindsight Experience Replay (HER** is a powerful technique to address this problem. The main idea behind HER is to *reinterpret failed episodes as if they were successful*, by changing the goal during replay. For example, suppose the agent was trying to reach goal **g** but ended up in a different final state **s′**. Instead of discarding this trajectory as a failure, HER allows us to relabel the experience by pretending that the agent’s goal was actually **g′ = s′**, the final state it did reach.
+En l'Aprenentatge per Reforç (RL), els *escenaris de recompensa esparsa (sparse reward settings)* representen un repte majúscul. En aquests entorns, els agents reben recompenses diferents de zero només quan arriben a estats objectiu molt concrets. Això significa que durant l'entrenament, l'agent pot realitzar moltes accions sense rebre cap feedback significatiu, cosa que dificulta aprendre polítiques efectives.
 
 
-By doing this, the agent can still learn something useful from the episode, even if it didn't reach the original goal. This dramatically increases the number of informative training examples, especially in environments with sparse rewards.
+L'**Hindsight Experience Replay (HER)** és una tècnica potent per tractar aquest problema. La idea darrere de HER consisteix en *reinterpretar episodis fracassats com si fossin exitosos*, canviant l'objectiu durant el replay. Per exemple, suposa que l'agent estava tractant d'assolir l'objectiu **g** però va acabar en un estat final diferent **s'**. En comptes de descartar la trajectòria considerant-la un fracàs, HER permet reetiquetar l'experiència assumint que l'objectiu de l'agent era en realitat **g' = s'**, l'estat final on realment va acabar.
 
 
-In MATLAB, HER can be implemented by modifying the replay buffer to store alternative goals and generate additional training data during experience replay.
+En fer això, l'agent pot extreure un aprenentatge útil de l'episodi, fins i tot en el cas d'haver fallat en relació amb l'objectiu original. Aquesta tècnica incrementa dràsticament la quantitat d'exemples d'entrenament formatius, especialment en aquells entorns amb recompenses escasses.
 
 
-[Her documentation](https://es.mathworks.com/help/reinforcement-learning/ref/rl.replay.rlhindsightreplaymemory.html)
+En MATLAB, HER es pot implementar modificant el buffer de memòria (replay buffer) per emmagatzemar objectius alternatius i generar dades d'entrenament addicionals en el moment de reexecutar (replay) les experiències.
 
 
-**Creating a DQN Agent**
+[Documentació d'Her](https://es.mathworks.com/help/reinforcement-learning/ref/rl.replay.rlhindsightreplaymemory.html)
+
+
+**Creant un Agent DQN**
 
 ```matlab
 obsInfo = getObservationInfo(env_pick_place);
@@ -791,7 +790,7 @@ herAgent = rlDQNAgent(obsInfo,actInfo);
 ```
 
 
-**Configuring Agent Parameters**
+**Configuració dels Paràmetres de l'Agent**
 
 ```matlab
 herAgent.AgentOptions.EpsilonGreedyExploration.Epsilon = 1.0;
@@ -803,18 +802,18 @@ herAgent.AgentOptions.CriticOptimizerOptions.GradientThreshold = 10;
 
 ```
 
-### **Adding Hindsight Experience Replay (HER)**
+### **Afegint Hindsight Experience Replay (HER)**
 
-To integrate **Hindsight Experience Replay (HER)** in MATLAB's Reinforcement Learning Toolbox, there are a few important components you must define:
+Per integrar **Hindsight Experience Replay (HER)** al Reinforcement Learning Toolbox de MATLAB, hi ha uns quants components importants que has de definir:
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. A custom **reward function** with the following format:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 1. Una **funció de recompensa** personalitzada amb el format següent:
 
 ```
 function reward = RewardFunc(State, Action, NextState)
 ```
 
-This function calculates the scalar reward given the current `State`, the executed `Action`, and the resulting `NextState`. These inputs must be passed **as cell arrays**, for example:
+Aquesta funció calcula la recompensa escalar donat un `State` actual, l'`Action` executada, i l'estat resultant `NextState`. Aquests valors d'entrada han de passar-se **com a cell arrays**, per exemple:
 
 
 `State     = {[``1` `,` `0` `,` `1` `,` `3``]};`
@@ -826,34 +825,34 @@ This function calculates the scalar reward given the current `State`, the execut
 `NextState = {[1` `,` `1` `,` `0` `,` `3``]};`
 
 
-This format is required by HER because it extracts subgoals and checks conditions using explicit indexing.
+Aquest format és requerit per a HER perquè extreu els subobjectius i verifica les condicions fent ús de l'indexatge explícit.
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. A **terminal condition functio** n to determine whether an episode has ended:
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 2. Una **funció de condició terminal** per determinar si un episodi ha finalitzat:
 
 ```
 function isdone = IsDoneFunc(State, Action, NextState)
 
 ```
 
-This function should return `true` if the goal is considered achieved or the episode is otherwise over. Like the reward function, it also uses cell arrays as input.
+Aquesta funció ha de retornar `true` si es considera que l'objectiu ha estat assolit o si l'episodi, altrament, ja s'ha donat per finalitzat. Així com passa amb la funció de recompensa, també fa ús de cell arrays com a paràmetres d'entrada.
 
 
- *In this case, both* *`RewardFunc`* *and* *`IsDoneFunc`* ***were already implemented correctly*** *beforehand.*
+ *En aquest cas, tant el* *`RewardFunc`* *com l'* *`IsDoneFunc`* ***ja estaven implementats correctament*** *d'abans.*
 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Specify what the **goal condition** looks like so that HER can replace the real goal with a hindsight goal in the replay buffer.
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 3. Especificar quina forma té la **condició objectiu** perquè HER pugui reemplaçar l'objectiu real amb un objectiu retrospectiu (hindsight goal) a l'historial (replay buffer).
 
 ```matlab
-% State = [arm_pos, arm_state, obj_pos, target_pos]
-% We define the goal as "obj_pos == target_pos"
-% Channel = 1 (because we have one observation vector)
-% Indices = 3 (object position), 4 (target position)
+% Estat = [arm_pos, arm_state, obj_pos, target_pos]
+% Definim l'objectiu com "obj_pos == target_pos"
+% Canal = 1 (perquè tenim un sol vector d'observació)
+% Índexs = 3 (posició de l'objecte), 4 (posició objectiu)
 
 goalConditionInfo = {{1, [3], 1, [4]}};
 ```
 
- This means: in channel 1, the elements at index 3 (object position) should match the elements at index 4 (target position) in channel 1.
+ Això vol dir el següent: al canal 1, els elements a l'índex 3 (posició de l'objecte) haurien de coincidir amb els elements situats a l'índex 4 (posició objectiu) al mateix canal 1.
 
 
 ```matlab
@@ -865,7 +864,7 @@ herAgent.ExperienceBuffer = rlHindsightReplayMemory(obsInfo,actInfo,...
 ```
 
 
-**Configuring Training Parameters**
+**Configuració dels Paràmetres d'Entrenament**
 
 ```matlab
 maxEpisodes = 100;
@@ -887,7 +886,7 @@ evaluator = rlEvaluator( ...
     RandomSeeds=101:110);
 ```
 
-**Start Training**
+**Inici d'Entrenament**
 
 ```matlab
 trainingStats = train(herAgent, env_pick_place, trainOpts, Evaluator=evaluator);
@@ -896,7 +895,7 @@ trainingStats = train(herAgent, env_pick_place, trainOpts, Evaluator=evaluator);
 ![figure_3.png](PickPlaceRL_media/figure_3.png)
 
 
-**Visualize the trained agent interacting with the environment**
+**Visualitza l'agent ja entrenat interactuant amb l'entorn**
 
 ```matlab
 plot(env_pick_place)
@@ -913,41 +912,40 @@ end
 ![figure_4.png](PickPlaceRL_media/figure_4.png)
 
 
-In this simple example with **only one object**, using **DQN with or without Hindsight Experience Replay (HER)** does **not show a significant difference** in performance. 
+En aquest exemple simple on **només hi ha un objecte**, utilitzar **DQN amb o sense Hindsight Experience Replay (HER)** **no mostra una diferència significativa** pel que fa al seu rendiment. 
 
 
-However, when training with **two objects**, the task becomes more complex and rewards are sparser. In this case:
+De tota manera, al moment d'entrenar amb **dos objectes**, la tasca esdevé més complexa i les recompenses encara esdevenen més escasses. En aquest cas:
 
--  **DQN alone** struggles to learn. 
--  **DQN with HER** learns significantly faster and more reliably. 
+-  **DQN en solitari** pateix força complicacions per aprendre. 
+-  **DQN configurat amb HER** aprèn de manera bastant més ràpida i fiable. 
 
-HER helps by transforming failed episodes into useful experiences.
+L'ús d'HER proporciona clars beneficis que ajuden a rendibilitzar fins i tot els episodis fallits establint-los després en experiències realment adients i útils.
 
 
-**Saving the model**
+**Guardant el model**
 
 ```matlab
 save('dqn_her_1_object.mat', 'herAgent');
 ```
 
-**Loading the model**
+**Carregant el model**
 
 ```matlab
 load('dqn_her_1_object.mat', 'herAgent');
 ```
-# Two objects with HER 
+# Dos objectes fent servir HER 
 
-In this section, we extend the previous implementation of **Hindsight Experience Replay (HER)** to handle **two objects** in a discrete pick\-and\-place environment. 
+En aquesta nova secció, ampliem el que hem implementat al darrer exercici d'**Hindsight Experience Replay (HER)** per treballar amb **dos objectes** tot això representat per un entorn pick-and-place totalment discret. 
 
-
-We start by defining a new environment with **2 objects** and **6 positions**:
+Comencem definint un nou entorn que contindrà **2 objectes** i **6 posicions possibles**:
 
 ```matlab
 env_pick_place = PickPlaceDiscreteEnv2(2, 6, @stepFuncSolution, @resetFuncSolution);
 ```
 
 
-**Creating a DQN Agent**
+**Creant un Agent DQN**
 
 ```matlab
 obsInfo = getObservationInfo(env_pick_place);
@@ -956,7 +954,7 @@ herv2Agent = rlDQNAgent(obsInfo,actInfo);
 ```
 
 
-**Configuring Agent Parameters**
+**Configuració dels Paràmetres de l'Agent**
 
 ```matlab
 herv2Agent.AgentOptions.EpsilonGreedyExploration.Epsilon = 1.0;
@@ -968,32 +966,31 @@ herv2Agent.AgentOptions.CriticOptimizerOptions.GradientThreshold = Inf;
 
 ```
 
-## Adding Hindsight Experience Replay (HER)
+## Afegint Hindsight Experience Replay (HER)
 
-To enable HER with **two objects**, we need to modify the reward function, terminal condition (`IsDoneFunc`), and the goal condition information.
-
-
-**Reward function**
+Per habilitar HER amb **dos objectes**, cal modificar la funció de recompensa, la condició terminal ('IsDoneFunc') i la informació que defineix la condició objectiu.
 
 
-In the reward function, we only need to change this code:
+**Funció de Recompensa**
 
 
-Original for one object:
+En la funció de recompensa, només cal modificar aquestes línies:
+
+Versió base per un sol tipus i model donat sobre un únic objecte:
 
 ```
 objects_pos = State{1}(3);
 target_pos = State{1}(4);
 ```
 
-Updated for two objects:
+En el cas de dos objectes, han de quedar així:
 
 ```
 objects_pos = State{1}(3:4);
 target_pos = State{1}(5:6);
 ```
 
-**IsDone function**
+**Funció IsDone**
 
 
 Original
@@ -1004,7 +1001,7 @@ function isdone = PickPlaceIsDoneFunc(State, Action, NextState)
 end
 ```
 
-Updated:
+Actualitzada:
 
 ```
 function isdone = PickPlaceIsDoneFunc(State, Action, NextState)
@@ -1012,14 +1009,14 @@ function isdone = PickPlaceIsDoneFunc(State, Action, NextState)
 end
 ```
 
-**Goal condition**
+**Condició objectiu**
 
+Definim aquestes consideracions fent servir el paràmetre `goalConditionInfo`, que ens permet especificar de manera explícita quina és la condició objectiu dins del sistema. Mitjançant aquest paràmetre, indiquem quins elements de l’estat s’han de comparar perquè HER pugui determinar quan es considera que l’objectiu s’ha assolit correctament. D’aquesta manera, `goalConditionInfo` estableix la referència que el mecanisme d’Hindsight Experience Replay utilitza per reconèixer si una experiència pot interpretar-se com un cas d’èxit respecte de la fita o objectiu final definit per a la tasca.
 
-We define the goal condition using `goalConditionInfo`, which specifies how HER recognizes when a goal is achieved:
 
 ```matlab
-% State = [arm_pos, arm_state, obj1_pos, obj2_pos, target1_pos, target2_pos]
-% Goal condition: both object positions must match their targets
+% Estat = [arm_pos, arm_state, obj1_pos, obj2_pos, target1_pos, target2_pos]
+% Condició d'objectiu: les dues posicions dels objectes han de coincidir amb els seus objectius
 
 goalConditionInfo = {{1, [3, 4], 1, [5, 6]}};
 ```
@@ -1033,7 +1030,7 @@ herv2Agent.ExperienceBuffer = rlHindsightReplayMemory(obsInfo,actInfo,...
 ```
 
 
-**Configuring Training Parameters**
+**Configuració dels Paràmetres d'Entrenament**
 
 ```matlab
 maxEpisodes = 3000;
@@ -1055,17 +1052,17 @@ evaluator = rlEvaluator( ...
     RandomSeeds=101:110);
 ```
 
-**Start Training**
+**Inici d'Entrenament**
 
 
-**Warning**: Training the model with these parameters can take around 8 hours.
+**Advertència**: entrenar el model amb aquests paràmetres pot trigar unes 8 hores.
 
 ```matlab
 trainingStats = train(herv2Agent, env_pick_place, trainOpts, Evaluator=evaluator);
 ```
 
 
-**Visualize the trained agent interacting with the environment**
+**Visualitza l'agent ja entrenat interactuant amb l'entorn**
 
 ```matlab
 plot(env_pick_place)
@@ -1079,15 +1076,14 @@ for i = 1:10
 end
 ```
 
-**Saving the model**
+**Guardant el model**
 
 ```matlab
 save('dqn_her_2_object.mat', 'herv2Agent');
 ```
 
-**Loading the model**
+**Carregant el model**
 
 ```matlab
 load('dqn_her_2_object.mat', 'herv2Agent');
 ```
-

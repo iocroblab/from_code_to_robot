@@ -1,48 +1,47 @@
+# Dinàmica 
 
-# Dynamics 
-
-In robotics, understanding the dynamics of a manipulator is essential for precise motion control, trajectory planning, and interaction with the environment. Dynamics describes the relationship between forces, torques, and the resulting motion of the robot, capturing the influence of inertia, Coriolis and centrifugal forces, and gravity.
+En robòtica, entendre la dinàmica d’un manipulador és essencial per al control precís del moviment, la planificació de trajectòries i la interacció amb l’entorn. La dinàmica descriu la relació entre forces, parells i el moviment resultant del robot, capturant la influència de la inèrcia, les forces de Coriolis i centrífugues, i la gravetat.
 
 
-A widely used approach to derive the equations of motion is the **Lagrange formulation**, which provides a systematic framework based on energy principles. By expressing the kinetic and potential energy of the system, the Lagrange method yields a set of differential equations that describe the evolution of joint positions and velocities under applied torques. This formulation is particularly convenient for robots with complex kinematics or multiple degrees of freedom, as it avoids explicitly computing the forces at each joint due to constraint reactions.
+Un enfocament àmpliament utilitzat per derivar les equacions de moviment és la **formulació de Lagrange**, que proporciona un marc sistemàtic basat en principis d’energia. Expressant l’energia cinètica i potencial del sistema, el mètode de Lagrange dona lloc a un conjunt d’equacions diferencials que descriuen l’evolució de les posicions i velocitats articulars sota parells aplicats. Aquesta formulació és particularment convenient per a robots amb cinemàtica complexa o múltiples graus de llibertat, ja que evita calcular explícitament les forces a cada articulació degudes a reaccions de restricció.
 
-# Lagrange Formulation 
+# Formulació de Lagrange 
 
-The equation:
+L’equació:
 
  $$ B\left(q\right)\cdot \ddot{\;q} +C\left(q,\dot{q} \right)\cdot \dot{q} +F\cdot \dot{q} +g\left(q\right)=\tau $$ 
 
-with the inertia matrix $B\left(q\right)$, the Coriolis matrix $C\left(q,\dot{q} \right)$, the friction matrix $F$ and the gravity term $g\left(q\right)$, describes the torque $\tau$ exerted on the joints for a given configuration q and its velocity $\dot{q}$. 
+amb la matriu d’inèrcia $B\left(q\right)$, la matriu de Coriolis $C\left(q,\dot{q} \right)$, la matriu de fricció $F$ i el terme de gravetat $g\left(q\right)$, descriu el parell $\tau$ exercit sobre les articulacions per a una configuració q donada i la seva velocitat $\dot{q}$. 
 
 
-This lagrange formulation can be rewritten to get the **forward dynamics** equation:
+Aquesta formulació de Lagrange es pot reescriure per obtenir l’equació de **dinàmica directa**:
 
  $$ \ddot{q} =B^{-1} \left(q\right)\cdot \left(\tau -C\left(q,\dot{q} \right)\cdot \dot{q} -F\cdot \dot{q} -g\left(q\right)\right) $$ 
 
-which computes the joint accelerations resulting from a given set of joint torques.
+que calcula les acceleracions articulars resultants d’un conjunt donat de parells articulars.
 
-### Example
+### Exemple
 
-Consider this two link manipulator
+Considera aquest manipulador de dos enllaços
 
 
 ![image_0.svg](Dynamics_Lagrange_Formulation_media/image_0.svg)
 
 
-with the following properties of the link: 
+amb les propietats següents dels enllaços: 
 
 ||||||
 | :-- | :-- | :-- | :-- | :-- |
-| Link  | Mass \[kg\]  | Radius \[m\]  | Link length \[m\]  | Center of mass \[m\]   |
+| Enllaç  | Massa $begin:math:display$kg$end:math:display$  | Radi $begin:math:display$m$end:math:display$  | Longitud de l’enllaç $begin:math:display$m$end:math:display$  | Centre de massa $begin:math:display$m$end:math:display$   |
 | 1  | 0.5   | 0.04  | 0.5  | 0.25   |
 | 2  | 0.7  | 0.04  | 0.7  | 0.35   |
 
 
-The manipulator can be modeled using these DH parameters: 
+El manipulador es pot modelar fent servir aquests paràmetres DH: 
 
 ||||||
 | :-: | :-: | :-: | :-: | :-- |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Enllaç  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0.5  | 0  | 0  | $\displaystyle q_1$   |
 | 2  | 0.7  | 0  | 0  | $\displaystyle q_2$   |
 
@@ -61,26 +60,26 @@ center_of_mass2 = [DH(2,1)/2,0,0];
 
 config = [pi/3;pi/2];
 ```
-## Inertia Matrix $B\left(q\right)$ 
+## Matriu d’inèrcia $B\left(q\right)$ 
 
-The inertia matrix of a robotic manipulator, captures how the robot's mass and geometry influence its resistance to motion. It is a symmetric, positive\-definite matrix that depends on the joint configuration $q$, and it relates joint accelerations $\ddot{q}$ to the required joint torques $\tau \;$ in the dynamic equations.
+La matriu d’inèrcia d’un manipulador robòtic captura com la massa i la geometria del robot influeixen en la seva resistència al moviment. És una matriu simètrica i definida positiva que depèn de la configuració articular $q$, i relaciona les acceleracions articulars $\ddot{q}$ amb els parells articulars requerits $\tau \;$ en les equacions dinàmiques.
 
  $$ B(q)=\sum_{i=1}^n \Big(m_{l_i } \cdot J_p^{l_i ~T} (q)\cdot J_p^{l_i } (q)+J_{\Theta }^{l_i ~T} (q)\cdot R_i (q)\cdot I_{l_i } \cdot R_i^T (q)\cdot J_{\Theta }^{l_i } (q)\Big) $$ 
 
-with 
+amb 
 
--  $m_{l_i }$: mass of link i 
--  $J_P^{l_i }$: linear part of Jacobian of link i 
--  $J_{\Theta }^{l_i }$: rotational part of Jacobian of link i 
--  $R_i$: rotation matrix from link i frame to base frame 
--  $I_{l_i }$: inertia tensor of link i in its local frame 
--  $B\left(q\right)$: total inertia matrix of the manipulator 
+-  $m_{l_i }$: massa de l’enllaç i 
+-  $J_P^{l_i }$: part lineal del jacobià de l’enllaç i 
+-  $J_{\Theta }^{l_i }$: part rotacional del jacobià de l’enllaç i 
+-  $R_i$: matriu de rotació del marc de l’enllaç i al marc base 
+-  $I_{l_i }$: tensor d’inèrcia de l’enllaç i en el seu marc local 
+-  $B\left(q\right)$: matriu d’inèrcia total del manipulador 
 
-To compute the inertia matrix for the example manipulator you need to do determine: 
+Per calcular la matriu d’inèrcia per al manipulador d’exemple, has de determinar: 
 
  $$ B(q)=\sum_{i=1}^2 \Big(m_{l_i } \cdot J_p^{l_i ~T} (q)\cdot J_p^{l_i } (q)+J_{\Theta }^{l_i ~T} (q)\cdot R_i (q)\cdot I_{l_i } \cdot R_i^T (q)\cdot J_{\Theta }^{l_i } (q)\Big) $$ 
 
-The Jacobians of the center of mass of each link are: 
+Els jacobians del centre de massa de cada enllaç són: 
 
  $$ J_P^{l_1 } =\left\lbrack \begin{array}{cc} -l_1 \cdot \sin \left(\theta_1 \right) & 0\newline l_1 \cdot \cos \left(\theta_1 \right) & 0\newline 0 & 0 \end{array}\right\rbrack $$ 
 
@@ -90,22 +89,22 @@ The Jacobians of the center of mass of each link are:
 
  $$ J_{\Theta }^{l_2 } =\left\lbrack \begin{array}{cc} 0 & 0\newline 0 & 0\newline 1 & 1 \end{array}\right\rbrack $$ 
 
-Notice how the Jacobians for link 1 only consider the first link and have 0 in the columns corresponding to the following links. 
+Observa com els jacobians per a l’enllaç 1 només consideren el primer enllaç i tenen 0 a les columnes corresponents als enllaços següents. 
 
-## Inertia Computation
+## Càlcul d’inèrcia
 
-Consider the arms as a cylinders. The inertia tensor for a solid cylinder, with a radius r, the length a and its principal axis in x, is computed as: 
+Considera els braços com a cilindres. El tensor d’inèrcia per a un cilindre sòlid, amb radi r, longitud a i el seu eix principal en x, es calcula com: 
 
  $$ I_{\textrm{xx}} =\frac{1}{2}\cdot m\cdot r^2 $$ 
 
  $$ I_{\textrm{yy}} =I_{\textrm{zz}} =\frac{1}{12}\cdot m\cdot a^2 +\frac{1}{4}\cdot m\cdot r^2 $$ 
 
-resulting in the inertia tensor $I$ (located around the center of mass)
+donant lloc al tensor d’inèrcia $I$ (situat al voltant del centre de massa)
 
  $$ I=\left\lbrack \begin{array}{ccc} I_{\textrm{xx}}  & 0 & 0\newline 0 & I_{\textrm{yy}}  & 0\newline 0 & 0 & I_{\textrm{zz}}  \end{array}\right\rbrack $$ 
-### Matlab Implementation \- Symbolic Toolbox
+### Implementació en Matlab \- Symbolic Toolbox
 
-This code computes the inertia matrix for the example two link robot manipulator. 
+Aquest codi calcula la matriu d’inèrcia per al manipulador robòtic d’exemple de dos enllaços. 
 
 ```matlab
 syms a1 a2 l1 l2 q1 q2 m1 m2 theta_i alpha_i a_i d_i m_i r_i l_i r1 r2 real 
@@ -123,7 +122,7 @@ Iyy=1/4*m_i*(1/3 * a_i^2 +r_i^2 );
 Izz=Iyy;
 LinkInertiaMatrix=diag([Ixx,Iyy,Izz]);
 
-%% INERTIA MATRIX
+%% MATRIU D’INÈRCIA
 A01_l = subs(Ai,{a_i,d_i,alpha_i,theta_i},{ l1, 0, 0, q1});
 A01 = subs(Ai,{a_i,d_i,alpha_i,theta_i},{a1,0,0,q1}); 
 R1 = A01(1:3,1:3);
@@ -170,20 +169,20 @@ B_twolink_subs = 2x2
 #
 ## Robotic System Toolbox 
 
-The robotic system toolbox allows us to compute the inertia matrix. 
+El Robotic System Toolbox ens permet calcular la matriu d’inèrcia. 
 
 
-The center of mass is configured as a structur property of a body as a vector $\left\lbrack \begin{array}{ccc} x & y & z \end{array}\right\rbrack$ relative to the body frame in $\left\lbrack \mathrm{m}\right\rbrack$. This means that, for our manipulator, the distance in x is negative!
+El centre de massa es configura com una propietat estructural d’un cos com un vector $\left\lbrack \begin{array}{ccc} x & y & z \end{array}\right\rbrack$ relatiu al marc del cos en $\left\lbrack \mathrm{m}\right\rbrack$. Això vol dir que, per al nostre manipulador, la distància en x és negativa!
 
 
-the inertia matrix is passed as a vector of the form: $\left\lbrack \begin{array}{cccccc} I_{\textrm{xx}}  & I_{\textrm{yy}}  & I_{\textrm{zz}}  & I_{\textrm{yz}}  & I_{\textrm{xz}}  & I_{\textrm{xy}}  \end{array}\right\rbrack \;\textrm{in}\;\left\lbrack \frac{\textrm{kg}}{{\mathrm{m}}^2 }\right\rbrack$, however the inertia used by the RS Toolbox is about the joint frame. To convert the previously computed Inertia, you need to apply the parallel\-axis theorem. 
+la matriu d’inèrcia es passa com un vector de la forma: $\left\lbrack \begin{array}{cccccc} I_{\textrm{xx}}  & I_{\textrm{yy}}  & I_{\textrm{zz}}  & I_{\textrm{yz}}  & I_{\textrm{xz}}  & I_{\textrm{xy}}  \end{array}\right\rbrack \;\textrm{en}\;\left\lbrack \frac{\textrm{kg}}{{\mathrm{m}}^2 }\right\rbrack$, tanmateix la inèrcia utilitzada pel RS Toolbox és respecte del marc de l’articulació. Per convertir la inèrcia calculada prèviament, has d’aplicar el teorema dels eixos paral·lels. 
 
 
-For this cylinder, only $I_{\textrm{yy}}$ and $I_{\textrm{zz}}$ will be altered as: 
+Per a aquest cilindre, només $I_{\textrm{yy}}$ i $I_{\textrm{zz}}$ es veuran alterats com: 
 
  $$ I_{\textrm{yy}}^{\prime } =I_{\textrm{zz}}^{\prime } =I_{\textrm{yy}} +m\cdot l_i^2 $$ 
 
-as x lies in the joint axis, $I_{\textrm{xx}}$ does not change.  
+com que x es troba en l’eix de l’articulació, $I_{\textrm{xx}}$ no canvia.  
 
 ```matlab
 twolink = rigidBodyTree("DataFormat","column"); 
@@ -196,7 +195,7 @@ bodies{2} = rigidBody('body_2');
 joints{1} = rigidBodyJoint('joint_1', 'revolute');
 joints{2} = rigidBodyJoint('joint_2', 'revolute');
 
-% 1) Inertia about CoM (solid cylinder of length a along x)
+% 1) Inèrcia respecte del CoM (cilindre sòlid de longitud a al llarg de x)
 Ixx1_C = 0.5*mass1*radius1^2;
 Iyy1_C = (1/12)*mass1*(3*radius1^2 + DH(1,1)^2);
 Izz1_C = Iyy1_C;
@@ -205,7 +204,7 @@ Ixx2_C = 0.5*mass2*radius2^2;
 Iyy2_C = (1/12)*mass2*(3*radius2^2 + DH(2,1)^2);
 Izz2_C = Iyy2_C;
 
-% 2) Parallel-axis shift to body frame origin (r = [lc,0,0])
+% 2) Desplaçament per eixos paral·lels fins a l’origen del marc del cos (r = [lc,0,0])
 lc1 = center_of_mass1(1); lc2 = center_of_mass2(1);
 
 Ixx1_O = Ixx1_C;
@@ -219,7 +218,7 @@ Izz2_O = Izz2_C + mass2*lc2^2;
 Inertia_1 = [Ixx1_O, Iyy1_O, Izz1_O, 0, 0, 0];
 Inertia_2 = [Ixx2_O, Iyy2_O, Izz2_O, 0, 0, 0];
 
-% 3) Assign to the rigid bodies
+% 3) Assigna-ho als cossos rígids
 bodies{1}.Mass = mass1; 
 bodies{2}.Mass = mass2;
 
@@ -229,11 +228,11 @@ bodies{2}.CenterOfMass = -center_of_mass2;
 bodies{1}.Inertia = Inertia_1;
 bodies{2}.Inertia = Inertia_2;
 
-% 4) Keep using standard DH:
+% 4) Continua fent servir DH estàndard:
 setFixedTransform(joints{1}, DH(1,:), 'dh');
 setFixedTransform(joints{2}, DH(2,:), 'dh');
 
-% Add bodies and joints to the rigid body tree
+% Afegeix cossos i articulacions a l’arbre de cossos rígids
 bodies{1}.Joint = joints{1}; 
 bodies{2}.Joint = joints{2}; 
 
@@ -249,12 +248,12 @@ B_toolbox = 2x2
 
 ```
 
-## Coriolis Matrix $C\left(q,\dot{q} \right)$ 
+## Matriu de Coriolis $C\left(q,\dot{q} \right)$ 
 
-The Coriolis matrix captures the velocity\-dependent forces that arise when the manipulator's joints move simultaneously. These forces, known as Coriolis and centrifugal forces, can significantly affect motion, especially at high speeds or in robots with long or heavy links. 
+La matriu de Coriolis captura les forces dependents de la velocitat que apareixen quan les articulacions del manipulador es mouen simultàniament. Aquestes forces, conegudes com a forces de Coriolis i centrífugues, poden afectar significativament el moviment, especialment a velocitats altes o en robots amb enllaços llargs o pesants. 
 
 
-The centripetal terms is proportional to ${\dot{q_j } }^2$ and the Coriolis terms proportional to $\dot{q_i } \cdot \dot{q_j }$ 
+Els termes centrípets són proporcionals a ${\dot{q_j } }^2$ i els termes de Coriolis són proporcionals a $\dot{q_i } \cdot \dot{q_j }$ 
 
  $$ C\left(q,\dot{q} \right)=\left\lbrack \begin{array}{cccc} c_{11}  & c_{12}  & \cdots  & c_{1n} \newline c_{21}  & c_{22}  & \cdots  & c_{2n} \newline \vdots  & \vdots  & \ddots  & \vdots \newline c_{\textrm{n1}}  & c_{\textrm{n2}}  & \cdots  & c_{\textrm{nn}}  \end{array}\right\rbrack $$ 
 
@@ -262,24 +261,24 @@ The centripetal terms is proportional to ${\dot{q_j } }^2$ and the Coriolis term
 
  $$ c_{ijk} (q,\dot{q} )=\frac{1}{2}\left(\frac{\partial b_{ij} }{\partial q_k }+\frac{\partial b_{ik} }{\partial q_j }-\frac{\partial b_{kj} }{\partial q_i }\right) $$ 
 
-with 
+amb 
 
  $$ B\left(q\right)=\left\lbrack \begin{array}{cccc} b_{11}  & b_{12}  & \cdots  & b_{1n} \newline b_{21}  & b_{22}  & \cdots  & b_{2n} \newline \vdots  & \vdots  & \ddots  & \vdots \newline b_{\textrm{n1}}  & b_{\textrm{n2}}  & \cdots  & b_{\textrm{nn}}  \end{array}\right\rbrack $$ 
 
-where $C\left(q,\dot{q} \right)\in {\mathbb{R}}^{\textrm{nxn}}$ where $\dot{q} \in {\mathbb{R}}^{\textrm{nx1}}$ 
+on $C\left(q,\dot{q} \right)\in {\mathbb{R}}^{\textrm{nxn}}$ on $\dot{q} \in {\mathbb{R}}^{\textrm{nx1}}$ 
 
-### Matlab Implementation \- Symbolic Toolbox
+### Implementació en Matlab \- Symbolic Toolbox
 
-For the example of the two link manipulator, the following equations must be solved: 
+Per a l’exemple del manipulador de dos enllaços, s’han de resoldre les equacions següents: 
 
  $$ C\left(q,\dot{q} \right)=\left\lbrack \begin{array}{cc} c_{11}  & c_{12} \newline c_{21}  & c_{22}  \end{array}\right\rbrack $$ 
 
  $$ c_{\textrm{ij}} =\sum_{k=1}^2 c_{\textrm{ijk}} \cdot \dot{q_k } $$ 
 ```matlab
 jointVel = [pi/4; pi/10]; 
-%% CORIOLIS MATRIX
+%% MATRIU DE CORIOLIS
 syms qdot1 qdot2 real 
-%Coriolis and centrifugal terms
+%Termes de Coriolis i centrífugs
 b11 = B_twolink(1,1);
 b12 = B_twolink(1,2);
 b21 = B_twolink(2,1);
@@ -320,7 +319,7 @@ C_product = 2x1
 
 ## Robotic System Toolbox 
 
-The function velocityProduct returns the product of $C\left(q,\dot{q} \right)\cdot \dot{q}$ rather than just the matrix itself. 
+La funció velocityProduct retorna el producte de $C\left(q,\dot{q} \right)\cdot \dot{q}$ en lloc de només la matriu en si. 
 
 ```matlab
 C_toolbox = velocityProduct(twolink, config, jointVel)
@@ -333,25 +332,25 @@ C_toolbox = 2x1
 
 ```
 
-# Gravity Term $g\left(q\right)$ 
+# Terme de gravetat $g\left(q\right)$ 
 
-In robotic manipulators, the gravity term represents the torques required at each joint to counteract the effect of gravity on the links. It depends on the configuration of the robot, the mass distribution of each link, and the position of their centers of mass. This term is crucial for motion control, as it allows the robot to maintain static positions or follow trajectories while compensating for gravitational forces. In practical applications, accurate computation of the gravitational forces ensures stable and efficient operation, especially for lightweight or flexible manipulators where gravity effects are significant.
+En manipuladors robòtics, el terme de gravetat representa els parells requerits a cada articulació per contrarestar l’efecte de la gravetat sobre els enllaços. Depèn de la configuració del robot, de la distribució de massa de cada enllaç i de la posició dels seus centres de massa. Aquest terme és crucial per al control del moviment, ja que permet al robot mantenir posicions estàtiques o seguir trajectòries compensant les forces gravitacionals. En aplicacions pràctiques, un càlcul precís de les forces gravitatòries garanteix un funcionament estable i eficient, especialment en manipuladors lleugers o flexibles on els efectes de la gravetat són significatius.
 
 
-Start by identifying the direction of gravity in the zero frame. In the example twolink manipulator the y\-axis is the direction of influence. 
+Comença identificant la direcció de la gravetat en el marc zero. En el manipulador d’exemple de dos enllaços, l’eix y és la direcció d’influència. 
 
  $$ g_0 =\left\lbrack \begin{array}{c} 0\newline -g\newline 0 \end{array}\right\rbrack $$ 
 
-with $g=9\ldotp 81\;\frac{\mathrm{m}}{{\mathrm{s}}^2 }$ 
+amb $g=9\ldotp 81\;\frac{\mathrm{m}}{{\mathrm{s}}^2 }$ 
 
 
-form the gravity term as: 
+forma el terme de gravetat com: 
 
  $$ g\left(q\right)=\left\lbrack \begin{array}{cccc} g_1 \left(q\right) & g_2 \left(q\right) & \cdots  & g_n \left(q\right) \end{array}\right\rbrack $$ 
 
-with $g_i \left(q\right)=-\sum_{j=1}^n m_{l_j } \cdot g_0^T \cdot J_{P_i }^{l_j }$ 
+amb $g_i \left(q\right)=-\sum_{j=1}^n m_{l_j } \cdot g_0^T \cdot J_{P_i }^{l_j }$ 
 
-## Matlab Implementation \- Symbolic Toolbox
+## Implementació en Matlab \- Symbolic Toolbox
 ```matlab
 syms g real
 g0 = [0 -g 0]';
@@ -401,15 +400,15 @@ G_toolbox = 2x1
 
 ```
 
-# Friction Term $F$ 
+# Terme de fricció $F$ 
 
-The friction term in robot dynamics accounts for resistive torques at the joints due to internal friction in motors, gears and bearings. Unlike the inertia, Coriolis or gravity terms, friction is non\-conservative and depends on the motion of the joints rather than their configuration.
+El terme de fricció en la dinàmica del robot té en compte els parells resistents a les articulacions deguts a la fricció interna en motors, engranatges i coixinets. A diferència dels termes d’inèrcia, Coriolis o gravetat, la fricció és no conservativa i depèn del moviment de les articulacions més que no pas de la seva configuració.
 
 
-The Friction term consists of two parts, the viscous friction depending on $B_m$ scaled by the squared gear ratio $G^2$ and the Coulomb friction $T_c$ scaled by $G$.
+El terme de fricció consta de dues parts: la fricció viscosa dependent de $B_m$ escalada pel quadrat de la relació de transmissió $G^2$ i la fricció de Coulomb $T_c$ escalada per $G$.
 
  $$ F\cdot \dot{q} =B_m \cdot G^2 \cdot \dot{q} +T_c \cdot \textrm{sign}\left(\dot{q} \right) $$ 
-## Matlab Implementation \- Symbolic Toolbox
+## Implementació en Matlab \- Symbolic Toolbox
 ```matlab
 syms bm1 bm2 Tc1 Tc2 G1 G2 qdot real 
 F = [bm1, bm2].*[G1, G2].^2
@@ -428,22 +427,22 @@ F_torque =
   $$ \displaystyle \left(\begin{array}{cc} {\textrm{bm}}_1 \,\textrm{qdot}\,{G_1 }^2 +{\textrm{Tc}}_1 \,\textrm{sign}\left(\textrm{qdot}\right) & {\textrm{bm}}_2 \,\textrm{qdot}\,{G_2 }^2 +{\textrm{Tc}}_2 \,\textrm{sign}\left(\textrm{qdot}\right) \end{array}\right) $$ 
  
 
-As of now the Robotic System toolbox does offer a function to compute the friction term. If the parameters are known, you need to add them to the torque computed by the toolbox functions.
+Ara com ara, el Robotic System Toolbox no ofereix cap funció per calcular el terme de fricció. Si els paràmetres són coneguts, els has d’afegir al parell calculat per les funcions del toolbox.
 
-# Dynamics functions from Robotic System Toolbox
+# Funcions de dinàmica del Robotic System Toolbox
 
- The Robotic system toolbox offers other functions to compute the dynamics terms as a whole. 
+ El Robotic System Toolbox ofereix altres funcions per calcular els termes dinàmics en conjunt. 
 
 
-The Dynamics function of the toolbox excludes the friction term, thus the equation becomes: 
+La funció de dinàmica del toolbox exclou el terme de fricció; per tant, l’equació esdevé: 
 
  $$ B\left(q\right)\cdot \;\ddot{\;q} +C\left(q,\dot{q} \right)\cdot \dot{q} +g\left(q\right)=\tau $$ 
 
-The function externalForce() returns the external force matrix for a desired force on a specified manipulator frame: 
+La funció externalForce() retorna la matriu de força externa per a una força desitjada sobre un marc especificat del manipulador: 
 
 ```matlab
                                   % Mx My Mz Fx Fy Fz
-                               %in [Nm Nm Nm N  N  N] 
+                               %en [Nm Nm Nm N  N  N] 
 desired_endeffector_forces_body1 = [0, 0, 0, 0, 1, 0];
 desired_endeffector_forces_body2 = [0, 0, 0, 5, 0, 0];
 
@@ -477,7 +476,7 @@ fext2 = 6x2
 ```
 
 
-Adding external force matrices combines the external forces. This may be used for a robot with multiple endeffectors: 
+Sumar matrius de forces externes combina les forces externes. Això es pot fer servir per a un robot amb múltiples efectors finals: 
 
 ```matlab
 total_external_forces = fext1 + fext2
@@ -495,7 +494,7 @@ total_external_forces = 6x2
 ```
 
 
-To compute the required joint accelerations you can use the forwardDynamics() function with the external force matrix as an input: 
+Per calcular les acceleracions articulars requerides pots fer servir la funció forwardDynamics() amb la matriu de forces externes com a entrada: 
 
 ```matlab
 q_dot_dot = forwardDynamics(twolink, config, [],[], total_external_forces)
@@ -509,10 +508,10 @@ q_dot_dot = 2x1
 ```
 
 
-The output of this function is a vector containing the required joint accelerations to fulfill the input requirement (here its the external forces). 
+La sortida d’aquesta funció és un vector que conté les acceleracions articulars requerides per complir el requisit d’entrada (aquí són les forces externes). 
 
 
- The forwardDynamics function also allows the joint velocity as an input: 
+ La funció forwardDynamics també permet la velocitat articular com a entrada: 
 
 ```matlab
 q_dot = [-pi/2; pi/5]; 
@@ -527,7 +526,7 @@ q_dot_dot_vel = 2x1
 ```
 
 
- or joint torques: 
+ o parells articulars: 
 
 ```matlab
 tau = [5; 5]; 
@@ -542,7 +541,7 @@ q_dot_dot_torque = 2x1
 ```
 
 
-To compute the required joint torques, use the function inverseDynamics(): 
+Per calcular els parells articulars requerits, fes servir la funció inverseDynamics(): 
 
 ```matlab
 tau_vel = inverseDynamics(twolink, config, q_dot)
@@ -578,27 +577,27 @@ tau_force = 2x1
 ```
 
 
-The output of this function is a vector containing the required joint torques to fulfill the input requirement. 
+La sortida d’aquesta funció és un vector que conté els parells articulars requerits per complir el requisit d’entrada. 
 
-# Parameterization and Identification 
+# Parametrització i identificació 
 
-An important property of the dynamic model is the linearity with respect to the dynamic parameters. This allows us to rewrite the dynamic equation: 
+Una propietat important del model dinàmic és la linealitat respecte dels paràmetres dinàmics. Això ens permet reescriure l’equació dinàmica: 
 
  $$ B\left(q\right)\cdot \;\ddot{\;q} +C\left(q,\dot{q} \right)\cdot \dot{q} +F\cdot \dot{q} +g\left(q\right)=\tau $$ 
 
-to a regressor form: 
+en forma de regressor: 
 
  $$ \tau =Y\left(q,\dot{q} ,\ddot{q} \right)\cdot \Pi \left(m,I\right) $$ 
 
-We are trying to estimate the relevant values of the inertia tensor and the mass of the link. 
+Intentem estimar els valors rellevants del tensor d’inèrcia i la massa de l’enllaç. 
 
 
-Setup the dynamic terms so that they depend on these variables. Assuming the links are a homogeneous in terms of mass distribution, their center of mass will be located at $0\ldotp 5\cdot \;\textrm{link}\;\textrm{length}$.
+Configura els termes dinàmics perquè depenguin d’aquestes variables. Assumint que els enllaços són homogenis pel que fa a la distribució de massa, el seu centre de massa estarà situat a $0\ldotp 5\cdot \;\textrm{longitud}\;\textrm{de l’enllaç}$.
 
-## Setup dynamic terms
+## Configura els termes dinàmics
 ```matlab
-syms m1 Ixx1 Iyy1 Izz1 m2 Ixx2 Iyy2 Izz2 %dynamic parameters
-syms q1 q2 qdot1 qdot2 qdotdot1 qdotdot2 %joint values
+syms m1 Ixx1 Iyy1 Izz1 m2 Ixx2 Iyy2 Izz2 %paràmetres dinàmics
+syms q1 q2 qdot1 qdot2 qdotdot1 qdotdot2 %valors articulars
 
 a1 = 0.5; 
 l1 = a1/2;
@@ -610,7 +609,7 @@ I_2 = diag([Ixx2, Iyy2, Izz2]);
 
 ```
 
-Setup the B matrix
+Configura la matriu B
 
 ```matlab
 A01_l = subs(Ai,{a_i,d_i,alpha_i,theta_i},{ l1, 0, 0, q1});
@@ -643,7 +642,7 @@ B4 = Jtheta_l2'*Il2*Jtheta_l2;
 B = simplify(B1+B2+B3+B4);
 ```
 
-Setup the Coriolis matrix: 
+Configura la matriu de Coriolis: 
 
 ```matlab
 b11 = B(1,1);
@@ -674,7 +673,7 @@ C =
 
 
 
-Setup the Gravity term: 
+Configura el terme de gravetat: 
 
 ```matlab
 g0 = [0 -9.81 0]';
@@ -698,7 +697,7 @@ G =
 
   $$ \displaystyle \left(\begin{array}{c} \frac{981\,\cos \left(\overline{q_1 } \right)\,\overline{m_1 } }{400}+\frac{981\,\overline{m_2 } \,{\left(\frac{\cos \left(\overline{q_1 } \right)}{2}+\frac{7\,\cos \left(\overline{q_1 } +\overline{q_2 } \right)}{20}\right)}}{100}\newline \frac{6867\,\cos \left(\overline{q_1 } +\overline{q_2 } \right)\,\overline{m_2 } }{2000} \end{array}\right) $$ 
  
-## Analyze dynamic terms and build regressor
+## Analitza els termes dinàmics i construeix el regressor
 ```matlab
 q = [q1; q2]; 
 qdot = [qdot1; qdot2]; 
@@ -712,12 +711,12 @@ tau =
 
 ```matlab
 
-vars = symvar(tau);   % all symbolic variables
+vars = symvar(tau);   % totes les variables simbòliques
 
-% kinematic variables
+% variables cinemàtiques
 kin_vars = [q1 q2 qdot1 qdot2 qdotdot1 qdotdot2];
 
-% dynamic parameters to be estimated 
+% paràmetres dinàmics que s’han d’estimar 
 param_pi = setdiff(vars, kin_vars)
 ```
 param_pi = 
@@ -727,7 +726,7 @@ param_pi =
 
 
 
-notice how param\_pi depends only on Izz and the masses
+observa com param\_pi només depèn d’Izz i de les masses
 
 ```matlab
 [c1 ,t1]= coeffs(tau(1),param_pi)
@@ -746,56 +745,56 @@ t1 =
 ```
 c2 = 
 
-  $$ \displaystyle \begin{array}{l} \left(\begin{array}{ccc} {\textrm{qdotdot}}_1 +{\textrm{qdotdot}}_2  & {\textrm{qdotdot}}_1 \,{\left(\frac{7\,\sigma_2 \,{\left(\frac{7\,\cos \left(q_1 +q_2 \right)}{20}+\frac{\cos \left(q_1 \right)}{2}\right)}}{20}+\frac{7\,\sin \left(\overline{q_1 } +\overline{q_2 } \right)\,{\left(\frac{7\,\sin \left(q_1 +q_2 \right)}{20}+\frac{\sin \left(q_1 \right)}{2}\right)}}{20}\right)}+{\textrm{qdot}}_1 \,{\left(\frac{7\,{\textrm{qdot}}_1 \,{\left(\sigma_1 +\sigma_3 \right)}}{80}-\frac{7\,{\textrm{qdot}}_2 \,{\left(\sigma_1 -\sigma_3 \right)}}{80}\right)}+\frac{49\,{\textrm{qdotdot}}_2 \,\cos \left(q_1 +q_2 -\overline{q_1 } -\overline{q_2 } \right)}{400}-\frac{7\,{\textrm{qdot}}_1 \,{\textrm{qdot}}_2 \,{\left(\sigma_1 -\sigma_3 \right)}}{80} & \frac{6867\,\sigma_2 \,\overline{m_2 } }{2000} \end{array}\right)\\\mathrm{}\\\textrm{where}\\\mathrm{}\\\;\;\sigma_1 =\sin \left(\overline{q_1 } -q_1 +\overline{q_2 } \right)\\\mathrm{}\\\;\;\sigma_2 =\cos \left(\overline{q_1 } +\overline{q_2 } \right)\\\mathrm{}\\\;\;\sigma_3 =\sin \left(q_1 +q_2 -\overline{q_1 } \right)\end{array} $$ 
+  $$ \displaystyle \begin{array}{l} \left(\begin{array}{ccc} {\textrm{qdotdot}}_1 +{\textrm{qdotdot}}_2  & {\textrm{qdotdot}}_1 \,{\left(\frac{7\,\sigma_2 \,{\left(\frac{7\,\cos \left(q_1 +q_2 \right)}{20}+\frac{\cos \left(q_1 \right)}{2}\right)}}{20}+\frac{7\,\sin \left(\overline{q_1 } +\overline{q_2 } \right)\,{\left(\frac{7\,\sin \left(q_1 +q_2 \right)}{20}+\frac{\sin \left(q_1 \right)}{2}\right)}}{20}\right)}+{\textrm{qdot}}_1 \,{\left(\frac{7\,{\textrm{qdot}}_1 \,{\left(\sigma_1 +\sigma_3 \right)}}{80}-\frac{7\,{\textrm{qdot}}_2 \,{\left(\sigma_1 -\sigma_3 \right)}}{80}\right)}+\frac{49\,{\textrm{qdotdot}}_2 \,\cos \left(q_1 +q_2 -\overline{q_1 } -\overline{q_2 } \right)}{400}-\frac{7\,{\textrm{qdot}}_1 \,{\textrm{qdot}}_2 \,{\left(\sigma_1 -\sigma_3 \right)}}{80} & \frac{6867\,sigma_2 \,\overline{m_2 } }{2000} \end{array}\right)\\\mathrm{}\\\textrm{where}\\\mathrm{}\\\;\;\sigma_1 =\sin \left(\overline{q_1 } -q_1 +\overline{q_2 } \right)\\\mathrm{}\\\;\;\sigma_2 =\cos \left(\overline{q_1 } +\overline{q_2 } \right)\\\mathrm{}\\\;\;\sigma_3 =\sin \left(q_1 +q_2 -\overline{q_1 } \right)\end{array} $$ 
  
 t2 = 
 
   $$ \displaystyle \left(\begin{array}{ccc} {\textrm{Izz}}_2  & m_2  & 1 \end{array}\right) $$ 
  
 
-notice how c2 depends only on $I_{\textrm{zz},2} \;\textrm{and}\;m_2$. This will be important when building the regressor. Make sure the indexes of your desired variables match in both cases:  
+observa com c2 només depèn de $I_{\textrm{zz},2} \;\textrm{i}\;m_2$. Això serà important a l’hora de construir el regressor. Assegura’t que els índexs de les variables desitjades coincideixin en tots dos casos:  
 
 ```matlab
 Y_sym = [c1(1), c1(2), c1(3), c1(4); 
             0,  c2(1), 0 ,    c2(2)]; 
 ```
-## Estimate parameters
+## Estima els paràmetres
 
-Load identification\_ex and use the recorded joint values
+Carrega identification\_ex i fes servir els valors articulars enregistrats
 
 ```matlab
 %load("identification_ex.mat"); 
 load("Resources/identification_ex.mat");
 
-%Identify dynamic parameters using data from simulated executions
+%Identifica paràmetres dinàmics fent servir dades d’execucions simulades
 % Regressor
-N = size(qout,1);         % number of time instants
-d = size(q,1);                    % number of joints
-P = size(Y_sym,2);        % number of dynamic parameters
+N = size(qout,1);         % nombre d’instants de temps
+d = size(q,1);                    % nombre d’articulacions
+P = size(Y_sym,2);        % nombre de paràmetres dinàmics
 
-% --- Initialize empty containers -----------------------------------------
-YY = [];               % big regressor (2N x P)
-Tau = [];              % stacked torques (2N x 1)
+% --- Inicialitza contenidors buits -----------------------------------------
+YY = [];               % regressor gran (2N x P)
+Tau = [];              % parells apilats (2N x 1)
 
-% --- Loop over all samples and append ------------------------------------
+% --- Recorre totes les mostres i concatena ------------------------------------
 for i = 1:N
 
-    % Evaluate regressor for this time instant
+    % Avalua el regressor per a aquest instant de temps
     Yi = double(subs(Y_sym, ...
         {qdotdot1, qdotdot2, qdot1, qdot2, q1, q2}, ...
         {qddout(i,1), qddout(i,2), ...
          qdout(i,1),  qdout(i,2), ...
          qout(i,1),   qout(i,2)}));
 
-    % Append regressor rows
+    % Afegeix les files del regressor
     YY = [YY; Yi];
 
-    % Get torques at this instant and append
-    tau_i = tauout(i, 1:d).';   % convert to column
+    % Obtén els parells en aquest instant i afegeix-los
+    tau_i = tauout(i, 1:d).';   % converteix a columna
     Tau = [Tau; tau_i];
 end
 
-% Least squares estimate of parameters
+% Estimació dels paràmetres per mínims quadrats
 pi_hat = pinv(YY) * Tau
 ```
 
@@ -807,5 +806,3 @@ pi_hat = 4x1
     2.3543
 
 ```
-
-

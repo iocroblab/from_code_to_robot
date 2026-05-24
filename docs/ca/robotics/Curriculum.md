@@ -1,162 +1,159 @@
+# Currículum
 
-# Curriculum
+A continuació trobaràs l’ordre proposat de tutorials i exercicis per a la secció de robòtica del projecte From\-Code\-to\-Robot. 
 
-Below you will find the proposed order of tutorials and exercises for the robotics section of the From\-Code\-to\-Robot project. 
+# 0. Conceptes bàsics 
 
-# 0. Basics 
+Aquest paquet conté alguns tutorials que expliquen com fer servir funcions bàsiques de Matlab. Entendre aquests conceptes és crucial per a les parts següents del tutorial de Robòtica. 
 
-This package contains some tutorials explaining how to use basic Matlab functions. Understanding these concepts is crucial for the following parts of the Robotics tutorial. 
+## [Manipulació de matrius](./0.Basics/Matrix_manipulation.md) 
 
-## [Matrix Manipulation](./0.Basics/Matrix_manipulation.md) 
-
-This tutorial explains how to setup and use matrices in MATLAB. 
+Aquest tutorial explica com configurar i fer servir matrius a MATLAB. 
 
 ## [Symbolic Math Toolbox](./0.Basics/Symbolic_Math_toolbox.md)
 
-This tutorial explains how to use symbolic variables in MATLAB. 
+Aquest tutorial explica com fer servir variables simbòliques a MATLAB. 
 
-## [Structures](./0.Basics/Structures.md)
+## [Estructures](./0.Basics/Structures.md)
 
-This tutorial illustrates how to access different elements of a structure and how to work with them. 
+Aquest tutorial il·lustra com accedir a diferents elements d’una estructura i com treballar-hi. 
 
-## [Cells](./0.Basics/Cells.md)
+## [Cel·les](./0.Basics/Cells.md)
 
-This tutorial illustrates how to access different elements of a cell and how to work with them. 
+Aquest tutorial il·lustra com accedir a diferents elements d’una cel·la i com treballar-hi. 
 
 ## [Simulink](./0.Basics/Simulink.md)
 
-This tutorial explains the basics of Simulink 
+Aquest tutorial explica els conceptes bàsics de Simulink 
 
-# 1. Modelling 
+# 1. Modelatge 
 
-This package explains the basics modelling a robot with the Robotic System Toolbox. It contains Tutorials to understand the concepts using the Symbolic Toolbox. 
+Aquest paquet explica els conceptes bàsics per modelar un robot amb el Robotic System Toolbox. Conté tutorials per entendre els conceptes fent servir el Symbolic Toolbox. 
 
-## [Transforms](./1.Modelling/Tutorial/Transforms.md)
+## [Transformacions](./1.Modelling/Tutorial/Transforms.md)
 
-This tutorial explains what a translation and rotation is, how they can be expressed in vectors and matrices and their combination as a homogeneous transform matrix. Additionally different rotation representations are explained. 
+Aquest tutorial explica què són una translació i una rotació, com es poden expressar en vectors i matrius i la seva combinació com a matriu de transformació homogènia. A més, s’expliquen diferents representacions de rotació. 
 
-### [Exercise 1.1 \- Find the Transforms](./1.Modelling/Exercise/Exercise-1-1.md)
+### [Exercici 1.1 \- Troba les transformacions](./1.Modelling/Exercise/Exercise-1-1.md)
 
-In this exercise you will need to find different transformations to describe the relative pose of two frames. 
+En aquest exercici hauràs de trobar diferents transformacions per descriure la postura relativa de dos marcs. 
 
-## [Modelling with the Robotic System Toolbox](./1.Modelling/Tutorial/Modelling_with_RS_toolbox.md)
+## [Modelatge amb el Robotic System Toolbox](./1.Modelling/Tutorial/Modelling_with_RS_toolbox.md)
 
-This tutorial explains how to setup a robot using the Robotic System Toolbox. 
+Aquest tutorial explica com configurar un robot fent servir el Robotic System Toolbox. 
 
-### [Exercise 1.2 \- Modeling of a Robot ](./1.Modelling/Exercise/Exercise-1-2.md)
+### [Exercici 1.2 \- Modelatge d’un robot ](./1.Modelling/Exercise/Exercise-1-2.md)
 
-In this exercise you will setup a Universal Robot using the Robotic System Toolbox.
+En aquest exercici configuraràs un Universal Robot fent servir el Robotic System Toolbox.
 
-### [Exercise 1.3 \- Find the DH parameters](./1.Modelling/Exercise/Exercise-1-3.md)
+### [Exercici 1.3 \- Troba els paràmetres DH](./1.Modelling/Exercise/Exercise-1-3.md)
 
-In this exercise you will compute the DH parameters for an arbitrary robot manipulator and set it up using the Robotic System Toolbox
+En aquest exercici calcularàs els paràmetres DH per a un manipulador robòtic arbitrari i el configuraràs fent servir el Robotic System Toolbox
 
-# 2. Kinematics
+# 2. Cinemàtica
 
-This package explains the relations between joint angles and resulting pose of endeffectors. Using this knowlege you will compute required joint angles for a desired pose and trajectories to move the joints in a controlled manner. 
+Aquest paquet explica les relacions entre els angles articulars i la postura resultant dels efectors finals. Fent servir aquest coneixement calcularàs els angles articulars requerits per a una postura desitjada i trajectòries per moure les articulacions de manera controlada. 
 
-## [Forward Kinematics](./2.Kinematics/Tutorial/Forward_Kinematics.md)
+## [Cinemàtica directa](./2.Kinematics/Tutorial/Forward_Kinematics.md)
 
-This tutorial explains how to compute the resulting transformation of a manipulator given a joint configuration on the example of a Universal UR3. 
+Aquest tutorial explica com calcular la transformació resultant d’un manipulador donada una configuració articular amb l’exemple d’un Universal UR3. 
 
-### [Exercise 2.1 \- Forward Kinematics](./2.Kinematics/Exercises/Exercise-2-1.md)
+### [Exercici 2.1 \- Cinemàtica directa](./2.Kinematics/Exercises/Exercise-2-1.md)
 
-In this exercise you will compute the resulting transform for a given configuration using the Symbolic Toolbox and the Robotic System Toolbox. 
+En aquest exercici calcularàs la transformació resultant per a una configuració donada fent servir el Symbolic Toolbox i el Robotic System Toolbox. 
 
-## [Inverse Kinematics](./2.Kinematics/Tutorial/Inverse_Kinematics.md)
+## [Cinemàtica inversa](./2.Kinematics/Tutorial/Inverse_Kinematics.md)
 
-This tutorial explains how to compute one or multiple solutions to the question, what joint angles are required to achieve a desired transformation. 
+Aquest tutorial explica com calcular una o múltiples solucions a la pregunta de quins angles articulars són necessaris per aconseguir una transformació desitjada. 
 
-### [Exercise 2.2 \- Inverse Kinematic Planar Arms](./2.Kinematics/Exercises/Exercise-2-2.md)
+### [Exercici 2.2 \- Cinemàtica inversa de braços planars](./2.Kinematics/Exercises/Exercise-2-2.md)
 
-In this exercise you will compute the inverse kinematic solutions for simple planar robots. 
+En aquest exercici calcularàs les solucions de cinemàtica inversa per a robots planars simples. 
 
-### [Exercise 2.3 \- Inverse Kinematic Anthropomorpic arm with Spherical Wrist](./2.Kinematics/Exercises/Exercise-2-3.md)
+### [Exercici 2.3 \- Cinemàtica inversa d’un braç antropomòrfic amb canell esfèric](./2.Kinematics/Exercises/Exercise-2-3.md)
 
-In this exercise you will compute the analytical inverse kinematic solutions for an Anthropomorpic arm with Spherical Wrist using the techniques explained in the tutorial. 
+En aquest exercici calcularàs les solucions analítiques de cinemàtica inversa per a un braç antropomòrfic amb canell esfèric fent servir les tècniques explicades al tutorial. 
 
-## [Joint Space Trajectory Planning](./2.Kinematics/Tutorial/Joint_Space_Trajectory_Planning.md)
+## [Planificació de trajectòries en l’espai articular](./2.Kinematics/Tutorial/Joint_Space_Trajectory_Planning.md)
 
-This tutorial explains how to compute a trajectory from one joint state to another using specific velocity profiles. 
+Aquest tutorial explica com calcular una trajectòria d’un estat articular a un altre fent servir perfils de velocitat específics. 
 
-### [Exercise 2.4 \- Joint Space Trajectory Planning](./2.Kinematics/Exercises/Exercise-2-4.md)
+### [Exercici 2.4 \- Planificació de trajectòries en l’espai articular](./2.Kinematics/Exercises/Exercise-2-4.md)
 
-In this tutorial you will setup different functions to compute trajectories for single joint and complete manipulators. You will adjust the functions to fulfill specific requirements. 
+En aquest tutorial configuraràs diferents funcions per calcular trajectòries per a una sola articulació i per a manipuladors complets. Ajustaràs les funcions per complir requisits específics. 
 
-# 3. Differential Kinematics
+# 3. Cinemàtica diferencial
 
-This package explains the relation between joint velocities and cartesian velocities of the endeffector. Building on this knowlege you will learn how to setup a numerical inverse kinematic algorithm and learn about the manipulability of robots and what challanges occure. 
+Aquest paquet explica la relació entre velocitats articulars i velocitats cartesianes de l’efector final. A partir d’aquest coneixement aprendràs com configurar un algorisme numèric de cinemàtica inversa i aprendràs sobre la manipulabilitat dels robots i quins reptes apareixen. 
 
 ## [Jacobians](<./3.Differential Kinematics/Tutorial/Jacobians.md>)
 
-This tutorial explains the computations of geometric and analytical Jacobian matrix using the Symbolic Toolbox.  Additionally you will learn how to utilize the Robotic System Toolbox for the computations. 
+Aquest tutorial explica els càlculs de la matriu jacobiana geomètrica i analítica fent servir el Symbolic Toolbox. A més, aprendràs com utilitzar el Robotic System Toolbox per als càlculs. 
 
-## [Manipulability](<./3.Differential Kinematics/Tutorial/Manipulability.md>) 
+## [Manipulabilitat](<./3.Differential Kinematics/Tutorial/Manipulability.md>) 
 
-This tutorial explains if and with how much efford a robot can move in specific configurations. It will explain the concept of singularities and redundancy and showcase some examples in Rviz. 
+Aquest tutorial explica si un robot pot moure’s en configuracions específiques i amb quin esforç. Explicarà el concepte de singularitats i redundància i mostrarà alguns exemples a Rviz. 
 
-### [Exercise 3.1 \- Jacobian](<./3.Differential Kinematics/Exercise/Exercise-3-1.md>) 
+### [Exercici 3.1 \- Jacobià](<./3.Differential Kinematics/Exercise/Exercise-3-1.md>) 
 
-In this exercise you will setup functions to symbolically compute the geometric and analytical jacobians and calculate the required joint speeds to achieve a specific motion. You will visualize this motion in Rviz and will analyze how the manipulability and joint speeds change when being near a singular configuration.
+En aquest exercici configuraràs funcions per calcular simbòlicament els jacobians geomètric i analític i calcular les velocitats articulars requerides per aconseguir un moviment específic. Visualitzaràs aquest moviment a Rviz i analitzaràs com canvien la manipulabilitat i les velocitats articulars quan s’està prop d’una configuració singular.
 
-## [Inverse Kinematic Algorithm](<./3.Differential Kinematics/Tutorial/Inverse_Kinematic_Algorithm.md>)
+## [Algorisme de cinemàtica inversa](<./3.Differential Kinematics/Tutorial/Inverse_Kinematic_Algorithm.md>)
 
-This tutorial explains two approaches on how to utilize the jacobians to setup a numerical inverse kinematic algorithm.
+Aquest tutorial explica dos enfocaments sobre com utilitzar els jacobians per configurar un algorisme numèric de cinemàtica inversa.
 
-### [Exercise 3.2 \- Inverse Kinematic Algorithm](<./3.Differential Kinematics/Exercise/Exercise-3-2.md>)
+### [Exercici 3.2 \- Algorisme de cinemàtica inversa](<./3.Differential Kinematics/Exercise/Exercise-3-2.md>)
 
-In this exercise you will setup the pseudo inverse kinematic algorithm and analyze the convergence and error it procudes. You will use quaternions to compute the orientation error using the analytical jacobian. 
+En aquest exercici configuraràs l’algorisme de cinemàtica inversa amb pseudoinversa i analitzaràs la convergència i l’error que produeix. Faràs servir quaternions per calcular l’error d’orientació fent servir el jacobià analític. 
 
-### [Exercise 3.3 \- Velocity Teleoperation](<./3.Differential Kinematics/Exercise/Exercise-3-3.md>)
+### [Exercici 3.3 \- Teleoperació per velocitat](<./3.Differential Kinematics/Exercise/Exercise-3-3.md>)
 
-In this exercise you will simulate a robot and controll the endeffector with your keyboard by computing the required joint speeds. 
+En aquest exercici simularàs un robot i controlaràs l’efector final amb el teu teclat calculant les velocitats articulars requerides. 
 
-# 4. Dynamcis
+# 4. Dinàmica
 
-This package explains the relation between joint states, \- speeds and \- torques using the lagrange formulation. You will also learn how to estimate parameters of your robot given sufficient testing data, this allows you to approximate e.g. the weight or inertia matrices of your robot maipulator. 
+Aquest paquet explica la relació entre estats articulars, velocitats i parells fent servir la formulació de Lagrange. També aprendràs com estimar paràmetres del teu robot donades dades de prova suficients; això et permet aproximar, per exemple, el pes o les matrius d’inèrcia del teu manipulador robòtic. 
 
-## [Dynamics Lagrange Formulation](./4.Dynamics/Tutorial/Dynamics_Lagrange_Formulation.md)
+## [Formulació de Lagrange de la dinàmica](./4.Dynamics/Tutorial/Dynamics_Lagrange_Formulation.md)
 
- This tutorial will explain what the different terms of the lagrange formulation are and how they are computed using the Symbolic Toolbox and the Robotic System Toolbox. Additionally a technique for the identification of linear dynamic parameters is presented. 
+ Aquest tutorial explicarà què són els diferents termes de la formulació de Lagrange i com es calculen fent servir el Symbolic Toolbox i el Robotic System Toolbox. A més, es presenta una tècnica per a la identificació de paràmetres dinàmics lineals. 
 
-### [Exercise 4.1 \- Dynamic Term Computations](./4.Dynamics/Exercise/Exercise-4-1.md)
+### [Exercici 4.1 \- Càlcul de termes dinàmics](./4.Dynamics/Exercise/Exercise-4-1.md)
 
-In this exercise you will setup functions to calculate the different terms of the lagrange formulation for an arbitrary manipulator using the symbolic toolbox. 
+En aquest exercici configuraràs funcions per calcular els diferents termes de la formulació de Lagrange per a un manipulador arbitrari fent servir el toolbox simbòlic. 
 
-### [Exercise 4.2 \- Effort\-Based Control using the Dynamic Model ](./4.Dynamics/Exercise/Exercise-4-2.md)
+### [Exercici 4.2 \- Control basat en esforç fent servir el model dinàmic ](./4.Dynamics/Exercise/Exercise-4-2.md)
 
-In this exercise you will control a ur3e robot to hold a weight in different configurations using the physics simulation engine gazebo. You will compute the required joint torques to hold a weight using the lagrange formulation. 
+En aquest exercici controlaràs un robot ur3e perquè sostingui un pes en diferents configuracions fent servir el motor de simulació física gazebo. Calcularàs els parells articulars requerits per sostenir un pes fent servir la formulació de Lagrange. 
 
 # 5. Control 
 
-This package explains differnet approaches to robotic control algorithms. E.g. centeralized and decenteralized control schemes.
+Aquest paquet explica diferents enfocaments d’algorismes de control robòtic. Per exemple, esquemes de control centralitzats i descentralitzats.
 
-## [Control Schemes](<./5.Control/Tutorial/Control Schemes.md>)
+## [Esquemes de control](<./5.Control/Tutorial/Control Schemes.md>)
 
-This tutorial explains the basic ideas behind different control schemes. 
+Aquest tutorial explica les idees bàsiques darrere de diferents esquemes de control. 
 
-### [Exercise 5.1 \- Threelink effort control using Symbolic Matrices](./5.Control/Exercises/Exercise1/Exercise-5-1.md)
+### [Exercici 5.1 \- Control d’esforç del manipulador de tres enllaços fent servir matrius simbòliques](./5.Control/Exercises/Exercise1/Exercise-5-1.md)
 
-In this exercise you will control a threelink manipulator using an inverse dynamic algorithm. You will setup a control scheme in simulink using the symbolic matrtices you have computed in Exercise 4.1 and compute more efficient matrices to reduce the compuational load. 
+En aquest exercici controlaràs un manipulador de tres enllaços fent servir un algorisme de dinàmica inversa. Configuraràs un esquema de control a simulink fent servir les matrius simbòliques que has calculat a l’Exercici 4.1 i calcularàs matrius més eficients per reduir la càrrega computacional. 
 
-### [Exercise 5.2 \- Threelink effort control using PD control and extenstions](./5.Control/Exercises/Exercise2/Exercise-5-2.md)
+### [Exercici 5.2 \- Control d’esforç del manipulador de tres enllaços fent servir control PD i extensions](./5.Control/Exercises/Exercise2/Exercise-5-2.md)
 
-In this exercise you will control a threelink manipulator using torque control and set up a PD control scheme that is augmented with additional terms theouout the exercise. Resulting in a PID+Gravity compensation
+En aquest exercici controlaràs un manipulador de tres enllaços fent servir control de parell i configuraràs un esquema de control PD que s’augmenta amb termes addicionals al llarg de l’exercici. El resultat és un PID + compensació de gravetat
 
-### [Exercise 5.3 \- UR effort control using Robotic System Toolbox](./5.Control/Exercises/Exercise3/Exercise-5-3.md)
+### [Exercici 5.3 \- Control d’esforç d’un UR fent servir Robotic System Toolbox](./5.Control/Exercises/Exercise3/Exercise-5-3.md)
 
-In this exercise you will control a UR robot of your choice, using an inverse dynamic control scheme by utilizing the simulink blocks of the Robotic System Toolbox. 
+En aquest exercici controlaràs un robot UR de la teva elecció, fent servir un esquema de control de dinàmica inversa mitjançant els blocs de simulink del Robotic System Toolbox. 
 
-### [Exercise 5.4 \- Universal Robots in task space using velocity control](./5.Control/Exercises/Exercise4/Exercise-5-4.md)
+### [Exercici 5.4 \- Universal Robots en l’espai de tasca fent servir control de velocitat](./5.Control/Exercises/Exercise4/Exercise-5-4.md)
 
-In this exercise you will control a UR robot in task space using an inverse jacobian scheme. 
+En aquest exercici controlaràs un robot UR en l’espai de tasca fent servir un esquema de jacobià invers. 
 
-### [Exercise 5.5 \- Universal Robots in task space using effort control](./5.Control/Exercises/Exercse5/Exercise-5-5.md)
+### [Exercici 5.5 \- Universal Robots en l’espai de tasca fent servir control d’esforç](./5.Control/Exercises/Exercse5/Exercise-5-5.md)
 
-In this exercise you will control a UR robot in task space using a centralized and decentralized scheme. 
+En aquest exercici controlaràs un robot UR en l’espai de tasca fent servir un esquema centralitzat i descentralitzat. 
 
-# 6. Capstone Project
+# 6. Projecte final
 
-Now you will combine your work from the Computer Vision and AI with your robotics knowledge, to detect and track a fruit and use it to teleoperate the robot. 
-
-
+Ara combinaràs el teu treball de Visió per Computador i IA amb els teus coneixements de robòtica, per detectar i seguir una fruita i fer-la servir per teleoperar el robot. 

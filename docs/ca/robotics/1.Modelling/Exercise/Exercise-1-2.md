@@ -1,24 +1,23 @@
-
 ```matlab
 clear all; 
 ```
-# Exercise 1.2 \- Modeling of a Robot
+# Exercici 1.2 \- Modelatge d’un robot
 
-In this exercise you will model a Universal UR3e robot from given DH parameters.
+En aquest exercici modelaràs un robot Universal UR3e a partir dels paràmetres DH donats.
 
 
  ![image_0.svg](Exercise-1-2_media/image_0.svg)
 
 
-Please store your solutions in the predefined variables!
+Guarda les teves solucions a les variables predefinides!
 
-# Task description:
+# Descripció de la tasca:
 
-Given the DH parameters of a UR3e Robot: 
+Donats els paràmetres DH d’un robot UR3e: 
 
 ||||||
 | :-: | :-- | :-: | :-: | :-: |
-| Link  | a \[m\]  | alpha  | d \[m\]  | theta   |
+| Eslabó  | a $begin:math:display$m$end:math:display$  | alpha  | d $begin:math:display$m$end:math:display$  | theta   |
 | 1  | 0  | pi/2  | 0.15185  | 0   |
 | 2  | \-0.24355  | 0  | 0  | 0   |
 | 3  | \-0.2132  | 0  | 0  | 0   |
@@ -27,29 +26,29 @@ Given the DH parameters of a UR3e Robot:
 | 6  | 0  | 0  | 0.0921  | 0   |
 
 
-The base and the coordinate frame of the first joint are identical!
+La base i el sistema de coordenades de la primera articulació són idèntics!
 
 
-Answer all the questions and store your solution in the correct variable
+Respon totes les preguntes i guarda la teva solució a la variable correcta.
 
-# Task 1
+# Tasca 1
 
-1.  Setup the robot structure and use the data format "column"
-2. Define bodies, name them body\_1, ..., body\_n
-3. Define joints, name them joint\_1, ..., joint\_n
+1.  Configura l’estructura del robot i utilitza el format de dades "column"
+2. Defineix els cossos, anomena’ls body\_1, ..., body\_n
+3. Defineix les articulacions, anomena-les joint\_1, ..., joint\_n
 
-Use the following variables to store your solution:
+Utilitza les variables següents per guardar la teva solució:
 
--  robot (name of your robot) 
--  bodies (name of your variable containing the bodies) 
--  joints (name of your variable containing the joints) 
+-  robot (nom del teu robot) 
+-  bodies (nom de la variable que conté els cossos) 
+-  joints (nom de la variable que conté les articulacions) 
 ```matlab
 robot = [];
 bodies = []; 
 joints = []; 
 ```
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
@@ -77,11 +76,11 @@ checking body elements
 checking joint elements
 ```
 
-# Task 2
+# Tasca 2
 
-1.  Link the DH parameters to the corresponding joints.
-2. Link the joints to their bodies.
-3. Add the bodies to the robot
+1.  Enllaça els paràmetres DH amb les articulacions corresponents.
+2. Enllaça les articulacions amb els seus cossos.
+3. Afegeix els cossos al robot
 ```matlab
 DH=[
    %a       alpha       d       theta
@@ -94,29 +93,28 @@ DH=[
     ]
 ```
 
-Add your code here: 
+Afegeix el teu codi aquí: 
 
 
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-2-2')
 
 ```
-# Task 3
-1.  Define the gravity to be in negative Z direction with a magnitude of $9\ldotp 81\;\frac{m}{s^2 }$ (see figure above)
-2. Set the home position for joints 1, 3 and 5 to $\frac{\pi }{2}$
+# Tasca 3
+1.  Defineix la gravetat en la direcció Z negativa amb una magnitud de $9\ldotp 81\;\frac{m}{s^2 }$ (vegeu la figura anterior)
+2. Estableix la posició inicial de les articulacions 1, 3 i 5 a $\frac{\pi }{2}$
 
-Add your code here:
+Afegeix el teu codi aquí:
 
 
 
-You can check your work by clicking the Run: 
+Pots comprovar la feina fent clic a Run: 
 
 ```matlab
  
 check_exercise('1-2-3')
 ```
-

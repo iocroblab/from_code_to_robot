@@ -1,24 +1,23 @@
+# Exercici 5.1 \- Control d’esforç del manipulador de tres enllaços fent servir matrius simbòliques
 
-# Exercise 5.1 \- Threelink effort control using Symbolic Matrices
+En aquest exercici faràs servir les matrius calculades a l’Exercici 4.1 per controlar el manipulador de tres enllaços en simulació fent servir Simulink. 
 
-In this exercise you will use the matrices computed in Exercise 4.1 to control the Threelink manipulator in simulation using Simulink. 
-
-# Start the Simulation
+# Inicia la simulació
 ```matlab
 
 StartTutorialApplication('Simulation','Controller', 'Effort', 'Model','threelink', 'Docker', false);
 StartTutorialApplication('Trajectory', 'Docker', false);
-StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %sends a 0 torque when no other command has been sent
+StartTutorialApplication('Safety_nodes','docker',false, 'model','threelink'); %envia un parell 0 quan no s’ha enviat cap altra comanda
 ```
 
-Remember that you can slow down the simulation as: 
+Recorda que pots alentir la simulació així: 
 
 
 SetSimulationSpeed( SpeedFactor, 'docker', false)
 
-# Convert Symbolic Matrices to Functions 
+# Converteix les matrius simbòliques en funcions 
 
-To use symbolic variables inside Simulink we have to convert them to a function. 
+Per fer servir variables simbòliques dins de Simulink les hem de convertir en una funció. 
 
 ```matlab
 syms symbolic1 symbolic2 real
@@ -34,7 +33,7 @@ my_sym_vec =
 matlabFunction(my_sym_variable, 'vars',{my_sym_vec}, 'File','my_test_subs_function');
 ```
 
-To use this function: 
+Per fer servir aquesta funció: 
 
 ```matlab
 test_configuration = [2,2]
@@ -57,29 +56,29 @@ my_sym_variable_subsituted = 1x2
 ```
 
 
-*hint: This can be done using the MatlabFunction block in Simulink*
+*pista: Això es pot fer fent servir el bloc MatlabFunction a Simulink*
 
-# Convert your Symbolic Matrices here
+# Converteix aquí les teves matrius simbòliques
 
 
 ```matlabTextOutput
-Unrecognized function or variable 'B'.
+Funció o variable 'B' no reconeguda.
 ```
 
-# Parameters
+# Paràmetres
 
-Setup the tau limit as: 
+Configura el límit de parell com: 
 
  $$ {\textrm{tau}}_{\lim } =\left\lbrack \begin{array}{c} 120\newline 120\newline 60 \end{array}\right\rbrack \left\lbrack \textrm{Nm}\right\rbrack $$ 
 
-and the desired configuration (both speed and position)
+i la configuració desitjada (tant velocitat com posició)
 
 
-try the configurations 
+prova les configuracions 
 
  $$ q\in \left\lbrace \left\lbrack \begin{array}{c} -\frac{\pi }{3}\newline \frac{\pi }{3}\newline \frac{\pi }{10} \end{array}\right\rbrack ,\left\lbrack \begin{array}{c} -\pi \;\newline \frac{\pi }{5}\newline \frac{\pi }{6}\; \end{array}\right\rbrack ,\left\lbrack \begin{array}{c} \frac{\pi }{8}\newline -\frac{\textrm{pi}}{2}\newline \frac{\textrm{pi}}{3} \end{array}\right\rbrack \right\rbrace $$ 
 
-store them as: 
+desa-les com: 
 
 -  q\_desired\_1 
 -  q\_desired\_2 
@@ -93,7 +92,7 @@ q_desired_3 = [pi/8,-pi/2,pi/3]';
 qd_desired = [0,0,0]'; 
 ```
 
-to visualize the target transforms in Rviz:
+per visualitzar les transformacions objectiu a Rviz:
 
 ```matlab
 load("5.Control/Resources/targetTransform_threelink.mat");
@@ -101,7 +100,7 @@ StaticFrameBroadcaster(targetTransform_threelink_1, 'target1');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target1
+Transformació estàtica publicada: base_link → target1
 ```
 
 ```matlab
@@ -109,7 +108,7 @@ StaticFrameBroadcaster(targetTransform_threelink_2, 'target2');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target2
+Transformació estàtica publicada: base_link → target2
 ```
 
 ```matlab
@@ -117,12 +116,12 @@ StaticFrameBroadcaster(targetTransform_threelink_3, 'target3');
 ```
 
 ```matlabTextOutput
-Published static transform: base_link → target3
+Transformació estàtica publicada: base_link → target3
 ```
 
-# Gains
+# Guanys
 
-Select the gains for your system, as this is an inverse dynamic scheme, follow the approach from Exercise 4.2. Don't scale the gains yet, you will be able to do so during simulation. 
+Selecciona els guanys per al teu sistema; com que aquest és un esquema de dinàmica inversa, segueix l’enfocament de l’Exercici 4.2. Encara no escalis els guanys, ja que ho podràs fer durant la simulació. 
 
 
 
@@ -134,44 +133,44 @@ w_i = 1x3
 
 # Dashboard
 
-In the Simulink file you will find the dashboard section that allows you to switch between the configurations, see the current torque output and scale the Kp and Kd matrix during simulation. 
+Al fitxer de Simulink trobaràs la secció dashboard que et permet canviar entre les configuracions, veure la sortida de parell actual i escalar les matrius Kp i Kd durant la simulació. 
 
-### Configuration Selector 
+### Selector de configuració 
 
-Check one of these boxes to select the desired configuration. 
+Marca una d’aquestes caselles per seleccionar la configuració desitjada. 
 
 
 ![image_0.png](Exercise-5-1_media/image_0.png)
 
 
-this selection block is linked to: 
+aquest bloc de selecció està enllaçat amb: 
 
 
 ![image_1.png](Exercise-5-1_media/image_1.png)
 
-### Scale Kd and Kp
+### Escala Kd i Kp
 
-By using the sliders you can alter the gain value of their corresponding K\_scale blocks: 
+Fent servir els controls lliscants pots modificar el valor de guany dels seus blocs K\_scale corresponents: 
 
 
 ![image_2.png](Exercise-5-1_media/image_2.png)
 
-### View Torque Trajectory
+### Visualitza la trajectòria de parell
 
-The Dashboard scope allows you to see the current torques live during simulation (like a scope). 
+El scope del Dashboard et permet veure els parells actuals en directe durant la simulació (com un scope). 
 
 
 ![image_3.png](Exercise-5-1_media/image_3.png)
 
-# Task 1
+# Tasca 1
 
-Open the File Exercise\_5\_1\_1.slx you will find a setup to be used for this exercise. From the outputs q and qd (left Subsystem) you will receive the current position and velocity of the joints as a column vector. 
-
-
-The input to the right subsystem accepts a column vector and sends the torques to the simulation. 
+Obre el fitxer Exercise\_5\_1\_1.slx; hi trobaràs una configuració per fer servir en aquest exercici. De les sortides q i qd (subsistema esquerre) rebràs la posició i velocitat actuals de les articulacions com a vector columna. 
 
 
-To import the results of your simulation into matlab: 
+L’entrada del subsistema dret accepta un vector columna i envia els parells a la simulació. 
+
+
+Per importar els resultats de la teva simulació a matlab: 
 
 ```matlab
 q_data_1 = out.position; 
@@ -180,28 +179,27 @@ tau_data_1 = out.tau;
 t_data_1 = out.tout; 
 ```
 
-Plot your results in matlab. 
+Representa gràficament els teus resultats a matlab. 
 
 
 ![figure_0.png](Exercise-5-1_media/figure_0.png)
 
 
-# Task 2 
+# Tasca 2 
 
-Reduce the computational load by only considering the diagonal terms of the B and C matrix and analyze the behavior and compare them to the results of Task 1. 
+Redueix la càrrega computacional considerant només els termes diagonals de la matriu B i C i analitza el comportament i compara’ls amb els resultats de la Tasca 1. 
 
-## Task 2.1 
+## Tasca 2.1 
 
-Setup the new symbolic matrix and convert them to a function.
-
-
-## Task 2.2 
-
-Open the File Exercise 5\_1\_2.slx and setup the plant with the new matrices B' and C'. 
+Configura la nova matriu simbòlica i converteix-la en una funció.
 
 
-To import the results of your simulation into matlab: 
+## Tasca 2.2 
+
+Obre el fitxer Exercise 5\_1\_2.slx i configura la planta amb les noves matrius B' i C'. 
+
+
+Per importar els resultats de la teva simulació a matlab: 
 
 
 ![figure_1.png](Exercise-5-1_media/figure_1.png)
-
