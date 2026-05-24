@@ -1,6 +1,6 @@
 # De Código a Robot
 
-<span style="font-size:24px;"><strong><em>Un currículo práctico de robótica, visión por computador e inteligencia artificial utilizando MATLAB y Company robots</em></strong></span>
+<span style="font-size:24px;"><strong><em>Un currículo práctico de robótica, visión por computador e inteligencia artificial utilizando MATLAB y robots UR</em></strong></span>
 
 ![](images/logos.svg)
 
