@@ -1,8 +1,9 @@
 # De Código a Robot
 
+<span style="font-size:24px;"><strong><em>Un currículo práctico de robótica, visión por computador e inteligencia artificial utilizando MATLAB y Company robots</em></strong></span>
+
 ![](images/logos.svg)
 
-De Código a Robot: un currículo práctico de robótica, visión por computador e inteligencia artificial utilizando MATLAB y robots de la empresa
 
 **Código**: https://github.com/iocroblab/from_code_to_robot.git
 

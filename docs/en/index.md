@@ -1,9 +1,8 @@
 # From Code To Robot
 
+<span style="font-size:24px;"><strong><em>A hands-on curriculum for robotics, computer vision, and AI using MATLAB and Company robots</em></strong></span>
+
 ![](images/logos.svg)
-
-
-From Code to Robot: A hands-on curriculum for robotics, computer vision, and AI using MATLAB and Company robots
 
 **Code**: [https://github.com/iocroblab/from_code_to_robot.git](https://github.com/iocroblab/from_code_to_robot.git)
 
