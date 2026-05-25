@@ -10,7 +10,10 @@
     max-width: none;
 }
 
-.md-nav--secondary .md-nav__title,
-.md-nav--secondary .md-nav__title .md-nav__button {
+.md-sidebar--secondary .md-sidebar__scrollwrap {
+    padding-top: 0;
+}
+
+.md-nav--secondary label {
     display: none !important;
 }
