@@ -1,8 +1,3 @@
----
-hide:
-  - toc
----
-
 # From Code To Robot
 
 <span style="font-size:24px;"><strong><em>A hands-on curriculum for robotics, computer vision, and AI using MATLAB and UR robots</em></strong></span>
