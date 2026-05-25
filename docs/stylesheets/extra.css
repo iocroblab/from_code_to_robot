@@ -10,6 +10,7 @@
     max-width: none;
 }
 
-.md-nav--secondary .md-nav__title {
-    display: none;
+.md-nav--secondary .md-nav__title,
+.md-nav--secondary .md-nav__title .md-nav__button {
+    display: none !important;
 }
