@@ -1,3 +1,8 @@
+---
+hide:
+  - toc
+---
+
 # De Codi a Robot
 
 <span style="font-size:24px;"><strong><em>Un currículum pràctic de robòtica, visió per computador i intel·ligència artificial utilitzant MATLAB i robots UR</em></strong></span>
