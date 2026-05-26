@@ -245,13 +245,13 @@ The curriculum is based on MATLAB and several MathWorks toolboxes for robotics, 
 
 1. **Robotics**
 
-   - Constantin Sul (Universitat Politècnica de Catalunya)
-   - Prof. Jan Rosell (Universitat Politècnica de Catalunya)
+    - Constantin Sul (Universitat Politècnica de Catalunya)
+    - Prof. Jan Rosell (Universitat Politècnica de Catalunya)
 
 2. **Computer Vision and Artificial Intelligence**
 
-   - Noel Nathan Planell (Universitat Politècnica de Catalunya)
-   - Prof. Isiah Zaplana (Universitat Politècnica de Catalunya)
+    - Noel Nathan Planell (Universitat Politècnica de Catalunya)
+    - Prof. Isiah Zaplana (Universitat Politècnica de Catalunya)
 
 ## Advisors
 
