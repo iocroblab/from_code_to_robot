@@ -5,6 +5,7 @@ pages:
   stage: deploy
   image: python:3.13-slim
   script:
+    - rm -rf public
     - pip install --no-cache-dir mkdocs mkdocs-material mkdocs-material-extensions mkdocs-static-i18n mkdocs-awesome-pages-plugin python-markdown-math
     - mkdocs build --site-dir public
   cache:
