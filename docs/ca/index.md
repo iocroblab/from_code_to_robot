@@ -5,7 +5,8 @@
 
 ![](images/logos.svg)
 
-**Codi**: https://github.com/iocroblab/from_code_to_robot.git
+**Codi**: [https://github.com/iocroblab/from_code_to_robot.git](https://github.com/iocroblab/from_code_to_robot.git)
+
 
 ## Continguts
 
