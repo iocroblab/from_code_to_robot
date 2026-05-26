@@ -8,72 +8,269 @@
 
 ## Contents
 
-- [Description](#description)
-    - [Robotics](#robotics)
-    - [Computer Vision](#computer-vision)
-    - [Artificial Intelligence](#artificial-intelligence)
-- [Goals](#goals)
-- [About](#about)
+- [Overview](#overview)
+  - [General Objective](#general-objective)
+  - [Project Goals](#project-goals)
+  - [Target Audience](#target-audience)
+  - [Key Features](#key-features)
+  - [Educational Flexibility](#educational-flexibility)
+- [Main Learning Outcomes](#main-learning-outcomes)
+- [Curriculum Structure](#curriculum-structure)
+  - [Robotics](#robotics)
+  - [Computer Vision](#computer-vision)
+  - [Artificial Intelligence](#artificial-intelligence)
+- [Software Requirements](#software-requirements)
 - [Credits](#credits)
+- [About](#about)
 
 
-## Description
-“From Code to Robot” is a hands-on curriculum that equips students with practical skills in robotics, computer vision, and artificial intelligence (AI) using MATLAB and Universal Robots (UR) robotic arms. Targeted at students in industrial engineering, computer science, and technology, this curriculum provides a software and hardware framework together with teaching material to supplement theoretical concepts with practical applications, preparing learners for careers in automation, robotics, and intelligent systems. 
+# Overview
 
-The curriculum is built around three core pillars – Robotics, Computer Vision, and AI – each offering focused, hands-on teaching materials and exercises that deepen students' technical skills. Separating the curriculum into these three pillars adds flexibility for both instructors and students. In many bachelor’s and master’s programs, courses focus exclusively on one domain – robotics, vision, or AI – and only recently are programs beginning to integrate topics across two or even all three fields. By maintaining a modular design, the curriculum supports two main objectives: (1) encouraging faculty to design elective courses that integrate multiple pillars for a more interdisciplinary, project-based learning experience, and (2) allowing individual modules to be used in courses that concentrate on one or two pillars, where the remaining content can be “fixed” or “preset” for instructors looking to focus primarily on robotics, vision, or AI. In particular, the objectives regarding each one of the three pillars are:
+**From Code to Robot** is an open, modular, and hands-on curriculum designed to teach the foundations of:
 
-### [Robotics](robotics/index.md)
+- 🤖 Robotics  
+- 👁️ Computer Vision  
+- 🧠 Artificial Intelligence  
 
-This module covers essential robotic concepts related to modeling, kinematics, differential kinematics, dynamics, and control for serial manipulators. It will include topics such as DH parameter computation, forward and inverse kinematics (both closed-form and iterative), trajectory planning, geometric and analytic Jacobians, singularities, redundancy, and dynamic modeling using Lagrange and Newton-Euler methods, as well as decentralized motion control. All concepts will be illustrated in simulation on a UR3 robotic arm using MATLAB, utilizing the Symbolic Math Toolbox and Simulink, and some exercises will be prepared to run on physical UR3 robots, utilizing the Universal Robots UR Series Manipulators Support from the Robotics System Toolbox.
+using **MATLAB** and **Universal Robots (UR)** manipulators.
 
-### [Computer Vision](Computer Vision/Curriculum.md)
+The project combines theory with practical experimentation through simulation, real robotic platforms, and executable MATLAB scripts. It is intended for undergraduate and graduate courses in:
 
-This module focuses on object detection and recognition using pretrained models, specifically YOLOv8. Key concepts include creating datasets for training, applying data augmentation, transfer learning, and the training and validation of deep learning models. The goal is to use MATLAB's current transfer learning framework within the Deep Learning Toolbox, integrating it with the YOLOv8 architecture (already implemented in MATLAB; refer to this git repository). 
+- Industrial Engineering  
+- Robotics  
+- Computer Science  
+- Automation and Control  
+- Artificial Intelligence  
 
-Students will work with the developed teaching materials, mainly MATLAB live or .m scripts, to annotate objects in images by defining bounding boxes, apply data augmentation techniques, such as geometric transformations (rotations, translations, and dilations), and train and validate new objects via transfer learning (YOLOv8 is already pretrained on the COCO dataset). These curriculum materials enable students to train YOLO on new objects and obtain their bounding boxes, facilitating object manipulation by the Universal Robots robots. In addition, a calibration script will be developed to convert detected object positions in images into spatial coordinates based on the lab’s existing cameras, ensuring smooth communication between the computer vision and robotics modules within MATLAB. 
-
-### [Artificial Intelligence](ai/Curriculum.md) 
-
-This module focuses on robotic task planning using Q-learning and Deep Q-learning, two UPC - BarcelonaTech model-free algorithms in Reinforcement Learning (RL). Key concepts covered include the STRIPS language (modeling pre- and post-conditions of robotic actions), task planning, and Q-learning algorithms. The goal is to create curricular materials in the
-form of MATLAB live or .m scripts, utilizing the existing implementation of these reinforcement learning algorithms in MATLAB’s Reinforcement Learning Toolbox. The current implementation of these algorithms is expected to support robotic task planning directly. However, if the algorithms do not account for action preconditions to reduce the number of possible actions in a given state,
-modifications may be necessary. In such a case, a customized version of the algorithm will be developed with minor adjustments to enable action pruning for each state. The developed materials will take as input a primary robotic task, defined by the user and based on objects detected by the computer vision module, and output a sequence of ordered primitive tasks. When executed by the
-robot, these tasks achieve the main objective. The sequence is then sent to the robotics module, which designs and executes the required trajectories to complete each task. This enables students to apply advanced techniques to optimize task sequencing and decision-making in robotics.
+The curriculum is organized as a flexible collection of tutorials, demos, exercises, and projects that instructors can easily adapt to different courses and academic levels.
 
 
-## Goals
-- Develop curriculum materials in the form of MATLAB live scripts or .m scripts (the latest version of .m scripts includes new features that make them more similar to live scripts), and Simulink models for programming, simulating and controlling UR3 robotic arms, covering kinematics, dynamics, and motion control using the Symbolic Math Toolbox, Simulink, the Universal Robots UR Series
-Manipulators Support from the Robotics System Toolbox. These curriculum materials will be developed in English, Spanish, and Catalan to accommodate the different course languages.
-- Integrate YOLOv8 into the MATLAB’s transfer learning framework of the Deep Learning Toolbox for customizable object detection, enabling a smooth communication with the robotics module.
-- Implement Q-learning and Deep Q-learning for task planning using the Reinforcement Learning Toolbox, generating optimized task sequences for robotic execution. 
-- Develop a modular set of demos and tutorials to equip students with skills in robotics, computer vision, and/or AI. 5. Publish a teaching innovation journal or conference paper, create repository
-documentation, and develop supporting materials for course adoption, as well as other promotional material such as YouTube videos.
+## General Objective
 
-## About
+Provide students with a practical and interdisciplinary framework to design, simulate, perceive, plan, and execute robotic tasks using modern tools in robotics, computer vision, and artificial intelligence.
 
-**Current Version**: 0.0.1
+The curriculum bridges the gap between theory and real robotic applications through reproducible hands-on exercises using MATLAB and UR robots.
+
+## Project Goals
+
+- Develop open teaching materials for robotics education
+- Promote interdisciplinary learning across robotics, vision, and AI
+- Facilitate adoption of practical robotics courses
+- Support experimentation with industrial robotic platforms
+- Publish teaching innovation and educational research outcomes
+- Provide reusable tutorials, demos, and documentation
+
+## Target Audience
+
+- Engineering students
+- Robotics researchers
+- Educators and instructors
+- AI and computer vision practitioners
+- Laboratories introducing hands-on robotics education
+
+
+## Key Features
+
+✅ Hands-on and project-based learning  
+✅ Modular curriculum adaptable to many courses  
+✅ Integration of Robotics + Vision + AI  
+✅ MATLAB-centered workflow  
+✅ Simulation and real robot execution  
+✅ Open educational resources  
+✅ Materials available in:
+  - English
+  - Spanish
+  - Catalan
+
+## Educational Flexibility
+
+The curriculum is intentionally modular.
+
+It can be used:
+
+- As a complete interdisciplinary robotics course
+- As independent modules in robotics, vision, or AI courses
+- In undergraduate or master-level programs
+- In laboratory sessions, projects, or tutorials
+
+This flexibility allows instructors to adapt the materials to their own teaching objectives and course structures.
+
 
 ---
 
-## Credits
+
+# Main Learning Outcomes
+
+After completing the curriculum, students will be able to:
+
+- Model and control robotic manipulators
+- Solve forward and inverse kinematics problems
+- Plan trajectories and analyze robot motion
+- Understand robot dynamics and decentralized control
+- Train and validate object detection models using YOLOv8
+- Build datasets and apply data augmentation techniques
+- Integrate perception with robotic manipulation
+- Implement robotic task planning using Reinforcement Learning
+- Design intelligent robotic behaviors using Q-learning and Deep Q-learning
+- Connect AI decision-making with robot execution
+- Develop complete robotics pipelines from perception to action
+
+---
+
+# Curriculum Structure
+
+The curriculum is organized into three interconnected pillars.
+
+---
+
+## Robotics
+
+This module introduces the foundations of robotic manipulators through MATLAB simulations and experiments with UR robots.
+
+### Topics Covered
+
+- DH parameter modeling
+- Forward and inverse kinematics
+- Differential kinematics and Jacobians
+- Singularities and redundancy
+- Trajectory planning
+- Dynamic modeling
+- Newton-Euler and Lagrange methods
+- Motion control
+- Simulation with Simulink
+
+### Practical Components
+
+- MATLAB live scripts 
+- Symbolic Math Toolbox
+- Simulink models
+- UR3 simulations
+- Real robot experiments using:
+  - Robotics System Toolbox
+  - Universal Robots Support Package
+
+### Learning Outcomes
+
+Students learn how to mathematically model, simulate, and control industrial robotic manipulators in realistic scenarios.
+
+---
+
+## Computer Vision
+
+This module focuses on object detection and robotic perception using deep learning techniques.
+
+### Topics Covered
+
+- YOLOv8 object detection
+- Dataset generation and annotation
+- Bounding box labeling
+- Data augmentation
+- Transfer learning
+- Model training and validation
+- Camera calibration
+- Vision-to-robot coordinate transformation
+
+### Practical Components
+
+- MATLAB Deep Learning Toolbox
+- Transfer learning with pretrained YOLOv8 models
+- Integration with robotic manipulation tasks
+- Detection of custom objects for robot interaction
+
+### Learning Outcomes
+
+Students learn how to train vision systems capable of detecting objects and providing spatial information for robotic manipulation.
+
+---
+
+## Artificial Intelligence
+
+This module introduces robotic task planning using Reinforcement Learning techniques.
+
+### Topics Covered
+
+- STRIPS representations
+- Task planning
+- Q-learning
+- Deep Q-learning
+- Sequential decision-making
+- Action pruning
+- Intelligent robotic behaviors
+
+### Practical Components
+
+- MATLAB Reinforcement Learning Toolbox
+- Planning pipelines connected to robot execution
+- AI-driven task sequencing
+- Integration with robotics and computer vision modules
+
+### Learning Outcomes
+
+Students learn how robots can autonomously make decisions, optimize task execution, and plan complex behaviors.
+
+---
+
+# Software Requirements 
+
+The curriculum is based on MATLAB and several MathWorks toolboxes for robotics, computer vision, and artificial intelligence.
+
+## Recommended Software
+
+- MATLAB (recommended version: R2025a or R2025b)
+- Simulink
+
+## MATLAB Toolboxes
+
+- Robotics System Toolbox
+- Symbolic Math Toolbox
+- Deep Learning Toolbox
+- Reinforcement Learning Toolbox
+- Computer Vision Toolbox
+- Image Processing Toolbox
+
+## Suggested Hardware
+
+- Universal Robots UR3 / UR5 manipulators
+- RGB camera
+
+
+
+---
+
+# Credits
 
 **From Code to Robot** is a project developed at the Universitat Politècnica de Catalunya and funded by MathWorks and Universal Robots.
 
-### Developers
+## Developers
 
-1. **Robotics**  
+1. **Robotics**
 
-    - Constantin Sul (Universitat Politècnica de Catalunya)
-    - Prof. Jan Rosell (Universitat Politècnica de Catalunya) 
+   - Constantin Sul (Universitat Politècnica de Catalunya)
+   - Prof. Jan Rosell (Universitat Politècnica de Catalunya)
 
-2. **Computer Vision and Artificial Intelligence**  
+2. **Computer Vision and Artificial Intelligence**
 
-    - Noel Nathan Planell (Universitat Politècnica de Catalunya)
-    - Prof. Isiah Zaplana (Universitat Politècnica de Catalunya) 
+   - Noel Nathan Planell (Universitat Politècnica de Catalunya)
+   - Prof. Isiah Zaplana (Universitat Politècnica de Catalunya)
 
-### Advisors
+## Advisors
 
-- Jennifer Gago (MathWorks)  
+- Jennifer Gago (MathWorks)
 - Carlos Pérez (Universal Robots)
 
+---
 
+# About
+
+**Current Version**: 0.0.1
+
+# Examples
+
+Manipulability ellipsoid
+
+![image_0.gif](robotics/Videos_media/image_0.gif)
+
+Torque control
+
+![image_1.gif](robotics/Videos_media/image_1.gif)
 
