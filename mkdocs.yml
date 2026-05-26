@@ -12,6 +12,7 @@ theme:
 
 plugins:
   - search
+  - awesome-pages
   - i18n:
       docs_structure: folder
       languages:
@@ -25,7 +26,7 @@ plugins:
         - locale: es
           name: Español
           build: true
-               
+
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
