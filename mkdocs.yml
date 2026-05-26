@@ -25,15 +25,7 @@ plugins:
         - locale: es
           name: Español
           build: true
-nav:
-  - Home: index.md
-  - Artificial Intelligence:
-      - ai/index.md
-  - Computer Vision:
-      - computer-vision/index.md
-  - Robotics:
-      - robotics/index.md
-      
+               
 markdown_extensions:
   - pymdownx.arithmatex:
       generic: true
