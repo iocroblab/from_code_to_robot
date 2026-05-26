@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 3.2 \- Inverse Kinematic Algorithm
 
 In this exercise you will setup an inverse kinematics algorithm using the pseudoinverse of the jacobian. 
@@ -62,6 +59,11 @@ Solve this exercise without using the function:
 
 -  inverseKinematics() 
 ```matlab
+clear all; 
+```
+
+```matlab
+
 function q = PseudoInverseAlgorithm(q0, x_desired, k, tol, Imax)
 syms q1 q2 q3 q4 q5 q6 real
 DH=[

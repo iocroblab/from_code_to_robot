@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 2.4 \- Joint Space Trajectory Planning
 
 In this exercise you will develop functions to compute joint trajectories. 
@@ -42,6 +39,10 @@ Use the following function name for your solution:
 Solve this exercise without using the functions: 
 
 -  quinticpolytraj() 
+```matlab
+clear all; 
+```
+
 ```matlab
 function [q_trajectory, qd_trajectory, qdd_trajectory, timevec] = SingleQuinticTrajectory(q0, qf, T, N, v0, vf, a0, af)
 

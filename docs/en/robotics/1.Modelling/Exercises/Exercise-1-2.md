@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 1.2 \- Modeling of a Robot
 
 In this exercise you will model a Universal UR3e robot from given DH parameters.
@@ -44,6 +41,7 @@ Use the following variables to store your solution:
 -  bodies (name of your variable containing the bodies) 
 -  joints (name of your variable containing the joints) 
 ```matlab
+clear all; 
 robot = [];
 bodies = []; 
 joints = []; 

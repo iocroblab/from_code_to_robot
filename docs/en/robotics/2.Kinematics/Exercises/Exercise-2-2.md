@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 2.2 \- Inverse Kinematic Planar Arms
 
 In this Exercise you will compute the inverse kinematic solutions of different planar manipulators.
@@ -33,7 +30,7 @@ Use the following variables  to store your solution:
 
 -  sol\_1 (row vector as: \[q1,q2\]) 
 ```matlab
-sol_1 = []; 
+clear all; 
 ```
 
 ```matlabTextOutput
@@ -41,6 +38,9 @@ Error using atan2
 Argument must be real.
 ```
 
+```matlab
+sol_1 = []; 
+```
 
 You can check your work by clicking the Run: 
 

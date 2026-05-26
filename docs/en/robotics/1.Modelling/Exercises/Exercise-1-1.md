@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 1.1 \- Find the Transforms
 
 In this exercise you will need to find transforms between coordinate frames. 
@@ -30,6 +27,7 @@ Use the following variables  to store your solution:
 -  T23 (homogeneous transform from frame 2 to frame 3) 
 -  T34 (homogeneous transform from frame 3 to frame 4) 
 ```matlab
+clear all; 
 T12 = [];  
 T23 = []; 
 T34 = [];  

@@ -57,6 +57,7 @@ Setup a symbolic array qd containing the following **real** symbolic variables f
 -  qd2 
 -  qd3 
 ```matlab
+clear all; 
 
 I1 = [];
 I2 = []; 

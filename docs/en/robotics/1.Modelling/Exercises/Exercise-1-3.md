@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 1.3 \- Find the DH parameters
 
 In this exercise you will compute the DH parameters of an arbitrary robot manipulator, setup the equations using the symbolic toolbox and the define the robot using the robotic system toolbox. 
@@ -30,6 +27,7 @@ Use the following variables to store your solution:
 -  q (an array with all the symbolic joint states) 
 -  limit\_i (array with minimum and maximum permitted joint value) 
 ```matlab
+clear all; 
 q=[];
 limit_1=[];
 ```

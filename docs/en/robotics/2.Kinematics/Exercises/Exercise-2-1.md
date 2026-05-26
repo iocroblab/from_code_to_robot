@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 2.1 \- Forward Kinematics
 
 In this exercise you will setup the forward kinematics equations for different robot manipulators. 
@@ -29,6 +26,7 @@ Use the following variables to store your solution:
 -  q (vector containing the symbolic Joint angles) 
 -  A36 (Forward Kinematic Equation) 
 ```matlab
+clear all; 
 q = []; 
 A36= []; 
 ```

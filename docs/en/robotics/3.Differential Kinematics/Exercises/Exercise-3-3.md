@@ -1,7 +1,4 @@
 
-```matlab
-clear all
-```
 # Exercise 3.3 \- Velocity Teleoperation
 
 In this exercise you will write a code to teleoperate a universal robot of your choice. 
@@ -68,6 +65,10 @@ You can see the controls in the terminal:
 # Start Applications: 
 
 To start the required programs and simulations execute (once): 
+
+```matlab
+clear all; 
+```
 
 ```matlab
 % StartTutorialApplication('Simulation', 'Controller','Speed','model','ur5e'); 

@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 2.3 \- Inverse Kinematic Anthropomorphic arm with Spherical Wrist
 
 In this Exercise you will compute the inverse kinematic of an anthropomorphic arm with a spherical wrist
@@ -51,6 +48,7 @@ Reach the following pose:
 Answer all the questions and store your solution in the correct variable
 
 ```matlab
+clear all; 
 syms q1 q2 q3 q4 q5 q6 real 
 % DH Parameters Table
         % a      alpha      d       theta

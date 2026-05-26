@@ -1,7 +1,4 @@
 
-```matlab
-clear all; 
-```
 # Exercise 3.1 \- Jacobian 
 
 In this exercise you will setup different functions relating to the jacobian of a UR3e robot. 
@@ -37,6 +34,7 @@ and without using the relation matrix $T_A \left(\Phi \right)$:
 
 -  $\displaystyle T_A \left(\Phi \right)=\left\lbrack \begin{array}{ccc} 0 & -\sin \left(\phi \right) & \cos \left(\phi \right)\cdot \sin \left(\theta \right)\newline 0 & -\sin \left(\phi \right)\cdot \sin \left(\theta \right) & -\sin \left(\phi \right)\cdot \sin \left(\theta \right)\newline 1 & \cos \left(\theta \right) & \cos \left(\theta \right) \end{array}\right\rbrack$ 
 ```matlab
+clear all; 
 Jp = []; 
 Jtheta = []; 
 J = []; 
