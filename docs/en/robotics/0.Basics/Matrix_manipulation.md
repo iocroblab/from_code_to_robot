@@ -82,25 +82,25 @@ This can also be used to transform a row vector in a column vector. This can be 
 
 ```matlab
 syms v1 v2 v3 real
-V_column = [v1, v2, v3]
+V_row = [v1, v2, v3]
 ```
-V_column = 
+V_row = 
 
   $$ \displaystyle \left(\begin{array}{ccc} v_1  & v_2  & v_3  \end{array}\right) $$ 
  
 
 ```matlab
-V_row = [v1, v2, v3]'
+V_column = [v1, v2, v3]'
 ```
-V_row = 
+V_column = 
 
   $$ \displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right) $$ 
  
 
 ```matlab
-V_row_2 = V_column'
+V_column_2 = V_row'
 ```
-V_row_2 = 
+V_column_2 = 
 
   $$ \displaystyle \left(\begin{array}{c} v_1 \newline v_2 \newline v_3  \end{array}\right) $$ 
  
@@ -221,11 +221,11 @@ ans =
 With this Notation we can also write into specific elements of the matrix and override them:
 
 ```matlab
-M(1:3, 3)=V_row
+M(1, 1:3)=V_row
 ```
 M = 
 
-  $$ \displaystyle \left(\begin{array}{ccc} m_{11}  & m_{12}  & v_1 \newline m_{21}  & m_{22}  & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right) $$ 
+  $$ \displaystyle \left(\begin{array}{ccc} v_1  & v_2  & v_3 \newline m_{21}  & m_{22}  & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right) $$ 
  
 
 ```matlab
@@ -233,7 +233,7 @@ M(1:2,1:2)=eye(2)
 ```
 M = 
 
-  $$ \displaystyle \left(\begin{array}{ccc} 1 & 0 & v_1 \newline 0 & 1 & v_2 \newline m_{31}  & m_{32}  & v_3  \end{array}\right) $$ 
+  $$ \displaystyle \left(\begin{array}{ccc} 1 & 0 & v_3 \newline 0 & 1 & m_{23} \newline m_{31}  & m_{32}  & m_{33}  \end{array}\right) $$ 
  
 # Combining Matrices 
 
