@@ -1,4 +1,4 @@
-# De Código a Robot
+# From Code To Robot
 
 <span style="font-size:24px;"><strong><em>Un currículo práctico de robótica, visión por computador e IA utilizando MATLAB y robots UR</em></strong></span>
 
