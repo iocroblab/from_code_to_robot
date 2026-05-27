@@ -272,7 +272,7 @@ Manipulability ellipsoid
 <!--  ![image_0.gif](robotics/Videos_media/image_0.gif) -->
 
 <div style="text-align:center;">
-  <img src="robotics/Videos_media/image_0.gif"
+  <img src="docs/en/robotics/Videos_media/image_0.gif"
        style="width:100%; max-width:600px;">
 </div>
 
@@ -282,7 +282,7 @@ Torque control
 <!-- ![image_1.gif](robotics/Videos_media/image_1.gif) -->
 
 <div style="text-align:center;">
-  <img src="robotics/Videos_media/image_1.gif"
+  <img src="docs/en/robotics/Videos_media/image_1.gif"
        style="width:100%; max-width:600px;">
 </div>
 
