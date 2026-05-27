@@ -1,71 +1,286 @@
 # De Codi a Robot
 
-<span style="font-size:24px;"><strong><em>Un currículum pràctic de robòtica, visió per computador i intel·ligència artificial utilitzant MATLAB i robots UR</em></strong></span>
-
+<span style="font-size:24px;"><strong><em>Un currículum pràctic de robòtica, visió per computador i IA utilitzant MATLAB i robots UR</em></strong></span>
 
 ![](images/logos.svg)
 
 **Codi**: [https://github.com/iocroblab/from_code_to_robot.git](https://github.com/iocroblab/from_code_to_robot.git)
 
-
 ## Continguts
 
-- [Descripció](#descripció)
+- [Visió general](#visió-general)
+    - [Objectiu general](#objectiu-general)
+    - [Objectius del projecte](#objectius-del-projecte)
+    - [Públic objectiu](#públic-objectiu)
+    - [Característiques principals](#característiques-principals)
+    - [Flexibilitat educativa](#flexibilitat-educativa)
+- [Principals resultats d’aprenentatge](#principals-resultats-daprenentatge)
+- [Estructura del currículum](#estructura-del-currículum)
     - [Robòtica](#robòtica)
-    - [Visió per Computador](#visió-per-computador)
-    - [Intel·ligència Artificial](#intel·ligència-artificial)
-- [Objectius](#objectius)
-- [Sobre el projecte](#sobre-el-projecte)
+    - [Visió per computador](#visió-per-computador)
+    - [Intel·ligència artificial](#intel·ligència-artificial)
+- [Requisits de programari](#requisits-de-programari)
 - [Crèdits](#crèdits)
+- [Sobre el projecte](#sobre-el-projecte)
 
-## Descripció
-"De Codi a Robot" és un currículum pràctic que proporciona a l'estudiantat competències aplicades en robòtica, visió per computador i intel·ligència artificial (IA) mitjançant MATLAB i braços robòtics Universal Robots (UR). Adreçat a estudiants d'enginyeria industrial, informàtica i tecnologies afins, aquest currículum ofereix un marc de programari i maquinari juntament amb material docent que complementa els conceptes teòrics amb aplicacions pràctiques, preparant els estudiants per a carreres en automatització, robòtica i sistemes intel·ligents.
 
-El currículum s'articula al voltant de tres pilars principals - Robòtica, Visió per Computador i IA - cadascun amb materials docents i exercicis pràctics específics que aprofundeixen en les competències tècniques de l'estudiantat. La separació del currículum en aquests tres pilars aporta flexibilitat tant al professorat com a l'estudiantat. En molts programes de grau i màster, les assignatures se centren exclusivament en un únic domini -robòtica, visió o IA- i només recentment s'han començat a integrar continguts de dos o fins i tot dels tres àmbits. Mitjançant un disseny modular, el currículum dona suport a dos objectius principals: (1) incentivar el professorat a dissenyar assignatures optatives que integrin diversos pilars per oferir una experiència d'aprenentatge més interdisciplinària i basada en projectes, i (2) permetre que mòduls individuals s'utilitzin en assignatures centrades en un o dos pilars, mentre que el contingut restant pot quedar "fixat" o "preconfigurat" per al professorat que vulgui focalitzar-se principalment en robòtica, visió o IA. En particular, els objectius associats a cadascun dels tres pilars són:
+# Visió general
 
-### [Robòtica](robotics/index.md)
+**From Code to Robot** és un currículum obert, modular i pràctic dissenyat per ensenyar els fonaments de:
 
-Aquest mòdul cobreix conceptes fonamentals de robòtica relacionats amb el modelatge, la cinemàtica, la cinemàtica diferencial, la dinàmica i el control de manipuladors sèrie. Inclou temes com el càlcul de paràmetres DH, la cinemàtica directa i inversa (tant en forma tancada com iterativa), la planificació de trajectòries, els jacobians geomètrics i analítics, les singularitats, la redundància i el modelatge dinàmic mitjançant els mètodes de Lagrange i Newton-Euler, així com el control de moviment descentralitzat. Tots els conceptes s'il·lustraran mitjançant simulació d'un braç robòtic UR3 a MATLAB, utilitzant el Symbolic Math Toolbox i Simulink, i alguns exercicis estaran preparats per executar-se en robots UR3 físics, emprant el Universal Robots UR Series Manipulators Support del Robotics System Toolbox.
+- 🤖 Robòtica  
+- 👁️ Visió per computador  
+- 🧠 Intel·ligència artificial  
 
-### [Visió per Computador](Computer Vision/Curriculum.md)
+utilitzant **MATLAB** i manipuladors **Universal Robots (UR)**.
 
-Aquest mòdul se centra en la detecció i el reconeixement d'objectes utilitzant models preentrenats, concretament YOLOv8. Els conceptes clau inclouen la creació de conjunts de dades per a l'entrenament, l'aplicació d'augment de dades, l'aprenentatge per transferència i l'entrenament i validació de models d'aprenentatge profund. L'objectiu és utilitzar el marc actual d'aprenentatge per transferència de MATLAB dins del Deep Learning Toolbox, integrant-lo amb l'arquitectura YOLOv8 (ja implementada a MATLAB; vegeu aquest repositori git).
+El projecte combina teoria amb experimentació pràctica mitjançant simulació, plataformes robòtiques reals i scripts executables de MATLAB. Està pensat per a cursos de grau i màster en:
 
-L'estudiantat treballarà amb els materials docents desenvolupats, principalment scripts MATLAB live o fitxers .m, per anotar objectes en imatges mitjançant la definició de capses delimitadores, aplicar tècniques d'augment de dades com transformacions geomètriques (rotacions, translacions i dilatacions) i entrenar i validar nous objectes mitjançant aprenentatge per transferència (YOLOv8 ja està preentrenat amb el conjunt de dades COCO). Aquests materials permeten entrenar YOLO amb nous objectes i obtenir-ne les capses delimitadores, facilitant la manipulació d'objectes amb robots Universal Robots. A més, es desenvoluparà un script de calibratge per convertir les posicions dels objectes detectats a les imatges en coordenades espacials a partir de les càmeres existents al laboratori, assegurant una comunicació fluida entre els mòduls de visió per computador i robòtica dins de MATLAB.
+- Enginyeria Industrial  
+- Robòtica  
+- Informàtica  
+- Automatització i Control  
+- Intel·ligència Artificial  
 
-### [Intel·ligència Artificial](ai/Curriculum.md)
+El currículum s’organitza com una col·lecció flexible de tutorials, demostracions, exercicis i projectes que els instructors poden adaptar fàcilment a diferents cursos i nivells acadèmics.
 
-Aquest mòdul se centra en la planificació de tasques robòtiques mitjançant Q-learning i Deep Q-learning, dos algoritmes sense model de l'àmbit de l'aprenentatge per reforç (RL) desenvolupats a la UPC - BarcelonaTech. Els conceptes clau inclouen el llenguatge STRIPS (modelatge de les precondicions i postcondicions de les accions robòtiques), la planificació de tasques i els algoritmes de Q-learning. L'objectiu és crear materials curriculars en forma de scripts MATLAB live o fitxers .m, utilitzant les implementacions existents d'aquests algoritmes al Reinforcement Learning Toolbox de MATLAB. Es preveu que la implementació actual d'aquests algoritmes doni suport directament a la planificació de tasques robòtiques. No obstant això, si els algoritmes no tenen en compte les precondicions de les accions per reduir el nombre d'accions possibles en un estat determinat, pot ser necessari introduir modificacions. En aquest cas, es desenvoluparà una versió personalitzada de l'algoritme amb ajustos menors per permetre la poda d'accions a cada estat. Els materials desenvolupats rebran com a entrada una tasca robòtica principal, definida per l'usuari i basada en els objectes detectats pel mòdul de visió per computador, i produiran com a sortida una seqüència ordenada de tasques primitives. Quan s'executen al robot, aquestes tasques permeten assolir l'objectiu principal. La seqüència s'envia posteriorment al mòdul de robòtica, que dissenya i executa les trajectòries necessàries per completar cada tasca. Això permet a l'estudiantat aplicar tècniques avançades per optimitzar la seqüenciació de tasques i la presa de decisions en robòtica.
 
-## Objectius
-- Desenvolupar materials curriculars en forma de scripts MATLAB live o fitxers .m (les versions més recents dels fitxers .m inclouen noves funcionalitats que els fan més similars als live scripts) i models de Simulink per programar, simular i controlar braços robòtics UR3, cobrint cinemàtica, dinàmica i control del moviment mitjançant el Symbolic Math Toolbox, Simulink i el Universal Robots UR Series Manipulators Support del Robotics System Toolbox. Aquests materials curriculars es desenvoluparan en anglès, castellà i català per adaptar-se a les diferents llengües docents.
-- Integrar YOLOv8 dins del marc d'aprenentatge per transferència de MATLAB del Deep Learning Toolbox per a la detecció d'objectes personalitzable, permetent una comunicació fluida amb el mòdul de robòtica.
-- Implementar Q-learning i Deep Q-learning per a la planificació de tasques utilitzant el Reinforcement Learning Toolbox, generant seqüències de tasques optimitzades per a l'execució robòtica.
-- Desenvolupar un conjunt modular de demostracions i tutorials per dotar l'estudiantat de competències en robòtica, visió per computador i/o IA. 5. Publicar un article en una revista o conferència d'innovació docent, crear documentació del repositori i desenvolupar materials de suport per a l'adopció en cursos, així com altres materials promocionals com vídeos a YouTube.
+## Objectiu general
 
-## Sobre el projecte
+Proporcionar als estudiants un marc pràctic i interdisciplinari per dissenyar, simular, percebre, planificar i executar tasques robòtiques utilitzant eines modernes de robòtica, visió per computador i intel·ligència artificial.
 
-**Versió actual**: 0.0.1
+El currículum connecta la teoria amb aplicacions robòtiques reals mitjançant exercicis pràctics reproduïbles utilitzant MATLAB i robots UR.
+
+## Objectius del projecte
+
+- Desenvolupar materials docents oberts per a l’educació en robòtica
+- Promoure l’aprenentatge interdisciplinari entre robòtica, visió i IA
+- Facilitar l’adopció de cursos pràctics de robòtica
+- Donar suport a l’experimentació amb plataformes robòtiques industrials
+- Publicar resultats d’innovació docent i recerca educativa
+- Proporcionar tutorials, demostracions i documentació reutilitzables
+
+## Públic objectiu
+
+- Estudiants d’enginyeria
+- Investigadors en robòtica
+- Docents i instructors
+- Professionals de la IA i la visió per computador
+- Laboratoris que introdueixen l’educació pràctica en robòtica
+
+
+## Característiques principals
+
+✅ Aprenentatge pràctic basat en projectes  
+✅ Currículum modular adaptable a molts cursos  
+✅ Integració de Robòtica + Visió + IA  
+✅ Flux de treball centrat en MATLAB  
+✅ Simulació i execució en robots reals  
+✅ Recursos educatius oberts  
+✅ Materials disponibles en:
+    - Anglès
+    - Castellà
+    - Català
+
+## Flexibilitat educativa
+
+El currículum és intencionadament modular.
+
+Es pot utilitzar:
+
+- Com un curs complet interdisciplinari de robòtica
+- Com a mòduls independents en cursos de robòtica, visió o IA
+- En programes de grau o de màster
+- En sessions de laboratori, projectes o tutorials
+
+Aquesta flexibilitat permet als instructors adaptar els materials als seus propis objectius docents i estructures de curs.
+
 
 ---
 
-## Crèdits
 
-**De Codi a Robot** és un projecte desenvolupat a la Universitat Politècnica de Catalunya i finançat per MathWorks i Universal Robots.
+# Principals resultats d’aprenentatge
 
-### Desenvolupadors
+Després de completar el currículum, els estudiants seran capaços de:
+
+- Modelar i controlar manipuladors robòtics
+- Resoldre problemes de cinemàtica directa i inversa
+- Planificar trajectòries i analitzar el moviment del robot
+- Comprendre la dinàmica del robot i el control descentralitzat
+- Entrenar i validar models de detecció d’objectes utilitzant YOLOv8
+- Construir conjunts de dades i aplicar tècniques d’augment de dades
+- Integrar la percepció amb la manipulació robòtica
+- Implementar la planificació de tasques robòtiques utilitzant Reinforcement Learning
+- Dissenyar comportaments robòtics intel·ligents utilitzant Q-learning i Deep Q-learning
+- Connectar la presa de decisions basada en IA amb l’execució robòtica
+- Desenvolupar pipelines robòtiques completes des de la percepció fins a l’acció
+
+---
+
+# Estructura del currículum
+
+El currículum s’organitza en tres pilars interconnectats.
+
+---
+
+## Robòtica
+
+Aquest mòdul introdueix els fonaments dels manipuladors robòtics mitjançant simulacions en MATLAB i experiments amb robots UR.
+
+### Temes tractats
+
+- Modelatge amb paràmetres DH
+- Cinemàtica directa i inversa
+- Cinemàtica diferencial i jacobians
+- Singularitats i redundància
+- Planificació de trajectòries
+- Modelatge dinàmic
+- Control de moviment
+- Simulació amb Simulink
+
+### Components pràctics
+
+- MATLAB live scripts 
+- Symbolic Math Toolbox
+- Robotics System Toolbox
+- Models de Simulink
+- Simulacions amb UR3 utilitzant:
+    - entorn ROS 2 Jazzy reproduïble basat en Docker.
+- Experiments amb robot real utilitzant:
+    - Universal Robots Support Package
+
+### Resultats d’aprenentatge
+
+Els estudiants aprenen a modelar matemàticament, simular i controlar manipuladors robòtics industrials en escenaris realistes.
+
+---
+
+## Visió per computador
+
+Aquest mòdul se centra en la detecció d’objectes i la percepció robòtica utilitzant tècniques d’aprenentatge profund.
+
+### Temes tractats
+
+- Detecció d’objectes amb YOLOv8
+- Generació i anotació de conjunts de dades
+- Etiquetatge de bounding boxes
+- Augment de dades
+- Transfer learning
+- Entrenament i validació de models
+- Calibratge de càmera
+- Transformació de coordenades de visió a robot
+
+### Components pràctics
+
+- MATLAB Deep Learning Toolbox
+- Transfer learning amb models YOLOv8 preentrenats
+- Integració amb tasques de manipulació robòtica
+- Detecció d’objectes personalitzats per a la interacció amb el robot
+
+### Resultats d’aprenentatge
+
+Els estudiants aprenen a entrenar sistemes de visió capaços de detectar objectes i proporcionar informació espacial per a la manipulació robòtica.
+
+---
+
+## Intel·ligència artificial
+
+Aquest mòdul introdueix la planificació de tasques robòtiques utilitzant tècniques de Reinforcement Learning.
+
+### Temes tractats
+
+- Representacions STRIPS
+- Planificació de tasques
+- Q-learning
+- Deep Q-learning
+- Presa de decisions seqüencial
+- Poda d’accions
+- Comportaments robòtics intel·ligents
+
+### Components pràctics
+
+- MATLAB Reinforcement Learning Toolbox
+- Pipelines de planificació connectades amb l’execució del robot
+- Seqüenciació de tasques guiada per IA
+- Integració amb els mòduls de robòtica i visió per computador
+
+### Resultats d’aprenentatge
+
+Els estudiants aprenen com els robots poden prendre decisions de manera autònoma, optimitzar l’execució de tasques i planificar comportaments complexos.
+
+---
+
+# Requisits de programari 
+
+El currículum es basa en MATLAB i diversos toolboxes de MathWorks per a robòtica, visió per computador i intel·ligència artificial.
+
+## Programari recomanat
+
+- MATLAB (versió recomanada: R2025a o R2025b)
+- Simulink
+
+## Toolboxes de MATLAB
+
+- Robotics System Toolbox
+- Symbolic Math Toolbox
+- Deep Learning Toolbox
+- Reinforcement Learning Toolbox
+- Computer Vision Toolbox
+- Image Processing Toolbox
+
+## Maquinari suggerit
+
+- Manipuladors Universal Robots UR3 / UR5
+- Càmera RGB
+
+
+
+---
+
+# Crèdits
+
+**From Code to Robot** és un projecte desenvolupat a la Universitat Politècnica de Catalunya i finançat per MathWorks i Universal Robots.
+
+## Desenvolupadors
 
 1. **Robòtica**
 
     - Constantin Sul (Universitat Politècnica de Catalunya)
     - Prof. Jan Rosell (Universitat Politècnica de Catalunya)
 
-2. **Visió per Computador i Intel·ligència Artificial**
+2. **Visió per computador i Intel·ligència artificial**
 
     - Noel Nathan Planell (Universitat Politècnica de Catalunya)
     - Prof. Isiah Zaplana (Universitat Politècnica de Catalunya)
 
-### Assessors
+## Assessors
 
 - Jennifer Gago (MathWorks)
 - Carlos Pérez (Universal Robots)
+
+---
+
+# Sobre el projecte
+
+**Versió actual**: 0.0.1
+
+# Exemples
+
+El·lipsoide de manipulabilitat
+
+<!--  ![image_0.gif](robotics/Videos_media/image_0.gif) -->
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/image_0.gif"
+       style="width:100%; max-width:600px;">
+</div>
+
+
+Control de parell
+
+<!-- ![image_1.gif](robotics/Videos_media/image_1.gif) -->
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/image_1.gif"
+       style="width:100%; max-width:600px;">
+</div>
