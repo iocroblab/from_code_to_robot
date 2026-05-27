@@ -78,6 +78,7 @@ The curriculum bridges the gap between theory and real robotic applications thro
 ✅ Simulation and real robot execution  
 ✅ Open educational resources  
 ✅ Materials available in:
+
     - English
     - Spanish
     - Catalan

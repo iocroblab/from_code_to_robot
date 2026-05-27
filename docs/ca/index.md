@@ -78,6 +78,7 @@ El currículum connecta la teoria amb aplicacions robòtiques reals mitjançant 
 ✅ Simulació i execució en robots reals  
 ✅ Recursos educatius oberts  
 ✅ Materials disponibles en:
+
     - Anglès
     - Castellà
     - Català

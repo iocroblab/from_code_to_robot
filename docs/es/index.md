@@ -78,6 +78,7 @@ El currículo conecta la teoría con aplicaciones robóticas reales mediante eje
 ✅ Simulación y ejecución en robots reales  
 ✅ Recursos educativos abiertos  
 ✅ Materiales disponibles en:
+
     - Inglés
     - Español
     - Catalán
