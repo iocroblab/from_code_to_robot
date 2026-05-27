@@ -8,3 +8,5 @@ win64/
 +best/
 matlab.mat
 yolov8n.mat
+
+.DS_Store
