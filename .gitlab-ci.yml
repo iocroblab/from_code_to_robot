@@ -6,7 +6,7 @@ pages:
   image: python:3.13-slim
   script:
     - rm -rf public
-    - pip install --no-cache-dir mkdocs mkdocs-material mkdocs-material-extensions mkdocs-static-i18n mkdocs-awesome-pages-plugin python-markdown-math
+    - pip install --no-cache-dir mkdocs mkdocs-material mkdocs-material-extensions mkdocs-static-i18n python-markdown-math
     - mkdocs build --site-dir public
   cache:
     key: ${CI_COMMIT_REF_SLUG}
