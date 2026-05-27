@@ -78,9 +78,9 @@ The curriculum bridges the gap between theory and real robotic applications thro
 ✅ Simulation and real robot execution  
 ✅ Open educational resources  
 ✅ Materials available in:
-  - English
-  - Spanish
-  - Catalan
+    - English
+    - Spanish
+    - Catalan
 
 ## Educational Flexibility
 
@@ -135,7 +135,6 @@ This module introduces the foundations of robotic manipulators through MATLAB si
 - Singularities and redundancy
 - Trajectory planning
 - Dynamic modeling
-- Newton-Euler and Lagrange methods
 - Motion control
 - Simulation with Simulink
 
@@ -143,11 +142,12 @@ This module introduces the foundations of robotic manipulators through MATLAB si
 
 - MATLAB live scripts 
 - Symbolic Math Toolbox
+- Robotics System Toolbox
 - Simulink models
-- UR3 simulations
+- UR3 simulations using:
+    - docker-based reproducible ROS 2 Jazzy environment.
 - Real robot experiments using:
-  - Robotics System Toolbox
-  - Universal Robots Support Package
+    - Universal Robots Support Package
 
 ### Learning Outcomes
 
@@ -268,9 +268,21 @@ The curriculum is based on MATLAB and several MathWorks toolboxes for robotics, 
 
 Manipulability ellipsoid
 
-![image_0.gif](robotics/Videos_media/image_0.gif)
+<!--  ![image_0.gif](robotics/Videos_media/image_0.gif) -->
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/image_0.gif"
+       style="width:100%; max-width:600px;">
+</div>
+
 
 Torque control
 
-![image_1.gif](robotics/Videos_media/image_1.gif)
+<!-- ![image_1.gif](robotics/Videos_media/image_1.gif) -->
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/image_1.gif"
+       style="width:100%; max-width:600px;">
+</div>
+
 
