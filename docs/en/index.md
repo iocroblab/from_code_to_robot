@@ -287,3 +287,11 @@ Torque control
 </div>
 
 
+Capstone exercise: teleoperating the robot with a fruit
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/capstone.gif"
+       style="width:100%; max-width:600px;">
+</div>
+
+
