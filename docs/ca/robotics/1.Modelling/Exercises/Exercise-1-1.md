@@ -28,6 +28,9 @@ Utilitza les variables següents per guardar la teva solució:
 -  T12 (transformació homogènia del sistema 1 al sistema 2) 
 -  T23 (transformació homogènia del sistema 2 al sistema 3) 
 -  T34 (transformació homogènia del sistema 3 al sistema 4) 
+
+Posa les distàncies en metres.
+
 ```matlab
 T12 = [];  
 T23 = []; 

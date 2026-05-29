@@ -28,6 +28,9 @@ Usa las siguientes variables para guardar tu solución:
 -  T12 (transformación homogénea del sistema 1 al sistema 2) 
 -  T23 (transformación homogénea del sistema 2 al sistema 3) 
 -  T34 (transformación homogénea del sistema 3 al sistema 4) 
+
+Pon las distancias en metros.
+
 ```matlab
 T12 = [];  
 T23 = []; 

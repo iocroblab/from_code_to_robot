@@ -26,6 +26,9 @@ Use the following variables  to store your solution:
 -  T12 (homogeneous transform from frame 1 to frame 2) 
 -  T23 (homogeneous transform from frame 2 to frame 3) 
 -  T34 (homogeneous transform from frame 3 to frame 4) 
+
+Put the distances in meters.
+
 ```matlab
 clear all; 
 T12 = [];  

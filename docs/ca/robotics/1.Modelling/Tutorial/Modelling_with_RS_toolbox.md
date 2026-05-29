@@ -229,9 +229,6 @@ Pots especificar qualsevol model UR, per exemple 'UR5e' (el model per defecte é
 
 Un cop **Rviz està en execució**, pots enviar-li una configuració desitjada com: 
 
-
-pots especificar el robot amb l’extensió 'ur5e' (per defecte és ur3e). 
-
 ```matlab
 myconfig = [0,-pi/2,0,-pi/2,0,0]; 
 JointStatesToRviz(myconfig, 'ur5e'); 
