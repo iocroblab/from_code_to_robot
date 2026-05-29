@@ -285,3 +285,10 @@ Control de par
   <img src="robotics/Videos_media/image_1.gif"
        style="width:100%; max-width:600px;">
 </div>
+
+Ejercicio final: teleoperar el robot con una fruta
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/capstone.gif"
+       style="width:100%; max-width:600px;">
+</div>

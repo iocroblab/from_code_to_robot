@@ -285,3 +285,10 @@ Control de parell
   <img src="robotics/Videos_media/image_1.gif"
        style="width:100%; max-width:600px;">
 </div>
+
+Exercici final: teleoperar el robot amb una fruita
+
+<div style="text-align:center;">
+  <img src="robotics/Videos_media/capstone.gif"
+       style="width:100%; max-width:600px;">
+</div>
