@@ -212,11 +212,7 @@ show(robot, myconfig_2) %we only have two joints
 ```
 # Visualize in Rviz
 
-In this tutorial can use the ROS2 visualization tool Rviz. Once  **Rviz is running** you can send it a desired configuration like: 
-
-
-you can specify the robot with the extension 'ur5e' ( default is ur3e). 
-
+In this tutorial can use the ROS2 visualization tool Rviz. 
 
 To start Rviz: 
 
@@ -226,8 +222,11 @@ StartTutorialApplication('Rviz','model','ur3e');
 %when using a native ROS workspace
 ```
 
+You can specify any UR model, e.g. 'ur5e' ( default is ur3e). 
+
+Once  **Rviz is running** you can send it a desired configuration like: 
+
 ```matlab
 myconfig = [0,-pi/2,0,-pi/2,0,0]; 
 JointStatesToRviz(myconfig, 'ur5e'); 
 ```
-

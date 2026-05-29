@@ -215,11 +215,21 @@ myconfig = [0,-pi/2,0,-pi/2,0,0];
 ```
 # Visualizar en Rviz
 
-En este tutorial puedes usar la herramienta de visualización de ROS2 Rviz. Una vez que **Rviz esté ejecutándose**, puedes enviarle una configuración deseada como: 
+En este tutorial puedes usar la herramienta de visualización de ROS2 Rviz.
 
-
-puedes especificar el robot con la extensión 'ur5e' (el valor predeterminado es ur3e). 
+Para arrancar Rviz:
 
 ```matlab
+StartTutorialApplication('Rviz','model','ur3e'); 
+%StartTutorialApplication('Rviz','model','ur3e', 'docker',false); %use this
+%when using a native ROS workspace
+```
+
+Puedes especificar cualquier modelo UR, por ejemplo 'UR5e' (el modelo por defecto es UR3e).
+
+Una vez que **Rviz esté ejecutándose**, puedes enviarle una configuración deseada como: 
+
+```matlab
+myconfig = [0,-pi/2,0,-pi/2,0,0]; 
 JointStatesToRviz(myconfig, 'ur5e'); 
 ```
