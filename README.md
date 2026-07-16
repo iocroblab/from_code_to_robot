@@ -4,7 +4,7 @@
 
 ![](images/logos.svg)
 
-**Code**: [https://github.com/iocroblab/from_code_to_robot.git](https://github.com/iocroblab/from_code_to_robot.git)
+**Website**: [https://teaching.ioc.upc.edu/from-code-to-robot/](https://teaching.ioc.upc.edu/from-code-to-robot/)
 
 ## Contents
 
