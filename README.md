@@ -228,6 +228,7 @@ The curriculum is based on MATLAB and several MathWorks toolboxes for robotics, 
 - Reinforcement Learning Toolbox
 - Computer Vision Toolbox
 - Image Processing Toolbox
+- Robotics System Toolbox Support Package for Universal Robots UR Series Manipulators
 
 ## Suggested Hardware
 
